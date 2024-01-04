@@ -1,0 +1,55 @@
+%use Helvetica font family in Memoir
+%\newcommand*{\memfontfamily}{phv}
+
+\documentclass[UTF8, oldfontcommands, a4paper]{memoir}
+
+\input{Common/Preamble}
+
+% Build the PDF by xelatex fpcr
+% Build index by makeindex fpcr
+
+
+\makeindex
+
+\begin{document}
+
+\setcounter{chapter}{-1}
+
+\title{函數程設與推論\\
+Functional Program Construction and Reasoning}
+\author{Shin-Cheng Mu}
+
+\begin{titlingpage}
+\maketitle
+\end{titlingpage}
+
+\setcounter{tocdepth}{2} %subsection
+\renewcommand*\contentsname{目錄}
+\tableofcontents
+
+\input{Chapters/Introduction}
+\input{Chapters/Basics}
+\input{Chapters/Induction}
+\input{Chapters/SearchTrees}
+\input{Chapters/Semantics}
+\input{Chapters/Derivation}
+\input{Chapters/Folds}
+\input{Chapters/SegProblems}
+\input{Chapters/Monads}
+
+\bibliographystyle{abbrvnat}
+\bibliography{bib}
+
+\appendix
+
+% supress answers
+\chapter{習題解答}
+\shipoutAnswer
+
+%\input{chapters/TransTerms}
+
+%\chapter{名詞翻譯與索引}
+
+\printindex
+
+\end{document}
