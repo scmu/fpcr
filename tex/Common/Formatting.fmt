@@ -1,0 +1,139 @@
+%if not lhs2tex_Formatting_fmt_read
+%let lhs2tex_Formatting_fmt_read = True
+
+%if style /= newcode
+\ReadOnlyOnce{Formatting.fmt}%
+\makeatletter
+
+\let\Varid\mathit
+\let\Conid\mathsf
+
+\def\commentbegin{\quad\begingroup\color{burntorange}\{\ }
+\def\commentend{\}\endgroup}
+
+\newcommand{\ty}[1]{\Conid{#1}}
+\newcommand{\con}[1]{\Conid{#1}}
+\newcommand{\id}[1]{\Varid{#1}}
+\newcommand{\cl}[1]{\Varid{#1}}
+\newcommand{\opsym}[1]{\mathrel{#1}}
+
+\newcommand\Keyword[1]{\textbf{\textsf{#1}}}
+\newcommand\Hide{\mathbin{\downarrow}}
+\newcommand\Reveal{\mathbin{\uparrow}}
+
+%% Paper-specific keywords
+
+%format Real = "\mathbb{R}"
+
+%format oplus = "(\oplus)"
+%format `oplus` = "\oplus"
+%format otimes = "(\otimes)"
+%format `otimes` = "\otimes"
+%format odot = "(\odot)"
+%format `odot` = "\odot"
+%format lhd = "(\lhd)"
+%format `lhd` = "\mathrel{\lhd}"
+%format rhd = "(\rhd)"
+%format `rhd` = "\mathrel{\rhd}"
+%format `app` = "\mathrel{\$}"
+
+%format +. = +
+%format -. = -
+%format *. = *
+%format /. = /
+
+%format +: = +
+%format -: = -
+%format *: = *
+
+%format <=> = "\mathrel{\equiv}"
+%format <== = "\mathrel{\Leftarrow}"
+%format ==> = "\mathrel{\Rightarrow}"
+%format `implies` = "\mathrel{\Rightarrow}"
+%format === = "\mathrel{=}"
+
+%format $ = "\,\mathrel{\scaleobj{0.7}{\textdollar}}\,"
+
+%format `mem` = "\mathrel{\in}"
+%format `union` = "\mathbin{\cup}"
+%format (singleton (x)) = "\{" x "\}"
+%format empty = "\emptyset"
+
+%format delta = "\delta"
+%format `leqc` = "\mathrel{\leq_{c}}"
+
+%format min = "(\downarrow)"
+%format `min` = "\mathbin{\downarrow}"
+%format max = "(\uparrow)"
+%format `max` = "\mathbin{\uparrow}"
+%format `sse` = "\mathrel{\subseteq}"
+%format `spe` = "\mathrel{\supseteq}"
+%format *** = "\times"
+%format (fork (f) (g)) = "\langle" f "," g "\rangle"
+
+%format `isPrefixOf` = "\mathbin{\sqsubseteq}"
+
+%format == = "\doubleequals"
+%format /= = "\not\doubleequals"
+%format . = "\mathbin{\cdot}"
+%format * = "\mathbin{\times}"
+%format `app` = "\mathbin{\$}"
+%format app = "(\mathbin{\$})"
+%format ++ = "\mathbin{+\!\!\!\!+}"
+
+%format Nat = "\mathbb{N}"
+%format Zero = "\mathbf{0}"
+%format Suc = "\mathbf{1_{+}}"
+
+%format :* = "\mathbin{\times}"
+
+%format not = "\Varid{not}"
+
+%format x0
+%format x1
+%format x2
+%format x3
+%format x4
+%format x5
+%format y0
+%format y1
+%format y2
+%format y3
+%format y4
+%format d0
+%format d1
+%format d2
+%format e0
+%format e1
+%format e2
+%format f0
+%format f1
+%format f2
+%format h0
+%format h1
+%format h2
+%format v0
+%format v1
+%format v2
+
+
+%format mu = "\mu\!"
+%format nu = "\nu\!"
+
+%format emailat = "@"
+
+%format <=: = "\mathrel{\unlhd}"
+%format <: = "\mathrel{\lhd}"
+%%format <:' = "\mathrel{\lhd}"
+
+%format ListP = List"^{+}"
+%format maximumP = "\Varid{maximum}^{+}"
+%format partsP = "\Varid{parts}^{+}"
+%format infty = "\infty"
+%format maxBound = "\infty"
+%format minBound = "-\infty"
+
+\makeatother
+\EndFmtInput
+%endif
+%endif

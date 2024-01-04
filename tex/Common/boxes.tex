@@ -1,0 +1,40 @@
+\definecolor{verylightgray}{rgb}{0.9, 0.9, 0.9}
+\newmdenv[roundcorner=5pt, innerbottommargin=10pt,
+linecolor=verylightgray, backgroundcolor=verylightgray]{infoshade}
+
+\newenvironment{infobox}[1]
+{\begin{figure}[t]
+\begin{infoshade}[frametitle=#1]
+\small
+}
+{
+\end{infoshade}
+\end{figure}
+}
+
+\definecolor{veryverylightgray}{rgb}{0.95, 0.95, 0.95}
+\newmdenv[roundcorner=2pt, innerbottommargin=7pt,
+linecolor=veryverylightgray, backgroundcolor=veryverylightgray]{exbox}
+
+\newenvironment{exlist}
+{
+\begin{exbox}
+\begin{minipage}{\textwidth}
+\color{black}
+\begin{ExerciseList}
+}
+{
+\end{ExerciseList}
+\end{minipage}
+\end{exbox}
+}
+
+\newenvironment{answer}
+{
+\begin{proof}[\color{nicered}{\bf 答}]
+}
+{
+\renewcommand{\qedsymbol}{$\color{nicered}{\Box}$}
+%\renewcommand{\qedsymbol}{$\blacksquare$}
+\end{proof}
+}

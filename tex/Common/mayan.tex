@@ -1,0 +1,24 @@
+%\usepackage{graphicx,MnSymbol}
+
+\DeclareFontFamily{U}{mathb}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathb}{m}{n}{
+      <5> <6> <7> <8> <9> <10> gen * mathb
+      <10.95> mathb10 <12> <14.4> <17.28> <20.74> <24.88> mathb12
+      }{}
+\DeclareSymbolFont{mathb}{U}{mathb}{m}{n}
+
+\newcommand\mathbfont{\usefont{U}{mathb}{m}{n}}
+
+\newcount\mayacnta%
+\newcount\mayacntc%
+%
+\def\mayaexpansion{%
+    \mayacntc=\mayacnta\mathbfont
+    \ifnum\mayacntc=0 0\else
+    \rotatebox[origin=c]{-90}{%
+    \loop\ifnum\mayacntc>5\advance\mayacntc by -5\repeat
+    \the\mayacntc\mayacntc=\mayacnta
+    \loop\ifnum\mayacntc>5\advance\mayacntc by -5 5\repeat}%
+    \fi}%
+\def\mayadigit#1{%
+    \mayacnta=#1\hbox{\mathbfont\mayaexpansion}}%

@@ -1,0 +1,90 @@
+% https://hstuart.dk/2007/05/21/styling-the-chapter/
+% https://texblog.org/2012/07/03/fancy-latex-chapter-styles/
+
+\makechapterstyle{box}{
+\renewcommand*{\printchaptername}{} \renewcommand*{\chapnumfont}{\normalfont\sffamily\huge\bfseries} \renewcommand*{\printchapternum}{ \flushright \begin{tikzpicture} \draw[fill,color=black] (0,0) rectangle (2cm,2cm); \draw[color=white] (1cm,1cm) node { \chapnumfont\thechapter }; \end{tikzpicture} } \renewcommand*{\chaptitlefont}{\normalfont\sffamily\Huge\bfseries} \renewcommand*{\printchaptertitle}[1]{\flushright\chaptitlefont##1} }
+
+\makechapterstyle{box}{ \renewcommand*{\printchaptername}{} \renewcommand*{\chapnumfont}{\normalfont\sffamily\huge\bfseries} \renewcommand*{\printchapternum}{ \flushright \begin{tikzpicture} \draw[fill,color=black] (0,0) rectangle (2cm,2cm); \draw[color=white] (1cm,1cm) node { \chapnumfont\thechapter }; \end{tikzpicture} } \renewcommand*{\chaptitlefont}{\normalfont\sffamily\Huge\bfseries} \renewcommand*{\printchaptertitle}[1]{\flushright\chaptitlefont##1} }
+
+%http://ftp.yzu.edu.tw/CTAN/info/latex-samples/MemoirChapStyles/MemoirChapStyles.pdf
+
+%\usepackage{color,calc,graphicx,soul}
+\usepackage{color,calc,graphicx,soul}
+%\usepackage[widespace]{fourier}
+\definecolor{nicered}{rgb}{.647,.129,.149}
+\makeatletter
+\newlength\dlf@normtxtw
+\setlength\dlf@normtxtw{\textwidth}
+\def\myhelvetfont{\def\sfdefault{mdput}}
+\newsavebox{\feline@chapter}
+\newcommand\feline@chapter@marker[1][4cm]{%
+\sbox\feline@chapter{%
+\resizebox{!}{#1}{\fboxsep=1pt%
+\colorbox{nicered}{\color{white}\bfseries\sffamily\thechapter}%
+}}%
+\rotatebox{90}{%
+\resizebox{%
+\heightof{\usebox{\feline@chapter}}+\depthof{\usebox{\feline@chapter}}}%
+{!}{\scshape\so\@chapapp}}\quad%
+\raisebox{\depthof{\usebox{\feline@chapter}}}{\usebox{\feline@chapter}}%
+}
+\newcommand\feline@chm[1][4cm]{%
+\sbox\feline@chapter{\feline@chapter@marker[#1]}%
+\makebox[0pt][l]{% aka \rlap
+\makebox[1cm][r]{\usebox\feline@chapter}%
+}}
+\makechapterstyle{daleif1}{
+\renewcommand\chapnamefont{\normalfont\Large\scshape\raggedleft\so}
+\renewcommand\chaptitlefont{\normalfont\huge\bfseries\scshape\color{nicered}}
+\renewcommand\chapternamenum{}
+\renewcommand\printchaptername{}
+\renewcommand\printchapternum{\null\hfill\feline@chm[2.5cm]\par}
+\renewcommand\afterchapternum{\par\vskip\midchapskip}
+\renewcommand\printchaptertitle[1]{\chaptitlefont\raggedleft ##1\par}
+}
+\makeatother
+%\chapterstyle{daleif1}
+
+% \usepackage{fourier} % or what ever
+%\usepackage[scaled=.92]{helvet}%. Sans serif - Helvetica
+\usepackage{color,calc}
+\newsavebox{\ChpNumBox}
+\definecolor{ChapBlue}{rgb}{0.00,0.65,0.65}
+\makeatletter
+\newcommand*{\thickhrulefill}{%
+\leavevmode\leaders\hrule height 1\p@ \hfill \kern \z@}
+\newcommand*\BuildChpNum[2]{%
+\begin{tabular}[t]{@{}c@{}}
+\makebox[0pt][c]{#1\strut} \\[.5ex]
+\colorbox{ChapBlue}{%
+\rule[-10em]{0pt}{0pt}%
+\rule{1ex}{0pt}\color{black}#2\strut
+\rule{1ex}{0pt}}%
+\end{tabular}}
+\makechapterstyle{BlueBox}{%
+\renewcommand{\chapnamefont}{\large\scshape}
+\renewcommand{\chapnumfont}{\Huge\bfseries}
+\renewcommand{\chaptitlefont}{\raggedright\Huge\bfseries}
+\setlength{\beforechapskip}{20pt}
+\setlength{\midchapskip}{26pt}
+\setlength{\afterchapskip}{40pt}
+\renewcommand{\printchaptername}{}
+\renewcommand{\chapternamenum}{}
+\renewcommand{\printchapternum}{%
+\sbox{\ChpNumBox}{%
+
+\BuildChpNum{\chapnamefont\@chapapp}%
+{\chapnumfont\thechapter}}}
+\renewcommand{\printchapternonum}{%
+\sbox{\ChpNumBox}{%
+\BuildChpNum{\chapnamefont\vphantom{\@chapapp}}%
+{\chapnumfont\hphantom{\thechapter}}}}
+\renewcommand{\afterchapternum}{}
+\renewcommand{\printchaptertitle}[1]{%
+\usebox{\ChpNumBox}\hfill
+\parbox[t]{\hsize-\wd\ChpNumBox-1em}{%
+\vspace{\midchapskip}%
+\thickhrulefill\par
+\chaptitlefont ##1\par}}%
+}
+%\chapterstyle{BlueBox}

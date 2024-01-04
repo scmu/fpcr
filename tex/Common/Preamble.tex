@@ -1,0 +1,124 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Imported packages
+
+\usepackage{xcolor}
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{amsthm}
+%\usepackage{amssymb}
+\usepackage{Common/doubleequals}
+\usepackage{comment}
+\usepackage{url}
+\usepackage{natbib}
+\usepackage{paralist}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{multicol}
+\usepackage{tikz}  % for chapterstyle
+\usepackage{mathptmx}
+%\usepackage{helvet}
+\usepackage{scalerel}
+
+\usepackage[T1]{fontenc}
+\usepackage[sfdefault]{biolinum}
+\renewcommand{\familydefault}{\sfdefault}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% for the greek and mayan numbers
+
+\usepackage[main=english, polutonikogreek]{babel}
+\usepackage{textgreek}
+%\usepackage{teubner}
+%\usepackage{subfigure}
+\input{Common/mayan.tex}
+
+\DeclareMathAlphabet{\mymathbb}{U}{BOONDOX-ds}{m}{n} % for tt and ff in Derivation.lhs
+
+\setsecnumdepth{subsection}  %number subsections
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Exercises
+\usepackage[answerdelayed]{exercise}
+%\usepackage[noanswer]{exercise} % to suppress answers
+\numberwithin{Answer}{chapter}
+\numberwithin{Exercise}{chapter}
+\renewcommand{\ExerciseListName}{習題}
+\setlength{\Exetopsep}{15pt}
+\setlength{\Exesep}{5pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Set Chinese Font
+
+%\usepackage{fontspec}
+\usepackage{xeCJK}
+\renewcommand{\familydefault}{\sfdefault} % use sans serif font
+\setCJKmainfont[BoldFont=STHeiti,ItalicFont=STKaiti]{STSong}
+\setCJKsansfont[BoldFont=Heiti TC Medium,ItalicFont=STFangsong]{Heiti TC Light}%{STXihei}
+%\setCJKsansfont[BoldFont=STHeiti,ItalicFont=STKaiti]{Heiti TC Light}%{STXihei}
+\setCJKmonofont{STFangsong}
+\renewcommand{\baselinestretch}{1.15}
+%\setlength{\jot}{-10pt}
+
+%\setromanfont[BoldFont={BiauKai}]{Apple LiSung Light}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preamble Extracted from lhs2Tex.
+%   Bruno's trick for separate type-setting.
+
+\input{Common/Lhs2TexPreamble}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Theorems & Lemma numbering
+
+\newtheorem{theorem}{\color{nicered}{定理}}[chapter]
+\newtheorem{lemma}[theorem]{\color{nicered}{引理}}
+\newtheorem{corollary}[theorem]{\color{nicered}{系理}}
+\newtheorem{example}[theorem]{\color{nicered}{例}}
+\newtheorem{definition}[theorem]{\color{nicered}{定義}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lhs2Tex Comment Style
+%  In Formatting.fmt
+
+% \def\commentbegin{\quad\{\ }
+% \def\commentend{\}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Box and Chapter Style
+
+\input{Common/boxes}
+
+\newcommand\todo[1]{\textcolor{blue!70!gray}{[todo: #1]}}
+
+\input{Common/ChapterStyles}
+\chapterstyle{daleif1}
+\setsecheadstyle{\color{nicered}\Large\bfseries\raggedright}
+\setparaheadstyle{\color{nicered}\bfseries\raggedright}
+%\setsechook{\color{nicered}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Math Color
+
+  % blues
+\definecolor{prussianblue}{rgb}{0.0, 0.19, 0.33}
+\definecolor{lapislazuli}{rgb}{0.15, 0.38, 0.61}
+\definecolor{tealblue}{rgb}{0.21, 0.46, 0.53}
+
+  % oranges
+\definecolor{terracotta}{rgb}{0.89, 0.45, 0.36}
+\definecolor{burntorange}{rgb}{0.8, 0.33, 0.0}
+
+\everymath{\color{tealblue}}
+%to avoid fake math mathcoloring
+%   https://tex.stackexchange.com/questions/100263/everymath-and-author-color
+% \makeatletter  \def\m@th{\mathsurround\z@\color{black}} \makeatother
+
+%\def\arraystretch{0}
+%\XeTeXlinebreaklocale "zh"
+%\XeTeXlinebreakskip = 0pt plus 1pt
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Draft Watermark
+
+\usepackage{draftwatermark}
+\SetWatermarkText{DRAFT}
+\SetWatermarkScale{1}
