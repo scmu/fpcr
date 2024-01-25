@@ -26,3 +26,7 @@ tex/fpcr.pdf
 *.ptb
 
 *.toc
+
+html/Chapters/
+
+tmp/

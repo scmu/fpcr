@@ -1,0 +1,122 @@
+body {
+  font-size: 120%;
+  color: #777;
+}
+
+code { color: #008b8b; }
+code comment { color: DarkSalmon; }
+
+.header { color: #333; }
+
+.header h1 {
+    font-size: 3em;
+    font-weight: 300;
+}
+.header h2 {
+    font-weight: 300;
+    color: #ccc;
+}
+
+.content-subhead {
+    font-weight: 300;
+    color: #888;
+}
+
+#menu {
+  background: #7395ae;
+  color: #333
+}
+
+#menu a { color: #333; }
+
+/*
+Add that light border to separate items into groups.
+*/
+/*
+#menu .pure-menu ul,
+#menu .pure-menu .menu-item-divided {
+    border-top: 1px solid #ddd;
+}
+*/
+/*
+Change color of the anchor links on hover/focus.
+
+#menu .pure-menu li:hover,
+#menu .pure-menu li:focus {
+    background: LavenderBlush;
+}
+*/
+#menu ul li a:hover {
+  color: #fff;
+}
+/*
+This styles the selected menu item `<li>`.
+*/
+#menu .pure-menu-selected,
+#menu .pure-menu-heading {
+    background: #557a95;
+}
+
+/*
+This styles a link within a selected menu item `<li>`.
+*/
+#menu .pure-menu-selected a {
+    color: #fff;
+}
+
+/*
+This styles the menu heading.
+*/
+#menu .pure-menu-heading {
+    font-size: 110%;
+    color: #fff;
+    margin: 0;
+}
+
+.menu-toggle { color: #adadad; }
+.menu-toggle:hover { color: #fff; }
+
+.collapsible-menu {
+  background-color: #eeeeee;
+}
+
+.menu-link {
+  background: #b1a296;
+  /* background: rgba(0,0,0,0.7); */
+  font-size: 10px; /* change this value to increase/decrease button size */
+}
+
+.menu-link:hover /*,
+.menu-link:focus  */ {
+    background: #938e94;
+}
+
+.menu-link span,
+.menu-link span:before,
+.menu-link span:after {
+    background-color: #fff;
+}
+
+#menu .author-info {
+  background-color: #b1a296;
+  padding: 20px 0 20px 10px;
+}
+
+.theorem { background-color: GhostWhite; }
+
+.infobox { background-color: LightSteelBlue; }
+
+.exercise {
+  background-color: #eeeeee;
+}
+
+.lbl-toggle {
+  font-weight: bold;
+  font-family: monospace;
+  text-align: left;
+  color: #222;
+  background: #bab2b5;
+}
+.lbl-toggle:hover { color: #eee; }
+
+.collapsible-content { background-color: #eee2dc; }
