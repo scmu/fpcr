@@ -52,28 +52,43 @@ Change color of the anchor links on hover/focus.
 /*
 This styles the selected menu item `<li>`.
 */
-#menu .pure-menu-selected,
 #menu .pure-menu-heading {
     background: #557a95;
+}
+
+#menu .pure-menu-selected{
+  background: #8faabe;
 }
 
 /*
 This styles a link within a selected menu item `<li>`.
 */
 #menu .pure-menu-selected a {
-    color: #fff;
+    color: #eee;
 }
 
 /*
 This styles the menu heading.
 */
-#menu .pure-menu-heading {
+#menu h1.pure-menu-heading {
     font-size: 110%;
     color: #fff;
     margin: 0;
 }
 
+#menu h2.pure-menu-heading {
+    font-size: 90%;
+    text-wrap: wrap;
+    text-transform: none;
+    color: #fff;
+    margin: 0;
+}
+
 .menu-toggle { color: #adadad; }
+.pure-menu-selected .menu-toggle {
+  color: #6e6e6e;
+}
+
 .menu-toggle:hover { color: #fff; }
 
 .collapsible-menu {
@@ -120,3 +135,11 @@ This styles the menu heading.
 .lbl-toggle:hover { color: #eee; }
 
 .collapsible-content { background-color: #eee2dc; }
+
+.fnote-toggle {
+  color: #000;
+  background: AntiqueWhite;
+}
+.fnote-toggle:hover { color: CadetBlue; }
+
+.collapsible-footnote { background-color: #eee2dc; }

@@ -71,3 +71,38 @@ input[type='checkbox'] {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
+
+/* Footnote */
+
+
+.fnote-toggle {
+  display: inline;
+  font-size: 80%;
+  transition: all 0.25s ease-out;
+}
+
+.fnote-toggle::after {
+  content: ' ';
+  display: inline-block;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid currentColor;
+  vertical-align: middle; margin-right: .7rem;
+  transform: translateY(-2px);
+  transition: transform .2s ease-out;
+}
+
+.toggle:checked+.fnote-toggle::after {
+  transform: rotate(90deg) translateX(-3px);
+}
+
+.collapsible-footnote {
+  display: none;
+  margin:  2px 10px 2px 50px;
+  padding: 20px 30px 20px 30px;
+  border-radius: 5px;
+}
+
+.toggle:checked + .fnote-toggle + .collapsible-footnote {
+  display: block;
+}
