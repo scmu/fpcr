@@ -8,7 +8,8 @@ import Data.List (inits, tails)
 import Common.MiniPrelude hiding (exp, gcd)
 
 import Chapters.Basics (square, ETree(..), ITree(..), positions, fork)
-import Chapters.Induction (mapI)
+import Chapters.Induction (mapI, sublists)
+import qualified Chapters.Induction as Induction
 ```
 
 # 一般程式推導 {#ch:derivation}
@@ -781,6 +782,66 @@ exp b n  | even n  = square (exp b (n `div` 2))
 空間的使用量也影響效率（例如，使用大量記憶體的程式可能需要較多次垃圾收集）；
 某些演算法適合快取，等等。
 我們在之後的章節中將看到一些歸納定義程式走訪資料結構的次數雖較少，但反而執行得慢的例子。
+
+:::{.exlist}
+:::{.exer #sublist-choose}
+回顧第 \@ref{sec:fan-perm} 節的 |sublists|:
+```spec
+sublists :: List a -> List (List a)
+sublists []      = [[]]
+sublists (x:xs)  = sublists xs ++ map (x:) (sublists xs) {-"~~."-}
+```
+{.nobreak}定義
+```spec
+choose :: Nat -> List a -> List (List a)
+choose k = filter ((k ==) . length) . sublists {-"~~,"-}
+```
+{.nobreak}使得 |choose k xs| 傳回 |xs| 的子串列中長度為 |k| 者，例如 |choose 3 "abcde" =| |["cde","bde","bce","bcd","ade","ace",| |"acd",| |"abe",| |"abd","abc"]|.
+使用展開-收回轉換導出 |choose| 的歸納定義。
+**提示**: 依照 |choose k xs| 的定義，我們會在 |xs| 上做歸納。但此例之中，先對 |k| 做歸納，再對 |xs| 做歸納，得到的程式會比較精簡。
+:::
+:::{.exans}
+先對 |k| 做歸納，再對 |xs| 做歸納。我們只列出最複雜的情況：
+
+{.noindent}**情況** |k := Suc k|, |xs := x:xs|.
+```{.haskell .invisible}
+length' = Induction.length
+chooseDerInd k x xs =
+```
+```haskell
+     choose (Suc k) (x:xs)
+ ===   {- |choose| 之定義 -}
+     filter ((Suc k ==) . length') (sublists (x:xs))
+ ===   {- |sublists| 之定義 -}
+     filter ((Suc k ==) . length') (sublists xs ++ map (x:) (sublists xs))
+ ===   {- |filter| 分配入 |(++)| -}
+     filter ((Suc k ==) . length') (sublists xs) ++
+     filter ((Suc k ==) . length') (map (x:) (sublists xs))
+ ===   {- |choose| 之定義 -}
+     choose (Suc k) xs ++
+     filter ((Suc k ==) . length') (map (x:) (sublists xs))
+ ===   {- 定理 \ref{thm:filter-map} -}
+     choose (Suc k) xs ++
+     map (x:) (filter ((Suc k ==) . length' . (x:)) (sublists xs))
+ ===  {- |(Suc k ==) . length' . (x:) = (k ==) . length'| -}
+     choose (Suc k) xs ++
+     map (x:) (filter ((k ==) . length') (sublists xs))
+ ===  {- |choose| 之定義 -}
+     choose (Suc k) xs ++
+     map (x:) (choose k xs) {-"~~."-}
+```
+
+我們得到：
+```haskell
+choose :: Nat -> List a -> List (List a)
+choose Zero     xs      =  [[]]
+choose (Suc k)  []      =  []
+choose (Suc k)  (x:xs)  =  choose (Suc k) xs ++
+                           map (x:) (choose k xs) {-"~~."-}
+```
+{.nobreak}確實是一般組合數學教材中會給的 $C^n_k$ 定義。
+:::
+:::
 
 ## 變數換常數 {#sec:var-cons}
 
