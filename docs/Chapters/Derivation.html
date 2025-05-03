@@ -1,0 +1,911 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="函數程設與推論">
+    <title>函數程設與推論</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <!-- link rel="stylesheet" href="/css/pure/pure-min.css" -->
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <script> MathJax = {
+              loader: {
+                load: ['input/tex-base', 'output/chtml']
+                },
+              tex: {
+                inlineMath: [['$', '$']]
+             }};
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3.0.0/es5/startup.js">
+    </script>
+</head>
+<body>
+
+<div id="layout">
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+        <!-- Hamburger icon -->
+        <span></span>
+    </a>
+<div id="menu"><div class="pure-menu"><h1 class="pure-menu-heading">函數程設與推論</h1><h2 class="pure-menu-heading">Functional Program Construction and Reasoning</h2><p><a href="ToC.html">目錄</a></p><nav class="nav" role="navigation"><ul class="pure-menu-list menu-level-1"><li class="pure-menu-item"><a href="Introduction.html#ch:intro">0 符號、演算、與抽象化</a><input class="toggle" id="menu-li-0" type="checkbox"/><label class="menu-toggle" for="menu-li-0"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Introduction.html#sec:knight-knave-island">0.1 騎士與惡棍之島</a></li><li class="pure-menu-item"><a href="Introduction.html#sec:let-symbols-work">0.2 讓符號為你工作</a></li><li class="pure-menu-item"><a href="Introduction.html#sec:abstraction">0.3 抽象化</a></li><li class="pure-menu-item"><a href="Introduction.html#sec:abstraction-and-expression">0.4 抽象化與表達力</a></li><li class="pure-menu-item"><a href="Introduction.html#sec:correctness">0.5 正確性</a></li><li class="pure-menu-item"><a href="Introduction.html#sec:calculable-programming-language">0.6 可演算的程式語言</a></li><li class="pure-menu-item"><a href="Introduction.html#sec:relevant-information">0.7 相關資料</a></li></ul></li><li class="pure-menu-item"><a href="Basics.html#ch:basics">1 值、函數、與定義</a><input class="toggle" id="menu-li-1" type="checkbox"/><label class="menu-toggle" for="menu-li-1"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Basics.html#sec:evaluation">1.1 值與求值</a></li><li class="pure-menu-item"><a href="Basics.html#sec:function-defns">1.2 函數定義</a></li><li class="pure-menu-item"><a href="Basics.html#sec:higher-order-func">1.3 高階函數</a></li><li class="pure-menu-item"><a href="Basics.html#sec:func-comp">1.4 函數合成</a></li><li class="pure-menu-item"><a href="Basics.html#sec:lambda-terms">1.5 $\lambda$ 算式</a></li><li class="pure-menu-item"><a href="Basics.html#sec:elementary-datatypes">1.6 簡單資料型態</a><input class="toggle" id="menu-li-1-6" type="checkbox"/><label class="menu-toggle" for="menu-li-1-6"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Basics.html#sec:boolean">1.6.1 布林值</a></li><li class="pure-menu-item"><a href="Basics.html#sec:char">1.6.2 字元</a></li><li class="pure-menu-item"><a href="Basics.html#sec:pairs">1.6.3 序對</a></li></ul></li><li class="pure-menu-item"><a href="Basics.html#sec:weak-head-normal-form">1.7 弱首範式</a></li><li class="pure-menu-item"><a href="Basics.html#sec:lists">1.8 串列</a><input class="toggle" id="menu-li-1-8" type="checkbox"/><label class="menu-toggle" for="menu-li-1-8"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Basics.html#sec:list-deconstruct">1.8.1 串列解構</a></li><li class="pure-menu-item"><a href="Basics.html#sec:list-generation">1.8.2 串列生成</a></li><li class="pure-menu-item"><a href="Basics.html#sec:list-combinators">1.8.3 串列上的種種組件函數</a></li></ul></li><li class="pure-menu-item"><a href="Basics.html#sec:wholemeal">1.9 全麥編程</a></li><li class="pure-menu-item"><a href="Basics.html#sec:user-defined-data">1.10 自訂資料型別</a></li><li class="pure-menu-item"><a href="Basics.html#sec:refs-basics">1.11 參考資料</a></li></ul></li><li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction.html#sec:math-induction">2.1 數學歸納法</a></li><li class="pure-menu-item"><a href="Induction.html#sec:induction-on-Nat">2.2 自然數上之歸納定義</a></li><li class="pure-menu-item"><a href="Induction.html#sec:inductive-proof-on-Nat">2.3 自然數上之歸納證明</a></li><li class="pure-menu-item"><a href="Induction.html#sec:induction-lists">2.4 串列與其歸納定義</a><input class="toggle" id="menu-li-2-4" type="checkbox"/><label class="menu-toggle" for="menu-li-2-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction.html#sec:induction-lists-defn">2.4.1 串列上之歸納定義</a></li><li class="pure-menu-item"><a href="Induction.html#sec:induction-lists-proof">2.4.2 串列上之歸納證明</a></li></ul></li><li class="pure-menu-item"><a href="Induction.html#sec:data-prog-proof">2.5 從資料、程式、到證明</a></li><li class="pure-menu-item"><a href="Induction.html#sec:more-inductive-defns">2.6 更多歸納定義與證明</a><input class="toggle" id="menu-li-2-6" type="checkbox"/><label class="menu-toggle" for="menu-li-2-6"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction.html#sec:filter-takeWhile-dropWhile">2.6.1 <code class="haskell">filter</code>, <code class="haskell">takeWhile</code>, 與 <code class="haskell">dropWhile</code></a></li><li class="pure-menu-item"><a href="Induction.html#sec:elem-neq-proof">2.6.2 <code class="haskell">elem</code> 與不等式證明</a></li><li class="pure-menu-item"><a href="Induction.html#sec:list-segments">2.6.3 串列區段</a></li><li class="pure-menu-item"><a href="Induction.html#sec:fan-perm">2.6.4 插入、排列、子串列、與劃分</a></li></ul></li><li class="pure-menu-item"><a href="Induction.html#sec:using-hints-from-symbols">2.7 再談「讓符號為你工作」</a></li><li class="pure-menu-item"><a href="Induction.html#sec:other-inductive-datatypes">2.8 其他歸納資料結構</a></li><li class="pure-menu-item"><a href="Induction.html#sec:induction-set-theory">2.9 由集合論看歸納法</a></li><li class="pure-menu-item"><a href="Induction.html#sec:induction-variations">2.10 歸納定義的簡單變化</a></li><li class="pure-menu-item"><a href="Induction.html#sec:complete-induction">2.11 完全歸納</a></li><li class="pure-menu-item"><a href="Induction.html#sec:well-founded-induction">2.12 良基歸納</a></li><li class="pure-menu-item"><a href="Induction.html#sec:lexicographic-induction">2.13 詞典序歸納</a></li><li class="pure-menu-item"><a href="Induction.html#sec:mutual-induction">2.14 交互歸納</a></li><li class="pure-menu-item"><a href="Induction.html#sec:induction-ref">2.15 參考資料</a></li></ul></li><li class="pure-menu-item"><a href="SearchTrees.html#ch:induction-search-trees">3 搜尋樹</a><input class="toggle" id="menu-li-3" type="checkbox"/><label class="menu-toggle" for="menu-li-3"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="SearchTrees.html#sec:induction-binary-search-tree">3.1 二元搜尋樹</a></li><li class="pure-menu-item"><a href="SearchTrees.html#sec:induction-red-black-tree">3.2 紅黑樹</a><input class="toggle" id="menu-li-3-2" type="checkbox"/><label class="menu-toggle" for="menu-li-3-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="SearchTrees.html#">3.2.1 紅黑樹插入</a></li><li class="pure-menu-item"><a href="SearchTrees.html#">3.2.2 紅黑樹之性質：高度</a></li><li class="pure-menu-item"><a href="SearchTrees.html#">3.2.3 紅黑樹之性質：平衡</a></li><li class="pure-menu-item"><a href="SearchTrees.html#">3.2.4 紅黑樹之性質：顏色</a></li></ul></li></ul></li><li class="pure-menu-item"><a href="Semantics.html#ch:semantics">4 關於語意的基本概念</a><input class="toggle" id="menu-li-4" type="checkbox"/><label class="menu-toggle" for="menu-li-4"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Semantics.html#sec:denotational-semantics">4.1 指稱語意</a></li><li class="pure-menu-item"><a href="Semantics.html#sec:operational-semantics">4.2 操作語意</a></li></ul></li><li class="pure-menu-selected pure-menu-item"><a href="#ch:derivation">5 一般程式推導</a><input class="toggle" id="menu-li-5" checked type="checkbox"/><label class="menu-toggle" for="menu-li-5"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Derivation.html#sec:fold-unfold-transform">5.1 展開-收回轉換</a></li><li class="pure-menu-item"><a href="Derivation.html#sec:efficiency-basics">5.2 關於執行效率</a></li><li class="pure-menu-item"><a href="Derivation.html#sec:fold-unfold-transform-efficiency">5.3 用展開-收回轉換增進效率</a><input class="toggle" id="menu-li-5-3" type="checkbox"/><label class="menu-toggle" for="menu-li-5-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation.html#sec:poly-horner">5.3.1 計算多項式 -- Horner 法則</a></li><li class="pure-menu-item"><a href="Derivation.html#sec:exp-binary-roll">5.3.2 二進位表示法</a></li><li class="pure-menu-item"><a href="Derivation.html#sec:wrap-reminder">5.3.3 小結與提醒</a></li></ul></li><li class="pure-menu-item"><a href="Derivation.html#sec:var-cons">5.4 變數換常數</a></li><li class="pure-menu-item"><a href="Derivation.html#sec:tupling">5.5 組對</a><input class="toggle" id="menu-li-5-5" type="checkbox"/><label class="menu-toggle" for="menu-li-5-5"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation.html#sec:steep">5.5.1 陡串列</a></li><li class="pure-menu-item"><a href="Derivation.html#sec:repl-tree">5.5.2 以串列標記樹狀結構</a></li><li class="pure-menu-item"><a href="Derivation.html#sec:rep-minE">5.5.3 代換為最小標籤 --- 循環程式</a></li><li class="pure-menu-item"><a href="Derivation.html#sec:tupling-conclude">5.5.4 小結與提醒</a></li></ul></li><li class="pure-menu-item"><a href="Derivation.html#sec:accumulating-param">5.6 累積參數</a><input class="toggle" id="menu-li-5-6" type="checkbox"/><label class="menu-toggle" for="menu-li-5-6"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation.html#sec:reversal-append">5.6.1 串列反轉與連接</a></li><li class="pure-menu-item"><a href="Derivation.html#sec:accum-info-flow">5.6.2 由上到下的資訊流</a></li><li class="pure-menu-item"><a href="Derivation.html#sec:tail-recursion">5.6.3 尾遞迴</a></li><li class="pure-menu-item"><a href="Derivation.html#sec:tail-recursion-more">5.6.4 更多尾遞迴範例</a></li><li class="pure-menu-item"><a href="Derivation.html#sec:tail-recursion-efficiency">5.6.5 尾遞迴的效率考量</a></li><li class="pure-menu-item"><a href="Derivation.html#sec:difference-list">5.6.6 函數作為串列</a></li></ul></li></ul></li><li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li><li class="pure-menu-item"><a href="Folds.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li></ul></li><li class="pure-menu-item"><a href="Folds.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li><li class="pure-menu-item"><a href="Folds.html#sec:foldr-program-gen">6.2.2 以摺融合生成程式</a></li><li class="pure-menu-item"><a href="Folds.html#sec:scan-lemma">6.2.3 掃描</a></li><li class="pure-menu-item"><a href="Folds.html#sec:banana-split">6.2.4 香蕉船定理</a></li><li class="pure-menu-item"><a href="Folds.html#sec:accum-param-fold-fusion">6.2.5 累積參數與摺融合</a></li><li class="pure-menu-item"><a href="Folds.html#sec:bring-in-context">6.2.6 引入脈絡</a></li></ul></li><li class="pure-menu-item"><a href="Folds.html#sec:foldl-listHomo-para">6.3 左摺、串列同構、與 Paramorphism</a><input class="toggle" id="menu-li-6-3" type="checkbox"/><label class="menu-toggle" for="menu-li-6-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds.html#sec:foldl">6.3.1 左摺</a></li><li class="pure-menu-item"><a href="Folds.html#sec:list-homomorphism">6.3.2 串列同構</a></li><li class="pure-menu-item"><a href="Folds.html#sec:paramorphism">6.3.3 Paramorphism 與本原遞迴</a></li></ul></li><li class="pure-menu-item"><a href="Folds.html#sec:foldN">6.4 自然數的摺</a></li><li class="pure-menu-item"><a href="Folds.html#sec:fold-on-other-data-structures">6.5 其他資料結構</a></li><li class="pure-menu-item"><a href="Folds.html#sec:folds-ref">6.6 參考資料</a></li></ul></li><li class="pure-menu-item"><a href="SegProblems.html#ch:segment-problems">7 區段問題</a><input class="toggle" id="menu-li-7" type="checkbox"/><label class="menu-toggle" for="menu-li-7"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="SegProblems.html#sec:maximum-segment-sum">7.1 最大區段和</a></li><li class="pure-menu-item"><a href="SegProblems.html#sec:maximum-plateau-length">7.2 最長高原問題</a></li><li class="pure-menu-item"><a href="SegProblems.html#sec:segProblems-ref">7.3 參考資料</a></li></ul></li><li class="pure-menu-item"><a href="Monads.html#ch:monads">8 單子與副作用</a><input class="toggle" id="menu-li-8" type="checkbox"/><label class="menu-toggle" for="menu-li-8"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Monads.html#sec:exceptions">8.1 例外處理</a></li><li class="pure-menu-item"><a href="Monads.html#sec:monad-class-laws">8.2 單子與單子律</a></li><li class="pure-menu-item"><a href="Monads.html#sec:monad-reader">8.3 讀取單子</a><input class="toggle" id="menu-li-8-3" type="checkbox"/><label class="menu-toggle" for="menu-li-8-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Monads.html#sec:var-env-reader">8.3.1 變數與環境</a></li><li class="pure-menu-item"><a href="Monads.html#sec:reader-is-monad">8.3.2 「讀取」副作用是單子</a></li><li class="pure-menu-item"><a href="Monads.html#sec:monad-reader-laws">8.3.3 推論讀取單子程式的性質</a></li></ul></li><li class="pure-menu-item"><a href="Monads.html#sec:monad-state">8.4 狀態單子</a><input class="toggle" id="menu-li-8-4" type="checkbox"/><label class="menu-toggle" for="menu-li-8-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Monads.html#sec:hanoi">8.4.1 河內塔問題</a></li></ul></li><li class="pure-menu-item"><a href="Monads.html#">8.5 參考資料</a></li></ul></li></ul></nav><p><a href="Ix.html">索引</a></p><p><a href="Biblio.html">參考書目</a></p><p class="author-info"><a href="https://  homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div><div id="main"><div class="header"><h1 class="chapter" id="ch:derivation">5 一般程式推導</h1></div><div class="content"><p><em>程式推導</em>(<em>program derivation</em>)<span id="ix-5-1"></span>是本書的重要主題。&shy;給定一個待解決的問題，並假設該問題能描述成邏輯、數學、或其他形式語言（稱作一個形式規格(specification)），&shy;程式推導泛指<em>以嚴謹方式將該規格轉換成一個解決該問題的程式</em>的方法。&shy;指令式語言與函數語言都能做程式推導，而且有許多道理可相通。&shy;本書討論函數語言的程式推導。&shy;一個簡單、典型的函數程式語言推導可能有如下的形式：</p><pre><code class="spec">  spec
+=  <comment>{- 性質 1 -}</comment>
+  e1
+=  <comment>{- 性質 2 -}</comment>
+  ....
+=  <comment>{- 性質 n -}</comment>
+  en 
+</code></pre><p>其中 <code class="haskell">spec</code> 是問題的規格，通常也是一個函數語言程式。&shy;根據性質 1, <code class="haskell">spec</code> 等於 <code class="haskell">e1</code>；根據性質 2，<code class="haskell">e1</code> 等於 <code class="haskell">e2</code>... 長此以往，直到我們導出一個符合我們要求的 <code class="haskell">en</code>.&shy;光這麼看來，這和我們前幾章作的數學證明似乎沒什麼不同。&shy;差別在於，做證明時我們已有 <code class="haskell">spec</code> 和 <code class="haskell">en</code>，要做的是把 <code class="haskell">spec</code> 到 <code class="haskell">en</code> 之間的步驟補足。&shy;但做程式推導時，我們是從 <code class="haskell">spec</code> 出發，希望透過種種跡象找出一個滿意的（可能是夠快的、不佔空間的、或滿足某些其他性質的）<code class="haskell">en</code>.&shy;當然，找出 <code class="haskell">en</code> 之後，從 <code class="haskell">spec</code> 推出 <code class="haskell">en</code> 的過程就成了 <code class="haskell">spec = en</code> 的證明。&shy;當程式推導的進行方式類似數學演算，有人可能稱之為<em>程式演算</em>(<em>program calculation</em>)<span id="ix-5-2"></span>。&shy;本書混用這兩個詞彙，並不區分。</p><p>為何做程式推導？第一個理由是我們希望程式正確。&shy;此處「正確」指的是 <code class="haskell">en</code> 確實滿足了最初的規格 <code class="haskell">spec</code>。但如果只為了正確性，我們為何不能先無論如何把 <code class="haskell">en</code> 寫出，再試著證明 <code class="haskell">spec = en</code>？&shy;原因之一是通常程式寫好了，大家便不想證它了。&shy;更重要的是：程式開發時，若沒有把「怎麼證明它」列入考量，寫出的程式常常是很難證明的。&shy;為了確保有證明，最好讓「產生證明」這件事成為程式開發過程的一部分，甚至讓證明引導程式的開發。&shy;Dijkstra 說道：</p><blockquote><p>先給一個程式再證明它，在某個意義上是把馬車放在馬前面。&shy;更有希望的做法是讓正確性證明與程式一起長出來：&shy;如此一來，我們能選擇證明的結構，然後設計一個能用這種方法證明出來的程式。&shy;這還有個額外的好處：正確性考量可以成為程式該怎麼寫的引導與啟發。 <a href="Biblio.html#Dijkstra:74:Programming">[Dijkstra 1974]</a></p></blockquote><p>Dijkstra 的最後一句話帶到了程式推導的第三個理由：&shy;提倡者認為，程式推導的種種方法與技巧可以引導我們去分析、思考、解決問題；&shy;這是解問題、甚至發現新演算法的方法（<a href="Biblio.html#Backhouse:03:Program">Backhouse [2003]</a>, <a href="Biblio.html#Backhouse:11:Algorithmic">Backhouse [2011]</a>）。&shy;藉由良好的符號設計，我們可以發現常見的程式推導模式，並將其推廣到其他有類似性質的問題上。</p><p>第<a href="Introduction.html#ch:intro">0 </a>章的結尾說道「函數語言的價值便是：它是個適於演算的語言。」&shy;便於做程式推導，是我覺得函數語言最突出的特質。&shy;我們可以由規格出發、在符號上操作，將程式如同求代數的解一樣地算出來。只要每個小步驟都正確，最後的程式就是正確的。&shy;由第<a href="Basics.html#ch:basics">1 </a>章至今，我們做了許多準備工作，備齊需要的基本知識。現在我們終於可以開始做一些演算了。</p><h2 class="section" id="sec:fold-unfold-transform">5.1 展開-收回轉換</h2><p>考慮這麼一個例子：給定一個整數形成的串列，我們想計算其每個數的平方的和。例如當輸入是<code class="haskell">[2,6,5,3]</code>, 我們希望算出 $2^2 + 6^2 + 5^2 + 3^2 = 74$. 這項工作可以簡短地描述如下：</p><p>函數 <code class="haskell">sumsq</code> 的型別為 <code class="haskell">List Int -&gt; Int</code>.&shy;其中 <code class="haskell">map square</code> 將輸入串列的每個元素都平方，然後由 <code class="haskell">sum</code> 計算其總和。第<a href="Induction.html#sec:induction-lists">2.4 </a>節中給過一個 <code class="haskell">sum</code> 的歸納定義，重複如下：</p><pre><code class="spec">sum :: List Int -&gt; Int
+sum []      = 0
+sum (x:xs)  = x + sum xs 
+</code></pre><p><b>消除中間串列</b> &emsp;&shy;對大部分的應用而言，如上定義的 <code class="haskell">sumsq</code> 已經很堪用了。但作為一個例子，我們來挑惕些仍不滿意之處。執行 <code class="haskell">sumsq xs</code> 時，<code class="haskell">map square</code> 會產生另一個（存放 <code class="haskell">xs</code> 每個元素的平方的）串列，該串列隨即由 <code class="haskell">sum</code> 消掉 --- 感覺上似乎很浪費空間與時間。&shy;<input class="toggle" id="footnote-5-1-1" type="checkbox"/><label class="fnote-toggle" for="footnote-5-1-1">(註1) </label><span class="collapsible-footnote">在惰性求值的情況下，該中間串列的<em>每個</em>節點被產生後立刻被 <code class="haskell">sum</code> 消去，因此不會真的佔用和 <code class="haskell">xs</code> 同樣長度的空間。這也是大家覺得惰性求值有助於模組化、使小函數變得易於重用的例子之一。但「產生一個新節點、立刻消去」仍耗了一些不必要的時間。</span>&shy;有不產生這個中間串列的方法嗎？</p><p>我們試著做些計算。當 <code class="haskell">sumsq</code> 的參數是 <code class="haskell">[]</code> 時：</p><pre><code class="haskell">   sumsq []
+ ===    <comment>{- <code class="haskell">sumsq</code> 之定義 -}</comment>
+   sum (map square [])
+ ===    <comment>{- <code class="haskell">map</code> 之定義 -}</comment>
+   sum []
+ ===    <comment>{- <code class="haskell">sum</code> 之定義 -}</comment>
+   0 
+</code></pre><p>由此我們得知 <code class="haskell">sumsq []</code> 會被計算成 <code class="haskell">0</code>. 當輸入不是空串列時呢？試計算：</p><pre><code class="haskell">   sumsq (x:xs)
+ ===    <comment>{- <code class="haskell">sumsq</code> 之定義 -}</comment>
+   sum (map square (x:xs))
+ ===    <comment>{- <code class="haskell">map</code> 之定義 -}</comment>
+   sum (square x : map square xs)
+ ===    <comment>{- <code class="haskell">sum</code> 之定義 -}</comment>
+   square x + sum (map square xs)
+ ===    <comment>{- <code class="haskell">sumsq</code> 之定義 -}</comment>
+   square x + sumsq xs 
+</code></pre><p>可得知對任何 <code class="haskell">x</code> 與 <code class="haskell">xs</code>, <code class="haskell">sum (x:xs)</code> 歸約的結果和 <code class="haskell">square x + sumsq xs</code> 會是相同的。&shy;總結說來，藉由計算，我們發現 <code class="haskell">sumsq</code> 滿足以下兩條性質：</p><p>但如果我們翻轉過來，把這兩條性質當作 <code class="haskell">sumsq</code> 的新定義呢？&shy;這是一個依據歸納法定義的良好程式，而且不會產生中間串列！</p><p>但我們怎知道 <code class="haskell">sumsq</code> 的新定義滿足我們最初的要求 ([RefUndefined])，即 <code class="haskell">sumsq = sum . map square</code> 呢？&shy;回顧起來，我們的演算只證明了當 <code class="haskell">sumsq</code> 滿足 ([RefUndefined])，它也滿足 ([RefUndefined])，&shy;卻還不能據此宣稱另一個方向：若 ([RefUndefined]) 成立，([RefUndefined]) 也成立。&shy;我們將在第<a href="Semantics.html#ch:semantics">4 </a>章詳細討論這個問題。&shy;目前可暫時這麼說：如果我們從某個問題規格 <code class="haskell">f = e</code> 起始，發現 <code class="haskell">f</code> 滿足某一組等式，而這些等式剛好可湊成一個<em>會正常終止</em>的歸納定義，則 <code class="haskell">e</code> 確實是唯一滿足這些等式的解。由於如此的 <code class="haskell">e</code> 是唯一的，我們也可倒過來以這組等式為 <code class="haskell">f</code> 的定義，並同時宣稱 <code class="haskell">f = e</code> 這個性質成立。</p><p>回顧起來，在 <code class="haskell">sumsq</code> 的計算中，我們僅是把 <code class="haskell">sumsq</code> 的定義展開，接著展開 <code class="haskell">map</code>, <code class="haskell">sum</code> 等等元件的定義，直到我們又看到 <code class="haskell">sumsq</code> 的定義出現在式子中、剛好可以收回為止。&shy;這是一種單純而歷史悠久的程式推導方法，稱作<em>展開-收回轉換</em>(<em>fold-unfold transformation</em>)<span id="ix-5-3"></span>。&shy;雖然簡單，有時這個方法意外地有用。</p><p>在這個例子中，我們真正做到的是將一個單行、使用全麥編程的 <code class="haskell">sumsq</code> 定義轉換成了一個歸納定義。&shy;新定義的 <code class="haskell">sumsq</code> 比起原版稍有效率些，但這只是恰巧發生的 --- 歸納定義的程式不見得總會比較有效率。&shy;程式推導確保程式的正確性 --- 意即<em>導出的程式與原本的規格是同一個函數</em>。&shy;但新程式的效率仍須單獨分析。這是下一節的主題。</p><div class="exlist"><div class="exercise exer" id="ex:descend"><h5 class="exercise-title">練習 5.1 </h5><p>下述函數 <code class="haskell">descend n</code> 傳回 <code class="haskell">[n, n-1, n-2...0]</code>:</p><pre><code class="haskell">descend :: Nat -&gt; List Nat
+descend Zero     = []
+descend (Suc n)  = Suc n : descend n 
+</code></pre><p>定義 <code class="haskell">sumseries = sum . descend</code>.&shy;請找出 <code class="haskell">sumseries</code> 的歸納定義。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-1" type="checkbox"/><label class="lbl-toggle" for="ans-5-1">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>顯然 <code class="haskell">sum (descend 0) = 0</code>. 考慮歸納情況：</p><pre><code class="haskell">   sum (descend (Suc n))
+ ===   <comment>{- <code class="haskell">descend</code> 之定義 -}</comment>
+   sum (Suc n : descend n)
+ ===   <comment>{- <code class="haskell">sum</code> 之定義 -}</comment>
+   (Suc n) + sum (descend n)
+ ===   <comment>{- <code class="haskell">sumseries</code> 之定義 -}</comment>
+   (Suc n) + sumseries n 
+</code></pre><p>因此</p><pre><code class="haskell">sumseries Zero     = Zero
+sumseries (Suc n)  = (Suc n) + sumseries n 
+</code></pre></div></div></div><div class="exlist"><div class="exercise exer" id="ex:repeatN"><h5 class="exercise-title">練習 5.2 </h5><p>承接習題<a href="Derivation.html#ex:descend">5.1 </a>。函數 <code class="haskell">repeatN :: (Nat × a) -&gt; List a</code> 的定義為</p><pre><code class="spec">repeatN (n,x) = map (const x) (descend n) 
+</code></pre><p>因此，<code class="haskell">repeatN (n,x)</code> 會傳回一個含 <code class="haskell">n</code> 個 <code class="haskell">x</code> 的串列。&shy;例如 <code class="haskell">repeatN (3,'a') = "aaa"</code>.&shy;請算出一個歸納定義的 <code class="haskell">repeatN</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-2" type="checkbox"/><label class="lbl-toggle" for="ans-5-2">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>顯然 <code class="haskell">repeatN (0,x) = []</code>.&shy;至於歸納情況，演算如下：</p><pre><code class="haskell">   repeatN (Suc n, x)
+ ===   <comment>{- <code class="haskell">repeatN</code> 之定義 -}</comment>
+   map (const x) (descend (Suc n))
+ ===   <comment>{- <code class="haskell">descend</code> 之定義 -}</comment>
+   map (const x) (Suc n : descend n)
+ ===   <comment>{- <code class="haskell">map</code> 與 <code class="haskell">const</code> 之定義 -}</comment>
+   x : map (const x) (descend n)
+ ===   <comment>{- <code class="haskell">repeatN</code> 之定義 -}</comment>
+   x : repeatN (n,x) 
+</code></pre><p>因此，</p><pre><code class="haskell">repeatN (Zero,   x)  = []
+repeatN (Suc n,  x)  = x : repeatN (n,x) 
+</code></pre></div></div></div><div class="exlist"><div class="exercise exer" id="ex:rld"><h5 class="exercise-title">練習 5.3 </h5><p>承接習題<a href="Derivation.html#ex:repeatN">5.2 </a>。遊程編碼(run-length encoding)<span id="ix-5-4"></span>是一種簡單的壓縮方式：將字串中重複的字元表達成其出現的數字。例如 <code class="haskell">"aaabbbbcdd"</code> 可以表達為 <code class="haskell">"3a4b1c2d"</code>. 下列函數 <code class="haskell">rld :: List (Nat × a) -&gt; List a</code> 則是抽象過的「遊程解碼」，將已經表示成（次數$\times$字元）的壓縮文展開：</p><pre><code class="spec">rld = concat . map repeatN 
+</code></pre><p>例如， <code class="haskell">rld [(2,'a'), (3,'b'), (1,'c')] = "aabbbc"</code>.&shy;請導出 <code class="haskell">rld</code> 的歸納定義。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-3" type="checkbox"/><label class="lbl-toggle" for="ans-5-3">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>基底狀況：</p><pre><code class="spec">   rld []
+=    <comment>{- <code class="haskell">rld</code> 之定義 -}</comment>
+   concat (map repeatN [])
+=    <comment>{- <code class="haskell">map</code> 與 <code class="haskell">concat</code> 之定義 -}</comment>
+   [] 
+</code></pre><p>歸納狀況：</p><pre><code class="haskell">      rld ((n,x):xs)
+ ===    <comment>{- <code class="haskell">rld</code> 之定義 -}</comment>
+      concat (map repeatN ((n,x):xs))
+ ===    <comment>{- <code class="haskell">map</code> 之定義 -}</comment>
+      concat (repeatN (n,x) : map repeatN xs)
+ ===    <comment>{- <code class="haskell">concat</code> 之定義 -}</comment>
+      repeatN (n,x) ++ concat (map repeatN xs)
+ ===    <comment>{- <code class="haskell">rld</code> 之定義 -}</comment>
+      repeatN (n,x) ++ rld xs 
+</code></pre><p>因此我們已推導出：</p><pre><code class="haskell">rld []          = []
+rld ((n,x):xs)  = repeatN (n,x) ++ rld xs 
+</code></pre></div></div></div><div class="exlist"><div class="exercise exer" id="ex:delete-select"><h5 class="exercise-title">練習 5.4 </h5><p>下列函數 <code class="haskell">delete</code> 將輸入串列中的每個元素輪流刪除：</p><pre><code class="haskell">delete         ::  List a -&gt; List (List a)
+delete []      =   []
+delete (x:xs)  =   xs : map (x:) (delete xs) 
+</code></pre><p>例如，<code class="haskell">delete [1,2,3,4] = [[2,3,4], [1,3,4], [1,2,4], [1,2,3]]</code>.&shy;函數 <code class="haskell">select :: List a -&gt; List (a × List a)</code> 則將一個串列中的元素依次選出。&shy;例如，<code class="haskell">select [1,2,3,4] = [(1,[2,3,4]), (2,[1,3,4]), (3,[1,2,4]), (4,[1,2,3])]</code>. 函數 <code class="haskell">select</code> 恰巧可用 <code class="haskell">delete</code> 定義出來：</p><pre><code class="haskell">select xs = zip xs (delete xs) 
+</code></pre><p>請推導出 <code class="haskell">select</code> 的歸納定義。<strong>提示</strong>：下述性質可能有用 ---&shy;<code class="haskell">zip xs (map f ys) = map (id *** f) (zip xs ys)</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-4" type="checkbox"/><label class="lbl-toggle" for="ans-5-4">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>顯然 <code class="haskell">select [] = []</code>。考慮 <code class="haskell">xs := x:xs</code> 的情況：</p><pre><code class="haskell">    select (x:xs)
+ ===   <comment>{- <code class="haskell">select</code> 與 <code class="haskell">delete</code> 之定義 -}</comment>
+    zip (x:xs) (xs : map (x:) (delete xs))
+ ===   <comment>{- <code class="haskell">zip</code> 之定義 -}</comment>
+    (x, xs) : zip xs (map (x:) (delete xs))
+ ===   <comment>{- <code class="haskell">zip xs (map f ys) = map (id *** f) (zip xs ys)</code> -}</comment>
+    (x, xs) : map (id *** (x:)) (zip xs (delete xs))
+ ===   <comment>{- <code class="haskell">select</code> 之定義 -}</comment>
+    (x, xs) : map (id *** (x:)) (select xs) 
+</code></pre><p>因此，</p><pre><code class="spec">select []      = []
+select (x:xs)  = (x, xs) : map (id *** (x:)) (select xs) 
+</code></pre></div></div></div><div class="exlist"><div class="exercise exer" id="ex:delete-take-drop"><h5 class="exercise-title">練習 5.5 </h5><p>函數 <code class="haskell">delete</code> 有另一個可能定義：</p><pre><code class="spec">delete xs = map (del xs) [0..length xs-1]
+   where del xs i = take i xs ++ drop (1+i) xs 
+</code></pre><p>（此處我們利用了當 <code class="haskell">n</code> 為負數時，<code class="haskell">[0..n]</code> 化簡成 <code class="haskell">[]</code> 的特性。）&shy;請用此定義推導出 <code class="haskell">delete</code> 的歸納定義。<strong>提示</strong>：你可能用得上下述性質：</p><pre><code class="equation" id="eq:gen-split">  |[0..n] = 0 : map (1+) [0..n-1]|\mbox{,~~ if |n &gt;= 0|,}</code>    (5.1 )
+</pre></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-5" type="checkbox"/><label class="lbl-toggle" for="ans-5-5">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>以下只列出歸納狀況：</p><pre><code class="haskell">    delete (x:xs)
+ ===   <comment>{- <code class="haskell">delete</code> 之定義 -}</comment>
+    map (del (x:xs)) [0..length (x:xs) -1]
+ ===   <comment>{- <code class="haskell">length</code> 之定義，簡單運算 -}</comment>
+    map (del (x:xs)) [0..length xs]
+ ===   <comment>{- 由於 <code class="haskell">length xs &gt;= 0</code>, 使用 \eqref{eq:gen-split} -}</comment>
+   map (del (x:xs)) (0 : map (1+) [0..length xs-1])
+ ===   <comment>{- <code class="haskell">map</code> 之定義 -}</comment>
+   del (x:xs) 0 : map (del (x:xs)) (map (1+) [0..length xs-1])
+ ===   <comment>{- <code class="haskell">map</code> 融合 -}</comment>
+   del (x:xs) 0 : map (del (x:xs) . (1+)) [0..length xs-1] 
+</code></pre><p>在此暫停一下，觀察 <code class="haskell">del (x:xs)</code>. 顯然, <code class="haskell">del (x:xs) 0 = xs</code>. 至於 <code class="haskell">del (x:xs) . (1+)</code>，我們演算看看:</p><pre><code class="haskell">    (del (x:xs) . (1+)) i
+ ===    <comment>{- <code class="haskell">(.)</code> 與 <code class="haskell">del</code> 之定義 -}</comment>
+    take (1+ i) (x:xs) ++ drop (1+ (1+ i)) (x:xs)
+ ===    <comment>{- <code class="haskell">take</code> 與 <code class="haskell">drop</code> 之定義 -}</comment>
+    x : take i xs ++ drop (1+ i) xs
+ ===    <comment>{- <code class="haskell">del</code> 之定義 -}</comment>
+    x : del xs i
+ ===    <comment>{- <code class="haskell">(.)</code> 之定義 -}</comment>
+    ((x:) . del xs) i 
+</code></pre><p>繼續之前的演算：</p><pre><code class="haskell">    del (x:xs) 0 : map (del (x:xs) . (1+)) [0 .. length xs - 1]
+ ===   <comment>{- 前述之演算 -}</comment>
+    xs : map ((x:) . del xs) [0 .. length xs - 1]
+ ===   <comment>{- <code class="haskell">map</code> 融合 -}</comment>
+    xs : map (x:) (map (del xs) [0 .. length xs - 1])
+ ===   <comment>{- <code class="haskell">delete</code> 之定義 -}</comment>
+    xs : map (x:) (delete xs) 
+</code></pre><p>由此，我們導出了正文中 <code class="haskell">delete</code> 的歸納定義.</p></div></div></div><h2 class="section" id="sec:efficiency-basics">5.2 關於執行效率</h2><p>有點意外地，本書直到現在才較正式地談執行效率。&shy;在本書中，我們假設數字四則運算、邏輯運算元等等都可在常數時間內完成。&shy;資料結構方面，使用資料建構元或對其做樣式配對都只需要常數時間。&shy;例如，將 <code class="haskell">x</code> 與 <code class="haskell">y</code> 做成 <code class="haskell">(x,y)</code> 是常數時間內可完成的動作；一個型別是序對的值如果已經是弱首範式，將其配對成 <code class="haskell">(x,y)</code> 以取出其中的 <code class="haskell">x</code> 和 <code class="haskell">y</code> 也只需要常數時間。&shy;如果有資料結構定義 <code class="haskell">data T = A | B</code>, 給一個已經是弱首範式的 <code class="haskell">x :: T</code>, 只需常數時間便可判斷它究竟是 <code class="haskell">A</code> 還是 <code class="haskell">B</code>.</p><p>回顧 <code class="haskell">List</code> 的定義：</p><pre><code class="spec">data List a = [] | a : List a 
+</code></pre><p>我們可看出這是一個偏一邊的表示法。&shy;對於串列的左邊的操作都可以在常數時間內完成。&shy;因此，我們可在常數時間內判斷一個串列 <code class="haskell">xs</code> 究竟是 <code class="haskell">[]</code> 還是可分解成頭和尾；&shy;產生 <code class="haskell">[]</code> 只需要常數時間；在 <code class="haskell">xs</code> 的左邊添加一個元素，傳回 <code class="haskell">x:xs</code>，也是常數時間內可完成的動作。&shy;但如果我們要拿出某串列最右邊的元素，或著在串列的右邊加東西呢？回顧 <code class="haskell">(++)</code> 的定義：</p><pre><code class="spec">(++) :: List a -&gt; List a -&gt; List a
+[]      ++ ys  = ys
+(x:xs)  ++ ys  = x : (xs ++ ys) 
+</code></pre><p>若我們試著看看 <code class="haskell">[1,2,3] ++ [4,5]</code> 是怎麼被算出來的</p><pre><code class="spec">   (1 : 2 : 3 : []) ++ (4 : 5 : [])
+=  1 : ((2 : 3 : []) ++ (4 : 5 : []))
+=  1 : 2 : ((3 : []) ++ (4 : 5 : []))
+=  1 : 2 : 3 : ([] ++ (4 : 5 : []))
+=  1 : 2 : 3 : 4 : 5 : [] 
+</code></pre><p>可發現 <code class="haskell">(++)</code> 需把第一個參數從頭到尾走過一遍。&shy;因此，若第一個參數的長度是 <code class="haskell">n</code>，<code class="haskell">(++)</code> 是一個時間複雜度為 $O(n)$ 的函數。&shy;函數 <code class="haskell">last</code> 的情況也類似。</p><div class="exlist"><div class="exercise exer" id="ex:last-bigO"><h5 class="exercise-title">練習 5.6 </h5><p>回顧 <code class="haskell">last</code> 的定義，試著展開 <code class="haskell">last [1,2,3,4]</code> 並確認 <code class="haskell">last xs</code> 需要的時間是否為 $O(|length xs|)$。</p></div></div><p>諸如 <code class="haskell">sum</code>, <code class="haskell">length</code>, <code class="haskell">maximum</code> 之類的函數將串列從頭到尾走過一次。&shy;當輸入串列長度為 <code class="haskell">n</code>, 它們均需時 $O(n)$。如果函數 <code class="haskell">f</code> 需時 $O(t)$，<code class="haskell">map f</code> 需時 $O(t\times n)$.&shy;函數 <code class="haskell">filter p</code>, <code class="haskell">takeWhile p</code> 等等在最壞情況下需將串列走完，因此它們也是需要線性時間的函數。&shy;函數 <code class="haskell">zip</code> 需要的時間與兩個串列中較短者成正比。</p><p>在習題 <a href="Induction.html#ex:reverse">2.5 </a> 中，我們曾請讀者定義一個函數 <code class="haskell">reverse :: List a -&gt; List a</code>，將輸入的串列反轉，例如 <code class="haskell">reverse [1,2,3,4,5] = [5,4,3,2,1]</code>. 一個可能的答案如下：</p><pre><code class="spec">reverse []      = []
+reverse (x:xs)  = reverse xs ++ [x] 
+</code></pre><p>這個程式的效率如何呢？我們看看 <code class="haskell">reverse [1,2,3,4]</code> 如何被歸約：</p><pre><code class="spec">   reverse [1,2,3,4]
+=  reverse [2,3,4] ++ [1]
+=  (reverse [3,4] ++ [2]) ++ [1]
+=  ((reverse [4] ++ [3]) ++ [2]) ++ [1]
+=  (((reverse [] ++ [4]) ++ [3]) ++ [2]) ++ [1]
+=  ((([] ++ [4]) ++ [3]) ++ [2]) ++ [1] 
+</code></pre><p>為了把 <code class="haskell">[1]</code> 接在左邊，<code class="haskell">(++ [1])</code> 需要走過一個長度為 <code class="haskell">3</code> 的串列。&shy;而在那之前，<code class="haskell">(++ [2])</code> 需要走過一個長度為 <code class="haskell">2</code> 的串列。&shy;推廣說來，要反轉一個長度為 <code class="haskell">n</code> 的串列，<code class="haskell">(++)</code> 會被使用 $O(n)$ 次。每個 <code class="haskell">(++)</code> 左邊的串列長度也是 $O(n)$，因此 <code class="haskell">reverse</code> 是一個需時 $O(n^2)$ 的演算法！&shy;「反轉串列」這個看來很基本的操作竟需要 $O(n^2)$ 的時間，似乎令人難以接受。&shy;是否有更快的做法呢？我們將在第 <a href="Derivation.html#sec:accumulating-param">5.6 </a> 節討論到。</p><div class="exlist"><div class="exercise exer" id="ex:ETree-tips"><h5 class="exercise-title">練習 5.7 </h5><p>回顧第<a href="Basics.html#sec:user-defined-data">1.10 </a>與<a href="Induction.html#sec:other-inductive-datatypes">2.8 </a>節中提及的&shy;外標籤二元樹：</p><pre><code class="spec">data ETree a  = Tip a | Bin (ETree a) (ETree a) 
+</code></pre><p>以下函數傳回樹中所有的標籤：</p><pre><code class="haskell">tips :: ETree a -&gt; List a
+tips (Tip x)    = [x]
+tips (Bin t u)  = tips t ++ tips u 
+</code></pre><p>函數 <code class="haskell">tips</code> 最壞情況的時間複雜度為何？請做出一個含有 <code class="haskell">n</code> 個標籤的樹 <code class="haskell">t</code>，使得 <code class="haskell">tips t</code> 僅需要 $O(n)$ 的時間算完；也請做出一個含有 <code class="haskell">n</code> 個標籤的樹 <code class="haskell">u</code>，使得 <code class="haskell">tips u</code> 需要 $O(n^2)$ 的時間。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-7" type="checkbox"/><label class="lbl-toggle" for="ans-5-7">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>令 <code class="haskell">t</code> 為一個向右傾斜的樹：</p><pre><code class="spec">t = Bin (Tip 1) (Bin (Tip 2) .. (Bin (Tip (n-1)) (Tip n))) 
+</code></pre><p><code class="haskell">tip t</code> 展開成為 <code class="haskell">[1] ++ ([2] .. ([n-1] ++ [n]))</code>, 可在 $O(n)$ 時間內歸約成範式。&shy;這是最好的情況。&shy;令 <code class="haskell">u</code> 為一個向左傾斜的樹：</p><pre><code class="spec">u =  Bin (Bin (... (Bin (Bin (Tip 1) (Tip 2)) (Tip 3)))...
+       (Tip (n-1))) (Tip n) 
+</code></pre><p><code class="haskell">tip u</code> 展開成為 <code class="haskell">((..(([1] ++ [2])++[3])..) .. ++ [n-1]) ++ [n]</code>, 需要 $O(n^2)$ 的時間，也是 <code class="haskell">tips</code> 最壞情況的時間複雜度.</p></div></div></div><h2 class="section" id="sec:fold-unfold-transform-efficiency">5.3 用展開-收回轉換增進效率</h2><p>在前面的例子中，我們手動推導出的 <code class="haskell">sumsq</code> 只比原來的版本快了一點點，並沒有複雜度上的改進。&shy;本節我們來看一些使用程式推導改進複雜度的例子。</p><h3 class="subsection" id="sec:poly-horner">5.3.1 計算多項式 -- Horner 法則</h3><p>給定整數串列 $\Varid{as} = [a_0, a_1, a_2 \ldots a_n]$ 以及 <code class="haskell">x :: Int</code>, 我們想計算如下的多項式：</p><pre><code class="equation">    a_0 + a_1 x + a_2 x^2 + ... + a_n x^n \mbox{~~.}</code>    (5.2 )
+</pre><p>這問題的規格能清楚寫成：</p><pre><code class="haskell">poly x as = sum (zipWith (*) as (iterate (* x) 1)) 
+</code></pre><p>其中 <code class="haskell">iterate (* x) 1</code> 產生無限串列 $[1, x, x^2, x^3 ...]$, <code class="haskell">zipWith</code> 計算 $[a_0, a_1 x, \ldots a_n x^n]$, <code class="haskell">sum</code> 計算總和。</p><p>讀者應已對 <code class="haskell">sum</code> 和 <code class="haskell">zipWith</code> 很熟悉了。函數 <code class="haskell">iterate</code> 在第 <a href="Basics.html#sec:list-generation">1.8.2 </a> 節中使用過，<code class="haskell">iterate f x</code> 會展開為無限長的串列 <code class="haskell">[x, f x, f (f x)...]</code>，每個元素分別是把 <code class="haskell">f</code> 使用<code class="haskell">0</code>次、<code class="haskell">1</code>次、<code class="haskell">2</code>次... 的結果。&shy;函數 <code class="haskell">iterate</code> 可定義為</p><pre><code class="spec">iterate :: (a -&gt; a) -&gt; a -&gt; List a
+iterate f x = x : map f (iterate f x) 
+</code></pre><p>我們可將之理解成：<code class="haskell">iterate f x</code> 的第一個元素是 <code class="haskell">x</code>；剩下的元素呢？是把 <code class="haskell">iterate f x</code> 本身拿來，對每個元素多做一次 <code class="haskell">f</code>!</p><p>讀到此的讀者可能有些疑問：這是一個合法的歸納定義嗎？以及，我們原已說定不談無限的資料結構，何以在此卻出現了呢？</p><p>上述 <code class="haskell">iterate</code> 的定義方式確實不是歸納，而是「餘歸納」(coinduction)的一個例子。<span id="ix-5-5"></span>&shy;第<a href="Induction.html#sec:induction-set-theory">2.9 </a>節中曾提及，餘歸納與歸納互為對偶，以餘歸納定義出的資料結構稱作「餘資料」，可以是能無限地展開的。<span id="ix-5-6"></span>&shy;「餘串列」和歸納定義的串列應該視為不同的型別，但它們可共存於同一個程式中，只要我們確定不在餘資料上做歸納定義或證明。</p><p>為培養一些對 <code class="haskell">iterate</code> 的直覺，我們試著展開它：</p><pre><code class="spec">  iterate f x
+=   <comment>{- <code class="haskell">iterate</code> 之定義 -}</comment>
+  x : map f (iterate f x)
+=   <comment>{- <code class="haskell">map</code> 之定義 -}</comment>
+  x : map f (x : map f (iterate f x))
+=   <comment>{- <code class="haskell">map</code> 融合 -}</comment>
+  x : f x : map (f . f) (iterate f x)
+=   <comment>{- <code class="haskell">iterate</code> 與 <code class="haskell">map</code> 之定義 -}</comment>
+  x : f x : f (f x) : map (f . f) (map f (iterate f x))
+=   <comment>{- <code class="haskell">map</code> 融合 -}</comment>
+  x : f x : f (f x) : map (f . f . f) (iterate f x)
+</code></pre><p>可發現越展開，式子中便累積越多個 <code class="haskell">map f</code>.</p><p>在 <code class="haskell">poly</code> 之中，<code class="haskell">iterate</code> 雖產生無限長的餘資料，但立刻被 <code class="haskell">zipWith</code> 截短了。&shy;<input class="toggle" id="footnote-5-3-2" type="checkbox"/><label class="fnote-toggle" for="footnote-5-3-2">(註2) </label><span class="collapsible-footnote">此處我們假設 <code class="haskell">as</code> 為有限長的串列，並把 <code class="haskell">zipWith</code> 視為在其第一個參數之上的歸納定義。</span>&shy;若我們試著展開 <code class="haskell">poly x [a,b,c,d]</code>, 會得到：</p><pre><code class="spec">   poly x [a,b,c,d]
+=  sum (zipWith (*) [a,b,c,d] (iterate (* x) 1))
+=    <comment>{- 展開 <code class="haskell">iterate</code>, 將「<code class="haskell">f</code>自我組合四次」記為 <code class="haskell">quad f</code> -}</comment>
+   sum (zipWith (*) [a,b,c,d]
+     (1 : (1*x) : (1*x*x) : (1*x*x*x) : map (quad (*x)) (iterate (*x) 1)))
+=  a  +  b *x  +  c * x * x  +  d * x * x * x 
+</code></pre><p>可看到式子越長，便累積越多個 <code class="haskell">(*x)</code>。當 <code class="haskell">as</code> 長度為 <code class="haskell">n</code>, 需要的乘法數目為 $O(n^2)$.&shy;我們有可能降低做乘法的次數嗎？</p><p>我們試著找出 <code class="haskell">poly</code> 在 <code class="haskell">as</code> 上的歸納定義。&shy;當 <code class="haskell">as := []</code> 時，<code class="haskell">poly x []</code> 可歸約為 <code class="haskell">0</code>.&shy;考慮 <code class="haskell">as := a:as</code> 的情況，和做證明時一樣，我們先將 <code class="haskell">poly x (a:as)</code> 展開，然後試著整理出 <code class="haskell">sum (zipWith (*) as (iterate (* x) 1)</code>，以便收回成為 <code class="haskell">poly x as</code>。&shy;計算中的每一步都以此為目的，試著將 <code class="haskell">sum</code> 與 <code class="haskell">zipWith</code> 移動至 <code class="haskell">iterate</code> 旁邊:</p><pre><code class="haskell" id="ex:polyDer1">      poly x (a : as)
+ ===   <comment>{- <code class="haskell">poly</code> 的定義 -}</comment>
+      sum (zipWith (*) (a:as) (iterate (* x) 1))
+ ===   <comment>{- <code class="haskell">iterate</code> 的定義 -}</comment>
+      sum (zipWith (*) (a:as) (1 : map (* x) (iterate (* x) 1)))
+ ===   <comment>{- <code class="haskell">zipWith</code> 與 <code class="haskell">sum</code> 的定義 -}</comment>
+      a + sum (zipWith (*) as (map (* x) (iterate (* x) 1)))
+ ===   <comment>{- <code class="haskell">zipWith (*) as . map (* x) = map (* x) . zipWith (*) as</code>，見習題 -}</comment>
+      a + sum (map (* x) (zipWith (*) as (iterate (* x) 1)))
+ ===   <comment>{- <code class="haskell">sum . map (* x) = (* x) . sum</code> -}</comment>
+      a + (sum (zipWith (*) as (iterate (* x) 1))) * x
+ ===   <comment>{- <code class="haskell">poly</code> 的定義 -}</comment>
+      a + (poly x as) * x 
+</code></pre><p>第 <code class="haskell">4</code> 步中關於 <code class="haskell">zipWith</code> 與 <code class="haskell">map</code> 的性質幫助我們將 <code class="haskell">map (*x)</code> 往外提、將 <code class="haskell">zipWith</code> 往裡推。事實上，該性質不限於乘法，而可適用於任何滿足結合律的運算子 <code class="haskell">otimes</code>。我們可非正式地理解如下：</p><pre><code class="spec">   zipWith otimes [a,b,c] (map (⊗ x) [d,e,f])
+=  [a ⊗ (d ⊗ x), b ⊗ (e ⊗ x), c ⊗ (f ⊗ x)]
+=    <comment>{- 結合律: <code class="haskell">m ⊗ (n ⊗ k) = (m ⊗ n) ⊗ k</code> -}</comment>
+   [(a ⊗ d) ⊗ x, (b ⊗ e) ⊗ x, (c ⊗ f) ⊗ x]
+=  map (⊗ x) (zipWith otimes [a,b,c] [d,e,f]) 
+</code></pre><p>第 <code class="haskell">5</code> 步之中的 <code class="haskell">sum . map (* x) = (* x) . sum</code> 在習題<a href="Induction.html#ex:sum-map-times">2.7 </a>中證明過，需要乘法與加法的分配律。&shy;在本推導中，它的功能是將 <code class="haskell">sum</code> 往右推。&shy;它也是使 <code class="haskell">poly</code> 可以加速的關鍵性質：共同的 <code class="haskell">(*x)</code> 可以提出來 ---&shy;左手邊可能做了的許多次 <code class="haskell">(*x)</code> 其實只需做一次。&shy;追根究底，<code class="haskell">poly</code> 之所以能算得更快，都歸功於乘法與加法的分配律。&shy;經過上述計算，我們可得：</p><pre><code class="spec">poly x []        = 0
+poly x (a : as)  = a + (poly as) * x 
+</code></pre><p>在這個定義中，函數 <code class="haskell">poly</code> 遞迴多少次，便做多少個乘法。&shy;因此本演算法所需的乘法數目為 $O(n)$.</p><p>快速版本的函數 <code class="haskell">poly</code> 相當於把 $a_0 + a_1 x + a_2 x^2 + ... + a_n x^n$ 轉換成</p><pre><code class="equation">    a_0 + x \times (a_1 + x \times (a_2 + ... + (a_{n-1} + x \times a_n)))\mbox{~~.}</code>    (5.3 )
+</pre><p>這條規則在 William George Horner 1819 年的一篇論文中出現並證明，因此通常被稱作 <em>Horner 法則</em><span id="ix-5-7"></span>，&shy;雖然 Horner 本人和許多歷史學家們都相信該規則可被追溯得更早。</p><div class="exlist"><div class="exercise exer" id="ex:zipWith-otimes-map"><h5 class="exercise-title">練習 5.8 </h5><p>試證明：如果 <code class="haskell">otimes</code> 滿足結合律，<code class="haskell">zipWith otimes as . map (⊗ x) = map (⊗ x) . zipWith otimes as</code>。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-8" type="checkbox"/><label class="lbl-toggle" for="ans-5-8">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>欲證明<code class="haskell">zipWith otimes as (map (⊗ x) bs) = map (⊗ x) (zipWith otimes as bs)</code>, 在 <code class="haskell">as</code> 上做歸納。&shy;當 <code class="haskell">as := []</code>, 等號兩邊都歸約成 <code class="haskell">[]</code>.&shy;考慮 <code class="haskell">as := a:as</code> 的情況。若 <code class="haskell">bs := []</code>, 等號兩邊仍均為 <code class="haskell">[]</code>.&shy;當 <code class="haskell">bs := b:bs</code>:</p><pre><code class="haskell">      zipWith otimes (a:as) (map (⊗ x) (b:bs))
+ ===    <comment>{- <code class="haskell">zipWith</code> 與 <code class="haskell">map</code> 之定義 -}</comment>
+      (a ⊗ (b ⊗ x)) : zipWith otimes as (map (⊗ x) bs)
+ ===    <comment>{- 歸納假設 -}</comment>
+      (a ⊗ (b ⊗ x)) : map (⊗ x) (zipWith otimes as bs)
+ ===    <comment>{- <code class="haskell">otimes</code> 滿足結合律 -}</comment>
+      ((a ⊗ b) ⊗ x) : map (⊗ x) (zipWith otimes as bs)
+ ===    <comment>{- <code class="haskell">zipWith</code> 與 <code class="haskell">map</code> 之定義 -}</comment>
+      map (⊗ x) (zipWith otimes (a:as) (b:bs)) 
+</code></pre></div></div></div><h3 class="subsection" id="sec:exp-binary-roll">5.3.2 二進位表示法</h3><p>回顧第<a href="Induction.html#sec:induction-on-Nat">2.2 </a>節中的函數 <code class="haskell">exp</code>。該函數計算乘冪 --- $|exp b n| = b^n$，其定義如下:</p><pre><code class="spec">exp :: Nat -&gt; Nat -&gt; Nat
+exp b Zero     = 1
+exp b (Suc n)  = b *: exp b n 
+</code></pre><p>以這個演算法計算 $b^n$ 時會需要 $O(n)$ 個乘法。是否有更快的做法呢？</p><p>我們先定義函數 <code class="haskell">binary :: Nat -&gt; List Bool</code>，可將一個自然數轉換成<em>反轉</em>的二進位表示法（即最低有效位在左邊，最高有效位在右邊）。以下我們將 <code class="haskell">False</code> 簡寫為 <code class="haskell">ff</code>, <code class="haskell">True</code> 簡寫為 <code class="haskell">tt</code>：</p><pre><code class="haskell">binary 0  = []
+binary n  | even n  = ff : binary (n `div` 2)
+          | odd n   = tt : binary (n `div` 2) 
+</code></pre><p>例如，<code class="haskell">map binary [1,2,3,4] = [[tt], [ff,tt], [tt,tt], [ff,ff,tt]]</code>.&shy;函數 <code class="haskell">binary</code> 在每次遞迴呼叫時將參數減半，因此 <code class="haskell">binary n</code> 只需要 $O(\log n)$ 的時間。&shy;我們讓 <code class="haskell">binary</code> 傳回反轉的二進位數是為了方便定義 <code class="haskell">decimal :: List Bool -&gt; Nat</code> --- <code class="haskell">binary</code> 的反函數，將 <code class="haskell">binary</code> 的結果轉回成原有的數字：</p><pre><code class="haskell">decimal []      = 0
+decimal (c:cs)  = if c then 1 + 2 * decimal cs else 2 * decimal cs 
+</code></pre><p>我們可證明 <code class="haskell">decimal . binary = id</code>.</p><p>回到 <code class="haskell">exp</code>, 試計算如下</p><pre><code class="spec">   exp b
+=    <comment>{- <code class="haskell">id</code> 為 <code class="haskell">(.)</code> 的單位元 -}</comment>
+   exp b . id
+=    <comment>{- <code class="haskell">decimal . binary = id</code> -}</comment>
+   exp b . decimal . binary 
+</code></pre><p>由於 <code class="haskell">binary n</code> 只需 $O(\log n)$ 的時間，如果我們能把 <code class="haskell">exp b . decimal</code> 的計算時間也縮減到 $O(\log n)$, 我們就有個只需對數時間的演算法了！</p><p>令 <code class="haskell">roll b = exp b . decimal</code>。顯然 <code class="haskell">roll b [] = 1</code>. 考慮輸入為 <code class="haskell">c:cs</code> 的情況，在以下的推導中，我們假設 $|exp b n| = b^n$ 擁有乘冪該有的各種算術性質：</p><pre><code class="haskell">    roll b (c:cs)
+ ===    <comment>{- <code class="haskell">exp2</code> 與 <code class="haskell">decimal</code> 之定義  -}</comment>
+    exp b (if c then 1 + 2 * decimal cs else 2 * decimal cs)
+ ===    <comment>{- 函數分配進 <code class="haskell">if</code> -}</comment>
+    if c then exp b (1 + 2 * decimal cs) else exp b (2 * decimal cs)
+ ===    <comment>{- 算術：$b^{i + 2 \times x} = b^i \times {(b^x)}^2 $ -}</comment>
+    if c then b * square (exp b (decimal cs)) else square (exp b (decimal cs))
+ ===    <comment>{- <code class="haskell">roll</code> 之定義  -}</comment>
+    if c then b * square (exp2 b cs) else square (roll b cs)
+</code></pre><p>因此，我們推導出了在 $O(\log n)$ 時間內計算 $b^n$ 的程式如下：</p><pre><code class="spec">exp b = roll b . binary
+
+roll b []      = 1
+roll b (c:cs)  = if c then b * square (exp2 b cs) else square (exp2 b cs)
+</code></pre><div class="exlist"><div class="exercise exer" id="binary-termination"><h5 class="exercise-title">練習 5.9 </h5><p>如何得知 <code class="haskell">binary</code> 會終止？它的定義用的是什麼歸納方式？</p></div><div class="exercise exer" id="ex:decimal-binary-id"><h5 class="exercise-title">練習 5.10 </h5><p>證明 <code class="haskell">decimal . binary = id</code>.</p></div><div class="exercise exer" id="ex:exp-roll-binary"><h5 class="exercise-title">練習 5.11 </h5><p>展開 <code class="haskell">exp b = roll b . binary</code> 以導出一個不產生中間串列的 <code class="haskell">exp</code> 定義。&shy;這個定義用的是什麼歸納方式呢？</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-11" type="checkbox"/><label class="lbl-toggle" for="ans-5-11">顯示答案</label><div class="collapsible-content"><h5>答案</h5><pre><code class="haskell">exp b 0 = 1
+exp b n  | even n  = square (exp b (n `div` 2))
+         | odd n   = b * square (exp b (n `div` 2)) 
+</code></pre><p>由於遞迴呼叫中的 <code class="haskell">n</code> 總是變小，本定義可視為 <code class="haskell">n</code> 之上的良基歸納。</p></div></div></div><h3 class="subsection" id="sec:wrap-reminder">5.3.3 小結與提醒</h3><p>如果回顧本節發生了什麼，該說：我們為 <code class="haskell">poly</code> 和 <code class="haskell">roll . decimal</code> 找出了歸納定義。&shy;它們的效率因此提升了，但這只能說是<em>湊巧</em>：兩個演算中，都有些代數性質可運用，使得推導出的歸納定義在每一步需要做的工作不多，剛好是有效率的。</p><p>一般說來，歸納定義和效率提升不見得能畫上等號。導出了某函數的歸納定義後，仍需針對它做分析，才能知道這個推導是否值得。&shy;有些情況下，推導出的程式有較好的時間複雜度，這樣的程式<em>通常</em>能表現得比原來的程式好。&shy;有些情況下，找出歸納定義能消除中間串列，或著減少走訪資料結構的次數。&shy;這時，導出的程式仍有同樣的時間複雜度，但<em>可能</em>有較小的常數。&shy;此時需注意：本章談的僅是時間複雜度，而且只考慮一些特定運算元被使用的次數。&shy;實際上的執行效率受到許多因素的影響，例如：不同運算元花費不同的時間；&shy;空間的使用量也影響效率（例如，使用大量記憶體的程式可能需要較多次垃圾收集）；&shy;某些演算法適合快取，等等。&shy;我們在之後的章節中將看到一些歸納定義程式走訪資料結構的次數雖較少，但反而執行得慢的例子。</p><div class="exlist"><div class="exercise exer" id="sublist-choose"><h5 class="exercise-title">練習 5.12 </h5><p>回顧第 <a href="Induction.html#sec:fan-perm">2.6.4 </a> 節的 <code class="haskell">sublists</code>:</p><pre><code class="spec">sublists :: List a -&gt; List (List a)
+sublists []      = [[]]
+sublists (x:xs)  = sublists xs ++ map (x:) (sublists xs) 
+</code></pre><p>定義</p><pre><code class="spec">choose :: Nat -&gt; List a -&gt; List (List a)
+choose k = filter ((k ==) . length) . sublists 
+</code></pre><p>使得 <code class="haskell">choose k xs</code> 傳回 <code class="haskell">xs</code> 的子串列中長度為 <code class="haskell">k</code> 者，例如 <code class="haskell">choose 3 "abcde" =</code> <code class="haskell">["cde","bde","bce","bcd","ade","ace",</code> <code class="haskell">"acd",</code> <code class="haskell">"abe",</code> <code class="haskell">"abd","abc"]</code>.&shy;使用展開-收回轉換導出 <code class="haskell">choose</code> 的歸納定義。&shy;<strong>提示</strong>: 依照 <code class="haskell">choose k xs</code> 的定義，我們會在 <code class="haskell">xs</code> 上做歸納。但此例之中，先對 <code class="haskell">k</code> 做歸納，再對 <code class="haskell">xs</code> 做歸納，得到的程式會比較精簡。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-12" type="checkbox"/><label class="lbl-toggle" for="ans-5-12">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>先對 <code class="haskell">k</code> 做歸納，再對 <code class="haskell">xs</code> 做歸納。我們只列出最複雜的情況：</p><p><strong>情況</strong> <code class="haskell">k := Suc k</code>, <code class="haskell">xs := x:xs</code>.</p><pre><code class="haskell">     choose (Suc k) (x:xs)
+ ===   <comment>{- <code class="haskell">choose</code> 之定義 -}</comment>
+     filter ((Suc k ==) . length') (sublists (x:xs))
+ ===   <comment>{- <code class="haskell">sublists</code> 之定義 -}</comment>
+     filter ((Suc k ==) . length') (sublists xs ++ map (x:) (sublists xs))
+ ===   <comment>{- <code class="haskell">filter</code> 分配入 <code class="haskell">(++)</code> -}</comment>
+     filter ((Suc k ==) . length') (sublists xs) ++
+     filter ((Suc k ==) . length') (map (x:) (sublists xs))
+ ===   <comment>{- <code class="haskell">choose</code> 之定義 -}</comment>
+     choose (Suc k) xs ++
+     filter ((Suc k ==) . length') (map (x:) (sublists xs))
+ ===   <comment>{- 定理 \ref{thm:filter-map} -}</comment>
+     choose (Suc k) xs ++
+     map (x:) (filter ((Suc k ==) . length' . (x:)) (sublists xs))
+ ===  <comment>{- <code class="haskell">(Suc k ==) . length' . (x:) = (k ==) . length'</code> -}</comment>
+     choose (Suc k) xs ++
+     map (x:) (filter ((k ==) . length') (sublists xs))
+ ===  <comment>{- <code class="haskell">choose</code> 之定義 -}</comment>
+     choose (Suc k) xs ++
+     map (x:) (choose k xs) 
+</code></pre><p>我們得到：</p><pre><code class="haskell">choose :: Nat -&gt; List a -&gt; List (List a)
+choose Zero     xs      =  [[]]
+choose (Suc k)  []      =  []
+choose (Suc k)  (x:xs)  =  choose (Suc k) xs ++
+                           map (x:) (choose k xs) 
+</code></pre><p>確實是一般組合數學教材中會給的 $C^n_k$ 定義。</p></div></div></div><h2 class="section" id="sec:var-cons">5.4 變數換常數</h2><p>接下來的幾節中，我們將介紹幾種常見的程式推導技巧。&shy;\todo{generalize}</p><p>本節先以一個簡單但時常用上的技巧作為開頭。&shy;回顧在例 [RefUndefined] 中提及的函數 <code class="haskell">positions</code>:</p><pre><code class="spec">positions z = map fst . filter ((==z) . snd) . zip [Zero..] 
+</code></pre><p><code class="haskell">positions z xs</code> 傳回 <code class="haskell">z</code> 在 <code class="haskell">xs</code> 中出現的所有位置。&shy;上述的定義方式會產生許多中間串列。&shy;我們能用第 <a href="Derivation.html#sec:fold-unfold-transform">5.1 </a> 節中的方式，利用展開-收回轉換為 <code class="haskell">positions</code> 推導出一個歸納定義，並藉此將中間串列消除嗎？</p><p>我們針對 <code class="haskell">positions z</code> 的輸入做分析，&shy;在歸納狀況中，先將 <code class="haskell">positions z (x:xs)</code> 展開，希望最後能收回 <code class="haskell">positions z xs</code>.&shy;由於讀者對相關計算應已熟悉，以下的演算以較快的步調進行：</p><pre><code class="haskell">      positions z (x:xs)
+ ===  map fst . filter ((==z) . snd) . zip [Zero .. ] $ (x:xs)
+ ===    <comment>{- <code class="haskell">zip</code> 之定義， <code class="haskell">[0..] = 0 : [1..]</code> -}</comment>
+      map fst . filter ((==z) . snd) $ (Zero,x) : zip [1..] (x:xs)
+ ===    <comment>{- <code class="haskell">map</code> 與 <code class="haskell">filter</code> 之定義 -}</comment>
+      if x==z then Zero : map fst (filter ((==z) . snd) (zip [1..] (x:xs)))
+         else map fst (filter ((==z) . snd) (zip [1..] (x:xs))) 
+</code></pre><p>結果我們卡在這兒了：最後的式子中，<code class="haskell">zip</code> 的參數是 <code class="haskell">[1..]</code>, 但 <code class="haskell">positions</code> 的定義要求這個參數得是 <code class="haskell">[Zero ..]</code>. 我們無法將式子收回得到 <code class="haskell">positions z xs</code>.</p><p>看來，問題是 <code class="haskell">positions</code> 的定義把 <code class="haskell">Zero</code> 給寫死了。如果我們索性把該位置變成一個變數呢？&shy;我們定義：</p><pre><code class="haskell">posFrom z i = map fst . filter ((z==) . snd) . zip [i..]
+</code></pre><p>函數 <code class="haskell">positions</code> 是 <code class="haskell">posFrom</code> 的特例：<code class="haskell">positions z = posFrom z 0</code>.&shy;而 <code class="haskell">posFrom</code> 的歸納定義可用展開-收回轉換找出：</p><pre><code class="haskell">      posFrom z i (x:xs)
+ ===  map fst . filter ((==z) . snd) . zip [i..] $ (x:xs)
+ ===    <comment>{- <code class="haskell">zip</code> 之定義， <code class="haskell">[i..] = i : [Suc i..]</code> -}</comment>
+      map fst . filter ((==z) . snd) $ (i,x) : zip [Suc i..] (x:xs)
+ ===    <comment>{- <code class="haskell">map</code> 與 <code class="haskell">filter</code> 之定義 -}</comment>
+      if x==z then i : map fst (filter ((==z) . snd) (zip [Suc i..] (x:xs)))
+         else map fst (filter ((==z) . snd) (zip [Suc i..] (x:xs)))
+ ===    <comment>{- <code class="haskell">posFrom</code> 之定義 -}</comment>
+      if x==z then i : posFrom z (Suc i) xs
+         else posFrom z (Suc i) xs 
+</code></pre><p>由此我們可得：</p><pre><code class="spec">posFrom z i []      =  []
+posFrom z i (x:xs)  =  if x==z then i : posFrom z (1+i) xs
+                         else posFrom z (1+i) xs 
+</code></pre><p>由於將一個常數換成變數，<code class="haskell">posFrom</code> 比 <code class="haskell">positions</code> 多了些彈性，因此較容易收回。&shy;這個技巧在許多場合用得上，往往是許多程式推導的第一步。&shy;但我並不建議大家看到任一個定義，便一股腦地把所有常數都換成變數。&shy;如同第<a href="Induction.html#sec:using-hints-from-symbols">2.7 </a>節中提及的原則，該把哪些常數換掉仍應由計算中發現，只用在必要之處。</p><div class="exlist"><div class="exercise exer" id="ex:index-positioning"><h5 class="exercise-title">練習 5.13 </h5><p>函數 <code class="haskell">index</code> 為串列中的每個元素標上位置。</p><pre><code class="haskell">index :: List a -&gt; List (Nat × a)
+index = zip [Zero .. ] 
+</code></pre><p>請試著為 <code class="haskell">index</code> 導出一個歸納定義。如果不成功，找出一個更通用的輔助函數，並導出其歸納定義。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-13" type="checkbox"/><label class="lbl-toggle" for="ans-5-13">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>試著展開-收回 <code class="haskell">index (x:xs)</code>：</p><pre><code class="spec">     index (x:xs)
+ === zip [Zero .. ] (x:xs)
+ ===  <comment>{- <code class="haskell">[Zero ..] = Zero: [1 ..]</code>, <code class="haskell">zip</code> 之定義 -}</comment>
+     (Zero,x) : zip [1..] xs 
+</code></pre><p>我們又發現 zip [1..] 無法收回成 index xs.&shy;因此，我們定義：</p><pre><code class="haskell">indexFrom :: Nat -&gt; List a -&gt; List (Nat × a)
+indexFrom i = zip [i..] 
+</code></pre><p>試著推導 <code class="haskell">indexFrom</code> 的歸納定義如下：</p><pre><code class="spec">     indexFrom i (x:xs)
+ === zip [i .. ] (x:xs)
+ ===  <comment>{- <code class="haskell">[i ..] = i: [Suc i ..]</code>, <code class="haskell">zip</code> 之定義 -}</comment>
+     (i,x) : zip [Suc i..] xs
+ === (i,x) : indexFrom (Suc i) xs 
+</code></pre><p>因此我們已得到：</p><pre><code class="spec">indexFrom i []      = []
+indexFrom i (x:xs)  = i,x) : indexFrom (Suc i) xs 
+</code></pre></div></div></div><h2 class="section" id="sec:tupling">5.5 組對</h2><p>接下來我們介紹另一個重要的技巧：「組對(tupling)」。</p><h3 class="subsection" id="sec:steep">5.5.1 陡串列</h3><p>給定一個整數串列。當我們說它很「陡」，意思是它由左到右下降得極快，快到每一個元素都大於其右邊所有元素的和。形式化的定義如下：</p><pre><code class="haskell">steep :: List Int -&gt; Bool
+steep []      = True
+steep (x:xs)  = x &gt; sum xs ⋀ steep xs 
+</code></pre><p>如果當作一個程式，當輸入串列長度為 <code class="haskell">n</code>, 由於反覆呼叫 <code class="haskell">sum</code>, 上述的程式需要 $O(n^2)$ 的時間。&shy;但每次算出的 <code class="haskell">sum xs</code> 和 <code class="haskell">x</code> 比較後便立刻被丟棄，似乎很浪費。我們能否把 <code class="haskell">sum</code> 的結果存下來呢？&shy;下述函數 <code class="haskell">steepsum</code> 把 <code class="haskell">steep</code> 與 <code class="haskell">sum</code> 都算出來，放在一個序對中：</p><pre><code class="spec">steepsum :: List Int -&gt; (Bool × Int)
+steepsum xs = (steep xs, sum xs) 
+</code></pre><p>我們看看 <code class="haskell">steepsum</code> 能否算得快一點？</p><p>根據定義，<code class="haskell">steepsum [] = (True, 0)</code>. 我們看看 <code class="haskell">xs = x:xs</code> 的例子：</p><pre><code class="haskell">      steepsum (x:xs)
+ ===    <comment>{- <code class="haskell">steepsum</code> 之定義 -}</comment>
+      (steep (x:xs), sum (x:xs))
+ ===    <comment>{- <code class="haskell">steep</code> 與 <code class="haskell">sum</code> 之定義 -}</comment>
+      (x &gt; sum xs ⋀ steep xs, x + sum xs)
+ ===    <comment>{- 將子算式提取至 <code class="haskell">let</code> 中 -}</comment>
+      let (b, s) = (steep xs, sum xs)
+      in (x &gt; s ⋀ b, x + s)
+ ===    <comment>{- <code class="haskell">steepsum</code> 之定義 -}</comment>
+      let (b, s) = steepsum xs
+      in (x &gt; s ⋀ b, x + s) 
+</code></pre><p>我們已推導出：</p><pre><code class="haskell">steepsum []      =  (True, 0)
+steepsum (x:xs)  =  let (b, s) = steepsum xs
+                    in (x &gt; s ⋀ b, x + s) 
+</code></pre><p>這是一個只用 $O(n)$ 時間的程式。&shy;有了 <code class="haskell">steepsum</code>，我們可重新定義 <code class="haskell">steep</code> 為 <code class="haskell">steep = fst . steepsum</code>。</p><p>讓一個函數<em>多傳回一些值</em>的動作稱作<em>組對</em>(<em>tupling</em>) --- 因為多傳回的值被放在一個序對中。<span id="ix-5-8"></span>&shy;<input class="toggle" id="footnote-5-5-3" type="checkbox"/><label class="fnote-toggle" for="footnote-5-5-3">(註3) </label><span class="collapsible-footnote">在一些函數語言中，<code>pair'' 指含兩個成員的序對，</code>tuple'' 則不限定為兩個成員。Tuple 也可當作動詞，指做出一個 tuple. 本書將動詞的 tuple 譯為「組對」-- 組出一個對。有些語言中 pair 與 tuple 有更根本的差異，但本書中不做區分。</span>&shy;我們常用此技巧來存下可重複使用的中間值，並減少走訪資料結構的次數。</p><p>最後一提：若使用第<a href="Basics.html#sec:pairs">1.6.3 </a>節，頁介紹的「分裂」運算元：&shy;<span id="ix-5-9"></span></p><pre><code class="spec">fork :: (a -&gt; b) -&gt; (a -&gt; c) -&gt; a -&gt; (b × c)
+(fork f g) x = (f x, g x) 
+</code></pre><p>函數 <code class="haskell">steepsum</code> 的定義可較簡潔地寫成：</p><pre><code class="spec">steepsum = fork steep sum 
+</code></pre><p>本書將在適當時採用這種寫法。</p><p><b>責任越大，能力越強？</b> &emsp;&shy;某個意義上，函數 <code class="haskell">steepsum</code> 做的事比 <code class="haskell">steep</code> 多：&shy;後者只判斷輸入是否為陡串列，前者不只如此，還多附送了串列的和。&shy;然而，傳回較多東西、似乎做了更多事的程式，反倒可以執行得比較快。&shy;竟出現「責任越大，能力越強」這種違反直覺的現象，這是怎麼回事呢？&shy;<input class="toggle" id="footnote-5-5-4" type="checkbox"/><label class="fnote-toggle" for="footnote-5-5-4">(註4) </label><span class="collapsible-footnote">「能力越強，責任越大 (with great power comes great responsibility)」是 2002 年版《蜘蛛人》電影的名句。根據考證 <a href="Biblio.html#OToole:15:Great">[O'Toole 2017]</a>, 法國國民公會1793年的政令中即出現過類似的想法，包括邱吉爾和羅斯福等人也都說過類似話語的不同版本。</span></p><p>其實，在歸納定義與歸納證明中，這都是常見的。&shy;有些比較通用的程式反倒比較容易定義；有些定理本身不好證明，為了證明它，我們把它變得更廣泛、更強些，反倒好證了。&shy;箇中原因說穿了便不難理解，&shy;函數 <code class="haskell">steepsum</code> 便是一個容易明白的好例子：一個函數若傳回較多資訊，在遞迴呼叫它時，我們便有更多資訊可直接取用。&shy;同樣地，一個定理若保證更強的性質，表示在使用歸納假設的步驟中，我們有了更強的性質可用。</p><p>如果我們把一個函數或待證的定理擴充得太強，確實也有可能使它們強到寫不出來、證不出來。&shy;做歸納定義或證明的重要技巧之一，便是找到這麼一個平衡點：將一個待定義或證明的物件擴充到足以提供歸納步驟需要的所有資訊，又不至於強到無法寫出、證出。</p><p>在這一節以及下一節中，我們都會看到許多如此的例子。</p><h3 class="subsection" id="sec:repl-tree">5.5.2 以串列標記樹狀結構</h3><p>我們再舉一個組對的好例子。回顧第 <a href="Basics.html#sec:user-defined-data">1.10 </a>與<a href="Induction.html#sec:other-inductive-datatypes">2.8 </a>節中提及的外標籤二元樹：</p><pre><code class="spec">data ETree a  = Tip a | Bin (ETree a) (ETree a) 
+</code></pre><p>下述函數 <code class="haskell">size :: ETree a -&gt; Int</code> 計算一棵樹中標籤的數目（對 <code class="haskell">ETree</code> 而言是 <code class="haskell">Tip</code> 出現的次數）； <code class="haskell">repl t xs</code> 則將 <code class="haskell">t</code> 原有的標籤丟棄，改用串列 <code class="haskell">xs</code> 由右至左依序重新為 <code class="haskell">t</code> 上標籤。&shy;觀察：在遞迴呼叫中，我們用 <code class="haskell">take</code> 和 <code class="haskell">drop</code> 將串列 <code class="haskell">xs</code> 截成適當的長度：</p><pre><code class="haskell">size (Tip _)    = 1
+size (Bin t u)  = size t + size u 
+
+repl :: ETree a -&gt; List b -&gt; ETree b
+repl (Tip _)    xs = Tip (head xs)
+repl (Bin t u)  xs = Bin (repl t (take n xs)) (repl u (drop n xs))
+    where n = size t 
+</code></pre><p>如果 <code class="haskell">t</code> 是一個向左傾斜的二元樹，<code class="haskell">repl t xs</code> 不僅會反覆計算 <code class="haskell">size</code>，也會反覆地將 <code class="haskell">take</code> 與 <code class="haskell">drop</code> 用在 <code class="haskell">xs</code> 上，使得上述的 <code class="haskell">repl</code> 成為一個 $O(n^2)$ 的演算法。&shy;利用組對的技巧，我們能讓 <code class="haskell">repl</code> 的時間複雜度小一些嗎？</p><p>我們試著把 <code class="haskell">repl</code> 作用在一個稍微左斜的樹，<code class="haskell">(Bin (Bin t u) v)</code> 之上，看看有什麼能做的。&shy;令 <code class="haskell">t</code>, <code class="haskell">u</code> 的 <code class="haskell">size</code> 分別為 <code class="haskell">n1</code> 與 <code class="haskell">n2</code>.&shy;如果我們希望導出一個線性時間的程式，其中一個提示是：我們希望在 <code class="haskell">repl (Bin (Bin t u) v) xs</code> 中，<em><code class="haskell">xs</code> 的每個元素最多都只被 <code class="haskell">take</code> 和 <code class="haskell">drop</code> 各碰過一次</em>。&shy;依此原則，以下的推導基嘗試做到兩點：首先，把連續的 <code class="haskell">take</code> 消去；其次，若已做了 <code class="haskell">take n1 xs</code>，就避免再出現 <code class="haskell">take (n1 + n2) xs</code>，因為後者的存在會讓 <code class="haskell">take</code> 重複處理 <code class="haskell">xs</code> 中的元素。&shy;我們會用到習題 <a href="Induction.html#ex:take-take">2.39 </a> -- <a href="Induction.html#ex:drop-drop">2.41 </a> 中提到的三個性質：</p><pre><code class="equation">|take m (take (m+n) xs)| ~&=~ |take m xs|
+\mbox{~~,}\\
+|drop m (take (m + n) xs)| ~&=~ |take n (drop m xs)|\mbox{~~,}\\
+|drop (m + n) xs| ~&=~ |drop n (drop m xs)| \mbox{~~.}</code>    (5.4 )
+</pre><p>其中 <code class="haskell">m</code>, <code class="haskell">n</code> 均為自然數。試演算如下：</p><pre><code class="haskell">      repl (Bin (Bin t u) v) xs
+ ===    <comment>{- <code class="haskell">repl</code> 之定義，兩次 -}</comment>
+      Bin  (Bin  (repl t (take n1 (take (n1+n2) xs)))
+                 (repl u (drop n1 (take (n1+n2) xs))))
+           (repl v (drop (n1+n2) xs))
+ ===    <comment>{- 習題 \ref{ex:take-take} -- \ref{ex:drop-drop} -}</comment>
+      Bin  (Bin  (repl t (take n1 xs))
+                 (repl u (take n2 (drop n1 xs))))
+           (repl v (drop n2 (drop n1 xs)))  
+</code></pre><p>演算到此，與 <code class="haskell">t</code> 有關的是 <code class="haskell">repl t</code>, <code class="haskell">take (size t)</code>, 與 <code class="haskell">drop (size t)</code> 三項；&shy;與 <code class="haskell">u</code> 有關的是 <code class="haskell">repl u</code>, <code class="haskell">take (size u)</code>, 與 <code class="haskell">drop (size u)</code> 三項。&shy;如果我們把 <code class="haskell">repl t</code>, <code class="haskell">take (size t)</code>, 與 <code class="haskell">drop (size t)</code> 取出，當作一個函數之內完成的動作：</p><pre><code class="haskell">repTail :: ETree a -&gt; List b -&gt; (ETree b × List b)
+repTail s xs = (repl s (take n xs), drop n xs) 
+  where n = size s 
+</code></pre><p>那麼 <code class="haskell">Bin (repl t (take n1 xs)) (repl u (take n2 (drop n1 xs)))</code> 似乎有可能收回成為這樣的式子：<code class="haskell">xs</code> 先被丟給 <code class="haskell">repTail t</code>，將 <code class="haskell">t</code> 標記好，並得到剩下的串列 <code class="haskell">drop n1 xs</code>。這個剩下的串列又可以丟給 <code class="haskell">repTail u</code>, 兩者都只把 <code class="haskell">xs</code> 走過一次。&shy;我們試著導出 <code class="haskell">repTail</code> 的歸納定義。&shy;基底狀況 <code class="haskell">s := Tip y</code> 比較容易，我們考慮 <code class="haskell">s := Bin t u</code> 的情況，&shy;並演算如下（令 <code class="haskell">n1 = size t</code>，<code class="haskell">n2 = size u</code>, 因此 <code class="haskell">size (Bin t u)= n1 + n2</code>）：</p><pre><code class="haskell">      repTail (Bin t u) xs
+ ===   <comment>{- <code class="haskell">repTail</code> 之定義 -}</comment>
+      (repl (Bin t u) (take (n1 + n2) xs), drop (n1 + n2) xs)
+ ===   <comment>{- <code class="haskell">repl</code> 之定義，令 <code class="haskell">n1 = size t</code> -}</comment>
+      (Bin  (repl t (take n1 (take (n1 + n2) xs)))
+            (repl u (drop n1 (take (n1 + n2) xs))), drop (n1 + n2) xs)
+ ===   <comment>{- 習題 \ref{ex:take-take} -- \ref{ex:drop-drop} -}</comment>
+      (Bin  (repl t (take n1 xs))
+            (repl u (take n2 (drop n1 xs))), drop n2 (drop n1 xs))
+ ===   <comment>{- 提出共同項 -}</comment>
+      let  (t', xs')   = (repl t (take n1 xs),  drop n1 xs)
+           (u', xs'')  = (repl u (take n2 xs'), drop n2 xs')
+      in (Bin t' u', xs'')
+ ===   <comment>{- <code class="haskell">repTail</code> 之定義 -}</comment>
+      let  (t', xs')   = repTail t xs
+           (u', xs'')  = repTail u xs'
+      in (Bin t' u', xs'') 
+</code></pre><p>因此我們得到：</p><pre><code class="spec">repTail (Tip _)    xs =  (Tip (head xs), tail xs)
+repTail (Bin t u)  xs =  let  (t', xs')   = repTail t xs
+                              (u', xs'')  = repTail u xs'
+                         in (Bin t' u', xs'') 
+</code></pre><p>確實如同所預期的，串列 <code class="haskell">xs</code> 被 <code class="haskell">repTail t</code> 使用，得到標籤過的新樹 <code class="haskell">t'</code>, 和剩下的串列 <code class="haskell">xs'</code>. 後者再被 <code class="haskell">repTail u</code> 用來給 <code class="haskell">u</code> 上標籤。最後我們得傳回剩下的串列 <code class="haskell">xs''</code>. 實際上把串列變短的動作發生在基底狀況 <code class="haskell">repTail (Tip _)</code> 中。串列中的每個元素只會在每次遇見 <code class="haskell">Tip</code> 時被取出一次，因此這是一個線性時間的演算法。</p><p>\todo{<code class="haskell">repsort t = rep t (sort (leaves t []))</code>.}</p><p><a href="Biblio.html#BurstallDarlington:77:Transformation">Burstall and Darlington [1977]</a></p><div class="exlist"><div class="exercise exer" id="ex:ascendingTuple"><h5 class="exercise-title">練習 5.14 </h5><p>下述函數 <code class="haskell">ascending :: List Int -&gt; Bool</code> 判斷一個串列是否由左到右遞增：</p><pre><code class="haskell">ascending :: List Int -&gt; Bool
+ascending []      = True
+ascending (x:xs)  = x &lt;= minimum xs ⋀ ascending xs 
+</code></pre><p>當輸入串列長度為 <code class="haskell">n</code>, 這個函數需要 $O(n^2)$ 個基本運算。請用組對的方式將之減少至 $O(n)$.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-14" type="checkbox"/><label class="lbl-toggle" for="ans-5-14">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>考慮如下的定義：</p><pre><code class="spec">ascMin :: List Int -&gt; (Bool × Int)
+ascMin = fork ascending minimum 
+</code></pre><p>如果 <code class="haskell">ascMin</code> 有更快的實作，我們可定義 <code class="haskell">ascending = fst . ascMin</code>.</p><p>當輸入為 <code class="haskell">[]</code>, 我們有 <code class="haskell">ascMin [] = (True, maxBound)</code>. 考慮當輸入為 <code class="haskell">x:xs</code> 的情況：</p><pre><code class="haskell">      ascMin (x:xs)
+ ===   <comment>{- <code class="haskell">ascMin</code> 之定義 -}</comment>
+      (ascending (x:xs), minimum (x:xs))
+ ===   <comment>{- <code class="haskell">ascending</code> 與 <code class="haskell">minimum</code> 之定義 -}</comment>
+      (x &lt;= minimum xs ⋀ ascending xs, x ↓ minimum xs)
+ ===   <comment>{- 引入區域變數 -}</comment>
+      let (b, y) = (ascending xs, minimum xs)
+      in (x &lt;= y ⋀ b, x ↓ y)
+ ===   <comment>{- <code class="haskell">ascMin</code> 之定義 -}</comment>
+      let (b, y) = ascMin xs
+      in (x &lt;= y ⋀ b, x ↓ y) 
+</code></pre><p>如此，我們已導出：</p><pre><code class="haskell">ascMin :: List Int -&gt; (Bool, Int)
+ascMin []      = (True, maxBound)
+ascMin (x:xs)  =  let (b, y) = ascMin xs
+                  in (x &lt;= y ⋀ b, x ↓ y) 
+</code></pre></div></div></div><div class="exlist"><div class="exercise exer" id="ex:baobab-ITree"><h5 class="exercise-title">練習 5.15 </h5><p>回顧第 <a href="Basics.html#sec:user-defined-data">1.10 </a> 節中談到的 <code class="haskell">ITree</code>:</p><pre><code class="spec">data ITree a = Null | Node a (ITree a) (ITree a) 
+</code></pre><p><em>猴麵包樹(baobab)</em>，又稱猢猻木，是一種樹幹相當粗的樹。%&shy;<input class="toggle" id="footnote-5-5-5" type="checkbox"/><label class="fnote-toggle" for="footnote-5-5-5">(註5) </label><span class="collapsible-footnote">猴麵包樹原產於馬達加斯加、非洲等地，也被寫進了《小王子》之中。</span>&shy;如果一個 <code class="haskell">ITree Int</code> 的<em>每個</em>標籤都大於其兩個子樹的標籤總和，我們便說它是一棵猴麵包樹。&shy;以下的函數判定一棵樹是否為猴麵包樹（其中 <code class="haskell">sumT :: ITree Int -&gt; Int</code> 計算一個樹中所有標籤的總和）：</p><pre><code class="haskell">baobab :: ITree Int -&gt; Bool
+baobab Null          =  True
+baobab (Node x t u)  =  baobab t ⋀ baobab u ⋀
+                          x &gt; (sumT t + sumT u) 
+</code></pre><p>因反覆呼叫 <code class="haskell">sumT</code>, 當樹的大小為 <code class="haskell">n</code> 時，<code class="haskell">baobab</code> 的執行時間為 $O(n^2)$.&shy;請使用組對的技巧，在 $O(n)$ 的時間內算出 <code class="haskell">baobab</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-15" type="checkbox"/><label class="lbl-toggle" for="ans-5-15">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>考慮如下的定義：</p><pre><code class="spec">baosum :: Tree Int -&gt; (Bool, Int)
+baosum = fork baobab sumT 
+</code></pre><p>如果 <code class="haskell">baosum</code> 有時間效率為 $O(n)$ 的定義，我們可重定義 <code class="haskell">baobab = fst . baosum</code>.&shy;當 <code class="haskell">t := Null</code>, 我們有 <code class="haskell">baosum Null = (True, 0)</code>.&shy;考慮 <code class="haskell">t := Node x t u</code>:</p><pre><code class="haskell">     baosum (Node x t u)
+ ===    <comment>{- <code class="haskell">baosum</code> 之定義 -}</comment>
+     (baobab (Node x t u), sumT (Node x t u))
+ ===    <comment>{- <code class="haskell">baobab</code> 與 <code class="haskell">sumT</code> 之定義 -}</comment>
+     (  baobab t ⋀ baobab u ⋀ x &gt; (sumT t + sumT u),
+        x + sumT t + sumT u)
+ ===    <comment>{- 引入區域變數 -}</comment>
+     let  (b,y) = (baobab t, sumT t)
+          (c,z) = (baobab u, sumT u)
+     in (b ⋀ c ⋀ x &gt; (y + z), x + y + z)
+ ===    <comment>{- <code class="haskell">baosum</code> 之定義 -}</comment>
+     let  (b,y) = baosum t
+          (c,z) = baosum u
+     in (b ⋀ c ⋀ x &gt; (y + z), x + y + z) 
+</code></pre><p>如此，我們已經導出：</p><pre><code class="haskell">baosum Null          = (True, 0)
+baosum (Node x t u)  =
+  let  (b,y) = baosum t
+       (c,z) = baosum u
+  in (b ⋀ c ⋀ x &gt; (y + z), x + y + z) 
+</code></pre></div></div></div><div class="exlist"><div class="exercise exer" id="ex:deepest"><h5 class="exercise-title">練習 5.16 </h5><p>本題出自<a href="Biblio.html#HuIwasaki:97:Tupling">Hu et al. [1997]</a>。&shy;函數 <code class="haskell">depth</code> 定義一棵 <code class="haskell">ETree</code> 的<em>深度</em>。&shy;<code class="haskell">Tip</code> 的深度為零，<code class="haskell">Bin</code> 的深度則為兩子樹中較深者的深度加一：</p><pre><code class="haskell">depth :: ETree a -&gt; Nat
+depth (Tip _)    = Zero
+depth (Bin t u)  = Suc (depth t ↑ depth u) 
+</code></pre><p>下列函數 <code class="haskell">deepest</code> 則傳回一棵樹中最深的標籤：</p><pre><code class="haskell">deepest :: ETree a -&gt; List a
+deepest (Tip x)    = [x]
+deepest (Bin t u)  | m &lt;  n  = deepest u
+                   | m == n  = deepest t ++ deepest u
+                   | m &gt;  n  = deepest t
+    where (m,n) = (depth t, depth u) 
+</code></pre><p>請用組對的技巧，避免重複計算 <code class="haskell">depth</code>.&shy;<strong>注意</strong>: 完成的程式中，<code class="haskell">(++)</code> 仍可能需要 $O(n^2)$ 的時間。&shy;我們將在習題<a href="Derivation.html#ex:deepestAux">5.31 </a>處理這個問題。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-16" type="checkbox"/><label class="lbl-toggle" for="ans-5-16">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>定義：</p><pre><code class="spec">dd :: ETree a -&gt; (List a, Nat)
+dd = fork deepest depth 
+</code></pre><p>顯然 <code class="haskell">dd (Tip x) = ([x], 0)</code>.&shy;以下我們考慮歸納情況時，用一個非標準的語法同時處理守衛算式的三個式子：</p><pre><code class="spec">      dd (Bin t u)
+ ===   <comment>{- <code class="haskell">dd</code>, <code class="haskell">deepest</code>, 與 <code class="haskell">depth</code> 之定義 -}</comment>
+      (  ( m &lt;  n  -&gt; deepest u
+         | m == n  -&gt; deepest t ++ deepest u
+         | m &gt;  n  -&gt; deepest t), 1 + (m ↑ n))
+      where (m,n) = (depth t, depth u)
+ ===   <comment>{- 取出 <code class="haskell">deepest t</code> 與 <code class="haskell">deepest u</code> -}</comment>
+      (  ( m &lt;  n  -&gt; ys
+         | m == n  -&gt; xs ++ ys
+         | m &gt;  n  -&gt; xs), 1 + (m ↑ n))
+      where ((xs,m),(ys,n)) = ((deepest t,depth t), (deepest u, depth u))
+ ===   <comment>{- <code class="haskell">dd</code> 之定義，函數分配進條件判斷 -}</comment>
+      ( m &lt;  n  -&gt; (ys, 1 + n)
+      | m == n  -&gt; (xs ++ ys, 1 + n)
+      | m &gt;  n  -&gt; (xs, 1 + m))
+      where ((xs,m),(ys,n)) = (dd t, dd u) 
+</code></pre><p>因此我們得到：</p><pre><code class="haskell">dd (Tip x)    = ([x],0)
+dd (Bin t u)  | m &lt;  n  = (ys, 1 + n)
+              | m == n  = (xs ++ ys, 1 + n)
+              | m &gt;  n  = (xs, 1 + m) 
+  where ((xs,m),(ys,n)) = (dd t, dd u) 
+</code></pre></div></div></div><div class="exlist"><div class="exercise exer" id="ex:red-black-tree-balanced-linear-time"><h5 class="exercise-title">練習 5.17 </h5><p>第 <a href="SearchTrees.html#sec:induction-red-black-tree">3.2 </a> 節中的函數 <code class="haskell">balanced :: RBTree -&gt; Bool</code> 檢查一棵紅黑樹是否平衡。由於重複呼叫 <code class="haskell">bheight</code>, 這是一個需要 $O(n^2)$ 時間的函數。請用組對的技巧推導出一個可在線性時間內判斷平衡的版本。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-17" type="checkbox"/><label class="lbl-toggle" for="ans-5-17">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>定義：</p><pre><code class="spec">balHeight :: RBTree -&gt; (Bool, Nat)
+balHeight = fork balanced bheight 
+</code></pre><p>我們有 <code class="haskell">balanced = fst . balHeight</code>.&shy;顯然 <code class="haskell">balHeight E = (True, 0)</code>.&shy;考慮 <code class="haskell">B t x u</code> 的狀況：</p><pre><code class="spec">  balHeight (B t x u)
+=   <comment>{- <code class="haskell">balHeight</code> 之定義 -}</comment>
+  (balanced (B t x u), bheight (B t x u))
+=   <comment>{- <code class="haskell">balanced</code> 與 <code class="haskell">bheight</code> 之定義 -}</comment>
+  (bheight t == bheight u ⋀ balanced t ⋀ balanced u,
+   1 + (bheight t ↑ bheight u))
+=   <comment>{- 將 <code class="haskell">balanced</code> 與 <code class="haskell">bheight</code> 的呼叫取出 -}</comment>
+  let  (bt,  ht)  = (balanced t, bheight t)
+       (bu,  hu)  = (balanced u, bheight u)
+  in   (ht == hu ⋀ bt ⋀ bu, 1 + (ht ↑ hu))
+=   <comment>{- <code class="haskell">balHeight</code> 之定義 -}</comment>
+  let  (bt,  ht)  = balHeight t
+       (bu,  hu)  = balHeight u
+  in   (ht == hu ⋀ bt ⋀ bu, 1 + (ht ↑ hu)) 
+</code></pre><p>當輸入為 <code class="haskell">R t x u</code> 的情況亦雷同。我們可推導出：</p><pre><code class="spec">balHeight :: RBTree -&gt; (Bool, Nat)
+balHeight E          =  (True, 0)
+balHeight (R t x u)  =  let  (bt,  ht)  = balHeight t
+                             (bu,  hu)  = balHeight u
+                        in   (ht == hu ⋀ bt ⋀ bu, (ht ↑ hu))
+balHeight (B t x u)  =  let  (bt,  ht)  = balHeight t
+                             (bu,  hu)  = balHeight u
+                        in   (ht == hu ⋀ bt ⋀ bu, 1 + (ht ↑ hu)) 
+</code></pre></div></div></div><h3 class="subsection" id="sec:rep-minE">5.5.3 代換為最小標籤 --- 循環程式</h3><p>下列函數 <code class="haskell">minE</code> 曾出現在第 <a href="Induction.html#sec:other-inductive-datatypes">2.8 </a> 節中，找出一棵 <code class="haskell">ETree</code> 中最小的值。&shy;函數 <code class="haskell">rep</code> 則可視為 <code class="haskell">repl</code> 的簡單版，將樹中的每個標籤都代換成同一個值 <code class="haskell">y</code>。</p><div class="multicols"><div class="mcol" width="0.45\textwidth"><pre><code class="haskell">minE :: ETree Int -&gt; Int
+minE (Tip x)    = x
+minE (Bin t u)  = minE t ↓ minE u 
+</code></pre></div><div class="mcol" width="0.5\textwidth"><pre><code class="haskell">rep :: b -&gt; ETree a -&gt; ETree b
+rep y (Tip _)   = Tip y
+rep y (Bin t u) = Bin (rep y t) (rep y u) 
+</code></pre></div></div><p>給一棵樹 <code class="haskell">t</code>, 我們要把 <code class="haskell">t</code> 之中的每個標籤都代換成 <code class="haskell">t</code> 的最小標籤。&shy;直觀的做法是寫成 <code class="haskell">let m = minE t in rep t m</code>.&shy;如此一來，<code class="haskell">t</code> 會被走訪兩次，第一次被<code class="haskell">minE</code> 走訪以計算 <code class="haskell">m</code>, 第二次由 <code class="haskell">rep</code> 進行代換。&shy;<a href="Biblio.html#Bird:84:Circular">Bird [1984]</a> 提出挑戰：有可能在只把 <code class="haskell">t</code> 走訪一次的情況下，完成上述工作嗎？</p><p>以下函數 <code class="haskell">repmin</code> 同時傳回代換過後的樹，以及原樹中的最小標籤：</p><pre><code class="spec">repmin :: ETree Int -&gt; a -&gt; (ETree a × Int)
+repmin y = fork (rep y) minE 
+</code></pre><p>使用本節的技巧，讀者們應該已經可以為 <code class="haskell">repmin</code> 導出如下的歸納定義：</p><pre><code class="haskell">repmin y (Tip x)    =  (Tip y, x)
+repmin y (Bin t u)  =  let  (t', m) = repmin y t
+                            (u', n) = repmin y u
+                       in (Bin t' u', m ↓ n) 
+</code></pre><p>該定義只將 <code class="haskell">t</code> 走訪一次。然後我們定義：</p><pre><code class="haskell">transform :: ETree Int -&gt; ETree Int
+transform t =  let (t', m) = repmin m t in t' 
+</code></pre><p>函數 <code class="haskell">transform</code> 用 <code class="haskell">repmin</code> 算出 <code class="haskell">t</code> 的最小標籤 <code class="haskell">m</code>, 同時又用 <code class="haskell">m</code> 來標記 <code class="haskell">t</code>... 於是，似乎確實用一次走訪就完成了兩件事！這是怎麼做到的呢？</p><p>函數 <code class="haskell">transform</code> 有個特殊之處：變數 <code class="haskell">m</code> 既是 <code class="haskell">repmin</code> 的傳回值，又是其參數。&shy;這是一個<em>循環程式</em>(<em>circular program</em>)。&shy;<span id="ix-5-10"></span>&shy;這樣的程式之所以能正常終止，有賴於 Haskell 的範式順序/惰性求值（見第頁）。實際上發生的事情如此：假設輸入為</p><pre><code class="haskell">t = Bin  (Bin (Tip 4) (Tip 2))
+         (Bin (Bin (Tip 3) (Tip 1)) (Tip 5))
+</code></pre><p><code class="haskell">repmin</code> 將輸入 <code class="haskell">t</code> 走訪一遍，邊走邊建立了一個未算出的算式 <code class="haskell">(4 ↓ 2) ↓ ((3 ↓ 1) ↓ 5)</code>.&shy;該算式就是 <code class="haskell">m</code> 的值，其實也可視作一棵樹，其結構和 <code class="haskell">t</code> 一樣，只是把每個 <code class="haskell">Bin</code> 代換成 <code class="haskell">min</code>.&shy;函數 <code class="haskell">repmin</code> 的另一項工作是新建一棵樹 <code class="haskell">t'</code>，該樹之中每個 <code class="haskell">Tip</code> 的標籤都指到這個算式。&shy;根據範式順序求值，這個算式還不用立刻被算出來。直到我們終於不得不算出它，例如當 <code class="haskell">t'</code> 被傳回，我們要求電腦把 <code class="haskell">t'</code> 印出來，或著有別的函數需檢查 <code class="haskell">t'</code> 中的標籤時，該算式才被歸約成一個數字 --- 這需要把該算式走訪一遍。&shy;（但，根據惰性求值，一但 <code class="haskell">m</code> 被算成一個數字，下次使用 <code class="haskell">m</code> 時就不再需要反覆計算了。）</p><p>需注意，雖然「<code class="haskell">t</code>只被走訪一次」確實成立，這並不表示 <code class="haskell">transform</code> 必然比老實將樹走訪兩次的程式快 --- 效率是個複雜的問題，本章將陸續談到更多。我的建議是：循環程式應視為有趣、優雅的謎題，而不是以效率為目的的程式設計技巧。</p><h3 class="subsection" id="sec:tupling-conclude">5.5.4 小結與提醒</h3><p>「組對」的技巧讓函數多傳回一些值。我們可能藉此省下一些重複的計算，增進效率。</p><p>我們自然想問：給一個有重複計算、待改進的函數 <code class="haskell">f</code>, 怎知道該讓它多傳回什麼值？&shy;在本節的例子中，我們可由符號演算看出一些端倪：&shy;將 <code class="haskell">f</code> 的定義展開，辨識出被重複計算的子算式，這些子算式就可能用來與原函數組對。&shy;但廣泛說來，「將一個函數或性質通用化」是編程與證明中最困難、最需要經驗、智慧的一步。&shy;只要找到正確的通用化，例如 <code class="haskell">steepsum</code> 或 <code class="haskell">repTail</code>, 剩下的推導都可相當機械化地進行。&shy;唯有「通用化」這一步，我們無法保證有任何機械化、公式化的方法可作為解決所有問題的萬靈丹 ---&shy;否則編程就是一件可完全自動化的事情了。</p><p>雖然如此，我們仍希望基於符號演算的形式方法能給我們一定程度的幫助與指引。&shy;程式語言研究的目標之一便是分辨出編程的過程中，哪些部分是瑣碎、機械化的，哪些部分是真正需要靈感與智慧的，並且盡量使用符號幫助，使我們在進行思考時有更多工具。</p><p>組對可用於減少走訪資料結構的次數，但這麼做並不見得有效率上的好處。&shy;例如，以下函數計算一個串列中元素的平均值：</p><pre><code class="spec">average xs = sum xs / length xs 
+</code></pre><p>利用組對，我們可以另定義一個函數 <code class="haskell">sumlen = fork sum length</code>,&shy;並推導其歸納定義，在一次走訪中同時計算串列的和與長度：</p><pre><code class="haskell">sumlen []      =  (0,0)
+sumlen (x:xs)  =  let (s,l) = sumlen xs
+                  in (x + s, 1 + l) 
+</code></pre><p>然後平均便可定義成 <code class="haskell">average' xs = let (s,l) = sumlen xs in s/l</code>.</p><p>然而，根據<a href="Biblio.html#HuIwasaki:97:Tupling">Hu et al. [1997]</a>，<code class="haskell">average'</code> 通常比 <code class="haskell">average</code> 慢。&shy;兩者都是 $O(n)$ 的演算法。&shy;函數 <code class="haskell">sumlen</code> 在傳回值時會產生一個序對，該序對立刻被上層拆掉。&shy;因此 <code class="haskell">average'</code> 每處理一個元素耗費的時間較多，往往不如乾脆將 <code class="haskell">xs</code> 走訪兩次。&shy;<a href="Biblio.html#HuIwasaki:97:Tupling">Hu et al. [1997]</a> 認為需有更有效率的序對實作法，組對才是值得做的轉換。</p><div class="exlist"><div class="exercise exer" id="ex:allpairs"><h5 class="exercise-title">練習 5.18 </h5><p>函數 <code class="haskell">allpairs</code> 傳回輸入串列中任兩個元素（依其原本順序）形成的序對。&shy;例如 <code class="haskell">allpairs [1,2,3,4]</code> 可得到 <code class="haskell">[(1,2),(1,3),(1,4),(2,3),(2,4),(3,4)]</code>。</p><pre><code class="haskell">allpairs :: List a -&gt; List (a × a)
+allpairs []      = []
+allpairs (x:xs)  = map (\y -&gt; (x,y)) xs ++ allpairs xs 
+</code></pre><p>而 <code class="haskell">maxdiff</code> 則計算一個串列中任兩元素前者與後者的最大差：</p><pre><code class="haskell">maxdiff :: List Int -&gt; Int
+maxdiff = maximum . map (\(x,y) -&gt; x - y) . allpairs 
+</code></pre><p>當輸入串列長度為 <code class="haskell">n</code>, 如此定義的 <code class="haskell">maxdiff</code> 是一個需時 $O(n^2)$ 的演算法。&shy;定義：</p><pre><code class="spec"> mdm xs = (maxdiff xs, ???) 
+</code></pre><p>找出 <code class="haskell">???</code> 可能的值，使得 <code class="haskell">mdm</code> 能在 $O(n)$ 時間之內完成計算。&shy;你可假設以下性質：</p><pre><code class="equation" id="eq:max-minus">  & |maximum (map (x-) xs) = x - minimum xs| \mbox{~~.}</code>    (5.5 )
+</pre><p>並假設 <code class="haskell">maximum</code> 與 <code class="haskell">minimum</code> 在空串列上的值分別為 <code class="haskell">-infty</code> 與 <code class="haskell">infty</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-18" type="checkbox"/><label class="lbl-toggle" for="ans-5-18">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>由 ([RefUndefined]) 我們推測：</p><pre><code class="spec">mdm :: List Int -&gt; (Int × Int)
+mdm xs = (maxdiff xs, minimum xs) 
+</code></pre><p>我們試圖找出 <code class="haskell">mdm</code> 的歸納定義。顯然 <code class="haskell">mdm [] = (-infty, infty)</code>.&shy;考慮歸納情況（令 <code class="haskell">minus (x,y) = x-y</code>）：</p><pre><code class="haskell">      mdm (x:xs)
+ ===    <comment>{- <code class="haskell">mdm</code>, <code class="haskell">maxdiff</code>, 與 <code class="haskell">minimum</code> 之定義 -}</comment>
+      (maximum (map minus (allpairs (x:xs))), x ↓ minimum xs)
+ ===  (  maximum (map minus (map (\y -&gt; (x,y)) xs ++ allpairs xs)),
+         x ↓ minimum xs) 
+</code></pre><p>集中焦點在序對的第一個元素：</p><pre><code class="haskell">      maximum (map minus (map (\y -&gt; (x,y)) xs ++ allpairs xs))
+ ===     <comment>{- 因 <code class="haskell">map f (xs ++ ys) = map f xs ++ map f ys</code> (習題 \ref{ex:map-append}) -}</comment>
+      maximum (  map minus (map (\y -&gt; (x,y)) xs) ++
+                 map minus (allpairs xs))
+ ===     <comment>{- <code class="haskell">map</code>-fusion -}</comment>
+      maximum (map (x-) xs ++ map minus (allpairs xs))
+ ===     <comment>{- 因 <code class="haskell">maximum (xs ++ ys) = maximum xs ↑ maximum ys</code> -}</comment>
+      maximum (map (x-) xs) ↑ maximum (map minus (allpairs xs))
+ ===     <comment>{- 因 \eqref{eq:max-minus} -}</comment>
+      (x - minimum xs) ↑ maximum (map minus (allpairs xs))
+ ===     <comment>{- <code class="haskell">maxdiff</code> 之定義 -}</comment>
+      (x - minimum xs) ↑ maxdiff xs 
+</code></pre><p>回到推導主體：</p><pre><code class="haskell">      mdm (x:xs)
+ ===    <comment>{- 上述計算 -}</comment>
+      ((x - minimum xs) ↑ maxdiff xs , x ↓ minimum xs)
+ ===    <comment>{- 使用 <code class="haskell">let</code> -}</comment>
+      let (y, z) = (maxdiff xs, minimum xs)
+      in ((x - z) ↑ y, x ↓ z)
+ ===    <comment>{- <code class="haskell">mdm</code> 之定義 -}</comment>
+      let (y, z) = mdm xs
+      in ((x - z) ↑ y, x ↓ z)  
+</code></pre><p>於是我們得知：</p><pre><code class="haskell">mdm []      =  (minBound, maxBound)
+mdm (x:xs)  =  let (y, z) = mdm xs
+               in ((x - z) ↑ y, x ↓ z)  
+</code></pre></div></div></div><h2 class="section" id="sec:accumulating-param">5.6 累積參數</h2><p>在第 <a href="Derivation.html#sec:efficiency-basics">5.2 </a> 節中，我們曾提及該處定義的 <code class="haskell">reverse :: List a -&gt; List a</code> 需要 $O(n^2)$ 的時間。是否有比較快的作法呢？</p><h3 class="subsection" id="sec:reversal-append">5.6.1 串列反轉與連接</h3><p>下列函數 <code class="haskell">revcat</code> 似乎比 <code class="haskell">reverse</code> 更通用一些：它拿兩個參數 <code class="haskell">xs</code> 與 <code class="haskell">ys</code>, 不僅將 <code class="haskell">xs</code> 反轉，還把 <code class="haskell">ys</code> 接到反轉後結果的右邊：%&shy;<input class="toggle" id="footnote-5-6-6" type="checkbox"/><label class="fnote-toggle" for="footnote-5-6-6">(註6) </label><span class="collapsible-footnote"><code class="haskell">revcat</code> 為 <code>reverse'' 與</code>concat'' 的簡寫。</span></p><pre><code class="haskell">revcat :: List a -&gt; List a -&gt; List a
+revcat xs ys = reverse xs ++ ys 
+</code></pre><p>原有的 <code class="haskell">reverse</code> 可以視為 <code class="haskell">revcat</code> 的特例 --- <code class="haskell">reverse xs = revcat xs []</code>.&shy;這裡是否也會出現<em>責任越大，能力越強</em>的現象：&shy;看似做了較多事情的 <code class="haskell">revcat</code> 其實反倒有比較有效率的實作呢？&shy;我們試著演算看看！當 <code class="haskell">xs := []</code>, 顯然 <code class="haskell">revcat [] ys = ys</code>.&shy;考慮 <code class="haskell">xs := x:xs</code> 的情況：</p><pre><code class="haskell">      revcat (x:xs) ys
+ ===    <comment>{- <code class="haskell">revcat</code> 之定義 -}</comment>
+      reverse (x:xs) ++ ys
+ ===    <comment>{- <code class="haskell">reverse</code> 之定義 -}</comment>
+      (reverse xs ++ [x]) ++ ys
+ ===    <comment>{- <code class="haskell">(++)</code> 之結合律 -}</comment>
+      reverse xs ++ ([x] ++ ys)
+ ===    <comment>{- <code class="haskell">(++)</code> 與 <code class="haskell">revcat</code> 之定義 -}</comment>
+      revcat xs (x : ys) 
+</code></pre><p>因此我們有了：</p><pre><code class="spec">revcat []      ys = ys
+revcat (x:xs)  ys = revcat xs (x:ys) 
+</code></pre><p>我們看看 <code class="haskell">revcat [1,2,3,4] []</code> 如何歸約：</p><pre><code class="spec">   revcat (1:2:3:4:[]) []
+=  revcat (2:3:4:[]) (1:[])
+=  revcat (3:4:[]) (2:1:[])
+=  revcat (4:[]) (3:2:1:[])
+=  revcat [] (4:3:2:1:[])
+=  [4,3,2,1] 
+</code></pre><p>串列 <code class="haskell">[1,2,3,4]</code> 中的元素一個個被搬到 <code class="haskell">revcat</code> 的第二個參數中。這是一個常數時間內可完成的動作，而每個元素只會被搬動一次。因此當 <code class="haskell">xs</code> 的長度是 <code class="haskell">n</code>，<code class="haskell">reverse xs ys</code> 可在 $O(n)$ 的時間內執行完畢！</p><p>我們剛看到的技巧和第 <a href="Derivation.html#sec:tupling">5.5 </a> 節中的組對互為對偶。&shy;在第 <a href="Derivation.html#sec:tupling">5.5 </a> 節中，我們為了導出一個函數的較快版本，讓它多傳回一些資訊。&shy;而在本節，我們則讓一個函數多吃些參數，多接受些資訊。&shy;通常這些新介紹的參數用於「累積」計算到目前為止的結果，例如&shy;在 <code class="haskell">revcat</code> 中，參數 <code class="haskell">ys</code> 存放被反轉到一半的串列。&shy;因此這個技巧被稱作<em>累積參數</em>(<em>accumulating parameters</em>)<span id="ix-5-11"></span>。</p><p>很多情況下，累積參數的運用仰賴某些運算元的結合律。&shy;觀察 <code class="haskell">revcat</code> 的推導，關鍵的一步便是 <code class="haskell">(++)</code> 的結合律。&shy;它使我們能夠把 <code class="haskell">(reverse xs ++ [x]) ++ ys</code> 轉換為 <code class="haskell">reverse xs ++ ([x] ++ ys)</code>，將&shy;<code class="haskell">[x]</code> 往右搬，才能收回、累積到 <code class="haskell">revcat</code> 的第二個參數 <code class="haskell">ys</code> 中。</p><p>回顧起來，我們最初如何發明出 <code class="haskell">revcat xs ys = reverse xs ++ ys</code> 這樣的定義呢？&shy;一個解釋便是：<code class="haskell">reverse</code> 之所以慢，是因為 <code class="haskell">(++)</code> 的括號都括錯了方向，往左邊括了。&shy;因此我們在右邊補一個 <code class="haskell">(++ ys)</code>, 希望用 <code class="haskell">(++)</code> 的結合律，將括號往右挪。</p><p>我們多看一個例子。以下函數 <code class="haskell">tags</code> 傳回一棵 <code class="haskell">ITree</code> 中所有的標籤：</p><pre><code class="haskell">tags :: ITree a -&gt; List a
+tags Null          = []
+tags (Node x t u)  = tags t ++ [x] ++ tags u 
+</code></pre><p>和習題 <a href="Derivation.html#ex:ETree-tips">5.7 </a> 的情況類似，當 <code class="haskell">t</code> 是一棵向左傾斜的樹，<code class="haskell">tags</code> 會需要 $O(n^2)$ 的時間。&shy;例如，考慮這棵樹 <code class="haskell">t</code> （以下將 <code class="haskell">Node x Null Null</code> 簡寫為 <code class="haskell">lv x</code>）：</p><pre><code class="spec">  t = Node 7  (Node 6  (Node 4  (Node 2 (lv 1) (lv 3))
+                       (lv 5)))
+              (lv 8) 
+</code></pre><p>將 <code class="haskell">tags t</code> 展開（並為說明方便，將一些 <code class="haskell">[]++[x]++[]</code> 化簡為 <code class="haskell">[x]</code>），我們會得到：</p><pre><code class="spec"> ((([1] ++ [2] ++ [3])  ++ [4]
+                        ++ [5]) ++ [6]) ++ [7] ++ [8] 
+</code></pre><p>這個式子的結構和 <code class="haskell">t</code> 一樣，只是將 <code class="haskell">Node x...</code> 都變為 <code class="haskell">.. ++ [x] ++ ..</code>.&shy;我們可看到 <code class="haskell">(++[6])</code> 需要走過一個長度為 <code class="haskell">5</code> 的串列，<code class="haskell">(++[7])</code> 需要走過一個長度為 <code class="haskell">6</code> 的串列。</p><p>為了避免 <code class="haskell">(++)</code> 的重複走訪，我們在 <code class="haskell">tags t</code> 的左邊補一個 <code class="haskell">(++ys)</code>, 希望透過結合律改變括號的順序。我們定義：</p><pre><code class="haskell">tagsAcc :: ITree a -&gt; List a -&gt; List a
+tagsAcc t ys = tags t ++ ys 
+</code></pre><p>利用 <code class="haskell">(++)</code> 的結合律，讀者應不難導出如下的歸納定義：</p><pre><code class="spec">tagsAcc Null          ys = ys
+tagsAcc (Node x t u)  ys = tagsAcc t (x : tagsAcc u ys) 
+</code></pre><p>之後我們便可重新定義 <code class="haskell">tags t = tagsAcc t []</code>.&shy;至於 <code class="haskell">tagsAcc</code> 的效率如何呢？&shy;如果將 <code class="haskell">tagsAcc t ys</code> 展開，我們順利地得到：</p><pre><code class="spec"> 1 : (2 : (3 : (4 : (5 : (6 : (7 : (8 : ys))))))) 
+</code></pre><div class="exlist"><div class="exercise exer" id="ex:tagsAcc"><h5 class="exercise-title">練習 5.19 </h5><p>由 <code class="haskell">tagsAcc t ys = tags t ++ ys</code> 推導出上述的歸納定義。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-19" type="checkbox"/><label class="lbl-toggle" for="ans-5-19">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>僅看 <code class="haskell">t := Node x t u</code> 的狀況：</p><pre><code class="haskell">      tagsAcc (Node x t u) ys
+ ===  tags (Node x t u) ++ ys
+ ===  (tags t ++ [x] ++ tags u) ++ ys
+ ===    <comment>{- <code class="haskell">(++)</code> 的結合律 -}</comment>
+      tags t ++ (x : tags u ++ ys)
+ ===  tagsAcc t (x : tagsAcc u ys) 
+</code></pre><p>我們可導出：</p><pre><code class="spec">tagsAcc Null          ys = ys
+tagsAcc (Node x t u)  ys = tagsAcc t (x : tagsAcc u ys) 
+</code></pre></div></div><div class="exercise exer" id="ex:tagsAcc-2"><h5 class="exercise-title">練習 5.20 </h5><p>確認 <code class="haskell">tagsAcc t ys</code> 確實是 <code class="haskell">1 : (2 : (3 : (4 : (5 : (6 : (7 : (8 : ys)))))))</code>.</p></div><div class="exercise exer" id="ex:ETree-tipsAcc"><h5 class="exercise-title">練習 5.21 </h5><p>接續習題 <a href="Derivation.html#ex:ETree-tips">5.7 </a>，利用累積參數，推導出一個只需線性時間的 <code class="haskell">tips :: ETree a -&gt; List a</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-21" type="checkbox"/><label class="lbl-toggle" for="ans-5-21">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>定義 <code class="haskell">tipsAcc t ys = tips t ++ ys</code>.&shy;如果 <code class="haskell">tipsAcc</code> 有個有效率的定義，我們可改定義 <code class="haskell">tips t = tipsAcc t []</code>.&shy;當 <code class="haskell">t := Tip x</code>, <code class="haskell">tipsAcc (Tip x) ys</code> 可直接展開為 <code class="haskell">x:ys</code>.&shy;當 <code class="haskell">t := Bin t u</code>,</p><pre><code class="haskell">      tipsAcc (Bin t u) ys
+ ===  (tips t ++ tips u) ++ ys
+ ===    <comment>{- <code class="haskell">(++)</code> 之結合律 -}</comment>
+      tips t ++ (tips u ++ ys)
+ ===  tipsAcc t (tipsAcc u ys) 
+</code></pre><p>因此，</p><pre><code class="spec">tipsAcc (Tip x)    ys = x : ys
+tipsAcc (Bin t u)  ys = tipsAcc t (tipsAcc u ys) 
+</code></pre></div></div></div><h3 class="subsection" id="sec:accum-info-flow">5.6.2 由上到下的資訊流</h3><p>前一節之中，我們用累積參數改變 <code class="haskell">(++)</code> 結合的順序。&shy;更廣泛說來，累積參數常有「增加一個由上到下的資訊流」的效果。</p><p><b>遞增串列</b> &emsp; 下述函數 <code class="haskell">ascending</code> 判斷一個串列是否為遞增：</p><pre><code class="spec">ascending :: List Int -&gt; Bool
+ascending []      = True
+ascending (x:xs)  = all (x &lt;=) xs ⋀ ascending xs 
+</code></pre><p>當輸入串列長度為 <code class="haskell">n</code>, 這個定義需做 $O(n^2)$ 次比較。&shy;習題 <a href="Derivation.html#ex:ascendingTuple">5.14 </a> 曾考慮過一個定義類似的 <code class="haskell">ascending</code>，並用組對的技巧得到一個時間複雜度為 $O(n)$ 的程式。本節則試試看改用累積參數！</p><p>這次我們使用如下的定義：</p><pre><code class="spec">ascendBnd xs z = all (z&lt;=) xs ⋀ ascending xs 
+</code></pre><p>在嘗試推導 <code class="haskell">ascendBnd</code> 之前，我們得先確定它是有用的 --- <code class="haskell">ascending</code> 可以用 <code class="haskell">ascendBnd</code> 定義出來。確實如此：<code class="haskell">ascending xs = ascendBnd xs minBound</code>.</p><p>現在我們可以推導 <code class="haskell">ascendBnd</code> 的歸納定義了。基底狀況如下：</p><pre><code class="haskell">      ascendBnd z []
+ ===   <comment>{- <code class="haskell">ascendBnd</code> 之定義 -}</comment>
+      all (z&lt;=) [] ⋀ ascending []
+ ===   <comment>{- <code class="haskell">all</code> 與 <code class="haskell">ascending</code> 之定義 -}</comment>
+      True
+</code></pre><p>歸納狀況的推導則會需要下述性質：</p><pre><code class="equation" id="eq:lowerbound-strengthen">  |z &lt;= x ⋀ all (z &lt;=) xs ⋀ all (x &lt;=) xs <comment>{-"~~"-}</comment> ==&gt; <comment>{-"~~"-}</comment> z &lt;= x ⋀ all (x &lt;=) xs |</code>    (5.6 )
+</pre><p>回顧起來，我們之所以那麼定義 <code class="haskell">ascendBnd</code>, 正是希望利用 ([RefUndefined]) 將程式中的 <code class="haskell">all (z&lt;=) xs</code> 吸收掉。推導如下：</p><pre><code class="haskell">      ascendBnd z (x:xs)
+ ===    <comment>{- <code class="haskell">ascendBnd</code> 與 <code class="haskell">ascending</code> 之定義 -}</comment>
+      all (z&lt;=) (x:xs) ⋀ all (x &lt;=) xs ⋀ ascending xs
+ ===    <comment>{- <code class="haskell">all</code> 之定義 -}</comment>
+      z &lt;= x ⋀ all (z &lt;=) xs ⋀ all (x &lt;=) xs ⋀ ascending xs
+ ===    <comment>{- 性質 \eqref{eq:lowerbound-strengthen} -}</comment>
+      z &lt;= x ⋀ all (x &lt;=) xs ⋀ ascending xs
+ ===    <comment>{- <code class="haskell">ascendBnd</code> 之定義 -}</comment>
+      z &lt;= x ⋀ ascendBnd x xs 
+</code></pre><p>總結之，我們導出了下述定義：</p><pre><code class="haskell">ascendBnd :: Int -&gt; List Int -&gt; Bool
+ascendBnd z []      = True
+ascendBnd z (x:xs)  = z &lt;= x ⋀ ascendBnd x xs 
+</code></pre><p>讀者可將之與最初的 <code class="haskell">ascending</code> 比較。函數 <code class="haskell">ascending</code> 的資訊流動只從串列尾到頭 --- <code class="haskell">ascending (x:xs)</code> 的值需等待 <code class="haskell">ascending xs</code> 的結果。但 <code class="haskell">ascendBnd</code> 多了一個 \emph{由上到下}的資訊流動：如果 <code class="haskell">ascendBnd z xs</code> 成立，參數 <code class="haskell">z</code> 是 <code class="haskell">xs</code> 所有元素的下界 (lower bound)，而該參數的值在每次遞迴呼叫時更新。</p><p><b>深度標記</b> &emsp; 給定 <code class="haskell">t :: ITree a</code>（型別 <code class="haskell">ITree</code> 定義於第 <a href="Basics.html#sec:user-defined-data">1.10 </a> 節）, 下述函數 <code class="haskell">depthsT t</code> 由左至右傳回樹中所有的元素，並標記其深度 --- 根部節點的深度為 <code class="haskell">0</code>, 左右子樹中的節點的深度則是其原本深度加一：</p><pre><code class="haskell">depths :: ITree a -&gt; List (a × Nat)
+depths Null          =  []
+depths (Node x t u)  =  map (id *** (Suc)) (depths t) ++ [(x,0)] ++
+                        map (id *** (Suc)) (depths u) 
+</code></pre><p>由於反覆使用 <code class="haskell">map</code>, 當輸入樹有 <code class="haskell">n</code> 個節點時，<code class="haskell">depths</code> 最壞情況下需使用 $O(n^2)$ 個 <code class="haskell">(Suc)</code>. 是否可能用累積參數讓它快一點呢？</p><p>和各種程式堆導與證明技巧一樣，使用累積參數的技巧時，最難的一步是如何設計那個通用版的函數。&shy;我們的答案仍是\emph{讓符號為你工作}：許多時候我們可以藉由觀察算式、展開定義看出有哪些部分是可以取出、吸收、或累積的。在 <code class="haskell">ascending</code> 的例子中，我們希望把 <code class="haskell">all (x&lt;=) xs</code> 吸收掉。&shy;至於此處，如果試圖展開 <code class="haskell">depths</code>, 我們會看到許多層 <code class="haskell">map (id *** (Suc))</code> 被堆積在算式中等待被畫減。&shy;如果我們在最外面套一個 <code class="haskell">map (id *** (k +))</code>:</p><pre><code class="spec">depthsAcc t k = map (id *** (k +)) (depths t) 
+</code></pre><p>也許有機會改變括號的順序，並將 <code class="haskell">map (id *** (Suc))</code> 吸收到&shy;<code class="haskell">map (id *** (k +))</code> 之中。</p><p>同樣地，在推導 <code class="haskell">depthsAcc</code> 之前，我們得先確認 <code class="haskell">depths</code> 是 <code class="haskell">depthsAcc</code> 的特例。&shy;確實，<code class="haskell">depths t = depthsAcc t 0</code>.</p><p>然後我們可以開始推導 <code class="haskell">depthsAcc</code> 了。基底狀況中，<code class="haskell">depthsAcc Null k = []</code>.&shy;考慮歸納狀況：</p><pre><code class="haskell">      depthsAcc (Node x t u) k
+ ===    <comment>{- <code class="haskell">depthsAcc</code> 與 <code class="haskell">depths</code> 之定義 -}</comment>
+      map (id *** (k +)) (  map (id *** (Suc)) (depths t) ++ [(x,0)] ++
+                             map (id *** (Suc)) (depths u))
+ ===    <comment>{- <code class="haskell">map</code> 分配入 <code class="haskell">(++)</code>, <code class="haskell">map</code> 之定義 -}</comment>
+      map (id *** (k +)) (map (id *** (Suc)) (depths t)) ++ [(x,k)] ++
+      map (id *** (k +)) (map (id *** (Suc)) (depths u))
+ ===    <comment>{- <code class="haskell">map</code> 融合， <code class="haskell">(***)</code> 融合 \eqref{eq:prod-fusion} -}</comment>
+      map (id *** ((k +) . (Suc))) (depths t) ++ [(x,k)] ++
+      map (id *** ((k +) . (Suc))) (depths u)
+ ===    <comment>{- 對所有 <code class="haskell">n</code>, 我們有 <code class="haskell">k + (Suc n) = Suc (k + n)</code> -}</comment>
+      map (id *** ((Suc k) +)) (depths t) ++ [(x,k)] ++
+      map (id *** ((Suc k) +)) (depths u)
+ ===    <comment>{- <code class="haskell">depthsAcc</code> 與 <code class="haskell">depths</code> 之定義 -}</comment>
+      depthsAcc t (Suc k) ++ [(x,k)] ++ depthsAcc u (Suc k) 
+</code></pre><p>因此我們得到</p><pre><code class="haskell">depthsAcc :: ITree a -&gt; Nat -&gt; List (a × Nat)
+depthsAcc Null          k =  []
+depthsAcc (Node x t u)  k =  depthsAcc t (Suc k) ++ [(x,k)] ++
+                             depthsAcc u (Suc k) 
+</code></pre><p>同樣地，<code class="haskell">depthsAcc</code> 的參數 <code class="haskell">k</code> 是從上往下傳遞的資訊：它記錄著目前的深度，每往下一層就遞增一次。</p><div class="exlist"><div class="exercise exer"><h5 class="exercise-title">練習 5.22 </h5><p>下述函數 <code class="haskell">depthsT</code> 將一個 <code class="haskell">ITree</code> 的深度標記在樹中：</p><pre><code class="haskell">depthsT :: ITree a -&gt; ITree (a × Nat)
+depthsT Null          = Null
+depthsT (Node x t u)  = Node (x,0)  (mapI (id *** (Suc)) (depthsT t))
+                                    (mapI (id *** (Suc)) (depthsT u)) 
+</code></pre><p>其中 <code class="haskell">mapI :: (a -&gt; b) -&gt; ITree a -&gt; ITree b</code> 將函數作用在樹中的每個元素上（見習題 <a href="Induction.html#ex:ITree-mapI">2.32 </a>）。&shy;同樣地，反覆使用 <code class="haskell">mapI</code> 使得本程式需用 $O(n^2)$ 個 <code class="haskell">(Suc)</code>.&shy;請推導出一個只用 $O(n)$ 個 <code class="haskell">(Suc)</code> 的程式。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-22" type="checkbox"/><label class="lbl-toggle" for="ans-5-22">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>採用這個定義：</p><pre><code class="spec">depthsTAcc t k = mapI (id *** (k +)) (depthsT t) 
+</code></pre><p>我們可重定義 <code class="haskell">depthsT t = depthsTAcc t 0</code>. 其餘的推導與 <code class="haskell">depthsAcc</code> 類似。</p></div></div></div><div class="exlist"><div class="exercise exer"><h5 class="exercise-title">練習 5.23 </h5><p>由於 <code class="haskell">(++)</code> 的使用方式，本節導出的 <code class="haskell">depthsAcc</code> 在最壞情況下的時間複雜度仍是 $O(n^2)$.&shy;請再使用累積參數，導出一個時間複雜度為 $O(n)$ 的程式。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-23" type="checkbox"/><label class="lbl-toggle" for="ans-5-23">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>採用這個定義：</p><pre><code class="spec">depthsAcc' t k ys = depthsAcc t k ++ ys 
+</code></pre></div></div></div><h3 class="subsection" id="sec:tail-recursion">5.6.3 尾遞迴</h3><p>關於第 <a href="Derivation.html#sec:reversal-append">5.6.1 </a> 節的 <code class="haskell">revcat</code> 有許多面向可談。&shy;本節先用它帶出一個重要的觀念：尾遞迴。</p><p>從第 <a href="Induction.html#ch:induction">2 </a> 章起，我們常見的歸納定義形式如下：</p><div class="multicols"><div class="mcol" width="0.5\textwidth"><pre><code class="spec">f []      = ...
+f (x:xs)  = ... f xs ... 
+</code></pre></div><div class="mcol" width="0.5\textwidth"><pre><code class="spec">sum []      = 0
+sum (x:xs)  = x + sum xs 
+</code></pre></div></div><p>右側的 <code class="haskell">sum</code> 函數便是一個典型的例子。&shy;我們通常必須對遞迴呼叫的結果做些加工。&shy;例如此處 <code class="haskell">sum xs</code> 的結果需要經過 <code class="haskell">(x+)</code>, 才成為 <code class="haskell">sum (x:xs)</code> 的值。&shy;實作上，電腦在執行 <code class="haskell">sum xs</code> 的程式碼前必須記下「<code class="haskell">sum xs</code> 回傳後，必須回來執行 <code class="haskell">(x+)</code>」這件事。&shy;這可能用堆疊或著其他方式達成。&shy;無論如何，當 <code class="haskell">xs</code> 長度為 <code class="haskell">n</code>, 便有大約 <code class="haskell">n</code> 個這種「尚待完成的計算」被暫存著。&shy;當 <code class="haskell">xs</code> 被走訪到了基底狀況，這些暫存的計算才一個個被收回。</p><p>但 <code class="haskell">revcat</code> 的情況卻有點不同。&shy;觀察其程式碼，會發現遞迴呼叫 <code class="haskell">revcat xs (x:ys)</code> 的結果本身就是其左手邊 <code class="haskell">revcat (x:xs) ys</code> 的值，不需其他的加工：</p><pre><code class="spec">revcat []      ys = ys
+revcat (x:xs)  ys = revcat xs (x:ys) 
+</code></pre><p>因此，<code class="haskell">revcat</code> 的實作中，遞迴呼叫完成後，電腦不需回到原呼叫之處再執行什麼東西：最後的結果 <code class="haskell">ys</code> 可直接傳回到最上層、第一個呼叫 <code class="haskell">revcat</code> 的地方！&shy;<input class="toggle" id="footnote-5-6-7" type="checkbox"/><label class="fnote-toggle" for="footnote-5-6-7">(註7) </label><span class="collapsible-footnote">如果該語言的實作確實有做到這點，我們說它實作了<em>尾呼叫消除</em>(<em>tail call elimination</em>)或<em>尾呼叫最佳化</em>(<em>tail call optimisation</em>)。有些語言到了蠻晚的版本才支援這個最佳化。</span></p><p>當一個函數 <code class="haskell">f</code> 呼叫函數 <code class="haskell">g</code> 時，如果該呼叫本身就是函數 <code class="haskell">f</code> 最後的結果，並沒有針對傳回值的額外計算，我們將它稱之為一個<em>尾呼叫</em>(<em>tail call</em>)。&shy;<span id="ix-5-12"></span>&shy;此名稱的由來可能是因為該呼叫是一連串計算後「最尾端」的動作。&shy;如果這是一個遞迴呼叫，則稱之為<em>尾遞迴</em>(<em>tail recursion</em>)。&shy;<span id="ix-5-13"></span></p><p><b>尾遞迴與迴圈</b> &emsp;&shy;函數語言中的尾遞迴程式和指令式語言中的迴圈有相當密切的關係。&shy;回顧 <code class="haskell">revcat [1,2,3,4] []</code> 的歸約過程：</p><pre><code class="spec">   revcat (1:2:3:4:[]) []
+=  revcat (2:3:4:[]) (1:[])
+=  revcat (3:4:[]) (2:1:[])
+=  revcat (4:[]) (3:2:1:[])
+=  revcat [] (4:3:2:1:[])
+=  [4,3,2,1] 
+</code></pre><p>其實看來就像是一個有兩個變數的迴圈，其中一個由 <code class="haskell">1:2:3:4:[]</code> 逐漸縮短為 <code class="haskell">[]</code>，另一個由 <code class="haskell">[]</code> 逐步增長為 <code class="haskell">4:3:2:1:[]</code>.&shy;函數 <code class="haskell">reverse</code> 的定義 <code class="haskell">reverse xs = revcat xs []</code> 就是為這兩個變數設定初始值：如果要計算 <code class="haskell">xs</code> 的反轉，兩變數應該分別初始化為 <code class="haskell">xs</code> 與 <code class="haskell">[]</code>.&shy;在 <code class="haskell">revcat</code> 的定義中，<code class="haskell">revcat [] ys</code> 表示該迴圈在第一個變數為 <code class="haskell">[]</code> 時終止，此時程式傳回 <code class="haskell">ys</code>；而<code class="haskell">revcat (x:xs) ys = revcat xs (x:ys)</code> 則指定了在迴圈的每一步中兩個變數的值如何改變。&shy;函數 <code class="haskell">reverse</code> 與 <code class="haskell">revcat</code> 的組合相當於是這樣的一個指令式語言迴圈（假設 <code class="haskell">xs</code> 與 <code class="haskell">ys</code> 為變數，<code class="haskell">XS</code> 為欲反轉的串列）：&shy;<input class="toggle" id="footnote-5-6-8" type="checkbox"/><label class="fnote-toggle" for="footnote-5-6-8">(註8) </label><span class="collapsible-footnote"><code class="haskell">xs, ys := e1, e2</code> 將 <code class="haskell">e1</code> 與 <code class="haskell">e2</code> 兩個值同時給予 <code class="haskell">xs</code> 與 <code class="haskell">ys</code>; <code class="haskell">do B -&gt; S od</code> 表示一個迴圈，當 <code class="haskell">B</code> 還成立時便反覆執行 <code class="haskell">S</code>.</span></p><pre><code class="spec">xs, ys := XS, [];
+do xs /= [] -&gt;
+   xs, ys := tail xs, head xs : ys
+od ;
+return ys
+</code></pre><p>而該迴圈的恆式(loop invariant)是什麼呢？&shy;正是 <code class="haskell">reverse XS = reverse xs ++ ys</code> --- 右手邊就是 <code class="haskell">revcat</code> 的定義。</p><p>一般說來，一個尾遞迴函數可視為一個迴圈，其參數就是迴圈中的變數。&shy;遞迴呼叫時參數改變，相當於更新這些變數的值，其基底狀況則相當於迴圈的終止條件。&shy;當我們為了計算某個函數 <code class="haskell">f</code> 而設計了另一個較通用、可寫成尾遞迴的函數 <code class="haskell">fAcc</code>,&shy;<code class="haskell">fAcc</code> 的定義(例如 <code class="haskell">reverse xs ++ ys</code>)往往就是這個迴圈的<em>恆式</em>(<em>loop invariant</em>)。&shy;<span id="ix-5-14"></span>&shy;在指令式程式推導的方法學中，設計一個迴圈最難之處便是決定其恆式。&shy;如第 <a href="Derivation.html#sec:tupling-conclude">5.5.4 </a> 節所言，一般來說，並沒有一個固定的方法讓我們由 <code class="haskell">f</code> 找出 <code class="haskell">fAcc</code>。&shy;但我們仍可讓符號推演幫我們一些忙，並歸納出一些常見的模式。</p><p><b>串列總和</b> &emsp;&shy;累積參數的技巧常被用來推導尾遞迴程式（雖然累積參數的應用並不僅止於此）。&shy;我們多看一個例子。如前所述，<code class="haskell">sum</code> 函數每次被遞迴呼叫時會需要用堆疊或其他等價的方式記住每個 <code class="haskell">(x+)</code>。是否能避免這麼做呢？&shy;我們定義：</p><pre><code class="haskell">sumAcc :: List Int -&gt; Int -&gt; Int
+sumAcc xs y = y + sum xs 
+</code></pre><p>如此定義 <code class="haskell">sumAcc</code> 的直覺理由是：我們想用參數 <code class="haskell">y</code> 存放累積的結果，希望利用 <code class="haskell">(+)</code> 的結合律逐步把 <code class="haskell">sum xs</code> 的結果搬入 <code class="haskell">y</code> 中。&shy;同樣地，一但找到了這個定義，之後的演算便相當日常、例行了。&shy;我們先記下：<code class="haskell">sum xs = sumAcc xs 0</code>.&shy;接下來試圖導出 <code class="haskell">sumAcc</code> 的歸納定義。&shy;在基底情況中，我們會需要 <code class="haskell">y + 0 = y</code>。&shy;為了目睹結合律如何運作，我們看看 <code class="haskell">xs := x:xs</code> 的狀況：</p><pre><code class="spec">     sumAcc (x:xs) y
+===  y + sum (x:xs)
+===  y + (x + sum xs)
+===    <comment>{- <code class="haskell">(+)</code> 之結合律 -}</comment>
+     (y+x) + sum xs
+===  sumAcc xs (y+x) 
+</code></pre><p>讀者可能發現我們之所以定義 <code class="haskell">sumAcc xs y</code> 為 <code class="haskell">y + sum xs</code>, 而不是 <code class="haskell">sum xs + y</code>, 是為了在使用結合律的那一步之中讓 <code class="haskell">x</code> 可以就近與 <code class="haskell">y</code> 結合。&shy;當然，<code class="haskell">(+)</code> 也滿足交換律，因此兩個定義其實是一樣的。&shy;當我們處理沒有交換律的運算元時，就得對這類細節更小心了。&shy;總之，我們可導出以下的程式：</p><pre><code class="spec">sumAcc []      y = y
+sumAcc (x:xs)  y = sumAcc xs (y + x) 
+</code></pre><p>這可翻譯成下述的兩種迴圈之一。&shy;左手邊的程式將串列 <code class="haskell">XS</code> 加總，使用的兩個變數 <code class="haskell">xs</code> 與 <code class="haskell">y</code> 對應到 <code class="haskell">sumAcc</code> 的兩個參數。&shy;在右邊的程式中，我們假設輸入資料 <code class="haskell">[x0, x1.. xN1]</code> 依序被存放在一個陣列 <code class="haskell">X</code> 中。陣列有 <code class="haskell">N</code> 個元素，其索引範圍為 <code class="haskell">[0.. N-1]</code>.&shy;我們把陣列視為索引到內容的函數，因此 <code class="haskell">X i</code> 存放著 <code class="haskell">xi</code>.</p><div class="multicols"><div class="mcol" width="0.5\textwidth"><pre><code class="spec">xs, y := XS, 0;
+do xs /= [] -&gt;  y   := y + head xs ;
+                xs  := tail xs
+od ;
+return y
+</code></pre></div><div class="mcol" width="0.45\textwidth"><pre><code class="spec">i, y := 0, 0;
+do i /= N -&gt;  y  := y + X i ;
+              i  := i + 1
+od ;
+return y
+</code></pre></div></div><p>確實，這就是我們一般用指令式語言加總一個串列/陣列時的常見迴圈寫法：&shy;由左到右走訪，用一個變數存放目前為止的和。&shy;以往許多人可能都沒注意到：同樣是「將 <code class="haskell">xs</code> 由左到右走一遍」，這個程式和 <code class="haskell">sum xs</code> 是不同的演算法！&shy;<code class="haskell">sum [1,2,3,4]</code> 算出的是 <code class="haskell">1 + (2 + (3 + (4 + 0)))</code>,&shy;而上述的、我們常用的那個迴圈算出的是 <code class="haskell">(((0 + 1) + 2) + 3) + 4</code>.&shy;多虧 <code class="haskell">(+)</code> 的結合律，它們剛好是一樣的。</p><p><b>在迴圈中處理串列</b> &emsp;&shy;在本節的結尾，我們更完整地討論一下歸納式的串列處理與迴圈的關係。初次閱讀的讀者可跳過本段。&shy;假設某函數 <code class="haskell">f :: List A -&gt; B</code> 能寫成如下的形式：</p><pre><code class="haskell"> f []      = e
+ f (x:xs)  = x ⊕ f xs 
+</code></pre><p>其中 <code class="haskell">e :: B</code>, <code class="haskell">oplus :: A -&gt; B -&gt; B</code>, 此處不假設 <code class="haskell">oplus</code> 滿足結合律。我們能用一個尾遞迴函數（或著說用一個迴圈）計算 <code class="haskell">f</code> 嗎？直覺上，我們可用一個迴圈將串列從右往左走一遍，並用變數紀錄目前為止算出的值。確實，如果我們要求如下的規格：</p><pre><code class="equation" id="eq:fold-loop">|loop xs (f ys)| &|= f (xs ++ ys) |</code>    (5.7 )
+</pre><p>（所以 <code class="haskell">f xs = loop xs (f []) = loop xs e</code>）&shy;並分析 <code class="haskell">xs := []</code> 和 <code class="haskell">xs := xs++[x]</code> 的情況如下：</p><div class="multicols"><div class="mcol" width="0.4\textwidth"><pre><code class="spec">    loop [] (f ys)
+===   <comment>{- <code class="haskell">loop</code> 之規格 -}</comment>
+    f ([] ++ ys)
+===   <comment>{- <code class="haskell">(++)</code> 之定義 -}</comment>
+    f ys 
+</code></pre></div><div class="mcol" width="0.5\textwidth"><pre><code class="spec">    loop (xs++[x]) (f ys)
+===   <comment>{- <code class="haskell">loop</code> 之規格 -}</comment>
+    f (xs ++ [x] ++ ys)
+===   <comment>{- <code class="haskell">(++)</code> 之結合律，<code class="haskell">loop</code> 之規格 -}</comment>
+    loop xs (f (x:ys))
+=== loop xs (x ⊕ f ys) 
+</code></pre></div></div><p>可知如下定義的 <code class="haskell">loop</code> 能滿足 ([RefUndefined])：</p><pre><code class="spec">loop []           z = z
+loop (xs ++ [x])  z = loop xs (x ⊕ z) 
+</code></pre><p>但從串列尾端取出元素較不方便。如果我們改用下式作為規格：</p><pre><code class="equation" id="eq:fold-loop-rev">|loop xs (f ys)| &|= f (reverse xs ++ ys) |</code>    (5.8 )
+</pre><p>可推導出</p><pre><code class="haskell"> loop []      z = z
+ loop (x:xs)  z = loop xs (x ⊕ z) 
+</code></pre><p>但此時要用 <code class="haskell">loop</code> 計算出 <code class="haskell">f xs</code>，得先將 <code class="haskell">xs</code> 反轉：<code class="haskell">f xs = loop (reverse xs) e</code>.&shy;這具體印證了我們的觀察：在串列上歸納定義出的函數，處理元素的順序和通常寫法的迴圈是相反的。</p><p>假設有 <code class="haskell">N</code> 個元素的串列 <code class="haskell">xs = [x0, x1 ... xN1]</code> 被<em>反過來</em>存放在陣列 <code class="haskell">X</code> 之中，&shy;意即 <code class="haskell">X 0 = xN1</code>, <code class="haskell">X 1 = xN2</code>, ... <code class="haskell">X (n-1) = x0</code>.&shy;前述的兩種 <code class="haskell">loop</code> 函數都可在不同的詮釋下理解為如下的指令式程式。</p><pre><code class="spec">i, z := 0, e;
+do i /= N -&gt;  z  := X i ⊕ z ;
+              i  := i + 1
+od ;
+return z 
+</code></pre><h3 class="subsection" id="sec:tail-recursion-more">5.6.4 更多尾遞迴範例</h3><p>我們多看些使用結合律推導出尾遞迴程式，並增進效率的例子。</p><p><b>快速乘冪</b> &emsp; 說到結合律的應用，似乎不得不提作為經典例子的乘冪。我們在第 <a href="Derivation.html#sec:exp-binary-roll">5.3.2 </a> 節中曾用二進位表示法導出一個用 $O(\log n)$ 個乘法計算 $b^n$ 的程式。&shy;此處我們使用結合律推導出尾遞迴的版本。&shy;回顧函數 <code class="haskell">exp</code> 在第 <a href="Induction.html#sec:induction-on-Nat">2.2 </a> 節中的定義，乘冪便是連續的乘法。&shy;我們定義以下的函數 <code class="haskell">expAcc</code>，把 <code class="haskell">exp b n</code> 乘上一個累積參數 <code class="haskell">x</code>，希望將一些中間結果搬移到 <code class="haskell">x</code> 中：</p><pre><code class="spec">expAcc :: Nat -&gt; Nat -&gt; Nat -&gt; Nat
+expAcc b n x = x * exp b n 
+</code></pre><p>如果 <code class="haskell">expAcc</code> 有快速的定義，我們可以令 <code class="haskell">exp b n = expAcc b n 1</code>.&shy;然後我們針對 <code class="haskell">n</code> 為零、<code class="haskell">n</code> 為非零的偶數，以及 <code class="haskell">n</code> 為奇數三種情況作分析。&shy;當 <code class="haskell">n := 0</code>, <code class="haskell">expAcc b 0 x = x</code>. 當 <code class="haskell">n</code> 為偶數時，可以被改寫成 <code class="haskell">2*n</code>.&shy;以下的推導中我們將 <code class="haskell">exp b n</code> 寫成 $b^n$, 並假設它已有乘冪該有的各種性質：</p><pre><code class="haskell">      expAcc b (2 * n) x
+ ===  x * exp b (2 * n)
+ ===   <comment>{- 因 <code class="haskell">exp b (m * n) = exp (exp b m) n</code> -}</comment>
+      x * exp (exp b 2) n
+ ===   <comment>{- <code class="haskell">expAcc</code> 之定義，<code class="haskell">exp b 2 = b * b</code> -}</comment>
+      expAcc (b * b) n x 
+</code></pre><p>當 <code class="haskell">n</code> 是奇數，我們將它改寫成 <code class="haskell">1+n</code>:</p><pre><code class="haskell">      expAcc b (1 + n) x
+ ===  x * exp b (1+n)
+ ===    <comment>{- $\Varid{exp}$ 之定義 -}</comment>
+      x * (b * exp b n)
+ ===    <comment>{- <code class="haskell">(*)</code> 之結合律 -}</comment>
+      (x * b) * exp b n
+ ===    <comment>{- <code class="haskell">expAcc</code> 之定義 -}</comment>
+      expAcc b n (x * b) 
+</code></pre><p>將語法改寫成 Haskell 能接受的形式（例如將 <code class="haskell">2 * n</code> 與 <code class="haskell">n</code> 改寫成 <code class="haskell">n</code> 與 <code class="haskell">n `div` 2</code>）之後，我們得到這樣的程式：</p><pre><code class="haskell">expAcc b 0 x  = x
+expAcc b n x  | even  n = expAcc (b * b) (n `div` 2) x
+              | odd   n = expAcc b (n-1) (x*b) 
+</code></pre><p>確實，這是一般在指令式語言中快速計算乘冪的方式。&shy;一個操作性的理解法是：<code class="haskell">expAcc b n x</code> 開始執行後，第一個參數中總是存放著 <code class="haskell">b</code> 的「<code class="haskell">2</code> 的某個次方」的乘冪（$b$, $b^2$, $b^4$...）。只在 <code class="haskell">n</code> 是奇數時，當時的 <code class="haskell">b</code> 才會被乘入累積參數 <code class="haskell">x</code> 之中。</p><div class="exlist"><div class="exercise exer" id="ex:expAcc-loop"><h5 class="exercise-title">練習 5.24 </h5><p>本節的 <code class="haskell">expAcc</code> 函數相當於怎樣的指令式語言迴圈？其迴圈恆式為何？</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-24" type="checkbox"/><label class="lbl-toggle" for="ans-5-24">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>假設我們要計算 <code class="haskell">exp B N</code>:</p><pre><code class="spec">b, n, x := B, N, 1;
+do n /= 0 -&gt;  if  even  n -&gt; b, n := b * b, n `div` 2
+              |   odd   n -&gt; n, x := n - 1, x * b
+              fi
+od;
+return x
+</code></pre><p>其迴圈恆式為 <code class="haskell">exp B N = x * exp b n</code>.</p></div></div></div><div class="exlist"><div class="exercise exer" id="ex:tail-recursion-length"><h5 class="exercise-title">練習 5.25 </h5><p>請推導出一個尾遞迴版本的 <code class="haskell">length</code> 函數。</p></div></div><div class="exlist"><div class="exercise exer" id="ex:tail-recursion-fact"><h5 class="exercise-title">練習 5.26 </h5><p>第 <a href="Induction.html#sec:inductive-proof-on-Nat">2.3 </a> 節中介紹了經典的階層函數：</p><pre><code class="spec">fact :: Nat -&gt; Nat
+fact Zero     = 1
+fact (Suc n)  = (Suc n) *: fact n 
+</code></pre><p>請推導出一個尾遞迴版本。&shy;您利用了關於 <code class="haskell">(*:)</code> 的什麼性質？&shy;最後的程式是否像是一個計算 <code class="haskell">n</code> 階層的指令式語言迴圈呢？</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-26" type="checkbox"/><label class="lbl-toggle" for="ans-5-26">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>我們預期將利用 <code class="haskell">(*:)</code> 的結合律。定義&shy;<code class="haskell">factAcc n y = y *: fact n</code>。&shy;顯然 <code class="haskell">factAcc Zero y = y</code>.&shy;至於 <code class="haskell">n := Suc n</code> 的狀況：</p><pre><code class="spec">     factAcc (Suc n) y
+===  y *: fact (Suc n)
+===  y *: ((Suc n) *: fact n)
+===    <comment>{- <code class="haskell">(*:)</code> 之結合律 -}</comment>
+     (y *: (Suc n)) *: fact n
+===  factAcc n (y *: (Suc n)) 
+</code></pre><p>因此我們有了下述定義。由於 <code class="haskell">fact n = factAcc n 1</code>.&shy;這相當於右邊的迴圈：</p><div class="multicols"><div class="mcol" width="0.5\textwidth"><pre><code class="spec">factAcc Zero     y = y
+factAcc (Suc n)  y =
+   factAcc n (y *: (Suc n)) 
+</code></pre></div><div class="mcol" width="0.5\textwidth"><pre><code class="spec">n, y := N, 0;
+do n /= 0 -&gt; n, y := n-1, y * n od;
+return y 
+</code></pre></div></div><p>在推導 <code class="haskell">factAcc</code> 的歸納定義時，我們不僅用到 <code class="haskell">(*:)</code> 的結合律，也用到了 <code class="haskell">y *: 1 = y</code>.</p></div></div></div><div class="exlist"><div class="exercise exer" id="ex:mulAcc-Ologm"><h5 class="exercise-title">練習 5.27 </h5><p>第 <a href="Induction.html#sec:induction-on-Nat">2.2 </a> 節中把乘法定義為連續的加法。&shy;確實，一些早期、簡單的微電腦中沒有專做乘法的電路，只能以加法實作乘法。&shy;但如果有乘以二、除以二、以及判斷一個數字是奇數或偶數的指令（都是簡單的位元運算），我們只需 $O(\log m)$ 個加法即可計算 <code class="haskell">m * n</code>. 定義：</p><pre><code class="spec">mulAcc m n k = k + m * n 
+</code></pre><p>請推導出一個只使用加減法、乘以二、除以二、奇偶判斷，並在 $O(\log m)$ 的時間內算出 <code class="haskell">mulAcc m n k</code> 的歸納定義。這個定義能被改寫成一個迴圈嗎？其恆式為何？</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-27" type="checkbox"/><label class="lbl-toggle" for="ans-5-27">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>針對 <code class="haskell">m</code> 做分析。基底情況中，<code class="haskell">mulAcc 0 n k = k + 0 * n = k</code>.&shy;當 <code class="haskell">m</code> 為非零的偶數，可被改寫為 <code class="haskell">2 * m</code> 並演算如下：</p><pre><code class="haskell">      mulAcc (2*m) n k
+ ===  k + (2*m) * n
+ ===   <comment>{- <code class="haskell">(*)</code> 之交換律與結合律 -}</comment>
+      k + m * (2 * n)
+ ===  mulAcc m (2*n) k 
+</code></pre><p>當 <code class="haskell">m</code> 為奇數，可被改寫為 <code class="haskell">1+m</code>, 並演算如下：</p><pre><code class="spec">      mulAcc (1+m) n k
+ ===  k + (1+m) * n
+ ===    <comment>{- <code class="haskell">(*)</code> 分配進入 <code class="haskell">(+)</code> -}</comment>
+      k + n + m * n
+ ===    <comment>{- <code class="haskell">(+)</code> 之結合律，<code class="haskell">mulAcc</code> 之定義 -}</comment>
+      mulAcc m n (k + n) 
+</code></pre><p>因此我們得到：</p><pre><code class="haskell">mulAcc 0 n k  = k
+mulAcc m n k  | even n  = mulAcc (m `div` 2) (2*n) k
+              | odd n   = mulAcc (m - 1) n (k + n) 
+</code></pre><p>如果改寫成計算 <code class="haskell">M * N</code> 的迴圈，其恆式為 <code class="haskell">M * N = k + m * n</code>.</p></div></div></div><div class="exlist"><div class="exercise exer" id="ex:dtoN"><h5 class="exercise-title">練習 5.28 </h5><p>下述函數 <code class="haskell">dtoN</code> 將一個以串列表達的十進位數字轉成自然數。&shy;例如 <code class="haskell">dtoN [4,1,6,0] = 4160</code>:</p><pre><code class="spec">dtoN :: List Nat -&gt; Nat
+dtoN []      = 0
+dtoN (d:ds)  = d * exp 10 (length ds) + dtoN ds 
+</code></pre><p>其中 <code class="haskell">length ds</code> 的反覆計算使得 <code class="haskell">dtoN</code> 成為一個需時 $O(n^2)$ 的演算法（<code class="haskell">n</code> 為輸入串列的長度）。</p><ol><li><p>使用組對的技巧，導出一個能在 $O(n)$ 時間內計算 <code class="haskell">dtoN</code> 以及一些其他輔助結果的函數。</p></li><li><p>使用累積參數，導出一個能在 $O(n)$ 時間內計算 <code class="haskell">dtoN</code> 的尾遞迴函數。<strong>提示</strong>：可試試看用這樣的定義 <code class="haskell">dtoNAcc ds n = ..n.. + dtoN ds</code>.</p></li></ol></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-28" type="checkbox"/><label class="lbl-toggle" for="ans-5-28">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>要使用組對避免重複計算，我們可以定義一個函數同時傳回 <code class="haskell">dtoN ds</code> 以及 <code class="haskell">10</code> 的 <code class="haskell">length ds</code> 次方。</p><pre><code class="spec">dtoNT :: List Nat -&gt; (Nat × Nat)
+dtoNT ds = (dtoN ds, exp 10 (length ds)) 
+</code></pre><p>我們可輕易導出：</p><pre><code class="haskell">dtoNT []      = (0,1)
+dtoNT (d:ds)  = (d * t + n, 10 * t) 
+  where (n,t) = dtoNT ds 
+</code></pre><p>若使用累積參數，可定義</p><pre><code class="spec">dtoNAcc ds n = n * exp 10 (length ds) + dtoN ds 
+</code></pre><p>若有歸納定義，我們可令 <code class="haskell">dtoN ds = dtoNAcc ds 0</code>.&shy;基底狀況為 <code class="haskell">dtoNAcc [] n = n</code>.&shy;至於 <code class="haskell">ds := d : ds</code> 的情況可演算如下：</p><pre><code class="haskell">      dtoNAcc (d : ds) n
+ ===  n * exp 10 (length (d:ds)) + dtoN (d:ds)
+ ===  n * exp 10 (length (d:ds)) + d * exp 10 (length ds) + dtoN ds
+ ===    <comment>{- <code class="haskell">length</code> 與乘冪之定義 -}</comment>
+      n * 10 * exp 10 (length ds) + d * exp 10 (length ds) + dtoN ds
+ ===    <comment>{- 算數運算 -}</comment>
+      (n * 10 + d) * exp 10 (length ds) + dtoN ds
+ ===    <comment>{- <code class="haskell">dtoNAcc</code> 之定義 -}</comment>
+      dtoNAcc ds (n * 10 + d) 
+</code></pre><p>可推導出：</p><pre><code class="haskell">dtoNAcc []      n = n
+dtoNAcc (d:ds)  n = dtoNAcc ds (n * 10 + d) 
+</code></pre></div></div></div><p><b>多個累積參數</b> &emsp;&shy;我們以一個稍微複雜的例子結束本節。給定以下函數：&shy;<input class="toggle" id="footnote-5-6-9" type="checkbox"/><label class="fnote-toggle" for="footnote-5-6-9">(註9) </label><span class="collapsible-footnote"><code class="haskell">masc</code> 為 ``mostly ascending'' 的縮寫。這個函數大致上遞增，但偶爾會掉下來一點點。</span></p><pre><code class="spec">masc :: Nat -&gt; Nat
+masc 0            = 1
+masc (2 * n)      = 2 * masc n
+masc (1 + 2 * n)  = n + masc n 
+</code></pre><p>我們想用累積參數的技巧，推導出一個以尾遞迴計算 <code class="haskell">masc n</code> 的演算法。&shy;最難的一步總是尋找一個合適的通用化。&shy;我們試著展開 <code class="haskell">masc</code>, 看看是否能找到什麼規律。&shy;以 <code class="haskell">masc 43</code> 為例：</p><pre><code class="spec">   masc 43
+=  21 + masc 21
+=  21 + 10 + masc 10
+=  31 + masc 10
+=  31 + 2 * masc 5
+=  31 + 2 * (2 + masc 2)
+=  35 + 2 * masc 2
+=  35 + 4 * masc 1
+=  35 + 4 * 1
+=  39 
+</code></pre><p>我們發現式子總能展開成為 <code class="haskell">a + b * masc n</code> 的形式。&shy;因此我們定義</p><pre><code class="spec">mascAcc :: Nat -&gt; Nat -&gt; Nat -&gt; Nat
+mascAcc n a b = a + b * masc n 
+</code></pre><p>但在開始推導 <code class="haskell">mascAcc</code> 前，我們得先確定 <code class="haskell">masc</code> 能由 <code class="haskell">mascAcc</code> 算得出來。&shy;幸好，我們可以讓 <code class="haskell">masc n = mascAcc n 0 1</code>.</p><p>現在我們試著尋找 <code class="haskell">mascAcc</code> 的尾遞迴定義。&shy;當 <code class="haskell">n := 0</code>, <code class="haskell">mascAcc 0 a b = a + b</code>.&shy;當 <code class="haskell">n</code> 為非零的偶數，可以將它代換為 <code class="haskell">2 * n</code>。我們推導：</p><pre><code class="haskell">      mascAcc (2*n) a b
+ ===  a + b * masc (2 * n)
+ ===   <comment>{- <code class="haskell">masc</code> 之定義 -}</comment>
+      a + b * 2 * masc n
+ ===  mascAcc n a (2 * b) 
+</code></pre><p>而當 <code class="haskell">n</code> 為奇數，可以寫成 <code class="haskell">1 + 2 * n</code> 的形式：</p><pre><code class="haskell">      mascAcc (1+2*n) a b
+ ===  a + b * masc (1 + 2 * n)
+ ===    <comment>{- <code class="haskell">masc</code> 之定義 -}</comment>
+      a + b * (n + masc n)
+ ===    <comment>{- <code class="haskell">(*)</code> 分配入 <code class="haskell">(+)</code>, <code class="haskell">(+)</code> 之結合律 -}</comment>
+      (a + b * n) + b * masc n
+ ===  mascAcc n (a + b * n) b 
+</code></pre><p>因此我們有了如下的尾遞迴定義：</p><pre><code class="haskell">mascAcc 0 a b  = a + b
+mascAcc n a b  | even  n = mascAcc (n `div` 2) a (2 * b)
+               | odd   n = mascAcc (n `div` 2) (a + b * (n `div` 2)) b 
+</code></pre><p>在推導 <code class="haskell">mascAcc</code> 的過程中使用了各種四則運算的性質，但總之目標是將式子整理回 <code class="haskell">a + b * masc n</code> 的形式，以便收回成為 <code class="haskell">mascAcc</code>。</p><div class="exlist"><div class="exercise exer" id="ex:tail-recursion-fusc"><h5 class="exercise-title">練習 5.29 </h5><p>本題來自<a href="Biblio.html#Kaldewaij:90:Programming">Kaldewaij [1990]</a>. 給定以下函數：</p><pre><code class="spec">fusc :: Nat -&gt; Nat
+fusc 0            = 0
+fusc 1            = 1
+fusc (2 * n)      = fusc n
+fusc (1 + 2 * n)  = fusc n + fusc (1 + n)
+</code></pre><p>請推導出一個計算 <code class="haskell">fusc</code> 的尾遞迴程式。&shy;<strong>提示</strong>: 以 <code class="haskell">fusc 78</code> 為例展開，看是否能找到什麼規律。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-29" type="checkbox"/><label class="lbl-toggle" for="ans-5-29">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>由於我們展開的式子都有 <code class="haskell">a * fusc n + b * fusc (1 + n)</code> 的形式，&shy;定義</p><pre><code class="spec"> fuscAcc n a b = a * fusc n + b * fusc (1 + n) 
+</code></pre><p>如果 <code class="haskell">fuscAcc</code> 有歸納定義，我們可令 <code class="haskell">fusc n = fuscAcc n 1 0</code>.</p><p>為推導 <code class="haskell">fuscAcc</code>, 針對 <code class="haskell">n</code> 做分析。&shy;當 <code class="haskell">n := 0</code>, <code class="haskell">fuscAcc 0 a b = b</code>.&shy;當 <code class="haskell">n</code> 為非零偶數，可被改寫為 <code class="haskell">2 * n</code>:</p><pre><code class="haskell">      fuscAcc (2 * n) a b
+ ===  a * fusc (2 * n) + b * fusc (1 + 2 * n)
+ ===    <comment>{- <code class="haskell">fusc</code> 之定義 -}</comment>
+      a * fusc n + b * (fusc n + fusc (1 + n))
+ ===    <comment>{- 四則運算 -}</comment>
+      (a + b) * fusc n + b * fusc (1 + n)
+ ===  fuscAcc n (a + b) b 
+</code></pre><p>當 <code class="haskell">n</code> 為奇數，也就是可改寫為 <code class="haskell">1 + 2 * n</code> 的形式時：</p><pre><code class="haskell">      fuscAcc (1 + 2 * n) a b
+ ===  a * fusc (1 + 2 * n) + b * fusc (2 + 2 * n)
+ ===  a * fusc (1 + 2 * n) + b * fusc (2 * (1 + n))
+ ===    <comment>{- <code class="haskell">fusc</code> 之定義 -}</comment>
+      a * (fusc n + fusc (1 + n)) + b * fusc (1 + n)
+ ===    <comment>{- 四則運算 -}</comment>
+      a * fusc n + (a + b) * fusc (1 + n)
+ ===  fuscAcc n a (a + b) 
+</code></pre><p>因此我們有了如下的程式：</p><pre><code class="haskell">fuscAcc 0 a b  = b
+fuscAcc n a b  | even  n = fuscAcc (n `div` 2) (a + b) b
+               | odd   n = fuscAcc (n `div` 2) a (a + b) 
+</code></pre></div></div></div><div class="exlist"><div class="exercise exer" id="ex:mapAcc"><h5 class="exercise-title">練習 5.30 </h5><p>我們能以尾遞迴的方式做 <code class="haskell">map f</code> 嗎？&shy;如果以 <code class="haskell">mapAcc f xs ys</code> <code class="haskell">= ys ++ map f xs</code> 為規格, 我們會導出如下的歸納定義：</p><pre><code class="spec">mapAcc f []      ys = ys
+mapAcc f (x:xs)  ys = mapAcc f xs (ys++[f x]) 
+</code></pre><p>但重複的 <code class="haskell">(++ [f x])</code> 需要 $O(n^2)$ 的時間。&shy;請問用什麼樣的規格才能導出下面的歸納定義呢？</p><pre><code class="spec">mapAcc f []      ys = reverse ys
+mapAcc f (x:xs)  ys = mapAcc f xs (f x : ys) 
+</code></pre></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-30" type="checkbox"/><label class="lbl-toggle" for="ans-5-30">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>使用如下的規格：</p><pre><code class="haskell">mapAcc :: (a -&gt; b) -&gt; List a -&gt; List b -&gt; List b
+mapAcc f xs ys = reverse ys ++ map f xs 
+</code></pre><p>因此 <code class="haskell">mapAcc f [] ys = reverse ys</code>. 而 <code class="haskell">xs := x : xs</code> 的情況推導如下：</p><pre><code class="haskell">      mapAcc f xs ys
+ ===  reverse ys ++ map f (x:xs)
+ ===  reverse ys ++ (f x : map f xs)
+ ===  (reverse ys ++ [f x]) ++ map f xs
+ ===  reverse (f x : ys) ++ map f xs
+ ===  mapAcc f xs (f x : ys) 
+</code></pre></div></div></div><h3 class="subsection" id="sec:tail-recursion-efficiency">5.6.5 尾遞迴的效率考量</h3><p>如前一節所述，歸納定義的 <code class="haskell">sum</code> 需用堆疊（或其他功能相當的機制）記下每個遞迴呼叫的結果該怎麼加工。&shy;這會佔用與輸入串列長度成正比的額外空間，相當不理想 --- 直覺上，「將一個串列加總」應該是只需定量的額外空間即可完成的計算。&shy;尾遞迴的 <code class="haskell">sumAcc</code> 則只需用一個變數存放目前為止的總和，當串列走訪到底，可直接將這個總和傳到最上層，似乎合理多了。&shy;因此，在以效率為考量的函數語言程式庫中，諸如加總、算最小值等等的函數幾乎都是以尾遞迴方式寫成的。&shy;大部分函數語言使用<em>及早求值</em> --- 在呼叫一個函數之前，總是把其參數先算成範式（見第<a href="Basics.html#sec:evaluation">1.1 </a>節，第頁）。&shy;對這些語言來說，在上述場合使用尾遞迴函數確實只使用了定額的額外空間，效果相當好。</p><p>但對使用惰性求值的 Haskell 來說，情況又更複雜一些 ---&shy;若以分析工具實測，我們會發現純以本章的方式寫出的 <code class="haskell">sumAcc</code> 仍用了和串列長度成正比的記憶體空間！&shy;這是怎麼回事呢？&shy;如前所述，<code class="haskell">sumAcc [1,2,3,4...] 0</code> 的值是 <code class="haskell">((((0 + 1) + 2) + 3) + 4) + ...</code>.&shy;串列越長，這個式子越長。&shy;根據惰性求值的原則，Haskell 不拖到被強迫求值的最後一刻是不會將算式歸約的。&shy;因此在走訪串列的過程中，<code class="haskell">0+1</code> 不會歸約成 <code class="haskell">1</code>, <code class="haskell">(0 + 1) + 2</code> 不會歸約成 <code class="haskell">3</code>...&shy;這個大算式就這麼存放在記憶體中。&shy;直到整個串列被走訪完，<code class="haskell">sumAcc</code> 的呼叫者要檢查其傳回值了（可能是要將它印出來，或著做樣式配對），這個大算式才又一步步被化簡成一個單一數值。</p><p>為改善這類情況下的效率，Haskell 提供了一些方法讓我們早點把一些數值強迫算成範式。&shy;例如在資料型別上標注某些欄位為「嚴格(strict)」的、使用內建函數 <code class="haskell">seq</code> 將數值歸約、或甚至使用更低階、屬於特定編譯器的「無盒型別(unboxed type)」等等。&shy;對實務導向的 Haskell 編程員來說這些都是實用的技巧，只是已超出本書的範疇。</p><p>如果函數傳回的不是數值，而是結構化的資料，而程式語言支援惰性求值，情形又有所不同。&shy;如習題 <a href="Derivation.html#ex:mapAcc">5.30 </a> 中所見，我們可用尾遞迴的方式做 <code class="haskell">map f</code>:</p><pre><code class="spec">mapAcc f []      ys = reverse ys
+mapAcc f (x:xs)  ys = mapAcc f xs (f x : ys) 
+</code></pre><p>乍看之下，這個程式的問題似乎是需要多做一次 <code class="haskell">reverse</code>。&shy;但這可能並不很嚴重：<code class="haskell">reverse</code> 也可用 <code class="haskell">revcat</code> 實作，在線性時間內完成。&shy;該定義和原歸納定義的 <code class="haskell">map f</code> 的最大差別是：<code class="haskell">mapAcc f</code> 需<em>等到輸入串列整個被走訪完畢後才會開始傳回第一個結果</em>。而回顧 <code class="haskell">map f</code> 的歸納定義：</p><pre><code class="spec">map f []      = []
+map f (x:xs)  = f x : map f xs 
+</code></pre><p>歸納狀況中，<code class="haskell">f x : ...</code> 可在走訪到 <code class="haskell">x</code> 時便先產生。考慮這樣的程式：&shy;<code class="haskell">length . filter p . map f</code>。根據惰性求值，<code class="haskell">f x : ...</code> 會立刻被 <code class="haskell">filter</code> 與 <code class="haskell">length</code> 接收，然後才開始計算 <code class="haskell">map f xs</code>. 因此 <code class="haskell">map f</code> 回傳的中間串列其實並不會被完整地產生。&shy;在大部分情況下，歸納定義的 <code class="haskell">map f</code> 是比尾遞迴的 <code class="haskell">mapAcc f</code> 更有效率的函數。&shy;在許多情形中，<em>早點產生部分的結果、早點讓它被使用掉</em>，會是在空間與時間上都更有效率的做法。</p><h3 class="subsection" id="sec:difference-list">5.6.6 函數作為串列</h3><p>既然說到串列反轉，本節延伸介紹一個相關且相當有用的技巧。&shy;回顧 <code class="haskell">revcat</code> 的尾遞迴定義，若將最後一個參數省去，其定義可改寫成：</p><pre><code class="spec">revcat :: List a -&gt; (List a -&gt; List a)
+revcat []      = id
+revcat (x:xs)  = revcat xs . (x:) 
+</code></pre><p><code class="haskell">revcat</code> 是一個傳回 <code class="haskell">List a -&gt; List a</code> 的函數。&shy;在基底狀況，<code class="haskell">revcat []</code> 傳回 <code class="haskell">id</code>.&shy;歸納狀況中，<code class="haskell">revcat xs</code> 傳回的函數和 <code class="haskell">(x:)</code> 組合在一起。&shy;這和 <code class="haskell">reverse</code> 其實很像：在基底狀況，<code class="haskell">reverse []</code> 傳回空串列 <code class="haskell">[]</code>,&shy;歸納狀況中，<code class="haskell">reverse (x:xs)</code> 傳回 <code class="haskell">reverse xs ++ (x:[])</code>。&shy;好像把空串列代換成 <code class="haskell">id</code>, 把 <code class="haskell">(++)</code> 變成 <code class="haskell">(.)</code>, 我們就得到 <code class="haskell">revcat</code> 了。</p><p>這令我們聯想：有沒有可能把 <code class="haskell">List a -&gt; List a</code> 視為串列的另一種表示法，&shy;其中 <code class="haskell">id</code> 就是空串列，而串列連接就是 <code class="haskell">(.)</code> 呢？&shy;定義：</p><pre><code class="haskell">type DList a = List a -&gt; List a 
+</code></pre><p>一個型別為 <code class="haskell">DList a</code> 的函數 <code class="haskell">f</code> 表示一個「尾段尚未確定」的串列 ---&shy;餵給它一個尾巴 <code class="haskell">ys</code>, <code class="haskell">f ys</code> 便會傳回一個真正的串列。&shy;若 <code class="haskell">xs</code> 是一個型別為 <code class="haskell">List a</code> 的串列， <code class="haskell">(xs ++)</code> 便是如此的一個 <code class="haskell">DList a</code>.&shy;要將一個 <code class="haskell">DList a</code> 轉成 <code class="haskell">List a</code>, 則只需將 <code class="haskell">[]</code> 傳進去即可。&shy;下列兩個函數幫我們在這兩種表示法之間作轉換：</p><div class="multicols"><div class="mcol" width="0.5\textwidth"><pre><code class="haskell">toDList :: List a -&gt; DList a
+toDList xs = (xs ++) 
+</code></pre></div><div class="mcol" width="0.5\textwidth"><pre><code class="haskell">toList :: DList a -&gt; List a
+toList xs = xs [] 
+</code></pre></div></div><p>空串列被轉換成 <code class="haskell">([]++)</code>, 化簡一下之後確實得到了 <code class="haskell">id</code>.&shy;「含一個單一元素 <code class="haskell">x</code>」的 <code class="haskell">DList</code> 可寫成 <code class="haskell">(x:)</code> ---&shy;給任何串列，<code class="haskell">(x:)</code> 把 <code class="haskell">x</code> 接到其最左邊。</p><p>兩個 <code class="haskell">DList a</code> 如何連接在一起呢？使用函數組合 <code class="haskell">(.)</code>。&shy;確實，<code class="haskell">(xs++) . (ys ++)</code> 是一個接收任一個尾段 <code class="haskell">ws</code>, 傳回 <code class="haskell">xs ++ (ys ++ ws)</code> 的函數。&shy;<code class="haskell">DList</code> 版本的 <code>cons'' 建構元則可定義成
+% 我們可定義 |DList| 版本的空串列與</code>cons'' 建構元如下：</p><div class="multicols"><div class="mcol" width="0.5\textwidth"><pre><code class="haskell">nil :: DList a
+nil = id 
+</code></pre></div><div class="mcol" width="0.5\textwidth"><pre><code class="haskell">cons :: a -&gt; DList a -&gt; DList a
+cons x xs = (x:) . xs 
+</code></pre></div></div><p><code class="haskell">List</code> 上的 <code class="haskell">(++)</code> 若往左結合，效率會較不好。&shy;例如 <code class="haskell">(xs ++ ys) ++ zs</code> 會需要把 <code class="haskell">xs</code> 走訪兩次。&shy;<code class="haskell">DList</code> 的情況呢？&shy;考慮 <code class="haskell">((xs ++) . (ys ++)) . (zs ++)</code>，其中左邊的兩個 <code class="haskell">DList</code> 被括在一起。&shy;我們演算看看給了一個尾端 <code class="haskell">ws</code> 後的情況：</p><pre><code class="spec">     ((xs ++) . (ys ++)) . (zs ++) $ ws
+===    <comment>{- <code class="haskell">(.)</code> 之定義 -}</comment>
+     (xs ++) . (ys ++) $ zs ++ ws
+===    <comment>{- <code class="haskell">(.)</code> 之定義 -}</comment>
+     (xs ++) $ ys ++ (zs ++ ws)
+===  xs ++ (ys ++ (zs ++ ws)) 
+</code></pre><p>由於 <code class="haskell">(.)</code> 的定義，即使 <code class="haskell">(xs ++) . (ys ++)</code> 先被組合在一起，我們仍得到括號往右括的 <code class="haskell">xs ++ (ys ++ (zs ++ ws))</code>！</p><p>我們多研究一個例子。&shy;在習題 <a href="Derivation.html#ex:ETree-tips">5.7 </a> 中，給定一個 <code class="haskell">ETree a</code>, 我們想傳回其所有的標記。&shy;如果寫成 <code class="haskell">tips (Bin t u) = tips t ++ tips u</code>，當樹往左邊傾斜時，程式會需要 $O(n^2)$ 的時間。&shy;但如果我們改用 <code class="haskell">DList</code>:</p><pre><code class="spec">tipsD :: ETree a -&gt; DList a
+tipsD (Tip x)    = (x:)
+tipsD (Bin t u)  = tipsD t . tipsD u 
+</code></pre><p>上述函數會邊走訪輸入的樹，邊產生一個結構與輸入樹相同的 <code class="haskell">DList</code>。&shy;例如，考慮如下的樹：</p><pre><code class="spec">t = Bin  (Bin  (Bin (Tip 5) (Tip 4))
+               (Bin (Tip 3) (Tip 2)))
+         (Tip 1)
+</code></pre><p><code class="haskell">tipsD t</code> 將會是 <code class="haskell">(((5:). (4:)) . ((3:) . (2:))) . (1:)</code> -- 結構和 <code class="haskell">t</code> 相同，只是將 <code class="haskell">t</code> 的每個 <code class="haskell">Tip x</code> 代換成 <code class="haskell">(x:)</code>, 每個 <code class="haskell">Bin</code> 代換成 <code class="haskell">(.)</code>.&shy;但當我們傳一個空串列進去，這個由 <code class="haskell">(x:)</code> 和 <code class="haskell">(.)</code> 形成的「樹」將被走訪一遍，並在線性時間內得到 <code class="haskell">5:4:3:2:1:[]</code>。&shy;事實上，如果我們為 <code class="haskell">tipsD</code> 補一個參數並展開，我們將得到和習題 <a href="Derivation.html#ex:ETree-tipsAcc">5.21 </a> 中一樣的結果。&shy;有了 <code class="haskell">tipsD</code>, 我們可將原有的 <code class="haskell">tips</code> 改定義為 <code class="haskell">tips = toList . tipsD</code>, 或著 <code class="haskell">tips t = tipsD t []</code>.</p><p><a href="Biblio.html#Hughes:86:Novel">Hughes [1986]</a></p><div class="exlist"><div class="exercise exer" id="ex:deepestAux"><h5 class="exercise-title">練習 5.31 </h5><p>在習題 <a href="Derivation.html#ex:deepest">5.16 </a> 中，我們使用組對可能得到一個型別為 <code class="haskell">ETree a -&gt; (List a, Nat)</code> 的函數。該函數仍需要 $O(n^2)$ 的時間連接串列（其中 $n$ 為輸入樹的大小）。&shy;請設計一個 $O(n)$ 的演算法。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-31" type="checkbox"/><label class="lbl-toggle" for="ans-5-31">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>假設習題 <a href="Derivation.html#ex:deepest">5.16 </a> 中推導出的函數為&shy;<code class="haskell">dd :: ETree a -&gt; (List a, Nat)</code>. 我們定義：</p><pre><code class="spec">ddD :: ETree a -&gt; (DList a, Nat)
+ddD t = let (xs, n) = dd t in ((\zs -&gt; xs++zs), n) 
+</code></pre><p>有了 <code class="haskell">ddD</code> 後，我們可改定義 <code class="haskell">dd t = let (f, n) = ddD t in (f [], n)</code>.</p><p>試著推導 <code class="haskell">ddD</code> 的歸納定義，不難得到 <code class="haskell">ddD (Tip x) = ((x:), 0)</code>.&shy;考慮 <code class="haskell">ddD (Bin t u)</code>, 為計算方便將 <code class="haskell">dd</code> 改寫為 <code class="haskell">if</code>-<code class="haskell">then</code>-<code class="haskell">else</code> 之形式：</p><pre><code class="haskell">      ddD (Bin t u)
+ ===    <comment>{- <code class="haskell">ddD</code> 之定義 -}</comment>
+      let (xs, n) = dd (Bin t u) in ((xs++), n)
+ ===    <comment>{- <code class="haskell">dd</code> 之定義 -}</comment>
+      let  (xs, m) = dd t
+           (ys, n) = dd u
+      in (  ((if m &lt; n then xs else if m == n then xs ++ ys else ys)++),
+            1 + (m ↑ n))
+ ===    <comment>{- 函數應用分配入 <code class="haskell">if</code> -}</comment>
+      let  (xs, m) = dd t
+           (ys, n) = dd u
+      in (  if m &lt; n then (xs++) else if m == n then (xs ++ ys ++) else (ys++),
+            1 + (m ↑ n))
+ ===    <comment>{- 抽出 <code class="haskell">(xs++)</code> 與 <code class="haskell">(ys++)</code> -}</comment>
+      let  (f, m) = (let (xs, m) = dd t in ((xs++), m))
+           (g, n) = (let (ys, n) = dd u in ((ys++), n))
+      in (  if m &lt; n then f else if m == n then f . g else g,
+            1 + (m ↑ n))
+ ===    <comment>{- <code class="haskell">ddD</code> 之定義 -}</comment>
+      let  (f, m) = ddD t
+           (g, n) = ddD u
+      in (  if m &lt; n then f else if m == n then f . g else g,
+            1 + (m ↑ n)) 
+</code></pre><p>因此我們得到：</p><pre><code class="haskell">ddD (Tip x)    = ((x:), 0)
+ddD (Bin t u)  | m &lt;  n  = (f, 1 + n)
+               | m == n  = (f . g, 1 + n)
+               | m &gt;  n  = (g, 1 + m) 
+  where ((f,m),(g,n)) = (ddD t, ddD u) 
+</code></pre></div></div></div></div></div></div>
+
+<script src="../js/ui.js"></script>
+
+</body>
+</html>
