@@ -99,7 +99,7 @@ Main> double (9 * 3)
 {.nobreak}上述演算的第一步將 |9*3| 歸約成 |27| --- 我們尚未定義 |(*)| 與 |(+)|, 但目前只需知道它們與大家所熟悉的整數乘法、加法相同。
 第二步將 |double 27| 變成 |27 + 27|, 根據的是 |double| 的定義：|double x = x + x|.
 最後，|27 + 27| 理所當然地歸約成 |54|.
-「歸約」\index{reduction 歸約}一詞由 $\beta$-reduction 而來，在此處指將函數本體中的形式參數代換為實際參數。%
+「歸約」\index{reduction 歸約}一詞由 $\beta$-reduction 而來，在此處指將函數本體中的形式參數代換為實際參數。
 ^[Reduction 的另一個常見譯名是「化簡」，然而，許多情況下，一個式子被 reduce 後變得更長而不「簡」，因此本書譯為「歸約」。]
 在上述例子中，我們遇到如 |double (9*3)| 的函數呼叫，先將參數 (|9*3|)化簡，再展開函數定義，可說是*由內到外*的歸約方式。
 大部分程式語言都依這樣的順序求值，讀者可能也對這種順序較熟悉。
@@ -169,7 +169,7 @@ inf = 1 + inf {-"~~."-}
 這相當於計算理論中常說到的*停機問題(halting problem)* --- 沒有一個演算法能準確判斷任意一個演算法（對某個輸入）是否能正常終止。
 
 但對於另兩個問題，計算科學中有個重要的*Church-Rosser 定理*\index{Church-Rosser Theorem}。
-非常粗略地說，該定理告訴我們：在我們目前討論的這類語言中%
+非常粗略地說，該定理告訴我們：在我們目前討論的這類語言中
 ^[此處討論的可粗略說是以 $\lambda$-calculus 為基礎的函數語言。基於其他概念設計的程式語言當然可能不遵守 Church-Rosser 定理。]
 
   * 一個式子*最多只有一個*範式。
@@ -549,7 +549,7 @@ Haskell 也配套設計了種種關於二元運算子的特殊語法，希望讓
 {#par:binary-operator-sectioning}
 假設某二元運算子 |oplus| 的型別是 |a -> b -> c|,
 |(x `oplus`)| 是給定了 |oplus| 的第一個參數後得到的函數；
-|(`oplus` y)| 則是給定了 |oplus| 的第二個參數後得到的函數：%
+|(`oplus` y)| 則是給定了 |oplus| 的第二個參數後得到的函數：
 ^[根據@Hudak:07:Being，此種「*切片*」(*sectioning*)語法最早見於 David Wile 的博士論文。
 後來被包括 Richard Bird 在內的 IFIP WG 2.1 成員使用，並由 David A. Turner 實作在他的語言 Miranda 中。]
 ```spec
@@ -1028,7 +1028,7 @@ not True   = False {-"~~."-}
 ```
 這和我們的的直覺理解一致：|not False| 是 |True|, |not True| 是
 |False|. 我們看到這個定義寫成兩行（正式說來是兩個「子句」），\emph{每一個子句分別對應到 |Bool| 的一個可能的值}。
-以下則是邏輯上的「且」和「或」（分別寫作|(&&)|與|(||||)|）的定義：%
+以下則是邏輯上的「且」和「或」（分別寫作|(&&)|與|(||||)|）的定義：
 ^[邏輯「且」又稱作合取(conjunction)\index{conjunction 合取、且}；邏輯「或」又稱作析取(disjunction).\index{disjunction 析取、或}
 在 Haskell 中，「且」與「或」需分別寫成 $(\mathtt{\&\&})$ 和 $(\mathtt{||||})$。本書中採用數學與邏輯領域較常使用的 |(&&)|與|(||||)|.]
 ```spec
@@ -1944,7 +1944,7 @@ pos z xs = case positions z xs of
 \index{merge sort 合併排序!bottom-up 由下至上}
 
 {title="合併排序"} 假設我們已有一個函數 |merge' :: (List Int :* List Int) -> List Int|,
-如果 |xs| 與 |ys| 已經排序好，|merge' (xs,ys)| 將它們合併為一個排序好的串列。%
+如果 |xs| 與 |ys| 已經排序好，|merge' (xs,ys)| 將它們合併為一個排序好的串列。
 ^[之所以取名為 |merge'|，因為在第\@ref{sec:well-founded-induction}節中我們將使用一個類似且相關的函數 |merge :: List Int -> List Int -> List Int|.]
 函數 |merge'| 可用第\@ref{sec:lexicographic-induction}節的方式歸納寫成，
 也可使用將在第\todo{where}章提及的組件 |unfoldr| 做出。

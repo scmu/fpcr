@@ -791,6 +791,6 @@ hanoi (Suc n)  = hanoi n >> inc >> hanoi n {-"~~."-}
 
 |hanoi n = put (2^n -1)|.
 
-## 參考資料
+## 參考資料 {#sec:monads-ref}
 
 @Wadler:92:Monads

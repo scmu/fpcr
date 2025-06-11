@@ -1191,7 +1191,7 @@ ascMin (x:xs)  =  let (b, y) = ascMin xs
 ```spec
 data ITree a = Null | Node a (ITree a) (ITree a) {-"~~."-}
 ```
-{.nobreak}*猴麵包樹(baobab)*，又稱猢猻木，是一種樹幹相當粗的樹。%
+{.nobreak}*猴麵包樹(baobab)*，又稱猢猻木，是一種樹幹相當粗的樹。
 ^[猴麵包樹原產於馬達加斯加、非洲等地，也被寫進了《小王子》之中。]
 如果一個 |ITree Int| 的*每個*標籤都大於其兩個子樹的標籤總和，我們便說它是一棵猴麵包樹。
 以下的函數判定一棵樹是否為猴麵包樹（其中 |sumT :: ITree Int -> Int| 計算一個樹中所有標籤的總和）：
@@ -1548,7 +1548,7 @@ mdm (x:xs)  =  let (y, z) = mdm xs
 
 ### 串列反轉與連接 {#sec:reversal-append}
 
-下列函數 |revcat| 似乎比 |reverse| 更通用一些：它拿兩個參數 |xs| 與 |ys|, 不僅將 |xs| 反轉，還把 |ys| 接到反轉後結果的右邊：%
+下列函數 |revcat| 似乎比 |reverse| 更通用一些：它拿兩個參數 |xs| 與 |ys|, 不僅將 |xs| 反轉，還把 |ys| 接到反轉後結果的右邊：
 ^[|revcat| 為 ``reverse'' 與 ``concat'' 的簡寫。]
 ```haskell
 revcat :: List a -> List a -> List a
