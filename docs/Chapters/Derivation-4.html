@@ -90,13 +90,13 @@
 <li class="pure-menu-item"><a href="Semantics.html#ch:semantics">4 關於語意的基本概念</a><input class="toggle" id="menu-li-4" type="checkbox"/><label class="menu-toggle" for="menu-li-4"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Semantics-1.html#sec:denotational-semantics">4.1 指稱語意</a></li>
 <li class="pure-menu-item"><a href="Semantics-2.html#sec:operational-semantics">4.2 操作語意</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Derivation.html#ch:derivation">5 一般程式推導</a><input class="toggle" id="menu-li-5" type="checkbox"/><label class="menu-toggle" for="menu-li-5"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-1.html#sec:fold-unfold-transform">5.1 展開-收回轉換</a></li>
+<li class="pure-menu-item"><a href="Derivation.html#ch:derivation">5 一般程式推導</a><input class="toggle" id="menu-li-5" checked type="checkbox"/><label class="menu-toggle" for="menu-li-5"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-1.html#sec:fold-unfold-transform">5.1 展開-收回轉換</a></li>
 <li class="pure-menu-item"><a href="Derivation-2.html#sec:efficiency-basics">5.2 關於執行效率</a></li>
 <li class="pure-menu-item"><a href="Derivation-3.html#sec:fold-unfold-transform-efficiency">5.3 用展開-收回轉換增進效率</a><input class="toggle" id="menu-li-5-3" type="checkbox"/><label class="menu-toggle" for="menu-li-5-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-3.html#sec:poly-horner">5.3.1 計算多項式 -- Horner 法則</a></li>
 <li class="pure-menu-item"><a href="Derivation-3.html#sec:exp-binary-roll">5.3.2 二進位表示法</a></li>
 <li class="pure-menu-item"><a href="Derivation-3.html#sec:wrap-reminder">5.3.3 小結與提醒</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Derivation-4.html#sec:var-cons">5.4 變數換常數</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:var-cons">5.4 變數換常數</a></li>
 <li class="pure-menu-item"><a href="Derivation-5.html#sec:tupling">5.5 組對</a><input class="toggle" id="menu-li-5-5" type="checkbox"/><label class="menu-toggle" for="menu-li-5-5"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-5.html#sec:steep">5.5.1 陡串列</a></li>
 <li class="pure-menu-item"><a href="Derivation-5.html#sec:repl-tree">5.5.2 以串列標記樹狀結構</a></li>
 <li class="pure-menu-item"><a href="Derivation-5.html#sec:rep-minE">5.5.3 代換為最小標籤 --- 循環程式</a></li>
@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -143,28 +143,56 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:derivation">5 一般程式推導</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-3.html#sec:fold-unfold-transform-efficiency">5.3 用展開-收回轉換增進效率</a></div><div class="next"><a href="Derivation-5.html#sec:tupling">5.5 組對</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:var-cons">5.4 變數換常數</h2><p>接下來的幾節中，我們將介紹幾種常見的程式推導技巧。
+\todo{generalize}</p><p>本節先以一個簡單但時常用上的技巧作為開頭。
+回顧在例 [RefUndefined] 中提及的函數 <code class="haskell">positions</code>:</p><pre><code class="spec">positions z = map fst . filter ((==z) . snd) . zip [Zero..] 
+</code></pre><p><code class="haskell">positions z xs</code> 傳回 <code class="haskell">z</code> 在 <code class="haskell">xs</code> 中出現的所有位置。
+上述的定義方式會產生許多中間串列。
+我們能用第 <a href="Derivation-1.html#sec:fold-unfold-transform">5.1 </a> 節中的方式，利用展開-收回轉換為 <code class="haskell">positions</code> 推導出一個歸納定義，並藉此將中間串列消除嗎？</p><p>我們針對 <code class="haskell">positions z</code> 的輸入做分析，
+在歸納狀況中，先將 <code class="haskell">positions z (x:xs)</code> 展開，希望最後能收回 <code class="haskell">positions z xs</code>.
+由於讀者對相關計算應已熟悉，以下的演算以較快的步調進行：</p><pre><code class="haskell">      positions z (x:xs)
+ ===  map fst . filter ((==z) . snd) . zip [Zero .. ] $ (x:xs)
+ ===    <comment>{- <code class="haskell">zip</code> 之定義， <code class="haskell">[0..] = 0 : [1..]</code> -}</comment>
+      map fst . filter ((==z) . snd) $ (Zero,x) : zip [1..] (x:xs)
+ ===    <comment>{- <code class="haskell">map</code> 與 <code class="haskell">filter</code> 之定義 -}</comment>
+      if x==z then Zero : map fst (filter ((==z) . snd) (zip [1..] (x:xs)))
+         else map fst (filter ((==z) . snd) (zip [1..] (x:xs))) 
+</code></pre><p>結果我們卡在這兒了：最後的式子中，<code class="haskell">zip</code> 的參數是 <code class="haskell">[1..]</code>, 但 <code class="haskell">positions</code> 的定義要求這個參數得是 <code class="haskell">[Zero ..]</code>. 我們無法將式子收回得到 <code class="haskell">positions z xs</code>.</p><p>看來，問題是 <code class="haskell">positions</code> 的定義把 <code class="haskell">Zero</code> 給寫死了。如果我們索性把該位置變成一個變數呢？
+我們定義：</p><pre><code class="haskell">posFrom z i = map fst . filter ((z==) . snd) . zip [i..]
+</code></pre><p>函數 <code class="haskell">positions</code> 是 <code class="haskell">posFrom</code> 的特例：<code class="haskell">positions z = posFrom z 0</code>.
+而 <code class="haskell">posFrom</code> 的歸納定義可用展開-收回轉換找出：</p><pre><code class="haskell">      posFrom z i (x:xs)
+ ===  map fst . filter ((==z) . snd) . zip [i..] $ (x:xs)
+ ===    <comment>{- <code class="haskell">zip</code> 之定義， <code class="haskell">[i..] = i : [Suc i..]</code> -}</comment>
+      map fst . filter ((==z) . snd) $ (i,x) : zip [Suc i..] (x:xs)
+ ===    <comment>{- <code class="haskell">map</code> 與 <code class="haskell">filter</code> 之定義 -}</comment>
+      if x==z then i : map fst (filter ((==z) . snd) (zip [Suc i..] (x:xs)))
+         else map fst (filter ((==z) . snd) (zip [Suc i..] (x:xs)))
+ ===    <comment>{- <code class="haskell">posFrom</code> 之定義 -}</comment>
+      if x==z then i : posFrom z (Suc i) xs
+         else posFrom z (Suc i) xs 
+</code></pre><p>由此我們可得：</p><pre><code class="spec">posFrom z i []      =  []
+posFrom z i (x:xs)  =  if x==z then i : posFrom z (1+i) xs
+                         else posFrom z (1+i) xs 
+</code></pre><p>由於將一個常數換成變數，<code class="haskell">posFrom</code> 比 <code class="haskell">positions</code> 多了些彈性，因此較容易收回。
+這個技巧在許多場合用得上，往往是許多程式推導的第一步。
+但我並不建議大家看到任一個定義，便一股腦地把所有常數都換成變數。
+如同第<a href="Induction-7.html#sec:using-hints-from-symbols">2.7 </a>節中提及的原則，該把哪些常數換掉仍應由計算中發現，只用在必要之處。</p><div class="exlist"><div class="exercise exer" id="ex:index-positioning"><h5 class="exercise-title">練習 5.13 </h5><p>函數 <code class="haskell">index</code> 為串列中的每個元素標上位置。</p><pre><code class="haskell">index :: List a -&gt; List (Nat × a)
+index = zip [Zero .. ] 
+</code></pre><p>請試著為 <code class="haskell">index</code> 導出一個歸納定義。如果不成功，找出一個更通用的輔助函數，並導出其歸納定義。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-13" type="checkbox"/><label class="lbl-toggle" for="ans-5-13">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>試著展開-收回 <code class="haskell">index (x:xs)</code>：</p><pre><code class="spec">     index (x:xs)
+ === zip [Zero .. ] (x:xs)
+ ===  <comment>{- <code class="haskell">[Zero ..] = Zero: [1 ..]</code>, <code class="haskell">zip</code> 之定義 -}</comment>
+     (Zero,x) : zip [1..] xs 
+</code></pre><p>我們又發現 zip [1..] 無法收回成 index xs.
+因此，我們定義：</p><pre><code class="haskell">indexFrom :: Nat -&gt; List a -&gt; List (Nat × a)
+indexFrom i = zip [i..] 
+</code></pre><p>試著推導 <code class="haskell">indexFrom</code> 的歸納定義如下：</p><pre><code class="spec">     indexFrom i (x:xs)
+ === zip [i .. ] (x:xs)
+ ===  <comment>{- <code class="haskell">[i ..] = i: [Suc i ..]</code>, <code class="haskell">zip</code> 之定義 -}</comment>
+     (i,x) : zip [Suc i..] xs
+ === (i,x) : indexFrom (Suc i) xs 
+</code></pre><p>因此我們已得到：</p><pre><code class="spec">indexFrom i []      = []
+indexFrom i (x:xs)  = i,x) : indexFrom (Suc i) xs 
+</code></pre></div></div></div></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-3.html#sec:fold-unfold-transform-efficiency">5.3 用展開-收回轉換增進效率</a></div><div class="next"><a href="Derivation-5.html#sec:tupling">5.5 組對</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

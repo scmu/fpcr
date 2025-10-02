@@ -58,7 +58,7 @@
 <li class="pure-menu-item"><a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a></li>
 <li class="pure-menu-item"><a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
+<li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" checked type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
 <li class="pure-menu-item"><a href="Induction-2.html#sec:induction-on-Nat">2.2 自然數上之歸納定義</a></li>
 <li class="pure-menu-item"><a href="Induction-3.html#sec:inductive-proof-on-Nat">2.3 自然數上之歸納證明</a></li>
 <li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists">2.4 串列與其歸納定義</a><input class="toggle" id="menu-li-2-4" type="checkbox"/><label class="menu-toggle" for="menu-li-2-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists-defn">2.4.1 串列上之歸納定義</a></li>
@@ -73,7 +73,7 @@
 <li class="pure-menu-item"><a href="Induction-7.html#sec:using-hints-from-symbols">2.7 再談「讓符號為你工作」</a></li>
 <li class="pure-menu-item"><a href="Induction-8.html#sec:other-inductive-datatypes">2.8 其他歸納資料結構</a></li>
 <li class="pure-menu-item"><a href="Induction-9.html#sec:induction-set-theory">2.9 由集合論看歸納法</a></li>
-<li class="pure-menu-item"><a href="Induction-10.html#sec:induction-variations">2.10 歸納定義的簡單變化</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:induction-variations">2.10 歸納定義的簡單變化</a></li>
 <li class="pure-menu-item"><a href="Induction-11.html#sec:complete-induction">2.11 完全歸納</a></li>
 <li class="pure-menu-item"><a href="Induction-12.html#sec:well-founded-induction">2.12 良基歸納</a></li>
 <li class="pure-menu-item"><a href="Induction-13.html#sec:lexicographic-induction">2.13 詞典序歸納</a></li>
@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -143,28 +143,97 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
+<div id="main"><div class="header"><h1 class="chapter" id="ch:induction">2 歸納定義與證明</h1></div><div class="navi"><div class="previous">&laquo;<a href="Induction-9.html#sec:induction-set-theory">2.9 由集合論看歸納法</a></div><div class="next"><a href="Induction-11.html#sec:complete-induction">2.11 完全歸納</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:induction-variations">2.10 歸納定義的簡單變化</h2><p>目前為止，我們所認定「良好」的函數定義是這種形式：</p><pre><code class="spec">f Zero     = ...
+f (Suc n)  = ... f n ...
+</code></pre><p>我們知道這樣定義出的函數是個全函數、對所有輸入都會終止、和歸納法有密切關係...。
+以後的幾個章節中，我們將逐步放鬆限制，允許更有彈性的函數定義模式。
+我們先從歸納法的一些較簡單的變化開始。</p><p><b>基底狀況的變化</b> &emsp;
+有些函數的值域是「正整數」或「大於 b 的整數」。
+定義這些函數時我們可用這樣的模式：</p><pre><code class="spec">f1 One      = e                                   fb b        = e
+f1 (Suc n)  = ... f1 n ... <comment>{-"~~,\qquad\qquad"-}</comment>  fb (Suc n)  = ... fb n ... 
+</code></pre><p>我們可把 <code class="haskell">f1</code> 理解為：另外訂了一個資料型別 <code class="haskell">data NatP = One | Suc NatP</code>,
+以 <code class="haskell">One</code> 為基底狀況，而 <code class="haskell">f1</code> 是 <code class="haskell">NatP</code> 之上的全函數。<code class="haskell">fb</code> 的情況也類似。
+與使用 <code class="haskell">Nat</code> 的函數混用時，我們就得在這兩個型別之間作轉換。這相當於檢查給 <code class="haskell">f1</code> 的輸入都是大於 <code class="haskell">1</code> 的整數。實務上為了方便，我們仍用同一個型別實作 <code class="haskell">Nat</code> 與 <code class="haskell">NatP</code>, 就如同實務上用 <code class="haskell">Int</code> 實作 <code class="haskell">Nat</code> 一樣。</p><p>串列的情形也類似。有些函數若能只定義在「不是空的串列」上，其定義會比較合理。
+對於這些函數，我們可想像有這麼一個「非空串列」資料型別
+<code class="haskell">data ListP a = [a] | a : ListP a</code>，
+只是為了方便，我們用普通串列實作它。
+<input class="toggle" id="footnote-2-10-13" type="checkbox"/><label class="fnote-toggle" for="footnote-2-10-13">(註13) </label><span class="collapsible-footnote">在一些型別系統更強大的語言中、進行更注重證明的應用時，我確實有將 <code class="haskell">NatP</code> 與 <code class="haskell">ListP</code> 做成與 <code class="haskell">Nat</code> 和 <code class="haskell">List</code> 不同的型別的經驗與需求。</span></p><div class="theorem" id="ex:maximumP"><h5 class="theorem-title">例 2.12  </h5><p>假設 <code class="haskell">x ↑ y</code> 傳回 <code class="haskell">x</code> 與 <code class="haskell">y</code> 中較大的值。
+函數 <code class="haskell">maximumP</code> 傳回一個非空串列中的最大元素：</p><pre><code class="haskell">maximumP :: ListP Int -&gt; Int
+maximumP [x]     = x
+maximumP (x:xs)  = x ↑ maximumP xs 
+</code></pre><p>Haskell 標準函式庫中另有一個函數 <code class="haskell">maximum :: List Int -&gt; Int</code>, 但該函數需假設 <code class="haskell">Int</code> 中有一個相當於 $-\infty$ 的值存在，以便當作 <code class="haskell">maximum []</code> 的結果：</p><pre><code class="spec">maximum []      = -infty
+maximum (x:xs)  = x ↑ maximum xs 
+</code></pre></div><div class="theorem" id="ex:partsP"><h5 class="theorem-title">例 2.13  </h5><p>回顧第<a href="Induction-6.html#sec:fan-perm">2.6.4 </a>節提及的「劃分(partition)」：如果 <code class="haskell">concat yss = xs</code>, 且<code class="haskell">yss</code> 中的每個串列都不是空的，則 <code class="haskell">yss</code> 是 <code class="haskell">xs</code> 的一個劃分。
+<span id="ix-2-32"></span>
+如果我們限定 <code class="haskell">xss</code> 為非空串列，計算所有劃分的函數
+<code class="haskell">partsP :: ListP a -&gt; List (ListP (ListP a))</code> 可以寫得更簡潔：</p><pre><code class="haskell">partsP [x]     = [[[x]]]
+partsP (x:xs)  = concat (map (extend x) (partsP xs)) 
+  where extend x (ys:yss) = [[x]:ys:yss, (x:ys):yss] 
+</code></pre><p>由於每個劃分一定是非空串列，<code class="haskell">extend</code> 不需考慮輸入為 <code class="haskell">[]</code> 的情況。</p></div><p><b>多個參數的歸納定義</b> &emsp;
+函數 <code class="haskell">take</code>/<code class="haskell">drop</code> 的功能與 <code class="haskell">takeWhile</code>/<code class="haskell">dropWhile</code> 很類似，
+但其定義方式卻有些不同：</p><pre><code class="haskell">take :: Nat -&gt; List a -&gt; List a
+take Zero     xs      = []
+take (Suc n)  []      = []
+take (Suc n)  (x:xs)  = x : take n xs 
 
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+drop :: Nat -&gt; List a -&gt; List a
+drop Zero     xs      = xs
+drop (Suc n)  []      = []
+drop (Suc n)  (x:xs)  = drop n xs 
+</code></pre><p>我們可把 <code class="haskell">take</code>/<code class="haskell">drop</code> 想成在自然數上歸納定義成的高階函數：
+<code class="haskell">take (Suc n)</code> 的值是一個 <code class="haskell">List a -&gt; List a</code> 的函數。
+定義 <code class="haskell">take (Suc n)</code> 時，我們假設 <code class="haskell">take n</code> 已有定義。
+唯一的特殊處是我們另分出兩個子情況：串列為 <code class="haskell">[]</code>, 或串列為 <code class="haskell">x:xs</code>.</p><p>根據「使證明的結構符合程式的結構」的原則，如果要做關於
+<code class="haskell">take</code>/<code class="haskell">drop</code> 的證明，一種可能做法是也依循著它們的結構：
+先拆解自然數，在 <code class="haskell">n := Suc n</code> 的情況中再分析串列的值。
+作為例子，我們來驗證第頁提到的這個性質：</p><div class="theorem" id="thm:take-drop-id"><h5 class="theorem-title">定理 2.14  </h5><p>對所有 <code class="haskell">n</code> 與 <code class="haskell">xs</code>, <code class="haskell">take n xs ++ drop n xs = xs</code>.</p></div><div class="proof"><b>證明 </b><p>在 <code class="haskell">n</code> 上做歸納。在 <code class="haskell">n := []</code> 的情況下，等號兩邊都化簡為 <code class="haskell">[]</code>.
+在 <code class="haskell">n:=Suc n</code> 的情況中，我們再細分出兩種情形：</p><p><strong>狀況</strong> <code class="haskell">n := Suc n</code>, <code class="haskell">xs := []</code>. 顯然等號兩邊都化簡為 <code class="haskell">[]</code>.</p><p><strong>狀況</strong> <code class="haskell">n := Suc n</code>, <code class="haskell">xs := x:xs</code>:</p><pre><code class="spec">   take (Suc n) (x:xs) ++ drop (Suc n) (x:xs)
+=    <comment>{- <code class="haskell">take</code> 與 <code class="haskell">drop</code> 之定義 -}</comment>
+   x : take n xs ++ drop n xs
+=    <comment>{- 歸納假設 -}</comment>
+   x : xs 
+</code></pre></div><p>然而，本章討論的是所有資料結構都是歸納定義、所有函數也都是全函數的世界。
+如果我們的世界中有不終止程式存在，上式便不見得成立了。</p><div class="exlist"><div class="exercise exer" id="ex:take-drop-non-termination"><h5 class="exercise-title">練習 2.37 </h5><p>請舉一個在允許不終止程式的 Haskell 中，
+<code class="haskell">take n xs ++ drop n xs = xs</code> 不成立的例子。</p></div><div class="exercise exer" id="ex:head-tail-id-neg"><h5 class="exercise-title">練習 2.38 </h5><p>對任何串列 <code class="haskell">xs</code>，<code class="haskell">head xs : tail xs = xs</code> 都成立嗎？請舉一個反例。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-38" type="checkbox"/><label class="lbl-toggle" for="ans-2-38">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p><code class="haskell">head [] : tail [] /= []</code>.</p></div></div><div class="exercise exer" id="ex:take-take"><h5 class="exercise-title">練習 2.39 </h5><p>證明對自然數 <code class="haskell">m</code>, <code class="haskell">n</code>, <code class="haskell">take m (take (m+n) xs) = take m xs</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-39" type="checkbox"/><label class="lbl-toggle" for="ans-2-39">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>針對 <code class="haskell">m</code> 做歸納。當 <code class="haskell">m := Zero</code>, 等號兩邊都歸約成 <code class="haskell">[]</code>。
+考慮<code class="haskell">m := Suc m</code>. 此時針對 <code class="haskell">xs</code> 做分析。
+當 <code class="haskell">xs := []</code>, 等號兩邊亦都歸約成 <code class="haskell">[]</code>。
+考慮 <code class="haskell">xs := x:xs</code> 的情況：</p><pre><code class="haskell">      take (Suc m) (take (Suc m + n) (x:xs))
+ ===    <comment>{- <code class="haskell">(+)</code> 與 <code class="haskell">take</code> 之定義 -}</comment>
+      take (Suc m) (x : take (m + n) xs)
+ ===    <comment>{- <code class="haskell">take</code> 之定義 -}</comment>
+      x : take m (take (m + n) xs)
+ ===    <comment>{- 歸納假設 -}</comment>
+      x : take m xs
+ ===    <comment>{- <code class="haskell">take</code> 之定義 -}</comment>
+      take (Suc m) xs 
+</code></pre></div></div><div class="exercise exer" id="ex:drop-take"><h5 class="exercise-title">練習 2.40 </h5><p>證明對自然數 <code class="haskell">m</code>, <code class="haskell">n</code>, <code class="haskell">drop m (take (m + n) xs) = take n (drop m xs)</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-40" type="checkbox"/><label class="lbl-toggle" for="ans-2-40">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>針對 <code class="haskell">m</code> 做歸納。當 <code class="haskell">m := Zero</code>, 等號兩邊都歸約成 <code class="haskell">take n xs</code>。
+考慮<code class="haskell">m := Suc m</code>. 此時針對 <code class="haskell">xs</code> 做分析。
+當 <code class="haskell">xs := []</code>, 等號兩邊亦都歸約成 <code class="haskell">[]</code>。
+考慮 <code class="haskell">xs := x:xs</code> 的情況：</p><pre><code class="haskell">      drop (Suc m) (take (Suc m + n) (x:xs))
+ ===    <comment>{- <code class="haskell">(+)</code> 與 <code class="haskell">take</code> 之定義 -}</comment>
+      drop (Suc m) (x : take (m + n) xs)
+ ===    <comment>{- <code class="haskell">take</code> 之定義 -}</comment>
+      drop n (take (m + n) xs)
+ ===    <comment>{- 歸納假設 -}</comment>
+      take n (drop m xs)
+ ===    <comment>{- <code class="haskell">take</code> 之定義 -}</comment>
+      take n (drop (Suc m) (x:xs)) 
+</code></pre></div></div><div class="exercise exer" id="ex:drop-drop"><h5 class="exercise-title">練習 2.41 </h5><p>證明對自然數 <code class="haskell">m</code>, <code class="haskell">n</code>, <code class="haskell">drop (m + n) xs) = drop n (drop m xs)</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-41" type="checkbox"/><label class="lbl-toggle" for="ans-2-41">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>針對 <code class="haskell">m</code> 做歸納。當 <code class="haskell">m := Zero</code>, 等號兩邊都歸約成 <code class="haskell">drop n xs</code>。
+考慮<code class="haskell">m := Suc m</code>. 此時針對 <code class="haskell">xs</code> 做分析。
+當 <code class="haskell">xs := []</code>, 等號兩邊亦都歸約成 <code class="haskell">[]</code>。
+考慮 <code class="haskell">xs := x:xs</code> 的情況：</p><pre><code class="haskell">      drop (Suc m + n) (x:xs)
+ ===    <comment>{- <code class="haskell">(+)</code> 與 <code class="haskell">take</code> 之定義 -}</comment>
+      drop (m + n) xs
+ ===    <comment>{- 歸納假設 -}</comment>
+      drop n (drop m xs)
+ ===    <comment>{- <code class="haskell">drop</code> 之定義 -}</comment>
+      drop n (drop (Suc m) (x:xs)) 
+</code></pre></div></div></div><p>函數 <code class="haskell">zip</code> 是另一個例子。我們可把 <code class="haskell">zip xs ys</code> 視為 <code class="haskell">xs</code> 之上的歸納定義：</p><pre><code class="spec">zip :: List a -&gt; List b -&gt; List (a × b)
+zip []      ys      = []
+zip (x:xs)  []      = []
+zip (x:xs)  (y:yz)  = (x,y) : zip xs ys 
+</code></pre><div class="exlist"><div class="exercise exer" id="ex:zipWith-map-uncurry-zip"><h5 class="exercise-title">練習 2.42 </h5><p>試定義 <code class="haskell">zipWith :: (a -&gt; b -&gt; c) -&gt; List a -&gt; List b -&gt; List c</code>,
+並證明 <code class="haskell">zipWith f xs ys = map (uncurry f) (zip xs ys)</code>.</p></div></div></div><div class="navi"><div class="previous">&laquo;<a href="Induction-9.html#sec:induction-set-theory">2.9 由集合論看歸納法</a></div><div class="next"><a href="Induction-11.html#sec:complete-induction">2.11 完全歸納</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

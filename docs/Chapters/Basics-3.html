@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="函數程設與推論">
+    <title>函數程設與推論</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <!-- link rel="stylesheet" href="/css/pure/pure-min.css" -->
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <script> MathJax = {
+              loader: {
+                load: ['input/tex-base', 'output/chtml']
+                },
+              tex: {
+                inlineMath: [['$', '$']]
+             }};
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3.0.0/es5/startup.js">
+    </script>
+</head>
+<body>
+
+<div id="layout">
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+        <!-- Hamburger icon -->
+        <span></span>
+    </a>
+<div id="menu"><div class="pure-menu"><h1 class="pure-menu-heading">函數程設與推論</h1><h2 class="pure-menu-heading">Functional Program Construction and Reasoning</h2><p><a href="../ToC.html">目錄</a></p><p><a href="../Preface.html">前言</a></p><nav class="nav" role="navigation"><ul class="pure-menu-list menu-level-1"><li class="pure-menu-item"><a href="Introduction.html#ch:intro">0 符號、演算、與抽象化</a><input class="toggle" id="menu-li-0" type="checkbox"/><label class="menu-toggle" for="menu-li-0"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Introduction-1.html#sec:knight-knave-island">0.1 騎士與惡棍之島</a></li>
+<li class="pure-menu-item"><a href="Introduction-2.html#sec:let-symbols-work">0.2 讓符號為你工作</a></li>
+<li class="pure-menu-item"><a href="Introduction-3.html#sec:abstraction">0.3 抽象化</a></li>
+<li class="pure-menu-item"><a href="Introduction-4.html#sec:abstraction-and-expression">0.4 抽象化與表達力</a></li>
+<li class="pure-menu-item"><a href="Introduction-5.html#sec:correctness">0.5 正確性</a></li>
+<li class="pure-menu-item"><a href="Introduction-6.html#sec:calculable-programming-language">0.6 可演算的程式語言</a></li>
+<li class="pure-menu-item"><a href="Introduction-7.html#sec:relevant-information">0.7 相關資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Basics.html#ch:basics">1 值、函數、與定義</a><input class="toggle" id="menu-li-1" checked type="checkbox"/><label class="menu-toggle" for="menu-li-1"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Basics-1.html#sec:evaluation">1.1 值與求值</a></li>
+<li class="pure-menu-item"><a href="Basics-2.html#sec:function-defns">1.2 函數定義</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:higher-order-func">1.3 高階函數</a></li>
+<li class="pure-menu-item"><a href="Basics-4.html#sec:func-comp">1.4 函數合成</a></li>
+<li class="pure-menu-item"><a href="Basics-5.html#sec:lambda-terms">1.5 $\lambda$ 算式</a></li>
+<li class="pure-menu-item"><a href="Basics-6.html#sec:elementary-datatypes">1.6 簡單資料型態</a><input class="toggle" id="menu-li-1-6" type="checkbox"/><label class="menu-toggle" for="menu-li-1-6"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Basics-6.html#sec:boolean">1.6.1 布林值</a></li>
+<li class="pure-menu-item"><a href="Basics-6.html#sec:char">1.6.2 字元</a></li>
+<li class="pure-menu-item"><a href="Basics-6.html#sec:pairs">1.6.3 序對</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Basics-7.html#sec:weak-head-normal-form">1.7 弱首範式</a></li>
+<li class="pure-menu-item"><a href="Basics-8.html#sec:lists">1.8 串列</a><input class="toggle" id="menu-li-1-8" type="checkbox"/><label class="menu-toggle" for="menu-li-1-8"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Basics-8.html#sec:list-deconstruct">1.8.1 串列解構</a></li>
+<li class="pure-menu-item"><a href="Basics-8.html#sec:list-generation">1.8.2 串列生成</a></li>
+<li class="pure-menu-item"><a href="Basics-8.html#sec:list-combinators">1.8.3 串列上的種種組件函數</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Basics-9.html#sec:wholemeal">1.9 全麥編程</a></li>
+<li class="pure-menu-item"><a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a></li>
+<li class="pure-menu-item"><a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
+<li class="pure-menu-item"><a href="Induction-2.html#sec:induction-on-Nat">2.2 自然數上之歸納定義</a></li>
+<li class="pure-menu-item"><a href="Induction-3.html#sec:inductive-proof-on-Nat">2.3 自然數上之歸納證明</a></li>
+<li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists">2.4 串列與其歸納定義</a><input class="toggle" id="menu-li-2-4" type="checkbox"/><label class="menu-toggle" for="menu-li-2-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists-defn">2.4.1 串列上之歸納定義</a></li>
+<li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists-proof">2.4.2 串列上之歸納證明</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Induction-5.html#sec:data-prog-proof">2.5 從資料、程式、到證明</a></li>
+<li class="pure-menu-item"><a href="Induction-6.html#sec:more-inductive-defns">2.6 更多歸納定義與證明</a><input class="toggle" id="menu-li-2-6" type="checkbox"/><label class="menu-toggle" for="menu-li-2-6"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction-6.html#sec:filter-takeWhile-dropWhile">2.6.1 <code class="haskell">filter</code>, <code class="haskell">takeWhile</code>, 與 <code class="haskell">dropWhile</code></a></li>
+<li class="pure-menu-item"><a href="Induction-6.html#sec:elem-neq-proof">2.6.2 <code class="haskell">elem</code> 與不等式證明</a></li>
+<li class="pure-menu-item"><a href="Induction-6.html#sec:list-segments">2.6.3 串列區段</a></li>
+<li class="pure-menu-item"><a href="Induction-6.html#sec:fan-perm">2.6.4 插入、排列、子串列、與劃分</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Induction-7.html#sec:using-hints-from-symbols">2.7 再談「讓符號為你工作」</a></li>
+<li class="pure-menu-item"><a href="Induction-8.html#sec:other-inductive-datatypes">2.8 其他歸納資料結構</a></li>
+<li class="pure-menu-item"><a href="Induction-9.html#sec:induction-set-theory">2.9 由集合論看歸納法</a></li>
+<li class="pure-menu-item"><a href="Induction-10.html#sec:induction-variations">2.10 歸納定義的簡單變化</a></li>
+<li class="pure-menu-item"><a href="Induction-11.html#sec:complete-induction">2.11 完全歸納</a></li>
+<li class="pure-menu-item"><a href="Induction-12.html#sec:well-founded-induction">2.12 良基歸納</a></li>
+<li class="pure-menu-item"><a href="Induction-13.html#sec:lexicographic-induction">2.13 詞典序歸納</a></li>
+<li class="pure-menu-item"><a href="Induction-14.html#sec:mutual-induction">2.14 交互歸納</a></li>
+<li class="pure-menu-item"><a href="Induction-15.html#sec:induction-ref">2.15 參考資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="SearchTrees.html#ch:induction-search-trees">3 搜尋樹</a><input class="toggle" id="menu-li-3" type="checkbox"/><label class="menu-toggle" for="menu-li-3"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="SearchTrees-1.html#sec:induction-binary-search-tree">3.1 二元搜尋樹</a></li>
+<li class="pure-menu-item"><a href="SearchTrees-2.html#sec:induction-red-black-tree">3.2 紅黑樹</a><input class="toggle" id="menu-li-3-2" type="checkbox"/><label class="menu-toggle" for="menu-li-3-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="SearchTrees-2.html#">3.2.1 紅黑樹插入</a></li>
+<li class="pure-menu-item"><a href="SearchTrees-2.html#">3.2.2 紅黑樹之性質：高度</a></li>
+<li class="pure-menu-item"><a href="SearchTrees-2.html#">3.2.3 紅黑樹之性質：平衡</a></li>
+<li class="pure-menu-item"><a href="SearchTrees-2.html#">3.2.4 紅黑樹之性質：顏色</a></li>
+</ul></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Semantics.html#ch:semantics">4 關於語意的基本概念</a><input class="toggle" id="menu-li-4" type="checkbox"/><label class="menu-toggle" for="menu-li-4"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Semantics-1.html#sec:denotational-semantics">4.1 指稱語意</a></li>
+<li class="pure-menu-item"><a href="Semantics-2.html#sec:operational-semantics">4.2 操作語意</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Derivation.html#ch:derivation">5 一般程式推導</a><input class="toggle" id="menu-li-5" type="checkbox"/><label class="menu-toggle" for="menu-li-5"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-1.html#sec:fold-unfold-transform">5.1 展開-收回轉換</a></li>
+<li class="pure-menu-item"><a href="Derivation-2.html#sec:efficiency-basics">5.2 關於執行效率</a></li>
+<li class="pure-menu-item"><a href="Derivation-3.html#sec:fold-unfold-transform-efficiency">5.3 用展開-收回轉換增進效率</a><input class="toggle" id="menu-li-5-3" type="checkbox"/><label class="menu-toggle" for="menu-li-5-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-3.html#sec:poly-horner">5.3.1 計算多項式 -- Horner 法則</a></li>
+<li class="pure-menu-item"><a href="Derivation-3.html#sec:exp-binary-roll">5.3.2 二進位表示法</a></li>
+<li class="pure-menu-item"><a href="Derivation-3.html#sec:wrap-reminder">5.3.3 小結與提醒</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Derivation-4.html#sec:var-cons">5.4 變數換常數</a></li>
+<li class="pure-menu-item"><a href="Derivation-5.html#sec:tupling">5.5 組對</a><input class="toggle" id="menu-li-5-5" type="checkbox"/><label class="menu-toggle" for="menu-li-5-5"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-5.html#sec:steep">5.5.1 陡串列</a></li>
+<li class="pure-menu-item"><a href="Derivation-5.html#sec:repl-tree">5.5.2 以串列標記樹狀結構</a></li>
+<li class="pure-menu-item"><a href="Derivation-5.html#sec:rep-minE">5.5.3 代換為最小標籤 --- 循環程式</a></li>
+<li class="pure-menu-item"><a href="Derivation-5.html#sec:tupling-conclude">5.5.4 小結與提醒</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a><input class="toggle" id="menu-li-5-6" type="checkbox"/><label class="menu-toggle" for="menu-li-5-6"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-6.html#sec:reversal-append">5.6.1 串列反轉與連接</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:accum-info-flow">5.6.2 由上到下的資訊流</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:tail-recursion">5.6.3 尾遞迴</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:tail-recursion-more">5.6.4 更多尾遞迴範例</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:tail-recursion-efficiency">5.6.5 尾遞迴的效率考量</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
+</ul></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-program-gen">6.2.2 以摺融合生成程式</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:scan-lemma">6.2.3 掃描</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:banana-split">6.2.4 香蕉船定理</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:accum-param-fold-fusion">6.2.5 累積參數與摺融合</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:bring-in-context">6.2.6 引入脈絡</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Folds-3.html#sec:foldl-listHomo-para">6.3 左摺、串列同構、與 Paramorphism</a><input class="toggle" id="menu-li-6-3" type="checkbox"/><label class="menu-toggle" for="menu-li-6-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-3.html#sec:foldl">6.3.1 左摺</a></li>
+<li class="pure-menu-item"><a href="Folds-3.html#sec:list-homomorphism">6.3.2 串列同構</a></li>
+<li class="pure-menu-item"><a href="Folds-3.html#sec:paramorphism">6.3.3 Paramorphism 與本原遞迴</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Folds-4.html#sec:foldN">6.4 自然數的摺</a></li>
+<li class="pure-menu-item"><a href="Folds-5.html#sec:fold-on-other-data-structures">6.5 其他資料結構</a></li>
+<li class="pure-menu-item"><a href="Folds-6.html#sec:folds-ref">6.6 參考資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="SegProblems.html#ch:segment-problems">7 區段問題</a><input class="toggle" id="menu-li-7" type="checkbox"/><label class="menu-toggle" for="menu-li-7"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="SegProblems-1.html#sec:maximum-segment-sum">7.1 最大區段和</a></li>
+<li class="pure-menu-item"><a href="SegProblems-2.html#sec:maximum-plateau-length">7.2 最長高原問題</a></li>
+<li class="pure-menu-item"><a href="SegProblems-3.html#sec:segProblems-ref">7.3 參考資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Monads.html#ch:monads">8 單子與副作用</a><input class="toggle" id="menu-li-8" type="checkbox"/><label class="menu-toggle" for="menu-li-8"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Monads-1.html#sec:exceptions">8.1 例外處理</a></li>
+<li class="pure-menu-item"><a href="Monads-2.html#sec:monad-class-laws">8.2 單子與單子律</a></li>
+<li class="pure-menu-item"><a href="Monads-3.html#sec:monad-reader">8.3 讀取單子</a><input class="toggle" id="menu-li-8-3" type="checkbox"/><label class="menu-toggle" for="menu-li-8-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Monads-3.html#sec:var-env-reader">8.3.1 變數與環境</a></li>
+<li class="pure-menu-item"><a href="Monads-3.html#sec:reader-is-monad">8.3.2 「讀取」副作用是單子</a></li>
+<li class="pure-menu-item"><a href="Monads-3.html#sec:monad-reader-laws">8.3.3 推論讀取單子程式的性質</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Monads-4.html#sec:monad-state">8.4 狀態單子</a><input class="toggle" id="menu-li-8-4" type="checkbox"/><label class="menu-toggle" for="menu-li-8-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Monads-4.html#sec:hanoi">8.4.1 河內塔問題</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
+</ul></li>
+</ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:basics">1 值、函數、與定義</h1></div><div class="navi"><div class="previous">&laquo;<a href="Basics-2.html#sec:function-defns">1.2 函數定義</a></div><div class="next"><a href="Basics-4.html#sec:func-comp">1.4 函數合成</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:higher-order-func">1.3 高階函數</h2><p>目前為止，我們看過由整數到整數的函數、由整數到真假值的函數...
+那麼，可以有由函數到函數的函數嗎？
+函數語言將函數視為重要的構成元件，因此函數也被視為<em>一級公民</em>。
+如果整數、真假值... 可以當作參數、可以被函數傳回，函數當然也可以。
+一個「輸入或輸出也是函數」的函數被稱為<em>高階函數</em>(<em>higher order function</em>)<span id="ix-1-14"></span>。
+Haskell 甚至設計了許多鼓勵我們使用高階函數的機制。
+本書中我們將見到許多高階函數。其實，我們已經看過一個例子了。</p><div class="infobox infobox" title="一級公民"><h5 class="infobox-title">一級公民</h5><p>在程式語言中，若說某物/某概念是<em>一級公民</em>(<em>first-class citizen</em>)<span id="ix-1-15"></span>或「一級的」，
+通常指它和其他事物被同等對待：
+如果其他事物可被當作參數、可被當作傳回值、可被覆寫...那麼它也可以。
+這是一個沒有嚴格形式定義的說法，由 Christopher Strachey 在 1960 年代提出，
+可用在型別、值、物件、模組... 等等之上。</p><p>例如：OCaml 是個有「一級模組」的語言，因為 OCaml 模組也可當作參數，可定義從模組到模組的函數（OCaml 中稱之為 functor）。
+在 C 語言之中函數是次級的，因為函數不能當參數傳（能傳的是函數的指標，而非函數本身）。
+Strachey指出，在 Algol 中實數是一級的，而程序是次級的。</p></div><p><b>Currying</b> &emsp; 回顧<code class="haskell">smaller</code>的定義：</p><pre><code>smaller :: Int -&gt; Int -&gt; Int
+smaller x y = if x &lt;= y then x else y 
+</code></pre><p><a href="Basics-2.html#sec:function-defns">1.2 </a> 節中說「<code class="haskell">smaller</code> 是一個函數，拿兩個參數 <code class="haskell">x</code> 與 <code class="haskell">y</code>」。
+但這僅是口語上方便的說法。
+事實上，在 Haskell 中（如同在 $\lambda$-calculus 中），所有函數都只有一個參數。
+函數 <code class="haskell">smaller</code> 其實是一個\emph{傳回函數的函數}：</p><ul><li><p><code class="haskell">smaller</code> 的型別 <code class="haskell">Int -&gt; Int -&gt; Int</code> 其實應看成 <code class="haskell">Int -&gt; (Int -&gt; Int)</code>：
+這個函數拿到一個 <code class="haskell">Int</code> 後，會傳回一個型別為 <code class="haskell">Int -&gt; Int</code> 的函數。</p></li><li><p><code class="haskell">smaller 3</code> 的型別是 <code class="haskell">Int -&gt; Int</code>。這個函數還可拿一個 <code class="haskell">Int</code> 參數，將之和 <code class="haskell">3</code> 比大小，傳回較小的那個。</p></li><li><p><code class="haskell">smaller 3 4</code> 是一個 <code class="haskell">Int</code>。它其實是將函數 <code class="haskell">smaller 3</code> 作用在 <code class="haskell">4</code> 之上。也就是說，<code class="haskell">smaller 3 4</code> 其實應看成 <code class="haskell">(smaller 3) 4</code>. 根據定義，它可展開為 <code class="haskell">if 3 &lt;= 4 then 3 else 4</code>，然後化簡為 <code class="haskell">3</code>.</p></li></ul><div class="exlist"><div class="exercise exer" id="ex:smaller-inpt"><h5 class="exercise-title">練習 1.4 </h5><p>將 <code class="haskell">smaller</code> 的定義鍵入一個檔案，載入 Haskell 直譯器中。</p><ol><li><p><code class="haskell">smaller 3 4</code> 的型別是什麼？在 GHCi 中可用 {\tt :t e} 指令得到算式 <code class="haskell">e</code> 的型別。</p></li><li><p><code class="haskell">smaller 3</code> 的型別是什麼？</p></li><li><p>在檔案中定義 <code class="haskell">st3 = smaller 3</code>. 函數 <code class="haskell">st3</code> 的型別是什麼？</p></li><li><p>給 <code class="haskell">st3</code> 一些參數，觀察其行為。</p></li></ol></div></div><p>「用『傳回函數的函數』模擬『接收多個參數的函數』」這種做法稱作 <em>currying</em>.
+<span id="ix-1-16"></span><input class="toggle" id="footnote-1-3-7" type="checkbox"/><label class="fnote-toggle" for="footnote-1-3-7">(註7) </label><span class="collapsible-footnote">Currying 為動名詞，形容詞則為 <em>curried</em>。
+此詞來自於邏輯學家 Haskell B. Curry 的姓氏。
+詳見第 <a href="Basics-11.html#sec:refs-basics">1.11 </a> 節。</span>
+Haskell 鼓勵大家使用 currying --- 它的內建函數大多依此配合設計，
+語法設計上也很給 currying 方便。
+當型別中出現連續的 <code class="haskell">(-&gt;)</code> 時，預設為往右邊結合，例如
+<code class="haskell">Int -&gt; Int -&gt; Int</code> 應看成 <code class="haskell">Int -&gt; (Int -&gt; Int)</code>.
+這使得「傳回函數的函數」容易寫。
+而在值的層次，連續的函數應用往左結合。
+例如，<code class="haskell">(smaller 3) 4</code> 可寫成 <code class="haskell">smaller 3 4</code>。
+這讓我們能很方便地將參數一個個餵給 curried 函數。</p><p>另一方面，如果我們想使用 <code class="haskell">double</code> 兩次，計算 <code class="haskell">x</code> 的四倍，應寫成 <code class="haskell">double (double x)</code>.
+若寫 <code class="haskell">double double x</code> ，會被視為 <code class="haskell">(double double) x</code> --- <code class="haskell">double</code> 作用在自身之上，而這顯然是個型別錯誤。</p><p>我們再看一個使用 currying 的練習：</p><div class="theorem" id="eg:polynomial"><h5 class="theorem-title">例 1.4  </h5><p>給定 <code class="haskell">a</code>, <code class="haskell">b</code>, <code class="haskell">c</code>, <code class="haskell">x</code>, 下述函數 <code class="haskell">poly</code> 計算 $ax^2 + bx + c$:</p><pre><code class="spec">poly :: Int -&gt; Int -&gt; Int -&gt; Int -&gt; Int
+poly a b c x = a * x * x + b * x + c 
+</code></pre><p>請定義一個函數 <code class="haskell">poly1</code>, 使得 $poly_1~x = x^2 + 2x + 1$.
+函數 <code class="haskell">poly1</code> 需使用 <code class="haskell">poly</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-1-4" type="checkbox"/><label class="lbl-toggle" for="ans-1-4">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>一種作法是：</p><pre><code class="spec">poly1 :: Int -&gt; Int
+poly1 x = poly 1 2 1 x 
+</code></pre><p>但這相當於 <code class="haskell">poly1 x = (poly 1 2 1) x</code> ---
+<code class="haskell">poly</code> 拿到 <code class="haskell">x</code> 後，立刻把 <code class="haskell">x</code> 傳給 <code class="haskell">poly 1 2 1</code> 這個函數。
+因此 <code class="haskell">poly1</code> 可更精簡地寫成：</p><pre><code class="spec">poly1 :: Int -&gt; Int
+poly1 = poly 1 2 1 
+</code></pre><p>兩種寫法都有人使用。
+有提及<code class="haskell">x</code>的寫法著重於描述拿到參數<code class="haskell">x</code>之後要對它進行什麼操作。
+而省略<code class="haskell">x</code>的寫法則是在函數的層次上思考：
+我們要定義一個函數，稱作<code class="haskell">poly1</code>。這個函數是什麼呢？
+<em>就是 <code class="haskell">poly</code> 拿到 <code class="haskell">1</code>, <code class="haskell">2</code>, <code class="haskell">1</code> 之後傳回的那個函數。</em></p><p>如果我們想用 <code class="haskell">poly</code> 定義出另一個函數
+$poly_2~a~b~c = a\times 2^2 + b \times 2 + 2$ 呢？
+最好理解的可能是不怎麼意外的寫法：</p><pre><code class="spec">poly :: Int -&gt; Int -&gt; Int -&gt; Int
+poly2 a b c = poly a b c 2 
+</code></pre><p>我們可以用一些技巧使 <code class="haskell">a</code>, <code class="haskell">b</code>, 和<code class="haskell">c</code>不出現在定義中，
+但如此得到的程式並不會更好懂。</p></div></div><p><b>二元運算子</b> &emsp;
+在進入其他主題前，我們交代一些語法細節。
+Haskell 鼓勵 currying 的使用，也把二元運算子都設計成 curried 的。
+例如加法的型別是 <code class="haskell">Int -&gt; Int -&gt; Int</code>.
+Haskell 也配套設計了種種關於二元運算子的特殊語法，希望讓它們更好用。
+但這些語法規則的存在都僅是為了方便我們寫出（主觀上）語法漂亮的程式，
+而不是非有不可、非學不可的規定。</p><p id="par:binary-operator-sectioning">
+假設某二元運算子 <code class="haskell">oplus</code> 的型別是 <code class="haskell">a -&gt; b -&gt; c</code>,
+<code class="haskell">(x ⊕)</code> 是給定了 <code class="haskell">oplus</code> 的第一個參數後得到的函數；
+<code class="haskell">(⊕ y)</code> 則是給定了 <code class="haskell">oplus</code> 的第二個參數後得到的函數：
+<input class="toggle" id="footnote-1-3-8" type="checkbox"/><label class="fnote-toggle" for="footnote-1-3-8">(註8) </label><span class="collapsible-footnote">根據<a href="../Biblio.html#Hudak:07:Being">Hudak et al. [2007]</a>，此種「<em>切片</em>」(<em>sectioning</em>)語法最早見於 David Wile 的博士論文。
+後來被包括 Richard Bird 在內的 IFIP WG 2.1 成員使用，並由 David A. Turner 實作在他的語言 Miranda 中。</span></p><pre><code class="spec">(x ⊕) y  = x ⊕ y  <comment>{-"\quad"-}</comment>  <comment>{- <code class="haskell">(x ⊕)</code> 的型別為 <code class="haskell">b -&gt; c</code>; -}</comment>
+(⊕ y) x  = x ⊕ y               <comment>{- <code class="haskell">(⊕ y)</code> 的型別為 <code class="haskell">a -&gt; c</code>.-}</comment>
+</code></pre><p>例如：</p><ul><li><p><code class="haskell">(2 *)</code> 和 <code class="haskell">(* 2)</code> 都是把一個數字乘以二的函數；</p></li><li><p><code class="haskell">(/ 2)</code> 則把輸入數字除以二；</p></li><li><p><code class="haskell">(1 /)</code> 計算輸入數字的倒數。</p></li></ul><p>名字以英文字母開頭的函數預設為前序的。例如，
+計算餘數的函數 <code class="haskell">mod</code> 使用時得寫成 <code class="haskell">mod 6 4</code>。
+若把它放在「倒引號(backquote)」中，表示將其轉為中序 ---
+如果我們比較喜歡把 <code class="haskell">mod</code> 放到中間，可以寫成 <code class="haskell">6 `mod` 4</code>.
+首字元非英文字母的函數（如 <code class="haskell">(+)</code>, <code class="haskell">(/)</code> 等）則會被預設為中序的二元運算子。
+若把一個中序二元運算子放在括號中，表示將其轉為前序運算子。
+例如，<code class="haskell">(+) 1 2</code> 和 <code class="haskell">1 + 2</code> 的意思相同。</p><p>在 Haskell 的設計中，函數應用的優先順序比中序運算子高。
+因此 <code class="haskell">double 3 + 4</code> 會被視作 <code class="haskell">(double 3) + 4</code>, 而不是 <code class="haskell">double (3+4)</code>.
+將中序運算子放在括號中也有「讓它不再是個中序運算子，只是個一般識別字」的意思。
+例如算式 <code class="haskell">f + x</code> 中，<code class="haskell">f</code> 和 <code class="haskell">x</code> 是中序運算子 <code class="haskell">(+)</code> 的參數。
+但在 <code class="haskell">f (+) x</code> 中，<code class="haskell">(+)</code> 和 <code class="haskell">x</code> 都是 <code class="haskell">f</code> 的參數
+（這個式子可以讀解為 <code class="haskell">(f (+)) x</code>）。</p><p><b>以函數為參數</b> &emsp; 下述函數 <code class="haskell">square</code> 計算輸入的平方：</p><pre><code class="haskell">square :: Int -&gt; Int
+square x = x * x 
+</code></pre><p>我們可另定義一個函數 <code class="haskell">quad :: Int -&gt; Int</code>，把 <code class="haskell">square</code> 用兩次，
+使得 <code class="haskell">quad x</code> 算出 $x^4$.</p><pre><code class="haskell">quad :: Int -&gt; Int
+quad x = square (square x)   
+</code></pre><p>但，「把某函數用兩次」是個常見的編程模式。
+我們能不能把 <code class="haskell">quad</code> 與 <code class="haskell">square</code> 抽象掉，單獨談「用兩次」這件事呢？
+下面的函數 <code class="haskell">twice</code> 把參數 <code class="haskell">f</code> 在 <code class="haskell">x</code> 之上用兩次：</p><pre><code class="haskell">twice      :: (a -&gt; a) -&gt; (a -&gt; a)
+twice f x  = f (f x) 
+</code></pre><p>有了 <code class="haskell">twice</code>, 我們可以這麼定義 <code class="haskell">quad</code>:</p><pre><code class="spec">quad :: Int -&gt; Int
+quad = twice square 
+</code></pre><p>函數 <code class="haskell">twice</code> 是本書中第一個「以函數為參數」的函數。
+我們可看到「讓函數可作為參數」對於抽象化是有益的：
+我們可以把「做兩次」這件事單獨拿出來說，把「做什麼」抽象掉。</p><p>「函數可以當作參數」意味著我們可以定義<em>作用在函數上的運算子</em>。
+<code class="haskell">twice</code> 就是這麼一個運算子：
+它拿一個函數 <code class="haskell">f</code>，把它加工一下，做出另一個函數（後者的定義是把 <code class="haskell">f</code> 用兩次）。</p><p><b>參數式多型</b> &emsp;
+函數 <code class="haskell">twice</code> 也是本書中第一個<em>多型</em>函數。
+在 Haskell 的型別中，小寫開頭的識別字（如其中的 <code class="haskell">a</code>）是型別層次的參數。
+讀者可想像成在 <code class="haskell">twice</code> 的型別最外層有一個省略掉的 <code class="haskell">forall a</code>.
+也就是說, <code class="haskell">twice</code> 的完整型別是 <code class="haskell">forall a . (a -&gt; a) -&gt; (a -&gt; a)</code> ---
+對所有的型別 <code class="haskell">a</code>, <code class="haskell">twice</code> 都可拿一個型別為 <code class="haskell">a -&gt; a</code> 的函數，
+然後傳回一個型別為 <code class="haskell">a -&gt; a</code> 的函數。</p><p>在 <code class="haskell">twice</code> 的型別 <code class="haskell">(a -&gt; a) -&gt; (a -&gt; a)</code> 中，</p><ul><li><p>第一個 <code class="haskell">a -&gt; a</code> 是參數 <code class="haskell">f</code> 的型別，</p></li><li><p>在第二個 <code class="haskell">a -&gt; a</code> 中，第一個 <code class="haskell">a</code> 是 參數 <code class="haskell">x</code> 的型別，</p></li><li><p>第二個 <code class="haskell">a</code> 則是整個計算結果的型別。</p></li></ul><p>參數 <code class="haskell">f</code> 的型別必須是 <code class="haskell">a -&gt; a</code>: 輸出入型別必須一樣，因為 <code class="haskell">f</code> 的結果必須可當作 <code class="haskell">f</code> 自己的輸入。</p><p>在 <code class="haskell">twice</code> 被使用時，型別參數 <code class="haskell">a</code> 會依照上下文被<em>特化</em>(<em>instantiate</em>)成別的型別。
+例如 <code class="haskell">twice square</code> 中， 因為 <code class="haskell">square</code> 的型別是 <code class="haskell">Int -&gt; Int</code>,
+<em>這一個</em> <code class="haskell">twice</code> 的型別變成了 <code class="haskell">(Int -&gt; Int) -&gt; (Int -&gt; Int)</code> --- <code class="haskell">a</code> 被特化成 <code class="haskell">Int</code>.
+若某函數 <code class="haskell">k</code> 的型別是 <code class="haskell">Float -&gt; Float</code>, 在 <code class="haskell">twice k</code> 中，<code class="haskell">twice</code> 的型別是 <code class="haskell">(Float -&gt; Float) -&gt; (Float -&gt; Float)</code>。
+同一個函數 <code class="haskell">twice</code> 可能依其上下文而有許多不同的型別，但都是 <code class="haskell">(a -&gt; a) -&gt; (a -&gt; a)</code> 的特例。
+「一段程式可能有許多不同型別」的現象稱作<em>多型</em>(<em>polymorphism</em>)<span id="ix-1-17"></span>。
+多型又有許多種類，此處為其中一種。詳情見... \todo{}</p><div class="exlist"><div class="exercise exer" id="ex:twice-type"><h5 class="exercise-title">練習 1.5 </h5><p>為何 <code class="haskell">twice</code> 的型別不可以是 <code class="haskell">(a -&gt; b) -&gt; (a -&gt; b)</code>?</p></div></div><div class="theorem" id="eg:forktimes"><h5 class="theorem-title">例 1.5  </h5><pre><code class="haskell">forktimes f g x = f x * g x 
+</code></pre><p>算式 <code class="haskell">forktimes f g x</code> 把 <code class="haskell">f x</code> 和 <code class="haskell">g x</code> 的結果乘起來。</p><ol><li><p>請想想 <code class="haskell">forktimes</code> 的型別該是什麼？</p></li><li><p>試定義函數 <code class="haskell">compute :: Int -&gt; Int</code>, 使用 <code class="haskell">forktimes</code> 計算 $x^2 + 3\times x  + 2$。 <strong>提示</strong>：$x^2 + 3\times x  + 2 = (x+1) \times (x+2)$.</p></li></ol></div><div class="wrap-collabsible"><input class="toggle" id="ans-1-5" type="checkbox"/><label class="lbl-toggle" for="ans-1-5">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>如同 <code class="haskell">twice</code>, <code class="haskell">forktimes</code> 可以有很多型別，但都應該是
+<code class="haskell">(a -&gt; Int) -&gt; (a -&gt; Int) -&gt; a -&gt; Int</code> 的特例：
+在 <code class="haskell">forktimes f g x</code> 中， <code class="haskell">f</code> 和 <code class="haskell">g</code> 的型別可以是 <code class="haskell">a -&gt; Int</code>,
+其中 <code class="haskell">a</code> 可以是任何型別 <code class="haskell">a</code>，而 <code class="haskell">x</code> 的型別必須也是同一個 <code class="haskell">a</code>.
+函數 <code class="haskell">compute</code> 可定義如下：</p><pre><code class="haskell">compute :: Int -&gt; Int
+compute = forktimes (+1) (+2) 
+</code></pre><p>其中 <code class="haskell">forktimes</code> 型別中的 <code class="haskell">a</code> 被特化為 <code class="haskell">Int</code>.</p></div></div><p>如前所述，<code class="haskell">forktimes f g x</code> 把 <code class="haskell">f x</code> 和 <code class="haskell">g x</code> 的結果乘起來。
+但，一定得是乘法嗎？我們當然可以再多做一點點抽象化。</p><div class="theorem" id="eg:lift2"><h5 class="theorem-title">例 1.6  </h5><p>考慮函數 <code class="haskell">lift2 h f g x = h (f x) (g x)</code>.</p><ol><li><p><code class="haskell">lift2</code> 的型別是什麼？</p></li><li><p>用 <code class="haskell">lift2</code> 定義 <code class="haskell">forktimes</code>.</p></li><li><p>用 <code class="haskell">lift2</code> 計算 $x^2 + 3\times x  + 2$.</p></li></ol></div><div class="wrap-collabsible"><input class="toggle" id="ans-1-5" type="checkbox"/><label class="lbl-toggle" for="ans-1-5">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>我們把 <code class="haskell">lift2</code> 最泛用的型別和其定義重複如下：</p><pre><code class="haskell">lift2 :: (a -&gt; b -&gt; c) -&gt; (d -&gt; a) -&gt; (d -&gt; b) -&gt; d -&gt; c 
+lift2 h f g x = h (f x) (g x) 
+</code></pre><p>有了 <code class="haskell">lift2</code>, <code class="haskell">forktimes</code> 可定義為：</p><pre><code class="spec">forktimes :: (a -&gt; Int) -&gt; (a -&gt; Int) -&gt; a -&gt; Int
+forktimes = lift2 (*) 
+</code></pre><p>請讀者觀察：<code class="haskell">lift</code> 型別中的 <code class="haskell">a</code>, <code class="haskell">b</code>, <code class="haskell">c</code> 都特化成 <code class="haskell">Int</code>,
+<code class="haskell">d</code> 則改名為 <code class="haskell">a</code>.</p><p>我們也可用 <code class="haskell">lift2</code> 定義 <code class="haskell">compute</code>:</p><pre><code class="spec">compute :: Int -&gt; Int
+compute = lift2 (*) (+1) (+2) 
+</code></pre><p>函數 <code class="haskell">lift2</code> 可以看作一個作用在二元運算子上的運算子，功用是把
+二元運算子「提升」到函數層次。
+例如，原本 <code class="haskell">(*)</code> 只能拿兩個 <code class="haskell">Int</code> 當作參數，
+（例：<code class="haskell">1 * 2</code> 是「把 <code class="haskell">1</code> 和 <code class="haskell">2</code> 乘起來」），
+但現在 <code class="haskell">lift2 (*)</code> 可將函數 <code class="haskell">(+1)</code> 和 <code class="haskell">(+2)</code> 當參數了，
+意思為「把 <code class="haskell">(+1)</code> 和 <code class="haskell">(+2)</code> 的結果乘起來」。</p></div></div></div><div class="navi"><div class="previous">&laquo;<a href="Basics-2.html#sec:function-defns">1.2 函數定義</a></div><div class="next"><a href="Basics-4.html#sec:func-comp">1.4 函數合成</a>&raquo;</div></div></div></div>
+
+<script src="../js/ui.js"></script>
+
+</body>
+</html>

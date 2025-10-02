@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -126,7 +126,7 @@
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-4.html#sec:foldN">6.4 自然數的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-5.html#sec:fold-on-other-data-structures">6.5 其他資料結構</a></li>
-<li class="pure-menu-item"><a href="Folds-6.html#sec:folds-ref">6.6 參考資料</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:folds-ref">6.6 參考資料</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="SegProblems.html#ch:segment-problems">7 區段問題</a><input class="toggle" id="menu-li-7" type="checkbox"/><label class="menu-toggle" for="menu-li-7"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="SegProblems-1.html#sec:maximum-segment-sum">7.1 最大區段和</a></li>
 <li class="pure-menu-item"><a href="SegProblems-2.html#sec:maximum-plateau-length">7.2 最長高原問題</a></li>
@@ -143,28 +143,7 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Folds-5.html#sec:fold-on-other-data-structures">6.5 其他資料結構</a></div><div class="next"><a href="SegProblems.html#ch:segment-problems">7 區段問題</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:folds-ref">6.6 參考資料</h2><p><a href="../Biblio.html#GibbonsHutton:01:When">Gibbons et al. [2001]</a></p></div><div class="navi"><div class="previous">&laquo;<a href="Folds-5.html#sec:fold-on-other-data-structures">6.5 其他資料結構</a></div><div class="next"><a href="SegProblems.html#ch:segment-problems">7 區段問題</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

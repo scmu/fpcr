@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -128,9 +128,9 @@
 <li class="pure-menu-item"><a href="Folds-5.html#sec:fold-on-other-data-structures">6.5 其他資料結構</a></li>
 <li class="pure-menu-item"><a href="Folds-6.html#sec:folds-ref">6.6 參考資料</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="SegProblems.html#ch:segment-problems">7 區段問題</a><input class="toggle" id="menu-li-7" type="checkbox"/><label class="menu-toggle" for="menu-li-7"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="SegProblems-1.html#sec:maximum-segment-sum">7.1 最大區段和</a></li>
+<li class="pure-menu-item"><a href="SegProblems.html#ch:segment-problems">7 區段問題</a><input class="toggle" id="menu-li-7" checked type="checkbox"/><label class="menu-toggle" for="menu-li-7"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="SegProblems-1.html#sec:maximum-segment-sum">7.1 最大區段和</a></li>
 <li class="pure-menu-item"><a href="SegProblems-2.html#sec:maximum-plateau-length">7.2 最長高原問題</a></li>
-<li class="pure-menu-item"><a href="SegProblems-3.html#sec:segProblems-ref">7.3 參考資料</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:segProblems-ref">7.3 參考資料</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Monads.html#ch:monads">8 單子與副作用</a><input class="toggle" id="menu-li-8" type="checkbox"/><label class="menu-toggle" for="menu-li-8"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Monads-1.html#sec:exceptions">8.1 例外處理</a></li>
 <li class="pure-menu-item"><a href="Monads-2.html#sec:monad-class-laws">8.2 單子與單子律</a></li>
@@ -143,28 +143,67 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
+<div id="main"><div class="header"><h1 class="chapter" id="ch:segment-problems">7 區段問題</h1></div><div class="navi"><div class="previous">&laquo;<a href="SegProblems-2.html#sec:maximum-plateau-length">7.2 最長高原問題</a></div><div class="next"><a href="Monads.html#ch:monads">8 單子與副作用</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:segProblems-ref">7.3 參考資料</h2><p><b>最大區段和</b> &emsp; 對試圖推銷程式推導的人來說，最大區段和問題幾乎有模範問題該有的一切特質：
+目標不難理解，但又不容易一眼看出怎麼解得快；
+大部分的推導過程都能用很形式化、依符號推導的方式進行；
+推出的程式有顯著的效率提升。程式僅需短短幾行，乍看之下卻不容易理解為何會正確。
+因此最大區段和問題是程式推導圈內常常提及的經典例子。</p><p>根據 Bentley 的 <em>Programming Pearls</em> <a href="../Biblio.html#Bentley:86:Programming">[Bentley 1986]</a> 一書，
+最大區段和問題最初由 Brown 大學的 Ulf Grenander 所提出。
+他當時正設計一個圖形配對的函式。
+其中，具有最大區段和的<em>二維</em>子陣列是圖形中最有可能含有指定樣式的區域。
+二維問題比較難解，因此他先考慮一維的情況：</p><blockquote><p>1977 年，[Grenander] 把該問題講給 UNILOGIC 公司的 Michael Shamos 聽，
+後者一夜之間就設計出了<strong>演算法3</strong>.
+Shamos 不久後告訴我這個問題時，我們都認為那大概就是最好的解法了；...
+又幾天後，Shamos 在 Carnegie-Mellon 大學的專題討論會中講了這個問題和它的來龍去脈。
+當時在場的統計學家 Jay Kadane 一聽，幾分鐘內就設計出了<strong>演算法4</strong>.</p></blockquote><blockquote><p>--- Jon Bentley, <em>Programming Pearls</em> (第一版), 第76頁.</p></blockquote><p>Kadane 的<strong>演算法4</strong>就是現在廣為人所知的（指令語言版）線性時間解（見第頁）。</p><p>Shamos 的<strong>演算法3</strong>則是一個採取<em>分而治之</em>(<em>divide and conquer</em>)法的演算法：
+將陣列分成長度略等的兩半<code class="haskell">xs ++ ys</code>, 分別計算 <code class="haskell">xs</code> 與 <code class="haskell">ys</code> 的最大區段和。
+但除此之外，還得考慮跨越 <code class="haskell">xs</code> 與 <code class="haskell">ys</code> 的區段。
+因此該演算法在遞迴的每一層又多用了兩個迴圈，分別計算 <code class="haskell">xs</code> 的最大後段和與 <code class="haskell">ys</code> 的最大前段和，
+兩者之和就是橫跨 <code class="haskell">xs</code> 與 <code class="haskell">ys</code> 的最大區段和。
+（見第頁。）
+該演算法使用 $O(n \log n)$ 的時間。</p><p>事後回顧，Shamos 其實不需在每層都把最大前段與後段和重頭算起。
+我們可用類似組對的想法，對每個子陣列都由下至上地算出以下四個值：最大前段和、最大區段和、最大後段和，以及總和。
+如此一來我們可得到一個線性時間演算法。
+這可看作給我們的一個暗示：「分而治之」在此也許是不必要的，我們不需要把陣列從中切半。
+事實上，把陣列分成頭與尾反而讓事情簡化不少。
+Kadane 立刻想出了<strong>演算法4</strong>，不知是否用了同樣的思路？</p><p>我最初是在 <a href="../Biblio.html#Gibbons:97:Calculating">Gibbons [1997]</a> 中見到此問題，當時便覺得印象深刻。
+Gibbons 的這篇文章是很好的函數程式推導簡介。
+<a href="../Biblio.html#Bird:96:Generic">Bird et al. [1996]</a> 改用<em>關係</em> --- 函數的一種擴充 --- 解最大區段和問題，並推廣到其他資料結構。
+<a href="../Biblio.html#Mu:08:Maximum">Mu [2008]</a> 則以最大區段和問題為開端，討論一些有趣的變形：例如有長度限制的最大區段和，和最大<em>平均</em>區段。</p><div class="infobox infobox" title="Shamos 的最大區段和演算法"><h5 class="infobox-title">Shamos 的最大區段和演算法</h5><p>以下是我根據個人理解將 Shamos 的<strong>演算法3</strong>寫成的 Python 程式。</p><pre><code class="spec" id="code:mss:shamos">def mss(l,u):
 
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
+  if l &gt; u:
+    return 0               <comment>{-"\quad\color{burntorange}{\mbox{\# 空陣列的情況}}"-}</comment>
+  else if l == u:
+    return (0 ↑ a[l])  <comment>{-"\quad\color{burntorange}{\mbox{\# 單一元素陣列的情況}}"-}</comment>
+  else:
+    m = (l + u) / 2
 
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+
+    <comment>{-"\color{burntorange}{\mbox{\# 計算 a[l..m] 的最大後段和}}"-}</comment>
+    sum, maxToLeft = 0, 0
+    for i in range (m, l-1, -1):
+      sum = sum + a[i]
+      maxToLeft = maxToLeft ↑ sum
+
+
+    <comment>{-"\color{burntorange}{\mbox{\# 計算 a[m+1..u] 的最大前段和}}"-}</comment>
+    sum, maxToRight = 0, 0
+    for i in range (m+1, u+1):
+      sum = sum + a[i]
+      maxToLeft = maxToRight ↑ sum
+
+
+    maxCrossing = maxToLeft + maxToRight
+
+
+    <comment>{-"\color{burntorange}{\mbox{\# 遞迴計算 a[l..m] 與 a[m+1..u] 的最大區段和}}"-}</comment>
+    maxInL = mss(l,m)
+    maxInR = mss(m+1,u)
+
+
+    return (maxInL ↑ maxCrossing ↑ maxInR)
+</code></pre></div><p><b>區段問題</b> &emsp;
+<a href="../Biblio.html#Zantema:92:Longest">Zantema [1992]</a></p></div><div class="navi"><div class="previous">&laquo;<a href="SegProblems-2.html#sec:maximum-plateau-length">7.2 最長高原問題</a></div><div class="next"><a href="Monads.html#ch:monads">8 單子與副作用</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

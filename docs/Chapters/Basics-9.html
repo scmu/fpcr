@@ -40,7 +40,7 @@
 <li class="pure-menu-item"><a href="Introduction-6.html#sec:calculable-programming-language">0.6 可演算的程式語言</a></li>
 <li class="pure-menu-item"><a href="Introduction-7.html#sec:relevant-information">0.7 相關資料</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Basics.html#ch:basics">1 值、函數、與定義</a><input class="toggle" id="menu-li-1" type="checkbox"/><label class="menu-toggle" for="menu-li-1"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Basics-1.html#sec:evaluation">1.1 值與求值</a></li>
+<li class="pure-menu-item"><a href="Basics.html#ch:basics">1 值、函數、與定義</a><input class="toggle" id="menu-li-1" checked type="checkbox"/><label class="menu-toggle" for="menu-li-1"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Basics-1.html#sec:evaluation">1.1 值與求值</a></li>
 <li class="pure-menu-item"><a href="Basics-2.html#sec:function-defns">1.2 函數定義</a></li>
 <li class="pure-menu-item"><a href="Basics-3.html#sec:higher-order-func">1.3 高階函數</a></li>
 <li class="pure-menu-item"><a href="Basics-4.html#sec:func-comp">1.4 函數合成</a></li>
@@ -54,7 +54,7 @@
 <li class="pure-menu-item"><a href="Basics-8.html#sec:list-generation">1.8.2 串列生成</a></li>
 <li class="pure-menu-item"><a href="Basics-8.html#sec:list-combinators">1.8.3 串列上的種種組件函數</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Basics-9.html#sec:wholemeal">1.9 全麥編程</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:wholemeal">1.9 全麥編程</a></li>
 <li class="pure-menu-item"><a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a></li>
 <li class="pure-menu-item"><a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></li>
 </ul></li>
@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -143,28 +143,101 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:basics">1 值、函數、與定義</h1></div><div class="navi"><div class="previous">&laquo;<a href="Basics-8.html#sec:lists">1.8 串列</a></div><div class="next"><a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:wholemeal">1.9 全麥編程</h2><p>讀者至此應已注意到本章採用的特殊編程風格。
+一般說到串列，大家會先想到資料結構課程中常提到的連結串列(linked list)。
+介紹連結串列的範例程式大多用迴圈或遞迴追蹤著指標，一個一個地處理串列中的元素。
+在指令式語言中做關於陣列的操作時，也常用變數或指標指著「目前的」元素，
+並在一個迴圈中將該變數逐次遞增或減。
+總之，我們處理聚合型資料結構時，總是將其中元素一個個取出來處理。
+但本章的做法不同：我們將整個串列視為一個整體，對整個串列做 <code class="haskell">map</code>, <code class="haskell">filter</code>, <code class="haskell">dropWhile</code> 等動作，或將它和另一個串列整個 <code class="haskell">zip</code> 起來...。</p><p>這種編程方式被稱作<em>全麥編程</em>(<em>wholemeal programming</em>)，<span id="ix-1-48"></span>
+第<a href="Basics-11.html#sec:refs-basics">1.11 </a>節中將解釋此詞的由來。
+全麥編程的提倡者們認為：一個個地處理元素太瑣碎，而鼓勵我們拉遠些，
+使用組件，以更抽象的方式組織程式的結構。</p><p>諸如 <code class="haskell">map</code>, <code class="haskell">filter</code>, <code class="haskell">iterate</code>, <code class="haskell">zipWith</code> 等等組件其實都是常見的編程模式。
+它們可被視為<em>為了特定目的已先寫好的迴圈</em>。
+拜高階函數與惰性求值之賜，這些組件能容易地被重用在許多不同脈絡中。
+這麼做的好處之一是：諸如 <code class="haskell">map</code>, <code class="haskell">filter</code>, <code class="haskell">zip</code> 等組件的意義清楚，
+整個程式的意義也因此會比起自行在迴圈中一個個處理元素來得容易理解。
+事實上，這麼做可以養成我們思考演算法的新習慣。
+一些常見的編程模式現在是有名字的，我們<em>把編程模式抽象出來</em>了。
+而如同第<a href="Introduction.html#ch:intro">0 </a>章所述，抽象化是我們理解、掌握、操作事物的重要方法。
+我們現在有了更多詞彙去理解、討論程式與演算法：
+「這個演算法其實就是先做個 <code class="haskell">map</code>，把結果 <code class="haskell">concat</code> 起來，然後做 <code class="haskell">filter</code>...」</p><p>在本書其他章節中我們也將看到：這些抽象化方便我們去操作、轉換程式。
+具體說來，如果程式用這些組件拼湊成，我們對這些組件知道的性質都可用在我們的程式上。
+例如，如果我們知道 <code class="haskell">map f . map g = map (f . g)</code>，
+當我們看到程式中有兩個相鄰的 <code class="haskell">map</code>, 我們可用已知的性質把他們合併成一個 ---
+這相當於合併兩個迴圈。或著我們可以把一個 <code class="haskell">map</code> 拆成兩個，以方便後續的其他處理。
+程式的建構方法使得程式含有更多資訊，使我們有更多可操作的空間。</p><p>全麥編程之所以成為可能，有賴程式語言的支援。
+例如，高階函數使得我們能將與特定問題相關的部分
+（如 <code class="haskell">map f</code> 與 <code class="haskell">filter p</code> 中的 <code class="haskell">f</code> 與 <code class="haskell">p</code>）抽象出來；
+惰性求值使我們勇於使用大串列或無限串列作為中間值，不用擔心它們被不必要地真正算出。</p><p>此外，全麥編程也需要豐富的組件函式庫。設計良好的組件捕捉了常見的編程模式，
+有了它們的幫忙，我們的程式可寫得簡潔明暸 ---
+本章之中大部分的程式都是都是一行搞定的 ``one-liner''.
+但，這些組件不可能窮舉所有的編程模式。我們仍會需要自行從頭寫些函數。
+受到全麥編程影響，在自行寫函數時，我們也常會希望將它們寫得更通用些，
+藉此發現常見的編程模式，設計出可重用的組件。</p><p>全麥編程能寫出多實用的程式？
+第<a href="Basics-11.html#sec:refs-basics">1.11 </a>節中會提及其他學者嘗試過的，包含解密碼、解數獨在內的有趣例子。
+在本節，我們則想示範一個小練習：由下至上的合併排序(merge sort)。
+<span id="ix-1-49"></span></p><p><b>合併排序</b> &emsp; 假設我們已有一個函數 <code class="haskell">merge' :: (List Int × List Int) -&gt; List Int</code>,
+如果 <code class="haskell">xs</code> 與 <code class="haskell">ys</code> 已經排序好，<code class="haskell">merge' (xs,ys)</code> 將它們合併為一個排序好的串列。
+<input class="toggle" id="footnote-1-9-15" type="checkbox"/><label class="fnote-toggle" for="footnote-1-9-15">(註15) </label><span class="collapsible-footnote">之所以取名為 <code class="haskell">merge'</code>，因為在第<a href="Induction-12.html#sec:well-founded-induction">2.12 </a>節中我們將使用一個類似且相關的函數 <code class="haskell">merge :: List Int -&gt; List Int -&gt; List Int</code>.</span>
+函數 <code class="haskell">merge'</code> 可用第<a href="Induction-13.html#sec:lexicographic-induction">2.13 </a>節的方式歸納寫成，
+也可使用將在第\todo{where}章提及的組件 <code class="haskell">unfoldr</code> 做出。
+我們如何用 <code class="haskell">merge'</code> 將整個串列排序好呢？</p><p>一般書中較常提及由上至下的合併排序：
+將輸入串列（或陣列）切成長度大致相等的兩半，分別排序，然後合併。
+本節則以由下至上的方式試試看。
+如果輸入串列為<code class="haskell">[4,2,3,5,8,0,1,7]</code>，我們先把
+每個元素都單獨變成串列，也就是變成<code class="haskell">[[4],[2],[3],[5],[8],[0],[1],[7]]</code>。
+然後把相鄰的串列兩兩合併：<code class="haskell">[[2,4],[3,5],[8,0],[1,7]]</code>，
+再兩兩合併成為 <code class="haskell">[[2,3,4,5],[0,1,8,7]]</code>，
+直到只剩下一個大串列為止。</p><p>如果我們定義兩個輔助函數：<code class="haskell">wrap</code> 將一個元素包成一個串列，
+<code class="haskell">isSingle</code> 判斷一個串列是否只剩下一個元素，</p><div class="multicols"><div class="mcol" width="0.4\textwidth"><pre><code class="haskell">wrap :: a -&gt; List a
+wrap x = [x] 
+</code></pre></div><div class="mcol" width="0.4\textwidth"><pre><code class="haskell">isSingle :: List a -&gt; Bool
+isSingle [x]  = True
+isSingle xs   = False 
+</code></pre></div></div><p>那麼上述的合併排序可以寫成：</p><pre><code class="spec">msort = head . until isSingle mergeAdj . map wrap 
+</code></pre><p>這幾乎只是把口語描述逐句翻譯：先把每個元素都包成串列，
+反覆做 <code class="haskell">mergeAdj</code> 直到只剩下一個大串列，然後將那個大串列取出來。</p><p>下一項工作是定義 <code class="haskell">mergeAdj :: List (List Int) -&gt; List (List Int)</code>,
+其功能是將相鄰的串列兩兩合併。
+如果我們能訂出一個函數 <code class="haskell">adjs :: List a -&gt; List (a × a)</code>,
+將相鄰的元素放在序對中，<code class="haskell">mergeAdj</code> 就可以寫成：</p><pre><code class="spec">mergeAdj = map merge' . adjs 
+</code></pre><p>但 <code class="haskell">adjs</code> 該怎麼定義呢？
+對大部分讀者來說，最自然的方式也許是用第<a href="Induction.html#ch:induction">2 </a>章將討論的歸納法。
+但作為練習，我們姑且用現有的組件試試看。
+先弄清楚我們對 <code class="haskell">adjs</code> 的期待。
+當 <code class="haskell">xs = [x0,x1,x2,x3]</code>, 我們希望
+<code class="haskell">adjs xs = [(x0,x1),(x2,x3)]</code>.
+但當 <code class="haskell">xs</code> 有奇數個元素時，例如 <code class="haskell">xs = [x0,x1,x2,x3,x4]</code>,
+最後一個元素 <code class="haskell">x4</code> 便落單了。
+如果是為了合併排序，我們也許可以把 <code class="haskell">x4</code> 和 <code class="haskell">[]</code> 放在一起，
+<code class="haskell">adjs xs = [(x0,x1),(x2,x3),(x4,[])]</code>.
+但為使 <code class="haskell">adjs</code> 適用於更多的情況，也許我們應該讓它多拿一個參數，
+當作落單的元素的配對。
+因此我們把 <code class="haskell">adjs</code> 的型別改為 <code class="haskell">a -&gt; List a -&gt; List (a × a)</code>,
+希望 <code class="haskell">adjs z xs = [(x0,x1),(x2,x3),(x4,z)]</code>.</p><p>我們試著看看這可如何辦到。</p><ul><li><p>首先，<code class="haskell">zip xs (tail xs)</code> 可把 <code class="haskell">xs</code> 的每個元素和其下一個放在序對中。
+例：當 <code class="haskell">xs = [x0,x1,x2,x3,x4]</code> 時，
+<code class="haskell">zip xs (tail xs)</code> 的值是 <code class="haskell">[(x0,x1),</code> <code class="haskell">(x1,x2),</code> <code class="haskell">(x2,x3),</code> <code class="haskell">(x3,x4)]</code>.</p></li><li><p>如果我們為 <code class="haskell">zip</code> 的第二個參數補上一個 <code class="haskell">z</code>,
+成為 <code class="haskell">zip xs (tail (xs ++ [z]))</code>，
+這可歸約為 <code class="haskell">[(x0,x1),(x1,x2),(x2,x3),(x3,x4),(x4,z)]</code>。</p></li><li><p>再將位置（由 <code class="haskell">0</code> 算起）為奇數的元素丟棄，我們便得到原先希望的
+<code class="haskell">[(x0,x1),(x2,x3),(x4,z)]</code> 了！</p></li></ul><p>讀者可試試看當 <code class="haskell">xs</code> 有偶數個元素時的情況。
+總之，<code class="haskell">adjs</code> 可定義成：</p><pre><code class="haskell">adjs ::  a -&gt; List a -&gt; List (a × a)
+adjs z xs = everyother (zip xs (tail xs ++ [z])) 
+</code></pre><p>其中 <code class="haskell">everyother ys</code> 把 <code class="haskell">ys</code> 中位置為奇數的元素丟棄。</p><p>最後，考慮如何把串列中位置為奇數的元素丟棄。
+一種做法是：一直從串列中丟掉頭兩個元素，直到串列用完：</p><pre><code class="haskell">everyother :: List a -&gt; List a
+everyother = map head . takeWhile (not . null) . iterate (drop 2) 
+</code></pre><p>總而言之，由下至上的合併排序可寫成：</p><pre><code class="haskell">msort :: List Int -&gt; List Int
+msort = head . until isSingle mergeAdj . map wrap 
+</code></pre><p>其中 <code class="haskell">mergeAdj</code> 的定義是：</p><pre><code class="haskell">mergeAdj :: List (List Int) -&gt; List (List Int)
+mergeAdj = map merge' . adjs [] 
+</code></pre><p>如果我們想看到合併排序完成前的每一步驟，可將 <code class="haskell">msort</code> 中
+（以 <code class="haskell">iterate</code> 與 <code class="haskell">dropWhile</code> 定義出）的 <code class="haskell">until</code>
+改為 <code class="haskell">iterate</code> 與 <code class="haskell">takeWhile</code>:</p><pre><code class="haskell">msortSteps :: List Int -&gt; List (List (List Int))
+msortSteps = takeWhile (not . isSingle) . iterate mergeAdj . map wrap 
+</code></pre><p>例如，<code class="haskell">msortSteps [9,2,5,3,6,4,7,0,5,1,8,2,3,1]</code> 可得到</p><pre><code class="spec">[  [[9],[2],[5],[3],[6],[4],[7],[0],[5],[1],[8],[2],[3],[1]],
+   [[2,9],[3,5],[4,6],[0,7],[1,5],[2,8],[1,3]],
+   [[2,3,5,9],[0,4,6,7],[1,2,5,8],[1,3]],
+   [[0,2,3,4,5,6,7,9],[1,1,2,3,5,8]]] 
+</code></pre><p>最後兩個串列合併為 <code class="haskell">[0,1,1,2,2,3,3,4,5,5,6,7,8,9]</code>，即為 <code class="haskell">msort</code> 的結果。</p></div><div class="navi"><div class="previous">&laquo;<a href="Basics-8.html#sec:lists">1.8 串列</a></div><div class="next"><a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

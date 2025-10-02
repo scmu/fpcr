@@ -32,7 +32,7 @@
         <!-- Hamburger icon -->
         <span></span>
     </a>
-<div id="menu"><div class="pure-menu"><h1 class="pure-menu-heading">函數程設與推論</h1><h2 class="pure-menu-heading">Functional Program Construction and Reasoning</h2><p><a href="../ToC.html">目錄</a></p><p><a href="../Preface.html">前言</a></p><nav class="nav" role="navigation"><ul class="pure-menu-list menu-level-1"><li class="pure-menu-item"><a href="Introduction.html#ch:intro">0 符號、演算、與抽象化</a><input class="toggle" id="menu-li-0" type="checkbox"/><label class="menu-toggle" for="menu-li-0"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Introduction-1.html#sec:knight-knave-island">0.1 騎士與惡棍之島</a></li>
+<div id="menu"><div class="pure-menu"><h1 class="pure-menu-heading">函數程設與推論</h1><h2 class="pure-menu-heading">Functional Program Construction and Reasoning</h2><p><a href="../ToC.html">目錄</a></p><p><a href="../Preface.html">前言</a></p><nav class="nav" role="navigation"><ul class="pure-menu-list menu-level-1"><li class="pure-menu-item"><a href="Introduction.html#ch:intro">0 符號、演算、與抽象化</a><input class="toggle" id="menu-li-0" checked type="checkbox"/><label class="menu-toggle" for="menu-li-0"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-selected pure-menu-item"><a href="#sec:knight-knave-island">0.1 騎士與惡棍之島</a></li>
 <li class="pure-menu-item"><a href="Introduction-2.html#sec:let-symbols-work">0.2 讓符號為你工作</a></li>
 <li class="pure-menu-item"><a href="Introduction-3.html#sec:abstraction">0.3 抽象化</a></li>
 <li class="pure-menu-item"><a href="Introduction-4.html#sec:abstraction-and-expression">0.4 抽象化與表達力</a></li>
@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -143,28 +143,34 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:intro">0 符號、演算、與抽象化</h1></div><div class="navi"><div class="previous">&laquo;<a href="Introduction.html#ch:intro">0 符號、演算、與抽象化</a></div><div class="next"><a href="Introduction-2.html#sec:let-symbols-work">0.2 讓符號為你工作</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:knight-knave-island">0.1 騎士與惡棍之島</h2><p>剛剛你是怎麼解這問題的？許多人解這類問題用的是窮舉法：假設<code class="haskell">A</code>是騎士、<code class="haskell">B</code>也是騎士，看看會不會有矛盾，接著假設<code class="haskell">A</code>是騎士、<code class="haskell">B</code>是惡棍，看看是否有矛盾... 依此類推。</p><p>我們想介紹另一種做法。我們將「<code class="haskell">A</code>是騎士」簡寫成<code class="haskell">A</code>. 如果<code class="haskell">A</code>說了某個陳述<code class="haskell">S</code>, 我們無法知道<code class="haskell">S</code>是否成立，但我們知道</p><pre><code class="spec">    A &lt;=&gt; S  
+</code></pre><p>其中的 <code class="haskell">(&lt;=&gt;)</code> 可以理解為邏輯中「若且唯若」的關係，也可以簡單理解為（真假值的）「等於」。若用口語說，當我們寫 <code class="haskell">P &lt;=&gt; Q</code>, 表示 <code class="haskell">P</code> 和 <code class="haskell">Q</code> 的真假值相同。確實，假定<code class="haskell">A</code>說了陳述<code class="haskell">S</code>，如果<code class="haskell">A</code>是騎士，<code class="haskell">S</code>便是真的；如果<code class="haskell">A</code>不是騎士，<code class="haskell">S</code>便是假的。因此「<code class="haskell">A</code>說了陳述<code class="haskell">S</code>」可寫成 <code class="haskell">A &lt;=&gt; S</code>。</p><p>「若且唯若」這符號有幾個性質。首先，對任何陳述 <code class="haskell">P</code>, 可知 <code class="haskell">P &lt;=&gt; P</code> 必定為真：</p><pre><code class="spec">  (P &lt;=&gt; P) &lt;=&gt; true 
+</code></pre><p>我們將這條規則命名為「自反恆真」。
+<input class="toggle" id="footnote-0-1-1" type="checkbox"/><label class="fnote-toggle" for="footnote-0-1-1">(註1) </label><span class="collapsible-footnote">給定二元關係 <code class="haskell">&lt;=:</code>，如果 <code class="haskell">x &lt;=: x</code> 對任何 <code class="haskell">x</code> 均成立，我們說 <code class="haskell">&lt;=:</code> 有<em>自反性</em>(<em>reflexivity</em>).<span id="ix-0-1"></span> 「自反恆真」即「自反性恆為真」的意思。</span>
+其次，既然 <code class="haskell">(&lt;=&gt;)</code> 可以理解為「等於」，理所當然該有交換律：
+<input class="toggle" id="footnote-0-1-2" type="checkbox"/><label class="fnote-toggle" for="footnote-0-1-2">(註2) </label><span class="collapsible-footnote"><code class="haskell">(&lt;=&gt;)</code> 和 <code class="haskell">(=)</code> 都是「等於」。我們在此處使用不同符號，僅是為了區分出先後次序：同一行內部的相等用 <code class="haskell">(&lt;=&gt;)</code>, 行與行之間的相等用 <code class="haskell">(=)</code>. 本書其他地方的用法可能不同。</span></p><pre><code class="spec">    P &lt;=&gt; Q
+ =  Q &lt;=&gt; P 
+</code></pre><p>最後，很少人注意到，真假值的「等於」是有結合律的：對任何 <code class="haskell">P</code>, <code class="haskell">Q</code>, 和 <code class="haskell">R</code>, 我們有這樣的性質：
+<input class="toggle" id="footnote-0-1-3" type="checkbox"/><label class="fnote-toggle" for="footnote-0-1-3">(註3) </label><span class="collapsible-footnote"><code class="haskell">(P &lt;=&gt; Q) &lt;=&gt; R</code> 只在 <code class="haskell">P</code>, <code class="haskell">Q</code>, 和 <code class="haskell">R</code> 都是真假值（或邏輯陳述）時有意義，否則 <code class="haskell">P</code>, <code class="haskell">Q</code>, 和 <code class="haskell">R</code>無法用 <code class="haskell">(&lt;=&gt;)</code> 串起。反例： <code class="haskell">(3 = 3) = 3</code> 可化簡成 <code class="haskell">true = 3</code>, 但後式中等號兩邊的值型別不同，不是合法的句子。也許因為我們較常考慮數字的相等，而較少用符號表達真假值的相等，<code class="haskell">(&lt;=&gt;)</code> 的結合律並不廣為人知。</span></p><pre><code class="spec">    (P &lt;=&gt; Q) &lt;=&gt; R
+ =  P &lt;=&gt; (Q &lt;=&gt; R) 
+</code></pre><p>為了練習，我們多考慮一些情況。假設我們問<code class="haskell">A</code>：「你是騎士嗎？」而<code class="haskell">A</code> 回答「是的！」這可以記成<code class="haskell">A &lt;=&gt; A</code>. 然而，根據自反恆真，<code class="haskell">A &lt;=&gt; A</code>可以化簡為<code class="haskell">true</code>. 這意味著：在這島上不管你問誰「你是騎士嗎」，對方都會回答「是」。</p><p>如果<code class="haskell">A</code>說：「<code class="haskell">B</code>是騎士」呢？ 這可以記成<code class="haskell">A &lt;=&gt; B</code>. 由此我們無法知道<code class="haskell">B</code>到底是騎士還是惡棍，但我們可以知道<code class="haskell">A</code>和<code class="haskell">B</code>是同一種人。</p><p>現在想想問題<a href="Introduction-0.html#eg:knight-knave-gold">0.1 </a>：居民 <code class="haskell">A</code> 說「如果你問 <code class="haskell">B</code> 他自己是不是騎士，他會說是。」這可以記成 <code class="haskell">A &lt;=&gt; (B &lt;=&gt; B)</code>. 我們來演算看看：</p><pre><code class="spec">   A &lt;=&gt; (B &lt;=&gt; B)
+=    <comment>{- 自反恆真-}</comment>
+   A &lt;=&gt; true
+=    <comment>{- 結合律與自反恆真 -}</comment>
+   A 
+</code></pre><p>也就是說，我們不知道<code class="haskell">B</code>到底是騎士還是惡棍，卻可知道<code class="haskell">A</code>一定是騎士！這段演算中，把 <code class="haskell">A &lt;=&gt; true</code> 換成 <code class="haskell">A</code> 的最後一步，直覺上似乎很直觀。如果要探究理由，其實用了結合律與自反恆真：<code class="haskell">(A &lt;=&gt; A) &lt;=&gt; true</code> 根據結合律可代換為 <code class="haskell">A &lt;=&gt; (A &lt;=&gt; true)</code>, 因此 <code class="haskell">A &lt;=&gt; true</code> 可代換成 <code class="haskell">A</code>.</p><p>再考慮一個熱身題：如果<code class="haskell">A</code>說「我和<code class="haskell">B</code>是同一種人」呢？這可記成<code class="haskell">A &lt;=&gt; (A &lt;=&gt; B)</code>。我們算算看:</p><pre><code class="spec">      A &lt;=&gt; (A &lt;=&gt; B)
+    =   <comment>{- 結合律 -}</comment>
+      (A &lt;=&gt; A) &lt;=&gt; B
+    =   <comment>{- 自反恆真 -}</comment>
+      true &lt;=&gt; B
+    =   <comment>{- 交換律與自反恆真 -}</comment>
+      B
+</code></pre><p>這次，我們不知<code class="haskell">A</code>是騎士還是惡棍，卻可知<code class="haskell">B</code>一定是騎士。</p><p>最後，我們該回到本章開頭的問題了。你站在山洞口，面對洞口的老人。姑且稱呼他為<code class="haskell">A</code>. 要怎麼想出一個問題問他，用來判斷島上到底有沒有金子呢？之前介紹邏輯符號的目的是讓我們可避免瞎猜，而用代數解未知數的方式把問題推演出來。把「島上有金子」這個命題記為<code class="haskell">G</code>. 我們希望問某個問題<code class="haskell">Q</code>。如果<code class="haskell">A</code>對問題<code class="haskell">Q</code>回答「是」，就表示島上有金子，反之則否。</p><ul><li><p>「<code class="haskell">A</code>對問題<code class="haskell">Q</code>回答『是』」記為<code class="haskell">A &lt;=&gt; Q</code>；</p></li><li><p>「<code class="haskell">A</code>對問題<code class="haskell">Q</code>回答『是』，島上便有金子」其實應該是一個若且唯若的命題，寫成<code class="haskell">G &lt;=&gt; (A &lt;=&gt; Q)</code>。</p></li></ul><p>而根據交換律和結合律，我們可以推演：</p><pre><code class="spec">       G &lt;=&gt; (A &lt;=&gt; Q)
+    =    <comment>{- 結合律 -}</comment>
+       (G &lt;=&gt; A) &lt;=&gt; Q
+    =    <comment>{- 交換律 -}</comment>
+       Q &lt;=&gt; (G &lt;=&gt; A)  
+</code></pre><p>我們可得知<code class="haskell">Q &lt;=&gt; (G &lt;=&gt; A)</code>，也就是說我們要問<code class="haskell">A</code>的問題<code class="haskell">Q</code>就是<code class="haskell">G &lt;=&gt; A</code>：「請問，『島上有金子』和『你是騎士』是不是等價的呢？」<input class="toggle" id="footnote-0-1-4" type="checkbox"/><label class="fnote-toggle" for="footnote-0-1-4">(註4) </label><span class="collapsible-footnote">不妨試試看能否把這句子講得不那麼繞口？</span></p><p>希望這個島上不論騎士或惡棍，邏輯都蠻不錯，才聽得懂這種問題囉！</p></div><div class="navi"><div class="previous">&laquo;<a href="Introduction.html#ch:intro">0 符號、演算、與抽象化</a></div><div class="next"><a href="Introduction-2.html#sec:let-symbols-work">0.2 讓符號為你工作</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

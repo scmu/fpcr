@@ -90,7 +90,7 @@
 <li class="pure-menu-item"><a href="Semantics.html#ch:semantics">4 關於語意的基本概念</a><input class="toggle" id="menu-li-4" type="checkbox"/><label class="menu-toggle" for="menu-li-4"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Semantics-1.html#sec:denotational-semantics">4.1 指稱語意</a></li>
 <li class="pure-menu-item"><a href="Semantics-2.html#sec:operational-semantics">4.2 操作語意</a></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:derivation">5 一般程式推導</a><input class="toggle" id="menu-li-5" checked type="checkbox"/><label class="menu-toggle" for="menu-li-5"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-1.html#sec:fold-unfold-transform">5.1 展開-收回轉換</a></li>
+<li class="pure-menu-item"><a href="Derivation.html#ch:derivation">5 一般程式推導</a><input class="toggle" id="menu-li-5" checked type="checkbox"/><label class="menu-toggle" for="menu-li-5"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-selected pure-menu-item"><a href="#sec:fold-unfold-transform">5.1 展開-收回轉換</a></li>
 <li class="pure-menu-item"><a href="Derivation-2.html#sec:efficiency-basics">5.2 關於執行效率</a></li>
 <li class="pure-menu-item"><a href="Derivation-3.html#sec:fold-unfold-transform-efficiency">5.3 用展開-收回轉換增進效率</a><input class="toggle" id="menu-li-5-3" type="checkbox"/><label class="menu-toggle" for="menu-li-5-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-3.html#sec:poly-horner">5.3.1 計算多項式 -- Horner 法則</a></li>
 <li class="pure-menu-item"><a href="Derivation-3.html#sec:exp-binary-roll">5.3.2 二進位表示法</a></li>
@@ -143,40 +143,136 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:derivation">5 一般程式推導</h1></div><div class="navi"><div class="previous">&laquo;<a href="Semantics-2.html#sec:operational-semantics">4.2 操作語意</a></div><div class="next"><a href="Derivation-1.html#sec:fold-unfold-transform">5.1 展開-收回轉換</a>&raquo;</div></div><div class="content"><p><em>程式推導</em>(<em>program derivation</em>)<span id="ix-5-1"></span>是本書的重要主題。
-給定一個待解決的問題，並假設該問題能描述成邏輯、數學、或其他形式語言（稱作一個形式規格(specification)），
-程式推導泛指<em>以嚴謹方式將該規格轉換成一個解決該問題的程式</em>的方法。
-指令式語言與函數語言都能做程式推導，而且有許多道理可相通。
-本書討論函數語言的程式推導。
-一個簡單、典型的函數程式語言推導可能有如下的形式：</p><pre><code class="spec">  spec
-=  <comment>{- 性質 1 -}</comment>
-  e1
-=  <comment>{- 性質 2 -}</comment>
-  ....
-=  <comment>{- 性質 n -}</comment>
-  en 
-</code></pre><p>其中 <code class="haskell">spec</code> 是問題的規格，通常也是一個函數語言程式。
-根據性質 1, <code class="haskell">spec</code> 等於 <code class="haskell">e1</code>；根據性質 2，<code class="haskell">e1</code> 等於 <code class="haskell">e2</code>... 長此以往，直到我們導出一個符合我們要求的 <code class="haskell">en</code>.
-光這麼看來，這和我們前幾章作的數學證明似乎沒什麼不同。
-差別在於，做證明時我們已有 <code class="haskell">spec</code> 和 <code class="haskell">en</code>，要做的是把 <code class="haskell">spec</code> 到 <code class="haskell">en</code> 之間的步驟補足。
-但做程式推導時，我們是從 <code class="haskell">spec</code> 出發，希望透過種種跡象找出一個滿意的（可能是夠快的、不佔空間的、或滿足某些其他性質的）<code class="haskell">en</code>.
-當然，找出 <code class="haskell">en</code> 之後，從 <code class="haskell">spec</code> 推出 <code class="haskell">en</code> 的過程就成了 <code class="haskell">spec = en</code> 的證明。
-當程式推導的進行方式類似數學演算，有人可能稱之為<em>程式演算</em>(<em>program calculation</em>)<span id="ix-5-2"></span>。
-本書混用這兩個詞彙，並不區分。</p><p>為何做程式推導？第一個理由是我們希望程式正確。
-此處「正確」指的是 <code class="haskell">en</code> 確實滿足了最初的規格 <code class="haskell">spec</code>。但如果只為了正確性，我們為何不能先無論如何把 <code class="haskell">en</code> 寫出，再試著證明 <code class="haskell">spec = en</code>？
-原因之一是通常程式寫好了，大家便不想證它了。
-更重要的是：程式開發時，若沒有把「怎麼證明它」列入考量，寫出的程式常常是很難證明的。
-為了確保有證明，最好讓「產生證明」這件事成為程式開發過程的一部分，甚至讓證明引導程式的開發。
-Dijkstra 說道：</p><blockquote><p>先給一個程式再證明它，在某個意義上是把馬車放在馬前面。
-更有希望的做法是讓正確性證明與程式一起長出來：
-如此一來，我們能選擇證明的結構，然後設計一個能用這種方法證明出來的程式。
-這還有個額外的好處：正確性考量可以成為程式該怎麼寫的引導與啟發。 <a href="../Biblio.html#Dijkstra:74:Programming">[Dijkstra 1974]</a></p></blockquote><p>Dijkstra 的最後一句話帶到了程式推導的第三個理由：
-提倡者認為，程式推導的種種方法與技巧可以引導我們去分析、思考、解決問題；
-這是解問題、甚至發現新演算法的方法（<a href="../Biblio.html#Backhouse:03:Program">Backhouse [2003]</a>, <a href="../Biblio.html#Backhouse:11:Algorithmic">Backhouse [2011]</a>）。
-藉由良好的符號設計，我們可以發現常見的程式推導模式，並將其推廣到其他有類似性質的問題上。</p><p>第<a href="Introduction.html#ch:intro">0 </a>章的結尾說道「函數語言的價值便是：它是個適於演算的語言。」
-便於做程式推導，是我覺得函數語言最突出的特質。
-我們可以由規格出發、在符號上操作，將程式如同求代數的解一樣地算出來。只要每個小步驟都正確，最後的程式就是正確的。
-由第<a href="Basics.html#ch:basics">1 </a>章至今，我們做了許多準備工作，備齊需要的基本知識。現在我們終於可以開始做一些演算了。</p></div><div class="navi"><div class="previous">&laquo;<a href="Semantics-2.html#sec:operational-semantics">4.2 操作語意</a></div><div class="next"><a href="Derivation-1.html#sec:fold-unfold-transform">5.1 展開-收回轉換</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:derivation">5 一般程式推導</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation.html#ch:derivation">5 一般程式推導</a></div><div class="next"><a href="Derivation-2.html#sec:efficiency-basics">5.2 關於執行效率</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:fold-unfold-transform">5.1 展開-收回轉換</h2><p>考慮這麼一個例子：給定一個整數形成的串列，我們想計算其每個數的平方的和。例如當輸入是<code class="haskell">[2,6,5,3]</code>, 我們希望算出 $2^2 + 6^2 + 5^2 + 3^2 = 74$. 這項工作可以簡短地描述如下：</p><p>函數 <code class="haskell">sumsq</code> 的型別為 <code class="haskell">List Int -&gt; Int</code>.
+其中 <code class="haskell">map square</code> 將輸入串列的每個元素都平方，然後由 <code class="haskell">sum</code> 計算其總和。第<a href="Induction-4.html#sec:induction-lists">2.4 </a>節中給過一個 <code class="haskell">sum</code> 的歸納定義，重複如下：</p><pre><code class="spec">sum :: List Int -&gt; Int
+sum []      = 0
+sum (x:xs)  = x + sum xs 
+</code></pre><p><b>消除中間串列</b> &emsp;
+對大部分的應用而言，如上定義的 <code class="haskell">sumsq</code> 已經很堪用了。但作為一個例子，我們來挑惕些仍不滿意之處。執行 <code class="haskell">sumsq xs</code> 時，<code class="haskell">map square</code> 會產生另一個（存放 <code class="haskell">xs</code> 每個元素的平方的）串列，該串列隨即由 <code class="haskell">sum</code> 消掉 --- 感覺上似乎很浪費空間與時間。
+<input class="toggle" id="footnote-5-1-1" type="checkbox"/><label class="fnote-toggle" for="footnote-5-1-1">(註1) </label><span class="collapsible-footnote">在惰性求值的情況下，該中間串列的<em>每個</em>節點被產生後立刻被 <code class="haskell">sum</code> 消去，因此不會真的佔用和 <code class="haskell">xs</code> 同樣長度的空間。這也是大家覺得惰性求值有助於模組化、使小函數變得易於重用的例子之一。但「產生一個新節點、立刻消去」仍耗了一些不必要的時間。</span>
+有不產生這個中間串列的方法嗎？</p><p>我們試著做些計算。當 <code class="haskell">sumsq</code> 的參數是 <code class="haskell">[]</code> 時：</p><pre><code class="haskell">   sumsq []
+ ===    <comment>{- <code class="haskell">sumsq</code> 之定義 -}</comment>
+   sum (map square [])
+ ===    <comment>{- <code class="haskell">map</code> 之定義 -}</comment>
+   sum []
+ ===    <comment>{- <code class="haskell">sum</code> 之定義 -}</comment>
+   0 
+</code></pre><p>由此我們得知 <code class="haskell">sumsq []</code> 會被計算成 <code class="haskell">0</code>. 當輸入不是空串列時呢？試計算：</p><pre><code class="haskell">   sumsq (x:xs)
+ ===    <comment>{- <code class="haskell">sumsq</code> 之定義 -}</comment>
+   sum (map square (x:xs))
+ ===    <comment>{- <code class="haskell">map</code> 之定義 -}</comment>
+   sum (square x : map square xs)
+ ===    <comment>{- <code class="haskell">sum</code> 之定義 -}</comment>
+   square x + sum (map square xs)
+ ===    <comment>{- <code class="haskell">sumsq</code> 之定義 -}</comment>
+   square x + sumsq xs 
+</code></pre><p>可得知對任何 <code class="haskell">x</code> 與 <code class="haskell">xs</code>, <code class="haskell">sum (x:xs)</code> 歸約的結果和 <code class="haskell">square x + sumsq xs</code> 會是相同的。
+總結說來，藉由計算，我們發現 <code class="haskell">sumsq</code> 滿足以下兩條性質：</p><p>但如果我們翻轉過來，把這兩條性質當作 <code class="haskell">sumsq</code> 的新定義呢？
+這是一個依據歸納法定義的良好程式，而且不會產生中間串列！</p><p>但我們怎知道 <code class="haskell">sumsq</code> 的新定義滿足我們最初的要求 ([RefUndefined])，即 <code class="haskell">sumsq = sum . map square</code> 呢？
+回顧起來，我們的演算只證明了當 <code class="haskell">sumsq</code> 滿足 ([RefUndefined])，它也滿足 ([RefUndefined])，
+卻還不能據此宣稱另一個方向：若 ([RefUndefined]) 成立，([RefUndefined]) 也成立。
+我們將在第<a href="Semantics.html#ch:semantics">4 </a>章詳細討論這個問題。
+目前可暫時這麼說：如果我們從某個問題規格 <code class="haskell">f = e</code> 起始，發現 <code class="haskell">f</code> 滿足某一組等式，而這些等式剛好可湊成一個<em>會正常終止</em>的歸納定義，則 <code class="haskell">e</code> 確實是唯一滿足這些等式的解。由於如此的 <code class="haskell">e</code> 是唯一的，我們也可倒過來以這組等式為 <code class="haskell">f</code> 的定義，並同時宣稱 <code class="haskell">f = e</code> 這個性質成立。</p><p>回顧起來，在 <code class="haskell">sumsq</code> 的計算中，我們僅是把 <code class="haskell">sumsq</code> 的定義展開，接著展開 <code class="haskell">map</code>, <code class="haskell">sum</code> 等等元件的定義，直到我們又看到 <code class="haskell">sumsq</code> 的定義出現在式子中、剛好可以收回為止。
+這是一種單純而歷史悠久的程式推導方法，稱作<em>展開-收回轉換</em>(<em>fold-unfold transformation</em>)<span id="ix-5-1"></span>。
+雖然簡單，有時這個方法意外地有用。</p><p>在這個例子中，我們真正做到的是將一個單行、使用全麥編程的 <code class="haskell">sumsq</code> 定義轉換成了一個歸納定義。
+新定義的 <code class="haskell">sumsq</code> 比起原版稍有效率些，但這只是恰巧發生的 --- 歸納定義的程式不見得總會比較有效率。
+程式推導確保程式的正確性 --- 意即<em>導出的程式與原本的規格是同一個函數</em>。
+但新程式的效率仍須單獨分析。這是下一節的主題。</p><div class="exlist"><div class="exercise exer" id="ex:descend"><h5 class="exercise-title">練習 5.1 </h5><p>下述函數 <code class="haskell">descend n</code> 傳回 <code class="haskell">[n, n-1, n-2...0]</code>:</p><pre><code class="haskell">descend :: Nat -&gt; List Nat
+descend Zero     = []
+descend (Suc n)  = Suc n : descend n 
+</code></pre><p>定義 <code class="haskell">sumseries = sum . descend</code>.
+請找出 <code class="haskell">sumseries</code> 的歸納定義。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-1" type="checkbox"/><label class="lbl-toggle" for="ans-5-1">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>顯然 <code class="haskell">sum (descend 0) = 0</code>. 考慮歸納情況：</p><pre><code class="haskell">   sum (descend (Suc n))
+ ===   <comment>{- <code class="haskell">descend</code> 之定義 -}</comment>
+   sum (Suc n : descend n)
+ ===   <comment>{- <code class="haskell">sum</code> 之定義 -}</comment>
+   (Suc n) + sum (descend n)
+ ===   <comment>{- <code class="haskell">sumseries</code> 之定義 -}</comment>
+   (Suc n) + sumseries n 
+</code></pre><p>因此</p><pre><code class="haskell">sumseries Zero     = Zero
+sumseries (Suc n)  = (Suc n) + sumseries n 
+</code></pre></div></div></div><div class="exlist"><div class="exercise exer" id="ex:repeatN"><h5 class="exercise-title">練習 5.2 </h5><p>承接習題<a href="#ex:descend">5.1 </a>。函數 <code class="haskell">repeatN :: (Nat × a) -&gt; List a</code> 的定義為</p><pre><code class="spec">repeatN (n,x) = map (const x) (descend n) 
+</code></pre><p>因此，<code class="haskell">repeatN (n,x)</code> 會傳回一個含 <code class="haskell">n</code> 個 <code class="haskell">x</code> 的串列。
+例如 <code class="haskell">repeatN (3,'a') = "aaa"</code>.
+請算出一個歸納定義的 <code class="haskell">repeatN</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-2" type="checkbox"/><label class="lbl-toggle" for="ans-5-2">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>顯然 <code class="haskell">repeatN (0,x) = []</code>.
+至於歸納情況，演算如下：</p><pre><code class="haskell">   repeatN (Suc n, x)
+ ===   <comment>{- <code class="haskell">repeatN</code> 之定義 -}</comment>
+   map (const x) (descend (Suc n))
+ ===   <comment>{- <code class="haskell">descend</code> 之定義 -}</comment>
+   map (const x) (Suc n : descend n)
+ ===   <comment>{- <code class="haskell">map</code> 與 <code class="haskell">const</code> 之定義 -}</comment>
+   x : map (const x) (descend n)
+ ===   <comment>{- <code class="haskell">repeatN</code> 之定義 -}</comment>
+   x : repeatN (n,x) 
+</code></pre><p>因此，</p><pre><code class="haskell">repeatN (Zero,   x)  = []
+repeatN (Suc n,  x)  = x : repeatN (n,x) 
+</code></pre></div></div></div><div class="exlist"><div class="exercise exer" id="ex:rld"><h5 class="exercise-title">練習 5.3 </h5><p>承接習題<a href="#ex:repeatN">5.2 </a>。遊程編碼(run-length encoding)<span id="ix-5-2"></span>是一種簡單的壓縮方式：將字串中重複的字元表達成其出現的數字。例如 <code class="haskell">"aaabbbbcdd"</code> 可以表達為 <code class="haskell">"3a4b1c2d"</code>. 下列函數 <code class="haskell">rld :: List (Nat × a) -&gt; List a</code> 則是抽象過的「遊程解碼」，將已經表示成（次數$\times$字元）的壓縮文展開：</p><pre><code class="spec">rld = concat . map repeatN 
+</code></pre><p>例如， <code class="haskell">rld [(2,'a'), (3,'b'), (1,'c')] = "aabbbc"</code>.
+請導出 <code class="haskell">rld</code> 的歸納定義。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-3" type="checkbox"/><label class="lbl-toggle" for="ans-5-3">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>基底狀況：</p><pre><code class="spec">   rld []
+=    <comment>{- <code class="haskell">rld</code> 之定義 -}</comment>
+   concat (map repeatN [])
+=    <comment>{- <code class="haskell">map</code> 與 <code class="haskell">concat</code> 之定義 -}</comment>
+   [] 
+</code></pre><p>歸納狀況：</p><pre><code class="haskell">      rld ((n,x):xs)
+ ===    <comment>{- <code class="haskell">rld</code> 之定義 -}</comment>
+      concat (map repeatN ((n,x):xs))
+ ===    <comment>{- <code class="haskell">map</code> 之定義 -}</comment>
+      concat (repeatN (n,x) : map repeatN xs)
+ ===    <comment>{- <code class="haskell">concat</code> 之定義 -}</comment>
+      repeatN (n,x) ++ concat (map repeatN xs)
+ ===    <comment>{- <code class="haskell">rld</code> 之定義 -}</comment>
+      repeatN (n,x) ++ rld xs 
+</code></pre><p>因此我們已推導出：</p><pre><code class="haskell">rld []          = []
+rld ((n,x):xs)  = repeatN (n,x) ++ rld xs 
+</code></pre></div></div></div><div class="exlist"><div class="exercise exer" id="ex:delete-select"><h5 class="exercise-title">練習 5.4 </h5><p>下列函數 <code class="haskell">delete</code> 將輸入串列中的每個元素輪流刪除：</p><pre><code class="haskell">delete         ::  List a -&gt; List (List a)
+delete []      =   []
+delete (x:xs)  =   xs : map (x:) (delete xs) 
+</code></pre><p>例如，<code class="haskell">delete [1,2,3,4] = [[2,3,4], [1,3,4], [1,2,4], [1,2,3]]</code>.
+函數 <code class="haskell">select :: List a -&gt; List (a × List a)</code> 則將一個串列中的元素依次選出。
+例如，<code class="haskell">select [1,2,3,4] = [(1,[2,3,4]), (2,[1,3,4]), (3,[1,2,4]), (4,[1,2,3])]</code>. 函數 <code class="haskell">select</code> 恰巧可用 <code class="haskell">delete</code> 定義出來：</p><pre><code class="haskell">select xs = zip xs (delete xs) 
+</code></pre><p>請推導出 <code class="haskell">select</code> 的歸納定義。<strong>提示</strong>：下述性質可能有用 ---
+<code class="haskell">zip xs (map f ys) = map (id *** f) (zip xs ys)</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-4" type="checkbox"/><label class="lbl-toggle" for="ans-5-4">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>顯然 <code class="haskell">select [] = []</code>。考慮 <code class="haskell">xs := x:xs</code> 的情況：</p><pre><code class="haskell">    select (x:xs)
+ ===   <comment>{- <code class="haskell">select</code> 與 <code class="haskell">delete</code> 之定義 -}</comment>
+    zip (x:xs) (xs : map (x:) (delete xs))
+ ===   <comment>{- <code class="haskell">zip</code> 之定義 -}</comment>
+    (x, xs) : zip xs (map (x:) (delete xs))
+ ===   <comment>{- <code class="haskell">zip xs (map f ys) = map (id *** f) (zip xs ys)</code> -}</comment>
+    (x, xs) : map (id *** (x:)) (zip xs (delete xs))
+ ===   <comment>{- <code class="haskell">select</code> 之定義 -}</comment>
+    (x, xs) : map (id *** (x:)) (select xs) 
+</code></pre><p>因此，</p><pre><code class="spec">select []      = []
+select (x:xs)  = (x, xs) : map (id *** (x:)) (select xs) 
+</code></pre></div></div></div><div class="exlist"><div class="exercise exer" id="ex:delete-take-drop"><h5 class="exercise-title">練習 5.5 </h5><p>函數 <code class="haskell">delete</code> 有另一個可能定義：</p><pre><code class="spec">delete xs = map (del xs) [0..length xs-1]
+   where del xs i = take i xs ++ drop (1+i) xs 
+</code></pre><p>（此處我們利用了當 <code class="haskell">n</code> 為負數時，<code class="haskell">[0..n]</code> 化簡成 <code class="haskell">[]</code> 的特性。）
+請用此定義推導出 <code class="haskell">delete</code> 的歸納定義。<strong>提示</strong>：你可能用得上下述性質：</p><pre><code class="equation" id="eq:gen-split">  |[0..n] = 0 : map (1+) [0..n-1]|\mbox{,~~ if |n &gt;= 0|,}</code>    (5.1 )
+</pre></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-5" type="checkbox"/><label class="lbl-toggle" for="ans-5-5">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>以下只列出歸納狀況：</p><pre><code class="haskell">    delete (x:xs)
+ ===   <comment>{- <code class="haskell">delete</code> 之定義 -}</comment>
+    map (del (x:xs)) [0..length (x:xs) -1]
+ ===   <comment>{- <code class="haskell">length</code> 之定義，簡單運算 -}</comment>
+    map (del (x:xs)) [0..length xs]
+ ===   <comment>{- 由於 <code class="haskell">length xs &gt;= 0</code>, 使用 \eqref{eq:gen-split} -}</comment>
+   map (del (x:xs)) (0 : map (1+) [0..length xs-1])
+ ===   <comment>{- <code class="haskell">map</code> 之定義 -}</comment>
+   del (x:xs) 0 : map (del (x:xs)) (map (1+) [0..length xs-1])
+ ===   <comment>{- <code class="haskell">map</code> 融合 -}</comment>
+   del (x:xs) 0 : map (del (x:xs) . (1+)) [0..length xs-1] 
+</code></pre><p>在此暫停一下，觀察 <code class="haskell">del (x:xs)</code>. 顯然, <code class="haskell">del (x:xs) 0 = xs</code>. 至於 <code class="haskell">del (x:xs) . (1+)</code>，我們演算看看:</p><pre><code class="haskell">    (del (x:xs) . (1+)) i
+ ===    <comment>{- <code class="haskell">(.)</code> 與 <code class="haskell">del</code> 之定義 -}</comment>
+    take (1+ i) (x:xs) ++ drop (1+ (1+ i)) (x:xs)
+ ===    <comment>{- <code class="haskell">take</code> 與 <code class="haskell">drop</code> 之定義 -}</comment>
+    x : take i xs ++ drop (1+ i) xs
+ ===    <comment>{- <code class="haskell">del</code> 之定義 -}</comment>
+    x : del xs i
+ ===    <comment>{- <code class="haskell">(.)</code> 之定義 -}</comment>
+    ((x:) . del xs) i 
+</code></pre><p>繼續之前的演算：</p><pre><code class="haskell">    del (x:xs) 0 : map (del (x:xs) . (1+)) [0 .. length xs - 1]
+ ===   <comment>{- 前述之演算 -}</comment>
+    xs : map ((x:) . del xs) [0 .. length xs - 1]
+ ===   <comment>{- <code class="haskell">map</code> 融合 -}</comment>
+    xs : map (x:) (map (del xs) [0 .. length xs - 1])
+ ===   <comment>{- <code class="haskell">delete</code> 之定義 -}</comment>
+    xs : map (x:) (delete xs) 
+</code></pre><p>由此，我們導出了正文中 <code class="haskell">delete</code> 的歸納定義.</p></div></div></div></div><div class="navi"><div class="previous">&laquo;<a href="Derivation.html#ch:derivation">5 一般程式推導</a></div><div class="next"><a href="Derivation-2.html#sec:efficiency-basics">5.2 關於執行效率</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

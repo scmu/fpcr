@@ -58,13 +58,13 @@
 <li class="pure-menu-item"><a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a></li>
 <li class="pure-menu-item"><a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
+<li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" checked type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
 <li class="pure-menu-item"><a href="Induction-2.html#sec:induction-on-Nat">2.2 自然數上之歸納定義</a></li>
 <li class="pure-menu-item"><a href="Induction-3.html#sec:inductive-proof-on-Nat">2.3 自然數上之歸納證明</a></li>
 <li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists">2.4 串列與其歸納定義</a><input class="toggle" id="menu-li-2-4" type="checkbox"/><label class="menu-toggle" for="menu-li-2-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists-defn">2.4.1 串列上之歸納定義</a></li>
 <li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists-proof">2.4.2 串列上之歸納證明</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Induction-5.html#sec:data-prog-proof">2.5 從資料、程式、到證明</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:data-prog-proof">2.5 從資料、程式、到證明</a></li>
 <li class="pure-menu-item"><a href="Induction-6.html#sec:more-inductive-defns">2.6 更多歸納定義與證明</a><input class="toggle" id="menu-li-2-6" type="checkbox"/><label class="menu-toggle" for="menu-li-2-6"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction-6.html#sec:filter-takeWhile-dropWhile">2.6.1 <code class="haskell">filter</code>, <code class="haskell">takeWhile</code>, 與 <code class="haskell">dropWhile</code></a></li>
 <li class="pure-menu-item"><a href="Induction-6.html#sec:elem-neq-proof">2.6.2 <code class="haskell">elem</code> 與不等式證明</a></li>
 <li class="pure-menu-item"><a href="Induction-6.html#sec:list-segments">2.6.3 串列區段</a></li>
@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -143,28 +143,60 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:induction">2 歸納定義與證明</h1></div><div class="navi"><div class="previous">&laquo;<a href="Induction-4.html#sec:induction-lists">2.4 串列與其歸納定義</a></div><div class="next"><a href="Induction-6.html#sec:more-inductive-defns">2.6 更多歸納定義與證明</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:data-prog-proof">2.5 從資料、程式、到證明</h2><p>本節再用一個例子談談「讓符號為我們工作」。考慮證明下述性質：</p><pre><code class="equation" id="eq:sum-concat"> |sum . concat = sum . map sum|\mbox{~ ~.}</code>    (2.6 )
+</pre><p>根據外延相等，這相當於證明對所有<code class="haskell">xss</code>,
+<code class="haskell">sum (concat xss) = sum (map sum xss)</code>.
+當 <code class="haskell">xss := []</code>, 等號兩邊都歸約成 <code class="haskell">0</code>. 考慮 <code class="haskell">xss := xs :xss</code> 的情況：</p><pre><code class="haskell">      sum (concat (xs:xss))
+ ===    <comment>{- <code class="haskell">concat</code> 之定義 -}</comment>
+      sum (xs ++ concat xss)
+ ===    <comment>{- 因 <code class="haskell">sum (xs ++ ys) = sum xs + sum ys</code> -}</comment>
+      sum xs + sum (concat xss)
+ ===    <comment>{- 歸納假設 -}</comment>
+      sum xs + sum (map sum xss)
+ ===    <comment>{- <code class="haskell">sum</code> 之定義 -}</comment>
+      sum (sum xs : map sum xss)
+ ===    <comment>{- <code class="haskell">map</code> 之定義 -}</comment>
+      sum (map sum (xs:xss)) 
+</code></pre><p>讀者對這個證明最大的疑問可能是：我們怎麼知道該用 <code class="haskell">sum (xs ++ ys) = sum xs + sum ys</code> 呢？
+為什麼當我們遇到 <code class="haskell">sum (xs ++ concat xss)</code>, 我們不是把 <code class="haskell">xs</code> 再拆成首和尾，甚至把 <code class="haskell">xss</code> 拆開？
+這是許多綜合考量的結果。
+首先，我們預期會使用歸納假設，因此證明前幾步的目的均為把 <code class="haskell">sum</code> 推到 <code class="haskell">concat xss</code> 左側，試圖做出 <code class="haskell">sum (concat xss)</code>.
+此處我們再強調一個觀念：<em>證明中的步驟不是瞎猜的，而是有目的的</em>。
+符號給我們提示：我們需要把 <code class="haskell">sum</code> 往右推，因此我們試圖尋找能完成這個目標的性質。</p><p>其次，<em>證明的結構跟隨著程式的結構</em>。由於 <code class="haskell">concat</code> 是由 <code class="haskell">(++)</code> 定義的，每一個關於 <code class="haskell">concat</code> 的定理，均很有可能奠基在一個關於 <code class="haskell">(++)</code> 的相對定理上。為了證明一個描述 <code class="haskell">sum</code> 與 <code class="haskell">concat</code> 的關係的定理，我們可能會需要一個關於 <code class="haskell">sum</code> 與 <code class="haskell">(++)</code> 的性質。</p><p>有了符號給我們的這兩個線索，我們便可以運用我們對語意的了解：<code class="haskell">sum</code> 與 <code class="haskell">(++)</code> 應該會滿足什麼性質？
+我們可猜測應該是 <code class="haskell">sum (xs ++ ys) = sum xs + sum ys</code> --- 根據我們對 <code class="haskell">sum</code> 與 <code class="haskell">(++)</code> 的語意上的理解，這性質成立的機會很大。
+而且，這個性質允許我們把 <code class="haskell">sum</code> 推到右邊。</p><p>符號仍舊幫助了我們。
+我們不可能期待所有定理都只靠符號推導出，在關鍵時刻我們仍會需要對於特定領域的、語意上的知識。但符號給了我們許多引導，
+縮小我們需要猜測的範圍。</p><p>至於 <code class="haskell">sum (xs ++ ys) = sum xs + sum ys</code> 該怎麼證明呢？
+不要急著把 <code class="haskell">xs</code> 與 <code class="haskell">ys</code> 都拆開。
+觀察等號左右邊的式子，根據 <code class="haskell">(++)</code>, <code class="haskell">(+)</code> 與 <code class="haskell">sum</code> 的定義，兩個式子的歸約都是先對 <code class="haskell">xs</code> 做情況分析。
+因此我們可試著在 <code class="haskell">xs</code> 上做歸納。</p><p><em>證明的結構跟隨著程式的結構</em> --- 這是做證明時相當好用的指引。
+程式對哪個參數做歸納，我們做證明時就在那個參數上做歸納。
+函數 <code class="haskell">f</code> 用函數 <code class="haskell">g</code> 定義，我們證明 <code class="haskell">f</code> 的性質時就可以預期會需要一個 <code class="haskell">g</code> 的相關性質。
+並非所有證明都可以如此做出，但這個模式在許多情況下都適用。</p><p>而如我們所知，<em>程式的結構又跟隨著資料的結構</em>：
+例如，串列有 <code class="haskell">[]</code> 和 <code class="haskell">x:xs</code> 兩個情況，我們定義串列上的程式時也分出這兩個情況，
+定義 <code class="haskell">f (x:xs)</code> 時可以使用 <code class="haskell">f xs</code> 的值。
+資料結構、程式、與證明於是有著這樣的連續關係：
+歸納定義出一個資料結構，我們就有了一個在上面歸納定義程式的方法；
+有了歸納定義的程式，我們便知道怎麼做關於它的歸納證明。
+一切由資料結構開始。</p><div class="exlist"><div class="exercise exer" id="ex:length-concat"><h5 class="exercise-title">練習 2.12 </h5><p>證明 <code class="haskell">length . concat = sum . map length</code>.
+我們會需要什麼關於 <code class="haskell">(++)</code> 的相關性質？</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-12" type="checkbox"/><label class="lbl-toggle" for="ans-2-12">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>考慮 <code class="haskell">xs:xss</code> 的情況：</p><pre><code class="spec">     length (concat (xs:xss))
+===  length (xs ++ concat xss)
+===    <comment>{- 因 <code class="haskell">length (xs ++ ys) = length xs + length ys</code> -}</comment>
+     length xs + length (concat xss)
+===    <comment>{- 歸納假設 -}</comment>
+     length xs + sum (map length xss)
+===  sum (length xs : map length xss)
+===  sum (map length (xs:xss)) 
+</code></pre><p>我們需要的性質是 <code class="haskell">length (xs ++ ys) = length xs + length ys</code> .</p></div></div><div class="exercise exer" id="ex:map-concat"><h5 class="exercise-title">練習 2.13 </h5><p>證明對所有 <code class="haskell">f</code>, <code class="haskell">map f . concat = concat . map (map f)</code>.
+我們會需要什麼關於 <code class="haskell">(++)</code> 的相關性質？</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-13" type="checkbox"/><label class="lbl-toggle" for="ans-2-13">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>考慮 <code class="haskell">xs:xss</code> 的情況：</p><pre><code class="spec">     map f (concat (xs:xss))
+===  map f (xs ++ concat xss)
+===   <comment>{- 因 <code class="haskell">map f (xs ++ ys) = map f xs ++ map f ys</code> -}</comment>
+     map f xs ++ map f (concat xss)
+===   <comment>{- 歸納假設 -}</comment>
+     map f xs ++ concat (map (map f xss))
+===  concat (map f xs : map (map f xss))
+===  concat (map (map f (xs : xss))) 
+</code></pre><p>我們需要的性質是 <code class="haskell">map f (xs ++ ys) = map f xs ++ map f ys</code> .</p></div></div></div></div><div class="navi"><div class="previous">&laquo;<a href="Induction-4.html#sec:induction-lists">2.4 串列與其歸納定義</a></div><div class="next"><a href="Induction-6.html#sec:more-inductive-defns">2.6 更多歸納定義與證明</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

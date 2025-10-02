@@ -87,8 +87,8 @@
 <li class="pure-menu-item"><a href="SearchTrees-2.html#">3.2.4 紅黑樹之性質：顏色</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Semantics.html#ch:semantics">4 關於語意的基本概念</a><input class="toggle" id="menu-li-4" type="checkbox"/><label class="menu-toggle" for="menu-li-4"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Semantics-1.html#sec:denotational-semantics">4.1 指稱語意</a></li>
-<li class="pure-menu-item"><a href="Semantics-2.html#sec:operational-semantics">4.2 操作語意</a></li>
+<li class="pure-menu-item"><a href="Semantics.html#ch:semantics">4 關於語意的基本概念</a><input class="toggle" id="menu-li-4" checked type="checkbox"/><label class="menu-toggle" for="menu-li-4"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Semantics-1.html#sec:denotational-semantics">4.1 指稱語意</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:operational-semantics">4.2 操作語意</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Derivation.html#ch:derivation">5 一般程式推導</a><input class="toggle" id="menu-li-5" type="checkbox"/><label class="menu-toggle" for="menu-li-5"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-1.html#sec:fold-unfold-transform">5.1 展開-收回轉換</a></li>
 <li class="pure-menu-item"><a href="Derivation-2.html#sec:efficiency-basics">5.2 關於執行效率</a></li>
@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -143,28 +143,22 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:semantics">4 關於語意的基本概念</h1></div><div class="navi"><div class="previous">&laquo;<a href="Semantics-1.html#sec:denotational-semantics">4.1 指稱語意</a></div><div class="next"><a href="Derivation.html#ch:derivation">5 一般程式推導</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:operational-semantics">4.2 操作語意</h2><p><em>操作語意</em>(operational semantics)<span id="ix-4-3"></span>談一個程式<em>做什麼</em>。
+在操作語意中，我們通常不談符號的「意思」是什麼。
+符號 <code class="haskell">Zero</code> 只代表它本身，<code class="haskell">Suc Zero</code> 也只代表它本身。
+操作語意著重的是一串符號如何變成另一段符號。
+在這個意義下，前述的 <code class="haskell">fact</code> 定義：</p><pre><code class="spec">fact :: Nat -&gt; Nat
+fact Zero     = 1
+fact (Suc n)  = (Suc n) * fact n 
+</code></pre><p>從操作語意的觀點可被讀解成覆寫規則：看到 <code class="haskell">fact Zero</code>, 均可改寫為 <code class="haskell">1</code>; 看到 <code class="haskell">fact (Suc n)</code>, 均可改寫為 <code class="haskell">(Suc n) * fact n</code>.
+歸約 <code class="haskell">fact (Suc (Suc Zero))</code> 這個式子可被視為是不斷使用這兩條覆寫規則：</p><pre><code class="spec">   fact (Suc (Suc Zero))
+=  (Suc (Suc Zero)) * fact (Suc Zero)
+=  (Suc (Suc Zero)) * (Suc Zero) * fact Zero
+=  (Suc (Suc Zero)) * (Suc Zero) * 1 
+</code></pre><p>其中的每個等號都可讀解為「改寫成」。</p><p>操作語意中較容易談「執行」與「終止」的概念。
+改寫一個式子相當於執行它，如果已經沒有可改寫之處，也就是碰到了範式，執行便終止了。
+在操作語意中，兩個數值（例如 <code class="haskell">4+4</code> 與 <code class="haskell">2*4</code>）相等意謂它們可被歸約成同一個範式；
+兩個函數 <code class="haskell">f</code> 和 <code class="haskell">g</code> 相等則意謂對於任何 <code class="haskell">x</code>, <code class="haskell">f x</code> 與 <code class="haskell">g x</code> 都相等。</p><p>有了兩種談語意的方式，我們自然希望它們有些一致性。確實，我們有如下的定理：</p><div class="theorem" id="thm:operational-denotational"><h5 class="theorem-title">定理 4.1  </h5><p>操作語意保持指稱語意。意即，給定一個有指稱語意的算式 <code class="haskell">e</code>, 若算式 <code class="haskell">e</code> 能在零步或多步之內依據操作語意改寫成 <code class="haskell">e'</code>, 則 <code class="haskell">e</code> 與 <code class="haskell">e'</code> 的指稱語意相同。</p></div><div class="theorem" id="thm:semantics-fixedpoint"><h5 class="theorem-title">定理 4.2  </h5><p>給定一個遞迴的函數定義 <code class="haskell">f = F f</code>。若在操作語意中，該函數對所有輸入都正常終止，則在指稱語意中，<code class="haskell">f</code> 是 <code class="haskell">F</code> 的唯一定點。</p></div><p>我們在下一節會</p></div><div class="navi"><div class="previous">&laquo;<a href="Semantics-1.html#sec:denotational-semantics">4.1 指稱語意</a></div><div class="next"><a href="Derivation.html#ch:derivation">5 一般程式推導</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

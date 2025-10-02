@@ -68,3 +68,19 @@ pre code comment code {
   display: inline;
   margin-left: 0;
 }
+
+.navi {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 20px;
+}
+
+.navi .previous {
+  float: left;
+  margin-left: 50px;
+}
+
+.navi .next {
+  float: right;
+  margin-right: 50px;
+}

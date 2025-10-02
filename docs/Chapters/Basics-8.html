@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="函數程設與推論">
+    <title>函數程設與推論</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <!-- link rel="stylesheet" href="/css/pure/pure-min.css" -->
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <script> MathJax = {
+              loader: {
+                load: ['input/tex-base', 'output/chtml']
+                },
+              tex: {
+                inlineMath: [['$', '$']]
+             }};
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3.0.0/es5/startup.js">
+    </script>
+</head>
+<body>
+
+<div id="layout">
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+        <!-- Hamburger icon -->
+        <span></span>
+    </a>
+<div id="menu"><div class="pure-menu"><h1 class="pure-menu-heading">函數程設與推論</h1><h2 class="pure-menu-heading">Functional Program Construction and Reasoning</h2><p><a href="../ToC.html">目錄</a></p><p><a href="../Preface.html">前言</a></p><nav class="nav" role="navigation"><ul class="pure-menu-list menu-level-1"><li class="pure-menu-item"><a href="Introduction.html#ch:intro">0 符號、演算、與抽象化</a><input class="toggle" id="menu-li-0" type="checkbox"/><label class="menu-toggle" for="menu-li-0"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Introduction-1.html#sec:knight-knave-island">0.1 騎士與惡棍之島</a></li>
+<li class="pure-menu-item"><a href="Introduction-2.html#sec:let-symbols-work">0.2 讓符號為你工作</a></li>
+<li class="pure-menu-item"><a href="Introduction-3.html#sec:abstraction">0.3 抽象化</a></li>
+<li class="pure-menu-item"><a href="Introduction-4.html#sec:abstraction-and-expression">0.4 抽象化與表達力</a></li>
+<li class="pure-menu-item"><a href="Introduction-5.html#sec:correctness">0.5 正確性</a></li>
+<li class="pure-menu-item"><a href="Introduction-6.html#sec:calculable-programming-language">0.6 可演算的程式語言</a></li>
+<li class="pure-menu-item"><a href="Introduction-7.html#sec:relevant-information">0.7 相關資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Basics.html#ch:basics">1 值、函數、與定義</a><input class="toggle" id="menu-li-1" checked type="checkbox"/><label class="menu-toggle" for="menu-li-1"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Basics-1.html#sec:evaluation">1.1 值與求值</a></li>
+<li class="pure-menu-item"><a href="Basics-2.html#sec:function-defns">1.2 函數定義</a></li>
+<li class="pure-menu-item"><a href="Basics-3.html#sec:higher-order-func">1.3 高階函數</a></li>
+<li class="pure-menu-item"><a href="Basics-4.html#sec:func-comp">1.4 函數合成</a></li>
+<li class="pure-menu-item"><a href="Basics-5.html#sec:lambda-terms">1.5 $\lambda$ 算式</a></li>
+<li class="pure-menu-item"><a href="Basics-6.html#sec:elementary-datatypes">1.6 簡單資料型態</a><input class="toggle" id="menu-li-1-6" type="checkbox"/><label class="menu-toggle" for="menu-li-1-6"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Basics-6.html#sec:boolean">1.6.1 布林值</a></li>
+<li class="pure-menu-item"><a href="Basics-6.html#sec:char">1.6.2 字元</a></li>
+<li class="pure-menu-item"><a href="Basics-6.html#sec:pairs">1.6.3 序對</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Basics-7.html#sec:weak-head-normal-form">1.7 弱首範式</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:lists">1.8 串列</a><input class="toggle" id="menu-li-1-8" checked type="checkbox"/><label class="menu-toggle" for="menu-li-1-8"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="#sec:list-deconstruct">1.8.1 串列解構</a></li>
+<li class="pure-menu-item"><a href="#sec:list-generation">1.8.2 串列生成</a></li>
+<li class="pure-menu-item"><a href="#sec:list-combinators">1.8.3 串列上的種種組件函數</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Basics-9.html#sec:wholemeal">1.9 全麥編程</a></li>
+<li class="pure-menu-item"><a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a></li>
+<li class="pure-menu-item"><a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
+<li class="pure-menu-item"><a href="Induction-2.html#sec:induction-on-Nat">2.2 自然數上之歸納定義</a></li>
+<li class="pure-menu-item"><a href="Induction-3.html#sec:inductive-proof-on-Nat">2.3 自然數上之歸納證明</a></li>
+<li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists">2.4 串列與其歸納定義</a><input class="toggle" id="menu-li-2-4" type="checkbox"/><label class="menu-toggle" for="menu-li-2-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists-defn">2.4.1 串列上之歸納定義</a></li>
+<li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists-proof">2.4.2 串列上之歸納證明</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Induction-5.html#sec:data-prog-proof">2.5 從資料、程式、到證明</a></li>
+<li class="pure-menu-item"><a href="Induction-6.html#sec:more-inductive-defns">2.6 更多歸納定義與證明</a><input class="toggle" id="menu-li-2-6" type="checkbox"/><label class="menu-toggle" for="menu-li-2-6"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction-6.html#sec:filter-takeWhile-dropWhile">2.6.1 <code class="haskell">filter</code>, <code class="haskell">takeWhile</code>, 與 <code class="haskell">dropWhile</code></a></li>
+<li class="pure-menu-item"><a href="Induction-6.html#sec:elem-neq-proof">2.6.2 <code class="haskell">elem</code> 與不等式證明</a></li>
+<li class="pure-menu-item"><a href="Induction-6.html#sec:list-segments">2.6.3 串列區段</a></li>
+<li class="pure-menu-item"><a href="Induction-6.html#sec:fan-perm">2.6.4 插入、排列、子串列、與劃分</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Induction-7.html#sec:using-hints-from-symbols">2.7 再談「讓符號為你工作」</a></li>
+<li class="pure-menu-item"><a href="Induction-8.html#sec:other-inductive-datatypes">2.8 其他歸納資料結構</a></li>
+<li class="pure-menu-item"><a href="Induction-9.html#sec:induction-set-theory">2.9 由集合論看歸納法</a></li>
+<li class="pure-menu-item"><a href="Induction-10.html#sec:induction-variations">2.10 歸納定義的簡單變化</a></li>
+<li class="pure-menu-item"><a href="Induction-11.html#sec:complete-induction">2.11 完全歸納</a></li>
+<li class="pure-menu-item"><a href="Induction-12.html#sec:well-founded-induction">2.12 良基歸納</a></li>
+<li class="pure-menu-item"><a href="Induction-13.html#sec:lexicographic-induction">2.13 詞典序歸納</a></li>
+<li class="pure-menu-item"><a href="Induction-14.html#sec:mutual-induction">2.14 交互歸納</a></li>
+<li class="pure-menu-item"><a href="Induction-15.html#sec:induction-ref">2.15 參考資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="SearchTrees.html#ch:induction-search-trees">3 搜尋樹</a><input class="toggle" id="menu-li-3" type="checkbox"/><label class="menu-toggle" for="menu-li-3"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="SearchTrees-1.html#sec:induction-binary-search-tree">3.1 二元搜尋樹</a></li>
+<li class="pure-menu-item"><a href="SearchTrees-2.html#sec:induction-red-black-tree">3.2 紅黑樹</a><input class="toggle" id="menu-li-3-2" type="checkbox"/><label class="menu-toggle" for="menu-li-3-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="SearchTrees-2.html#">3.2.1 紅黑樹插入</a></li>
+<li class="pure-menu-item"><a href="SearchTrees-2.html#">3.2.2 紅黑樹之性質：高度</a></li>
+<li class="pure-menu-item"><a href="SearchTrees-2.html#">3.2.3 紅黑樹之性質：平衡</a></li>
+<li class="pure-menu-item"><a href="SearchTrees-2.html#">3.2.4 紅黑樹之性質：顏色</a></li>
+</ul></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Semantics.html#ch:semantics">4 關於語意的基本概念</a><input class="toggle" id="menu-li-4" type="checkbox"/><label class="menu-toggle" for="menu-li-4"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Semantics-1.html#sec:denotational-semantics">4.1 指稱語意</a></li>
+<li class="pure-menu-item"><a href="Semantics-2.html#sec:operational-semantics">4.2 操作語意</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Derivation.html#ch:derivation">5 一般程式推導</a><input class="toggle" id="menu-li-5" type="checkbox"/><label class="menu-toggle" for="menu-li-5"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-1.html#sec:fold-unfold-transform">5.1 展開-收回轉換</a></li>
+<li class="pure-menu-item"><a href="Derivation-2.html#sec:efficiency-basics">5.2 關於執行效率</a></li>
+<li class="pure-menu-item"><a href="Derivation-3.html#sec:fold-unfold-transform-efficiency">5.3 用展開-收回轉換增進效率</a><input class="toggle" id="menu-li-5-3" type="checkbox"/><label class="menu-toggle" for="menu-li-5-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-3.html#sec:poly-horner">5.3.1 計算多項式 -- Horner 法則</a></li>
+<li class="pure-menu-item"><a href="Derivation-3.html#sec:exp-binary-roll">5.3.2 二進位表示法</a></li>
+<li class="pure-menu-item"><a href="Derivation-3.html#sec:wrap-reminder">5.3.3 小結與提醒</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Derivation-4.html#sec:var-cons">5.4 變數換常數</a></li>
+<li class="pure-menu-item"><a href="Derivation-5.html#sec:tupling">5.5 組對</a><input class="toggle" id="menu-li-5-5" type="checkbox"/><label class="menu-toggle" for="menu-li-5-5"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-5.html#sec:steep">5.5.1 陡串列</a></li>
+<li class="pure-menu-item"><a href="Derivation-5.html#sec:repl-tree">5.5.2 以串列標記樹狀結構</a></li>
+<li class="pure-menu-item"><a href="Derivation-5.html#sec:rep-minE">5.5.3 代換為最小標籤 --- 循環程式</a></li>
+<li class="pure-menu-item"><a href="Derivation-5.html#sec:tupling-conclude">5.5.4 小結與提醒</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a><input class="toggle" id="menu-li-5-6" type="checkbox"/><label class="menu-toggle" for="menu-li-5-6"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-6.html#sec:reversal-append">5.6.1 串列反轉與連接</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:accum-info-flow">5.6.2 由上到下的資訊流</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:tail-recursion">5.6.3 尾遞迴</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:tail-recursion-more">5.6.4 更多尾遞迴範例</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:tail-recursion-efficiency">5.6.5 尾遞迴的效率考量</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
+</ul></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-program-gen">6.2.2 以摺融合生成程式</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:scan-lemma">6.2.3 掃描</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:banana-split">6.2.4 香蕉船定理</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:accum-param-fold-fusion">6.2.5 累積參數與摺融合</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:bring-in-context">6.2.6 引入脈絡</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Folds-3.html#sec:foldl-listHomo-para">6.3 左摺、串列同構、與 Paramorphism</a><input class="toggle" id="menu-li-6-3" type="checkbox"/><label class="menu-toggle" for="menu-li-6-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-3.html#sec:foldl">6.3.1 左摺</a></li>
+<li class="pure-menu-item"><a href="Folds-3.html#sec:list-homomorphism">6.3.2 串列同構</a></li>
+<li class="pure-menu-item"><a href="Folds-3.html#sec:paramorphism">6.3.3 Paramorphism 與本原遞迴</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Folds-4.html#sec:foldN">6.4 自然數的摺</a></li>
+<li class="pure-menu-item"><a href="Folds-5.html#sec:fold-on-other-data-structures">6.5 其他資料結構</a></li>
+<li class="pure-menu-item"><a href="Folds-6.html#sec:folds-ref">6.6 參考資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="SegProblems.html#ch:segment-problems">7 區段問題</a><input class="toggle" id="menu-li-7" type="checkbox"/><label class="menu-toggle" for="menu-li-7"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="SegProblems-1.html#sec:maximum-segment-sum">7.1 最大區段和</a></li>
+<li class="pure-menu-item"><a href="SegProblems-2.html#sec:maximum-plateau-length">7.2 最長高原問題</a></li>
+<li class="pure-menu-item"><a href="SegProblems-3.html#sec:segProblems-ref">7.3 參考資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Monads.html#ch:monads">8 單子與副作用</a><input class="toggle" id="menu-li-8" type="checkbox"/><label class="menu-toggle" for="menu-li-8"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Monads-1.html#sec:exceptions">8.1 例外處理</a></li>
+<li class="pure-menu-item"><a href="Monads-2.html#sec:monad-class-laws">8.2 單子與單子律</a></li>
+<li class="pure-menu-item"><a href="Monads-3.html#sec:monad-reader">8.3 讀取單子</a><input class="toggle" id="menu-li-8-3" type="checkbox"/><label class="menu-toggle" for="menu-li-8-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Monads-3.html#sec:var-env-reader">8.3.1 變數與環境</a></li>
+<li class="pure-menu-item"><a href="Monads-3.html#sec:reader-is-monad">8.3.2 「讀取」副作用是單子</a></li>
+<li class="pure-menu-item"><a href="Monads-3.html#sec:monad-reader-laws">8.3.3 推論讀取單子程式的性質</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Monads-4.html#sec:monad-state">8.4 狀態單子</a><input class="toggle" id="menu-li-8-4" type="checkbox"/><label class="menu-toggle" for="menu-li-8-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Monads-4.html#sec:hanoi">8.4.1 河內塔問題</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
+</ul></li>
+</ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:basics">1 值、函數、與定義</h1></div><div class="navi"><div class="previous">&laquo;<a href="Basics-7.html#sec:weak-head-normal-form">1.7 弱首範式</a></div><div class="next"><a href="Basics-9.html#sec:wholemeal">1.9 全麥編程</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:lists">1.8 串列</h2><p>一個\emph{串列}(list)<span id="ix-1-37"></span>
+抽象說來便是<em>將零個或多個值放在一起變成一串</em>。
+串列是函數語言傳統上的重要資料結構：
+早期的函數語言 LISP 便是 LISt Processing 的縮寫。
+Haskell 中的串列多了一個限制：串列中的每個元素必須有同樣的型別。
+本書中將「元素型別均為 <code class="haskell">a</code> 的串列」的型別寫成 <code class="haskell">List a</code>.
+<input class="toggle" id="footnote-1-8-13" type="checkbox"/><label class="fnote-toggle" for="footnote-1-8-13">(註13) </label><span class="collapsible-footnote">Haskell 中的寫法是 <code class="haskell">[a]</code>. 同樣地，在我的教學經驗中，將中括號同時使用在值與型別上造成不少誤解。例如學生可能認為 <code class="haskell">[1,2]</code> 的型別是 <code class="haskell">[Int,Int]</code> --- 其實應該是 <code class="haskell">[Int]</code>.</span>
+Hasekell 以中括號表示串列，其中的元素以逗號分隔。
+例如，<code class="haskell">[1,2,3,4]</code> 是一個型別為 <code class="haskell">List Int</code> 的串列，其中有四個元素；
+<code class="haskell">[True, False, True]</code> 是一個型別為 <code class="haskell">List Bool</code> 的串列，有三個元素。
+至於 <code class="haskell">[]</code> 則是沒有元素的<em>空串列</em>（通常唸做 ``nil''），其最通用的型別為 <code class="haskell">List a</code>，
+其中 <code class="haskell">a</code> 可以是任何型別。</p><p>串列的元素也可以是串列。例如 <code class="haskell">[[1,2,3],[],[4,5]]</code> 的型別是 <code class="haskell">List (List Int)</code>,
+含有三個元素，分別為 <code class="haskell">[1,2,3]</code>, <code class="haskell">[]</code>, 和 <code class="haskell">[4,5]</code>.</p><p>事實上，上述的寫法只是語法糖。我們可想像 Haskell 有這樣的型別定義：</p><pre><code class="spec">data List a  =  []  |  a : List a 
+</code></pre><p>意謂一個元素型別為 <code class="haskell">a</code> 的串列只有兩種可能構成方式：
+可能是空串列 <code class="haskell">[]</code>，也可能是一個元素 (<code class="haskell">a</code>) 接上另一個串列 (<code class="haskell">List a</code>)。
+後者的情況中，元素和串列之間用符號 <code class="haskell">(:)</code> 銜接。
+<span id="ix-1-38"></span>
+<span id="ix-1-39"></span></p><p>符號 <code class="haskell">(:)</code> 唸作 ``cons'', 為「建構(construct)」的字首。
+其型別為 <code class="haskell">a -&gt; List a -&gt; List a</code> ---
+它總是將一個型別為 <code class="haskell">a</code> 的元素接到一個 <code class="haskell">List a</code> 之上，造出另一個 <code class="haskell">List a</code>.
+上述的 <code class="haskell">[1,2,3,4]</code> 其實是 <code class="haskell">1 : (2 : (3 : (4 : [])))</code>
+的簡寫：由空串列 <code class="haskell">[]</code> 開始，將元素一個個接上去。
+為了方便，Haskell 將 <code class="haskell">(:)</code> 運算元視做右相依的，
+因此我們可將括號省去，寫成
+<code class="haskell">1 : 2 : 3 : 4 : []</code>。</p><div class="infobox infobox" title="|(:)| 與 |(::)|"><h5 class="infobox-title">|(:)| 與 |(::)|</h5><p><span id="ix-1-40"></span><span id="ix-1-41"></span>
+大部分有型別的函數語言（如 ML, Agda 等）之中，
+<code class="haskell">(:)</code> 表示型別關係，<code class="haskell">(::)</code> 則是串列的建構元。
+Haskell 的前身之一是 David A. Turner 的語言 Miranda.
+在其 Hindley-Milner 型別系統中，Miranda 使用者幾乎不需寫出程式的型別 ---
+型別可由電腦自動推導。而串列是重要資料結構。
+把兩個符號調換過來，使常用的符號較短一些，似乎是合理的設計。</p><p>Haskell 繼承了 Miranda 的語法。
+然而，後來 Haskell 的型別發展得越來越複雜，
+使用者偶爾需要寫出型別來幫助編譯器。
+即使型別簡單，程式語言界也漸漸覺得將函數的型別寫出是好習慣。
+而串列建構元的使用量並不見得比型別關係多。
+但此時想改符號也為時已晚了。</p></div><p>無論如何，這樣的串列表示法是偏一邊的 ---
+元素總是從左邊放入，最左邊的元素也最容易取出。
+如果一個串列不是空的，其最左邊的元素稱作該串列的<em>頭</em>(<em>head</em>)，
+剩下的元素稱作其<em>尾</em>(<em>tail</em>)。
+例如，<code class="haskell">[1,2,3,4]</code> 的頭是 <code class="haskell">1</code>, 尾是 <code class="haskell">[2,3,4]</code>.</p><p>Haskell 中將字串當作字元形成的串列。標準函式庫中這麼定義著：</p><pre><code class="spec">type String = List Char 
+</code></pre><p>意謂 <code class="haskell">String</code> 就是 <code class="haskell">List Char</code>。
+在 Haskell 中，<code class="haskell">data</code> 用於定義新型別，而 <code class="haskell">type</code> 並不產生一個新的型別，
+只是給現有的型別一個較方便或更顯出當下意圖的名字。
+此外，Haskell 另提供一個語法糖，用雙引號表達字串。
+因此，<code class="haskell">"fun"</code> 是 <code class="haskell">['f','u','n']</code> 的簡寫，
+後者又是 <code class="haskell">'f':'u':'n':[]</code> 的簡寫。</p><p>本節接下來將介紹許多與串列相關的內建函數。</p><h3 class="subsection" id="sec:list-deconstruct">1.8.1 串列解構</h3><p>我們先從拆解串列的函數開始。函數 <code class="haskell">head</code> 和 <code class="haskell">tail</code> 分別取出一個串列的頭和尾：</p><div class="multicols"><div class="mcol" width="0.4\textwidth"><pre><code class="spec">head :: List a -&gt; a
+head (x:xs) = x 
+</code></pre></div><div class="mcol" width="0.4\textwidth"><pre><code class="spec">tail :: List a -&gt; List a
+tail (x:xs) = xs 
+</code></pre></div></div><p>注意其型別：<code class="haskell">head</code> 傳回一個元素，<code class="haskell">tail</code> 則傳回一個串列。
+例：<code class="haskell">head "fun"</code> 和 <code class="haskell">tail "fun"</code> 分別是字元 <code class="haskell">'f'</code> 和字串 <code class="haskell">"un"</code>.
+函數 <code class="haskell">head</code> 和 <code class="haskell">tail</code> 都可用樣式配對定義，但此處的樣式並不完整，尚缺 <code class="haskell">[]</code> 的情況。
+如果將空串列送給 <code class="haskell">head</code> 或 <code class="haskell">tail</code>，則會出現執行時錯誤。
+因此，<code class="haskell">head</code> 和 <code class="haskell">tail</code> 都是<em>部分函數</em>(<em>partial functions</em>) --- 它們只將某些值（非空的串列）對應到輸出，某些值（空串列）則沒有。<span id="ix-1-42"></span></p><p>函數 <code class="haskell">null</code> 判斷一個串列是否為空串列。它也可用樣式配對定義如下：</p><pre><code class="spec">null :: List a -&gt; Bool
+null []      = True
+null (x:xs)  = False 
+</code></pre><p>本書依循 <a href="../Biblio.html#Bird:98:Introduction">Bird [1998]</a> 中的變數命名習慣，
+將型別為串列的變數以 <code class="haskell">s</code> 做結尾，例如 <code class="haskell">xs</code>, <code class="haskell">ys</code> 等等。
+至於「元素為串列的串列」則命名為 <code class="haskell">xss</code>, <code class="haskell">yss</code> 等等。
+但這只是為方便理解而設計的習慣。Haskell 本身並無此規定。</p><p>除了 <code class="haskell">head</code> 與 <code class="haskell">tail</code>，也有另一組函數 <code class="haskell">last</code> 與 <code class="haskell">init</code> 分別取出一個串列<em>最右邊</em>的元素，以及剩下的串列：</p><pre><code class="spec">last  :: List a -&gt; a 
+init  :: List a -&gt; List a 
+</code></pre><p>例：<code class="haskell">last "fun"</code> 與 <code class="haskell">init "fun"</code> 分別為字元 <code class="haskell">'n'</code> 與字串 <code class="haskell">"fu"</code>.
+但 <code class="haskell">last</code> 與 <code class="haskell">init</code> 的定義比起 <code class="haskell">head</code> 與 <code class="haskell">tail</code> 來得複雜：
+記得我們的串列表示法是偏向一邊的，從左邊存取元素容易，從右邊存取元素則較麻煩。
+我們會在 \todo{where} 之中談到 <code class="haskell">last</code> 與 <code class="haskell">init</code> 的定義。</p><h3 class="subsection" id="sec:list-generation">1.8.2 串列生成</h3><p>第<a href="#sec:list-deconstruct">1.8.1 </a>節中的函數均將串列拆開。
+本節之中我們來看一些生成串列的方法。
+如果元素的型別是有順序的（例如<code class="haskell">Int</code>, <code class="haskell">Char</code>等型別），Haskell 提供了一個
+方便我們依序生成串列的語法。以例子說明：</p><div class="theorem" id="eg:list-gen-examples"><h5 class="theorem-title">例 1.15  </h5><p>以下為 Haskell 的列舉語法的一些例子：</p><ul><li><p><code class="haskell">[0..10]</code> 可展開為 <code class="haskell">[0,1,2,3,4,5,6,7,8,9,10]</code>.</p></li><li><p>可用頭兩個元素來指定間隔量。例如 <code class="haskell">[0,3..10] = [0,3,6,9]</code>. 注意該串列的元素不超過右界 <code class="haskell">10</code>.</p></li><li><p>在 <code class="haskell">[10..0]</code> 之中，<code class="haskell">10</code> 一開始就超過了右界 <code class="haskell">0</code>, 因此得到 <code class="haskell">[]</code>. 如果想要產生由 <code class="haskell">10</code> 倒數到 <code class="haskell">0</code> 的串列，可這樣指定間隔：<code class="haskell">[10,9..0]</code>.</p></li><li><p>字元也是有順序的，因此 <code class="haskell">['a'..'z']</code> 可展開為含所有英文小寫字母的串列。</p></li><li><p>至於沒有右界的 <code class="haskell">[0..]</code> 則會展開為含 <code class="haskell">[0,1,2,3...]</code> 的無限長串列。</p></li></ul></div><p>函數 <code class="haskell">iterate :: (a -&gt; a) -&gt; a -&gt; List a</code> 用於產生無限長的串列：
+<code class="haskell">iterate f x</code> 可展開為 <code class="haskell">[x, f x, f (f x), f (f (f x))... ]</code>.</p><div class="theorem" id="eg:iterate-example"><h5 class="theorem-title">例 1.16  </h5><p>一些 <code class="haskell">iterate</code> 的例子：</p><ul><li><p><code class="haskell">iterate (1+) 0</code> 展開為 <code class="haskell">[0,1,2,3...]</code>. 其實 <code class="haskell">[n..]</code> 可視為 <code class="haskell">iterate (1+) n</code> 的簡寫。</p></li><li><p>在例[RefUndefined]中我們會看到 <code class="haskell">[m..n]</code> 也可用 <code class="haskell">iterate</code> 與其他函數做出。</p></li><li><p><code class="haskell">iterate not False</code> 可得到無窮串列 <code class="haskell">[False, True, False...]</code>.</p></li></ul></div><p>數學中描述集合時常使用一種稱作集合建構式(set comprehension)的語法。例如，
+<code class="haskell">{x * x | x ∈ S, odd x}</code> 表示收集所有 <code class="haskell">x*x</code> 形成的集合，其中
+<code class="haskell">x</code> 由集合 S 中取出，並且必須為奇數。Haskell 將類似的語法用在串列上。
+同樣以例子說明：</p><div class="theorem" id="eg:list-comprehension-examples"><h5 class="theorem-title">例 1.17  </h5><p>串列建構式(list comprehension)的例子：<span id="ix-1-43"></span></p><ul><li><p><code class="haskell">[x | x &lt;- [0..9]]</code> 表示「從<code class="haskell">[0..9]</code>之中取出 <code class="haskell">x</code>, 並收集 <code class="haskell">x</code>」，可展開為 <code class="haskell">[0,1,2,3,4,5,6,7,8,9]</code>.</p></li><li><p><code class="haskell">[x*x | x &lt;- [0..10]]</code> 的 <code class="haskell">x</code> 來源和之前相同，但收集的是 <code class="haskell">x*x</code>，得到 <code class="haskell">[0,1,4,9,25,36,49,64,81]</code>.</p></li><li><p><code class="haskell">[(x,y) | x &lt;- [0..2], y &lt;- "abc"]</code> 展開得到
+<code class="haskell">[(0,'a'),</code> <code class="haskell">(0,'b'),</code> <code class="haskell">(0,'c'),</code> <code class="haskell">(1,'a'),</code> <code class="haskell">(1,'b'),</code> <code class="haskell">(1,'c'),</code> <code class="haskell">(2,'a'),</code> <code class="haskell">(2,'b'),</code> <code class="haskell">(2,'c')]</code>.
+注意序對出現的順序：先固定 <code class="haskell">x</code>，將 <code class="haskell">y</code> 跑過一遍，再換成下一個 <code class="haskell">x</code>.</p></li><li><p><code class="haskell">[x*x | x &lt;- [0..10], odd x]</code> 從<code class="haskell">[0..10]</code>之中取出 <code class="haskell">x</code>，但只挑出滿足 <code class="haskell">odd x</code> 的那些，得到 <code class="haskell">[1,9,25,49,81]</code>.</p></li></ul></div><div class="theorem" id="eg:list-comprehension-examples2"><h5 class="theorem-title">例 1.18  </h5><p>以下算式的值分別為何？</p><ol><li><p><code class="haskell">[(a,b) | a &lt;- [1..3], b &lt;- [1..2]]</code>.</p></li><li><p><code class="haskell">[(a,b) | b &lt;- [1..2], a &lt;- [1..3]]</code>.</p></li><li><p><code class="haskell">[(i, j) | i &lt;- [1..4], j &lt;- [(i + 1)..4]]</code>. 這是一個有了 <code class="haskell">i &lt;- ..</code> 之後，<code class="haskell">i</code> 即可在右方被使用的例子。</p></li><li><p><code class="haskell">[(i, j) | i &lt;- [1..4], even i, j &lt;- [(i + 1)..4], odd j]</code>.</p></li><li><p><code class="haskell">['a' |i &lt;- [0..10]]</code>. 這個例子顯示 <code class="haskell">i</code> 並不一定非得出現在被收集項目中。</p></li></ol></div><div class="wrap-collabsible"><input class="toggle" id="ans-1-11" type="checkbox"/><label class="lbl-toggle" for="ans-1-11">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>分別展開如下：</p><ol><li><p><code class="haskell">[(1,1),(1,2),(2,1),(2,2),(3,1),(3,2)]</code>.</p></li><li><p><code class="haskell">[(1,1),(2,1),(3,1),(1,2),(2,2),(3,2)]</code>.</p></li><li><p><code class="haskell">[(1,2),(1,3),(1,4),(2,3),(2,4),(3,4)]</code>.</p></li><li><p><code class="haskell">[(2,3)]</code>.</p></li><li><p><code class="haskell">"aaaaaaaaaaa"</code>.</p></li></ol></div></div><p>串列建構式在寫程式時相當好用，但它也僅是個語法糖 ---
+所有的串列建構式都可轉換為後面的章節將介紹的 <code class="haskell">map</code>, <code class="haskell">concat</code>, <code class="haskell">filter</code> 等函數的組合。</p><h3 class="subsection" id="sec:list-combinators">1.8.3 串列上的種種組件函數</h3><p>我們將在本節介紹大量與串列有關的函數。
+它們常被稱做<em>組件</em>(<em>combinators</em>)<span id="ix-1-44"></span>函數。
+每一個組件都負責一項單一、但具通用性而容易重用的功能。
+它們常用來彼此結合以組出更大的程式。</p><p>介紹這些函數有兩個原因。首先，它們可用來組出許多有趣的程式。
+我們將一邊逐一介紹這些函數，一邊以例子示範，
+同時也逐漸帶出本章鼓勵的一種特殊編程風格。
+另一個原因是在日後的章節中我們也都將以這些函數作為例子，
+討論並證明關於它們的性質。</p><p>第一次閱讀的讀者可能訝異：這麼多函數，怎麼記得住？
+事實上，這些組件大都僅是把常見的編程模式具體地以形式方式表達出來。
+辨識出這些模式後，不僅會發現它們其實很熟悉，對於我們日後了解其他程式也有助益。</p><p><b>長度</b> &emsp; 函數 <code class="haskell">length :: List a -&gt; Int</code> 計算串列的長度。
+空串列 <code class="haskell">[]</code> 的長度為 <code class="haskell">0</code>. 例：<code class="haskell">length "function" = 8</code>.</p><p><b>索引</b> &emsp; 函數 <code class="haskell">(!!)</code> 的型別為 <code class="haskell">List a -&gt; Int -&gt; a</code>.
+給定串列 <code class="haskell">xs</code> 和整數 <code class="haskell">i</code>, 如果 <code class="haskell">0 &lt;= i &lt; length xs</code>,
+<code class="haskell">xs !! i</code> 為 <code class="haskell">xs</code> 中的第 <code class="haskell">i</code> 個元素，但由 <code class="haskell">0</code> 起算。
+例 <code class="haskell">"function" !! 0 = 'f'</code>, <code class="haskell">"function" !! 3 = 'c'</code>.
+如果 <code class="haskell">i &gt; length xs</code>, 則會成為執行期錯誤。
+注意：如果 <code class="haskell">length xs = n</code>，其中的元素編號分別為 <code class="haskell">0</code>, <code class="haskell">1</code> .. <code class="haskell">n-1</code>.</p><p>在指令式語言中，索引是處理陣列常用的基本操作。
+處理陣列的常見模式是用一個變數<code class="haskell">i</code>指向目前正被處理的元素，將<code class="haskell">a[i]</code>的值讀出或覆寫，
+然後更新<code class="haskell">i</code>的值。
+但由接下來的許多範例中，讀者會發現本章盡量避免這種做法。
+也因此 <code class="haskell">(!!)</code> 在本章中使用的機會不多。</p><p><b>連接</b> &emsp; 函數 <code class="haskell">(++) :: List a -&gt; List a -&gt; List a</code> 將兩個串列相接。
+例：<code class="haskell">[1,2,3] ++ [4,5] = [1,2,3,4,5]</code>.</p><p>函數 <code class="haskell">(++)</code> 和 <code class="haskell">(:)</code> 似乎都是把串列接上東西。兩者有什麼不同呢？
+答案是：<code class="haskell">(:) :: a -&gt; List a -&gt; List a</code> 永遠把<em>一個</em>元素接到串列的左邊，
+而 <code class="haskell">(++)</code> 把兩個串列接在一起，兩個串列都有可能含有零個或多個元素。
+例：<code class="haskell">[] ++ [4,5] = [4,5]</code>. 事實上，<code class="haskell">(:)</code> 是比 <code class="haskell">(++)</code> 更基礎的操作。
+在第<a href="Induction-4.html#sec:induction-lists-defn">2.4.1 </a>節中，我們會看到 <code class="haskell">(++)</code> 是用 <code class="haskell">(:)</code> 定義而成的。</p><p>另一個關於連接的函數是 <code class="haskell">concat :: List (List a) -&gt; List a</code>：它以一個元素都是串列的串列作為輸入，將其中的串列接在一起。例：<code class="haskell">concat [[1,2,3],[],[4],[5,6]]</code> <code class="haskell">=</code> <code class="haskell">[1,2,3,4,5,6]</code>. 它和 <code class="haskell">(++)</code> 的不同之處在哪呢？顯然，<code class="haskell">(++)</code> 總把兩個串列接在一起，
+而 <code class="haskell">concat</code> 的參數中可含有零個或多個串列。
+在第<a href="Induction-4.html#sec:induction-lists-defn">2.4.1 </a>節中，我們會看到 <code class="haskell">concat</code> 是用 <code class="haskell">(++)</code> 定義而成的。</p><p><b>取與丟</b> &emsp; <code class="haskell">take</code> 的型別為 <code class="haskell">Int -&gt; List a -&gt; List a</code>.
+<code class="haskell">take n xs</code> 取 <code class="haskell">xs</code> 的前 <code class="haskell">n</code> 個元素。若 <code class="haskell">xs</code> 的長度不到 <code class="haskell">n</code>,
+<code class="haskell">take n xs</code> 能拿幾個就拿幾個. 例：<code class="haskell">take 3 "function" = "fun"</code>,
+<code class="haskell">take 5 "ox" = "ox"</code>.</p><p>相對地，<code class="haskell">drop n xs</code> 丟掉 <code class="haskell">xs</code> 的前 <code class="haskell">n</code> 個元素。若 <code class="haskell">xs</code> 的長度不到 <code class="haskell">n</code>,
+<code class="haskell">drop n xs</code> 能丟幾個就拿幾個. 例：<code class="haskell">drop 3 "function" = "ction"</code>,
+<code class="haskell">take 5 "ox" = ""</code>. 函數 <code class="haskell">drop</code> 的型別也是 <code class="haskell">Int -&gt; List a -&gt; List a</code>.</p><p>函數 <code class="haskell">take</code> 和 <code class="haskell">drop</code> 顯然有些關聯，但它們的關聯該怎麼具體地寫下來呢？
+一個可能是：對所有的 <code class="haskell">n</code> 和 <code class="haskell">xs</code>,</p><p>乍看之下似乎言之成理。但這個性質真的成立嗎？
+我們將在第<a href="Induction.html#ch:induction">2 </a>章中討論到。</p><p><b>映射</b> &emsp; <code class="haskell">map :: (a -&gt; b) -&gt; List a -&gt; List b</code> 是串列上
+一個很重要的高階函數：<code class="haskell">map f xs</code> 將 <code class="haskell">f</code> 作用在 <code class="haskell">xs</code> 的每一個元素上。
+例：</p><p>回憶我們之前關於高階函數的討論，另一個理解方式是：
+<code class="haskell">map</code> 是一個處理函數的操作。給一個「將 <code class="haskell">a</code> 變成 <code class="haskell">b</code>」的函數 <code class="haskell">f :: a -&gt; b</code>，
+<code class="haskell">map</code> 將這個函數<em>提升</em>到串列的層次，
+得到一個「將 <code class="haskell">List a</code> 變成 <code class="haskell">List b</code>」的函數 <code class="haskell">map f :: List a -&gt; List b</code>.</p><div class="theorem" id="ex:inits"><h5 class="theorem-title">例 1.19  </h5><p>如果一個串列 <code class="haskell">xs</code> 可分解為 <code class="haskell">ys ++ zs</code>, 我們說 <code class="haskell">ys</code> 是 <code class="haskell">xs</code> 的一個<em>前段(prefix)</em>,<span id="ix-1-45"></span>
+<code class="haskell">zs</code> 則是 <code class="haskell">xs</code> 的一個<em>後段</em>(<em>suffix</em>). <span id="ix-1-46"></span>
+例如，串列 <code class="haskell">[1,2,3]</code> 的前段包括 <code class="haskell">[]</code>, <code class="haskell">[1]</code>, <code class="haskell">[1,2]</code>, 與<code class="haskell">[1,2,3]</code> （注意：<code class="haskell">[]</code>是一個前段，<code class="haskell">[1,2,3]</code> 本身也是）, 後段則包括 <code class="haskell">[1,2,3]</code>, <code class="haskell">[2,3]</code>, <code class="haskell">[3]</code>, 與 <code class="haskell">[]</code>。</p><p>試定義函數 <code class="haskell">inits :: List a -&gt; List (List a)</code>, 計算輸入串列的所有前段。
+<input class="toggle" id="footnote-1-8-14" type="checkbox"/><label class="fnote-toggle" for="footnote-1-8-14">(註14) </label><span class="collapsible-footnote">請注意該函數的名字是 <code class="haskell">inits</code>, 和之前介紹過的 <code class="haskell">init</code> 不同。這是 Haskell 函式庫中使用的命名。</span>
+{\bf 提示}：目前我們可以用 <code class="haskell">map</code>, <code class="haskell">take</code> 和其他函數組出 <code class="haskell">inits</code>.
+在第<a href="Induction-6.html#sec:more-inductive-defns">2.6 </a>節中將會介紹另一個做法。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-1-11" type="checkbox"/><label class="lbl-toggle" for="ans-1-11">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>一種使用 <code class="haskell">map</code> 和 <code class="haskell">take</code> 的可能作法如下：</p><pre><code class="spec">inits :: List a -&gt; List (List a)
+inits xs = map (\n -&gt; take n xs) [0 .. length xs] 
+</code></pre><p>或著也可用串列建構式寫成 <code class="haskell">[take n xs | n &lt;- [0.. length xs]]</code>.
+讀者可能已發現：<code class="haskell">[f x | x &lt;- xs]</code> 就是 <code class="haskell">map f xs</code>.</p></div></div><div class="exlist"><div class="exercise exer" id="ex:tails"><h5 class="exercise-title">練習 1.12 </h5><p>定義函數 <code class="haskell">tails :: List a -&gt; List (List a)</code>,
+計算輸入串列的所有後段。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-1-12" type="checkbox"/><label class="lbl-toggle" for="ans-1-12">顯示答案</label><div class="collapsible-content"><h5>答案</h5><pre><code class="spec">tails :: List a -&gt; List (List a)
+tails xs = map (\n -&gt; drop n xs) [0 .. length xs] 
+</code></pre></div></div></div><p><b>過濾</b> &emsp;
+一個型別為 <code class="haskell">a -&gt; Bool</code> 的函數稱作一個「述語」(predicate).
+<span id="ix-1-47"></span>
+給定述語 <code class="haskell">p</code>, <code class="haskell">filter p xs</code> 將 <code class="haskell">xs</code> 之中滿足 <code class="haskell">p</code> 的元素挑出。
+函數 <code class="haskell">filter</code> 的型別為 <code class="haskell">(a -&gt; Bool) -&gt; List a -&gt; List a</code>。
+例：<code class="haskell">filter even [2,5,1,7,6] = [2,6]</code>.</p><div class="theorem" id="eg:numUpper"><h5 class="theorem-title">例 1.20  </h5><p>該怎麼得知一個字串中大寫字母的個數？
+將大寫字母過濾出來，計算所得串列的長度即可。如下所示：</p><pre><code class="spec">numUpper :: String -&gt; Int
+numUpper = length . filter isUpper 
+</code></pre></div><div class="theorem" id="eg:map-square"><h5 class="theorem-title">例 1.21  </h5><p>下列算式求出$0^2$ 到 $50^2$ 的平方數（能寫成 $n^2$ 的數字）中，
+結尾為 $25$ 的數字。</p><pre><code class="spec">  filter ((==25) . (`mod` 100)) (map square [0..50]) 
+</code></pre><p>歸約後得到 <code class="haskell">[25,225,625,1225,2025]</code>.
+其中 <code class="haskell">(==25) . (`mod` 100)</code> 部分使用了第頁
+中提到的語法。如果覺得不習慣，也可用 $\lambda$ 算式寫成：</p><pre><code class="spec">  filter (\ n -&gt; n `mod` 100 == 25) (map square [0..50]) 
+</code></pre></div><div class="theorem" id="eg:map-square-2"><h5 class="theorem-title">例 1.22  </h5><p>接續上例。另一個可能寫法是先過濾出「平方之後結尾為 <code class="haskell">25</code>」的數字，
+再算這些數字的平方：</p><pre><code class="spec">  map square (filter ((==25) . (`mod` 100) . square) [0..50]) 
+</code></pre><p>這個算式也歸約出一樣的結果：<code class="haskell">[25,225,625,1225,2025]</code>。</p><p>稍微推廣一些，這個例子暗示我們 <code class="haskell">filter p . map f</code> 和 <code class="haskell">map f . filter (p . f)</code> 似乎是等價的。
+但確實如此嗎？我們也將在第<a href="Induction.html#ch:induction">2 </a>章中討論。</p></div><div class="theorem" id="eg:map-square-fork"><h5 class="theorem-title">例 1.23  </h5><p>接續上例。如果我們不僅希望找到結尾為 $25$ 的平方數，也希望知道它們是什麼數字的平方，
+一種寫法如下：</p><pre><code class="spec">  filter ((==25) . (`mod` 100) . snd) (map (fork id square) [0..50]) 
+</code></pre><p>我們用 <code class="haskell">map (fork id square)</code> 將每個數字與他們的平方放在一個序對中，
+得到<code class="haskell">[(0,0), (1,1), (2,4), (3,9)...]</code>.
+而 <code class="haskell">filter</code> 的述語多了一個 <code class="haskell">snd</code>, 表示我們只要那些「第二個元素符合條件」的序對。
+上式化簡後可得到 <code class="haskell">[(5,25),</code> <code class="haskell">(15,225),</code> <code class="haskell">(25,625),</code> <code class="haskell">(35,1225),</code> <code class="haskell">(45,2025)]</code>.
+運算元 <code class="haskell">fork</code> 的定義詳見第頁。</p><p>述語 <code class="haskell">(==25) . (`mod` 100) . snd</code> 可以展開為 <code class="haskell">(\(i,n) -&gt; n `mod` 100 == 25)</code>.</p></div><p><b>取、丟、與過濾</b> &emsp; 函數 <code class="haskell">takeWhile</code>, <code class="haskell">dropWhile</code> 和 <code class="haskell">filter</code> 有一樣的型別。</p><pre><code class="spec">takeWhile  :: (a -&gt; Bool) -&gt; List a -&gt; List a 
+dropWhile  :: (a -&gt; Bool) -&gt; List a -&gt; List a 
+</code></pre><p>它們之間的差異也許用例子解釋得最清楚：</p><pre><code class="spec">filter     even [6,2,4,1,7,8,2] = [6,2,4,8,2] 
+takeWhile  even [6,2,4,1,7,8,2] = [6,2,4] 
+dropWhile  even [6,2,4,1,7,8,2] = [1,7,8,2] 
+</code></pre><p><code class="haskell">filter p</code> 挑出所有滿足 <code class="haskell">p</code> 的元素；
+<code class="haskell">takeWhile p</code> 由左往右逐一取出元素，直到遇上第一個不滿足 <code class="haskell">p</code> 的元素，並將剩下的串列丟棄；
+<code class="haskell">dropWhile p</code> 則與 <code class="haskell">takeWhile p</code> 相對，將元素丟棄，直到遇上第一個不滿足 <code class="haskell">p</code> 的元素。
+直覺上，後兩者似乎也應該滿足 <code class="haskell">takeWhile p xs ++ dropWhile p xs = xs</code>, 但這仍尚待驗證。</p><div class="theorem" id="eg:fromto-takeWhile-iterate"><h5 class="theorem-title">例 1.24  </h5><p>給定整數 <code class="haskell">m</code> 與 <code class="haskell">n</code>, <code class="haskell">[m..n]</code> 可視為 <code class="haskell">takeWhile (&lt;= n) (iterate (1+) m)</code> 的簡寫。</p></div><div class="theorem" id="eg:takeWhile-dropWhile-until"><h5 class="theorem-title">例 1.25  </h5><p>讀者也許覺得 <code class="haskell">takeWhile</code> 或 <code class="haskell">dropWhile</code> 似乎和迴圈有密切關係。
+確實，利用 <code class="haskell">iterate</code> 與 <code class="haskell">dropWhile</code>，我們可定義出類似 <code class="haskell">while</code> 迴圈的操作：</p><pre><code class="haskell">until :: (a -&gt; Bool) -&gt; (a -&gt; a) -&gt; a -&gt; a
+until p f = head . dropWhile (not . p) . iterate f
+</code></pre><p><code class="haskell">until p f x</code> 由 <code class="haskell">x</code> 算出 <code class="haskell">f x</code>, 由 <code class="haskell">f x</code> 算出 <code class="haskell">f (f x)</code> ...
+直到 <code class="haskell">p (f (f .. x))</code> 成立為止。例：
+<code class="haskell">until ((&gt; 50) . square) (1+) 0</code> 得到 <code class="haskell">8</code>, 因為 $8^2 = 64$,
+是第一個平方大於 $50$ 的非負整數。
+由於惰性求值，<code class="haskell">iterate f</code> 在意義上雖然是個無窮串列，
+但只會被執行到 <code class="haskell">dropWhile (not . p)</code> 擷取的長度為止。</p><p>下述函數則實作了用輾轉相減法求最大公因數的古典演算法。函數 <code class="haskell">minus</code> 不斷
+將大數減去小數，直到兩數相等為止：</p><pre><code class="haskell">gcd :: (Int × Int) -&gt; Int
+gcd = fst . until (uncurry (==)) minus 
+  where minus (x,y)  | x &gt; y = (y, x-y)
+                     | x &lt; y = (y-x, x) 
+</code></pre><p>關於 <code class="haskell">uncurry</code> 詳見第頁。</p></div><div class="exlist"><div class="exercise exer" id="ex:squaresUpTo"><h5 class="exercise-title">練習 1.13 </h5><p>試定義一個函數
+<code class="haskell">squaresUpTo :: Int -&gt; List Int</code>, 使得 <code class="haskell">squaresUpTo n</code> 傳回
+所有不大於 <code class="haskell">n</code> 的平方數。例：<code class="haskell">squaresUpTo 10 = [1,4,9]</code>,
+<code class="haskell">squaresUpTo (-1) = []</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-1-13" type="checkbox"/><label class="lbl-toggle" for="ans-1-13">顯示答案</label><div class="collapsible-content"><h5>答案</h5><pre><code class="haskell">squaresUpTo :: Int -&gt; List Int
+squaresUpTo n = takeWhile (&lt;= n) (map square [0..]) 
+</code></pre></div></div></div><p><b>拉鍊</b> &emsp;
+函數 <code class="haskell">zip :: List a -&gt; List b -&gt; List (a × b)</code> 的作用可由下述例子示範：</p><pre><code class="spec">zip [1,2,3]  "abc"  = [(1,'a'), (2,'b'), (3,'c')] 
+zip [1,2]    "abc"  = [(1,'a'), (2,'b')] 
+zip [1,2,3]  "ab"   = [(1,'a'), (2,'b')] 
+zip [1..]    "abc"  = [(1,'a'), (2,'b'), (3,'c')] 
+zip [1..]    [2..]  = [(1,2), (2,3), (3,4) ..] 
+</code></pre><p><code class="haskell">zip xs ys</code> 將串列 <code class="haskell">xs</code> 與 <code class="haskell">ys</code> 相對應的元素放在序對中。
+如果兩個串列長度不同，<code class="haskell">zip</code> 將其中一個用完後即停止。
+<code class="haskell">zip</code> 也能處理無限長的串列。
+由於這個動作看來像是把<code class="haskell">xs</code>與<code class="haskell">ys</code>當作拉鍊的兩側「拉起來」，因此用拉拉鍊的狀聲詞 ``zip'' 命名。</p><p>相對地，也有一個函數 <code class="haskell">unzip :: List (a × b) -&gt; (List a × List b)</code>，
+將「拉鍊」拉開。例：<code class="haskell">unzip [(1,'a'), (2,'b'), (3,'c')]</code> 可得到
+<code class="haskell">([1,2,3],"abc")</code>.</p><p>許多情況下，我們不想要把兩兩對應的元素放到序對中，而是分別餵給一個二元運算子。
+這時可用另一個相關函數 <code class="haskell">zipWith</code>, 例：
+<code class="haskell">zipWith (+) [1,2,3] [4,5,6] = [5,7,9]</code>
+函數 <code class="haskell">zipWith</code> 可以這樣定義：</p><pre><code class="spec">zipWith :: (a -&gt; b -&gt; c) -&gt; List a -&gt; List b -&gt; List c
+zipWith f = map (uncurry f) . zip 
+</code></pre><div class="exlist"><div class="exercise exer" id="ex:zipWith-defn-zip"><h5 class="exercise-title">練習 1.14 </h5><p>用 <code class="haskell">zipWith</code> 定義 <code class="haskell">zip</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-1-14" type="checkbox"/><label class="lbl-toggle" for="ans-1-14">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>\Answer <code class="haskell">zip = zipWith (,)</code>, 或 <code class="haskell">zip = zipWith (\x y -&gt; (x,y))</code>.</p></div></div></div><div class="theorem" id="eg:positions"><h5 class="theorem-title">例 1.26  </h5><p>試定義函數 <code class="haskell">positions :: Char -&gt; String -&gt; List Int</code>, 使得
+<code class="haskell">positions z xs</code> 傳回 <code class="haskell">z</code> 在 <code class="haskell">xs</code> 中出現的所有位置。
+例：<code class="haskell">positions 'o' "hoola hooligans" = [1,2,7,8]</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-1-14" type="checkbox"/><label class="lbl-toggle" for="ans-1-14">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>一種可能寫法如下：</p><pre><code class="haskell">positions z = map fst . filter ((==z) . snd) . zip [0..] 
+</code></pre><p>我們用 <code class="haskell">zip [0..]</code> 為輸入串列標上位置，用 <code class="haskell">filter ((==z) . snd)</code>
+取出第二個元素等於 <code class="haskell">z</code> 的序對，最後用 <code class="haskell">map fst</code> 取出所有位置。
+注意函數合成與 currying 的使用。</p></div></div><div class="theorem" id="eg:positions-fst"><h5 class="theorem-title">例 1.27  </h5><p>接續上例。如果我們僅想要 <code class="haskell">z</code> 出現的第一個位置呢？我們可以定義：</p><pre><code class="spec">pos :: Char -&gt; String -&gt; Int
+pos z = head . positions z 
+</code></pre><p>這是一個部分函數，<code class="haskell">pos z xs</code> 傳回 <code class="haskell">positions z xs</code> 的第一個結果。
+如果 <code class="haskell">z</code> 沒有出現，<code class="haskell">positions z xs</code> 傳回 <code class="haskell">[]</code>, <code class="haskell">pos z xs</code>
+會得到執行期錯誤。如果 <code class="haskell">z</code> 出現在 <code class="haskell">xs</code> 中，由於惰性求值，<code class="haskell">pos</code>
+得到第一個位置後 <code class="haskell">positions</code> 便會停下，不會把串列整個產生。</p><p>如果我們希望 <code class="haskell">pos</code> 在 <code class="haskell">z</code> 沒有出現時傳回 <code class="haskell">-1</code>, 可以這麼做：</p><pre><code class="spec">pos :: Char -&gt; String -&gt; Int
+pos z xs = case positions z xs of
+            []      -&gt; -1
+            (i:is)  -&gt; i 
+</code></pre></div></div><div class="navi"><div class="previous">&laquo;<a href="Basics-7.html#sec:weak-head-normal-form">1.7 弱首範式</a></div><div class="next"><a href="Basics-9.html#sec:wholemeal">1.9 全麥編程</a>&raquo;</div></div></div></div>
+
+<script src="../js/ui.js"></script>
+
+</body>
+</html>

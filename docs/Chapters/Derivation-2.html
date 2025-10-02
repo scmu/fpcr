@@ -90,8 +90,8 @@
 <li class="pure-menu-item"><a href="Semantics.html#ch:semantics">4 關於語意的基本概念</a><input class="toggle" id="menu-li-4" type="checkbox"/><label class="menu-toggle" for="menu-li-4"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Semantics-1.html#sec:denotational-semantics">4.1 指稱語意</a></li>
 <li class="pure-menu-item"><a href="Semantics-2.html#sec:operational-semantics">4.2 操作語意</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Derivation.html#ch:derivation">5 一般程式推導</a><input class="toggle" id="menu-li-5" type="checkbox"/><label class="menu-toggle" for="menu-li-5"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-1.html#sec:fold-unfold-transform">5.1 展開-收回轉換</a></li>
-<li class="pure-menu-item"><a href="Derivation-2.html#sec:efficiency-basics">5.2 關於執行效率</a></li>
+<li class="pure-menu-item"><a href="Derivation.html#ch:derivation">5 一般程式推導</a><input class="toggle" id="menu-li-5" checked type="checkbox"/><label class="menu-toggle" for="menu-li-5"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-1.html#sec:fold-unfold-transform">5.1 展開-收回轉換</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:efficiency-basics">5.2 關於執行效率</a></li>
 <li class="pure-menu-item"><a href="Derivation-3.html#sec:fold-unfold-transform-efficiency">5.3 用展開-收回轉換增進效率</a><input class="toggle" id="menu-li-5-3" type="checkbox"/><label class="menu-toggle" for="menu-li-5-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-3.html#sec:poly-horner">5.3.1 計算多項式 -- Horner 法則</a></li>
 <li class="pure-menu-item"><a href="Derivation-3.html#sec:exp-binary-roll">5.3.2 二進位表示法</a></li>
 <li class="pure-menu-item"><a href="Derivation-3.html#sec:wrap-reminder">5.3.3 小結與提醒</a></li>
@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -143,28 +143,51 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:derivation">5 一般程式推導</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-1.html#sec:fold-unfold-transform">5.1 展開-收回轉換</a></div><div class="next"><a href="Derivation-3.html#sec:fold-unfold-transform-efficiency">5.3 用展開-收回轉換增進效率</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:efficiency-basics">5.2 關於執行效率</h2><p>有點意外地，本書直到現在才較正式地談執行效率。
+在本書中，我們假設數字四則運算、邏輯運算元等等都可在常數時間內完成。
+資料結構方面，使用資料建構元或對其做樣式配對都只需要常數時間。
+例如，將 <code class="haskell">x</code> 與 <code class="haskell">y</code> 做成 <code class="haskell">(x,y)</code> 是常數時間內可完成的動作；一個型別是序對的值如果已經是弱首範式，將其配對成 <code class="haskell">(x,y)</code> 以取出其中的 <code class="haskell">x</code> 和 <code class="haskell">y</code> 也只需要常數時間。
+如果有資料結構定義 <code class="haskell">data T = A | B</code>, 給一個已經是弱首範式的 <code class="haskell">x :: T</code>, 只需常數時間便可判斷它究竟是 <code class="haskell">A</code> 還是 <code class="haskell">B</code>.</p><p>回顧 <code class="haskell">List</code> 的定義：</p><pre><code class="spec">data List a = [] | a : List a 
+</code></pre><p>我們可看出這是一個偏一邊的表示法。
+對於串列的左邊的操作都可以在常數時間內完成。
+因此，我們可在常數時間內判斷一個串列 <code class="haskell">xs</code> 究竟是 <code class="haskell">[]</code> 還是可分解成頭和尾；
+產生 <code class="haskell">[]</code> 只需要常數時間；在 <code class="haskell">xs</code> 的左邊添加一個元素，傳回 <code class="haskell">x:xs</code>，也是常數時間內可完成的動作。
+但如果我們要拿出某串列最右邊的元素，或著在串列的右邊加東西呢？回顧 <code class="haskell">(++)</code> 的定義：</p><pre><code class="spec">(++) :: List a -&gt; List a -&gt; List a
+[]      ++ ys  = ys
+(x:xs)  ++ ys  = x : (xs ++ ys) 
+</code></pre><p>若我們試著看看 <code class="haskell">[1,2,3] ++ [4,5]</code> 是怎麼被算出來的</p><pre><code class="spec">   (1 : 2 : 3 : []) ++ (4 : 5 : [])
+=  1 : ((2 : 3 : []) ++ (4 : 5 : []))
+=  1 : 2 : ((3 : []) ++ (4 : 5 : []))
+=  1 : 2 : 3 : ([] ++ (4 : 5 : []))
+=  1 : 2 : 3 : 4 : 5 : [] 
+</code></pre><p>可發現 <code class="haskell">(++)</code> 需把第一個參數從頭到尾走過一遍。
+因此，若第一個參數的長度是 <code class="haskell">n</code>，<code class="haskell">(++)</code> 是一個時間複雜度為 $O(n)$ 的函數。
+函數 <code class="haskell">last</code> 的情況也類似。</p><div class="exlist"><div class="exercise exer" id="ex:last-bigO"><h5 class="exercise-title">練習 5.6 </h5><p>回顧 <code class="haskell">last</code> 的定義，試著展開 <code class="haskell">last [1,2,3,4]</code> 並確認 <code class="haskell">last xs</code> 需要的時間是否為 $O(|length xs|)$。</p></div></div><p>諸如 <code class="haskell">sum</code>, <code class="haskell">length</code>, <code class="haskell">maximum</code> 之類的函數將串列從頭到尾走過一次。
+當輸入串列長度為 <code class="haskell">n</code>, 它們均需時 $O(n)$。如果函數 <code class="haskell">f</code> 需時 $O(t)$，<code class="haskell">map f</code> 需時 $O(t\times n)$.
+函數 <code class="haskell">filter p</code>, <code class="haskell">takeWhile p</code> 等等在最壞情況下需將串列走完，因此它們也是需要線性時間的函數。
+函數 <code class="haskell">zip</code> 需要的時間與兩個串列中較短者成正比。</p><p>在習題 <a href="Induction-4.html#ex:reverse">2.5 </a> 中，我們曾請讀者定義一個函數 <code class="haskell">reverse :: List a -&gt; List a</code>，將輸入的串列反轉，例如 <code class="haskell">reverse [1,2,3,4,5] = [5,4,3,2,1]</code>. 一個可能的答案如下：</p><pre><code class="spec">reverse []      = []
+reverse (x:xs)  = reverse xs ++ [x] 
+</code></pre><p>這個程式的效率如何呢？我們看看 <code class="haskell">reverse [1,2,3,4]</code> 如何被歸約：</p><pre><code class="spec">   reverse [1,2,3,4]
+=  reverse [2,3,4] ++ [1]
+=  (reverse [3,4] ++ [2]) ++ [1]
+=  ((reverse [4] ++ [3]) ++ [2]) ++ [1]
+=  (((reverse [] ++ [4]) ++ [3]) ++ [2]) ++ [1]
+=  ((([] ++ [4]) ++ [3]) ++ [2]) ++ [1] 
+</code></pre><p>為了把 <code class="haskell">[1]</code> 接在左邊，<code class="haskell">(++ [1])</code> 需要走過一個長度為 <code class="haskell">3</code> 的串列。
+而在那之前，<code class="haskell">(++ [2])</code> 需要走過一個長度為 <code class="haskell">2</code> 的串列。
+推廣說來，要反轉一個長度為 <code class="haskell">n</code> 的串列，<code class="haskell">(++)</code> 會被使用 $O(n)$ 次。每個 <code class="haskell">(++)</code> 左邊的串列長度也是 $O(n)$，因此 <code class="haskell">reverse</code> 是一個需時 $O(n^2)$ 的演算法！
+「反轉串列」這個看來很基本的操作竟需要 $O(n^2)$ 的時間，似乎令人難以接受。
+是否有更快的做法呢？我們將在第 <a href="Derivation-6.html#sec:accumulating-param">5.6 </a> 節討論到。</p><div class="exlist"><div class="exercise exer" id="ex:ETree-tips"><h5 class="exercise-title">練習 5.7 </h5><p>回顧第<a href="Basics-10.html#sec:user-defined-data">1.10 </a>與<a href="Induction-8.html#sec:other-inductive-datatypes">2.8 </a>節中提及的
+外標籤二元樹：</p><pre><code class="spec">data ETree a  = Tip a | Bin (ETree a) (ETree a) 
+</code></pre><p>以下函數傳回樹中所有的標籤：</p><pre><code class="haskell">tips :: ETree a -&gt; List a
+tips (Tip x)    = [x]
+tips (Bin t u)  = tips t ++ tips u 
+</code></pre><p>函數 <code class="haskell">tips</code> 最壞情況的時間複雜度為何？請做出一個含有 <code class="haskell">n</code> 個標籤的樹 <code class="haskell">t</code>，使得 <code class="haskell">tips t</code> 僅需要 $O(n)$ 的時間算完；也請做出一個含有 <code class="haskell">n</code> 個標籤的樹 <code class="haskell">u</code>，使得 <code class="haskell">tips u</code> 需要 $O(n^2)$ 的時間。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-7" type="checkbox"/><label class="lbl-toggle" for="ans-5-7">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>令 <code class="haskell">t</code> 為一個向右傾斜的樹：</p><pre><code class="spec">t = Bin (Tip 1) (Bin (Tip 2) .. (Bin (Tip (n-1)) (Tip n))) 
+</code></pre><p><code class="haskell">tip t</code> 展開成為 <code class="haskell">[1] ++ ([2] .. ([n-1] ++ [n]))</code>, 可在 $O(n)$ 時間內歸約成範式。
+這是最好的情況。
+令 <code class="haskell">u</code> 為一個向左傾斜的樹：</p><pre><code class="spec">u =  Bin (Bin (... (Bin (Bin (Tip 1) (Tip 2)) (Tip 3)))...
+       (Tip (n-1))) (Tip n) 
+</code></pre><p><code class="haskell">tip u</code> 展開成為 <code class="haskell">((..(([1] ++ [2])++[3])..) .. ++ [n-1]) ++ [n]</code>, 需要 $O(n^2)$ 的時間，也是 <code class="haskell">tips</code> 最壞情況的時間複雜度.</p></div></div></div></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-1.html#sec:fold-unfold-transform">5.1 展開-收回轉換</a></div><div class="next"><a href="Derivation-3.html#sec:fold-unfold-transform-efficiency">5.3 用展開-收回轉換增進效率</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

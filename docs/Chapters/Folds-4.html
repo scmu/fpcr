@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -124,7 +124,7 @@
 <li class="pure-menu-item"><a href="Folds-3.html#sec:list-homomorphism">6.3.2 串列同構</a></li>
 <li class="pure-menu-item"><a href="Folds-3.html#sec:paramorphism">6.3.3 Paramorphism 與本原遞迴</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Folds-4.html#sec:foldN">6.4 自然數的摺</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:foldN">6.4 自然數的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-5.html#sec:fold-on-other-data-structures">6.5 其他資料結構</a></li>
 <li class="pure-menu-item"><a href="Folds-6.html#sec:folds-ref">6.6 參考資料</a></li>
 </ul></li>
@@ -143,28 +143,38 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Folds-3.html#sec:foldl-listHomo-para">6.3 左摺、串列同構、與 Paramorphism</a></div><div class="next"><a href="Folds-5.html#sec:fold-on-other-data-structures">6.5 其他資料結構</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:foldN">6.4 自然數的摺</h2><p>自然數可以視為有兩個建構元 <code class="haskell">Zero</code> 和 <code class="haskell">Suc</code> 的歸納資料結構。
+我們也可為自然數定義一個摺：</p><pre><code class="haskell">foldN :: (a -&gt; a) -&gt; a -&gt; Nat -&gt; a
+foldN f e Zero     = e
+foldN f e (Suc n)  = f (foldN f e n) 
+</code></pre><p>和串列的情況類似，函數 <code class="haskell">foldN f e</code> 拿一個自然數，將其中的 <code class="haskell">Zero</code> 代換成 <code class="haskell">e</code>, <code class="haskell">Suc</code> 代換成 <code class="haskell">f</code>.
+留意型別：<code class="haskell">Zero</code> 與 <code class="haskell">Suc</code> 的型別分別是 <code class="haskell">Nat</code> 與 <code class="haskell">Nat -&gt; Nat</code>,
+<code class="haskell">foldN</code> 要將一個型別為 <code class="haskell">Nat</code> 的值轉變為型別為 <code class="haskell">a</code> 的值,
+因此 <code class="haskell">e</code> 的型別為 <code class="haskell">a</code>, 而 <code class="haskell">f</code> 的型別為 <code class="haskell">a -&gt; a</code>.
+為方便稱呼，我們也將 <code class="haskell">e</code> 與 <code class="haskell">f</code> 分別稱為基底值與步驟函數。</p><p>許多我們定義過的、自然數上的函數都可寫成自然數的摺：</p><ul><li><p><code class="haskell">exp b = foldN (b*) 1</code>,</p></li><li><p><code class="haskell">(+n) = foldN (Suc) n</code>,</p></li><li><p><code class="haskell">(*n) = foldN (n+) 0</code>.</p></li></ul><p>自然數上的 <code class="haskell">id :: Nat -&gt; Nat</code> 也可寫成摺：<code class="haskell">id = foldN (Suc) 0</code>.</p><p>自然數的摺也有一個融合定理：</p><div class="theorem" id="thm:foldN-fusion" title="摺融合定理(自然數版)"><h5 class="theorem-title">定理 6.18  摺融合定理(自然數版) </h5><p><span id="ix-6-16"></span>
+給定 <code class="haskell">f :: a -&gt; a</code>, <code class="haskell">e :: a</code>, <code class="haskell">h :: a -&gt; b</code>.
+如果對所有在 <code class="haskell">foldN f e</code> 值域中的 <code class="haskell">x :: a</code>, 融合條件
+<code class="haskell">h (f x) = g (h x)</code> 成立, 則</p><pre><code class="spec">h . foldN f e = foldN g (h e) 
+</code></pre></div><div class="theorem" id="eg:foldN-even"><h5 class="theorem-title">例 6.19  </h5><p>判斷一個自然數是否為偶數的述語 <code class="haskell">even :: Nat -&gt; Bool</code> 可寫成一個摺:</p><pre><code class="spec">  even = foldN not True 
+</code></pre><p>函數 <code class="haskell">even . (+n)</code> 判斷一個數值加上 <code class="haskell">n</code> 之後是否為偶數。
+由於 <code class="haskell">(+ n) = foldN (Suc) n</code>, 我們可以嘗試把 <code class="haskell">even</code> 融入 <code class="haskell">(+n)</code>, 變成一個摺。
+根據定理<a href="#thm:foldN-fusion">6.18 </a>, 基底值為 <code class="haskell">even n</code>;
+而由於 <code class="haskell">even (Suc n) = not (even n)</code>, 步驟函數為 <code class="haskell">not</code>.
+因此：</p><pre><code class="spec">even . (+n) = foldN not (even n) 
+</code></pre></div><div class="exlist"><div class="exercise exer" id="ex:foldN-fib"><h5 class="exercise-title">練習 6.12 </h5><p>回顧第<a href="Induction-11.html#sec:complete-induction">2.11 </a>節中提到的費氏數定義：</p><pre><code class="spec">fib 0      = 0
+fib 1      = 1
+fib (2+n)  = fib (1+n) + fib n 
+</code></pre><p>若直接將上述定義當作演算法，我們得做許多重複的計算。
+定義 <code class="haskell">fib2 n = (fib (1+n), fib n)</code>.
+請將 <code class="haskell">fib2</code> 融合進 <code class="haskell">id :: Nat -&gt; Nat</code>, 以便得到一個遞迴呼叫次數為 $O(n)$ 的演算法。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-6-12" type="checkbox"/><label class="lbl-toggle" for="ans-6-12">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>回顧 <code class="haskell">id = foldN (Suc) 0</code>.
+欲將 <code class="haskell">fib2</code> 融入 <code class="haskell">id</code>, 基底值為 <code class="haskell">fib2 0 = (fib 1, fib 0) = (1,0)</code>.
+為得到步驟函數，我們演算如下：</p><pre><code class="spec">   fib2 (Suc n)
+=  (fib (Suc (Suc n)), fib (Suc n))
+=    <comment>{- <code class="haskell">fib</code> 之定義 -}</comment>
+   (fib (Suc n) + fib n, fib (Suc n))
+=  (\(x,y) -&gt; (x+y,x)) (fib2 n) 
+</code></pre><p>因此我們得到</p><pre><code class="spec">fib2 = foldN (\(x,y) -&gt; (x+y,x)) (1,0) 
+</code></pre></div></div></div></div><div class="navi"><div class="previous">&laquo;<a href="Folds-3.html#sec:foldl-listHomo-para">6.3 左摺、串列同構、與 Paramorphism</a></div><div class="next"><a href="Folds-5.html#sec:fold-on-other-data-structures">6.5 其他資料結構</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

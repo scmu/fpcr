@@ -32,12 +32,12 @@
         <!-- Hamburger icon -->
         <span></span>
     </a>
-<div id="menu"><div class="pure-menu"><h1 class="pure-menu-heading">函數程設與推論</h1><h2 class="pure-menu-heading">Functional Program Construction and Reasoning</h2><p><a href="../ToC.html">目錄</a></p><p><a href="../Preface.html">前言</a></p><nav class="nav" role="navigation"><ul class="pure-menu-list menu-level-1"><li class="pure-menu-item"><a href="Introduction.html#ch:intro">0 符號、演算、與抽象化</a><input class="toggle" id="menu-li-0" type="checkbox"/><label class="menu-toggle" for="menu-li-0"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Introduction-1.html#sec:knight-knave-island">0.1 騎士與惡棍之島</a></li>
+<div id="menu"><div class="pure-menu"><h1 class="pure-menu-heading">函數程設與推論</h1><h2 class="pure-menu-heading">Functional Program Construction and Reasoning</h2><p><a href="../ToC.html">目錄</a></p><p><a href="../Preface.html">前言</a></p><nav class="nav" role="navigation"><ul class="pure-menu-list menu-level-1"><li class="pure-menu-item"><a href="Introduction.html#ch:intro">0 符號、演算、與抽象化</a><input class="toggle" id="menu-li-0" checked type="checkbox"/><label class="menu-toggle" for="menu-li-0"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Introduction-1.html#sec:knight-knave-island">0.1 騎士與惡棍之島</a></li>
 <li class="pure-menu-item"><a href="Introduction-2.html#sec:let-symbols-work">0.2 讓符號為你工作</a></li>
 <li class="pure-menu-item"><a href="Introduction-3.html#sec:abstraction">0.3 抽象化</a></li>
 <li class="pure-menu-item"><a href="Introduction-4.html#sec:abstraction-and-expression">0.4 抽象化與表達力</a></li>
 <li class="pure-menu-item"><a href="Introduction-5.html#sec:correctness">0.5 正確性</a></li>
-<li class="pure-menu-item"><a href="Introduction-6.html#sec:calculable-programming-language">0.6 可演算的程式語言</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:calculable-programming-language">0.6 可演算的程式語言</a></li>
 <li class="pure-menu-item"><a href="Introduction-7.html#sec:relevant-information">0.7 相關資料</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Basics.html#ch:basics">1 值、函數、與定義</a><input class="toggle" id="menu-li-1" type="checkbox"/><label class="menu-toggle" for="menu-li-1"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Basics-1.html#sec:evaluation">1.1 值與求值</a></li>
@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -143,28 +143,31 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:intro">0 符號、演算、與抽象化</h1></div><div class="navi"><div class="previous">&laquo;<a href="Introduction-5.html#sec:correctness">0.5 正確性</a></div><div class="next"><a href="Introduction-7.html#sec:relevant-information">0.7 相關資料</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:calculable-programming-language">0.6 可演算的程式語言</h2><p>正確性是如此重要又難以掌握的性質，我們因此希望程式語言能幫助我們確保程式的正確性。我們採用的方法是：給定一個規格，我們希望正確的程式能夠由其規格演算、推導出來。就如同在騎士與惡棍問題中，我們把希望 <code class="haskell">Q</code> 滿足的性質寫下，然後利用符號的規則算出 <code class="haskell">Q</code>. 我們希望程式也能如此從其規格被<em>算</em>出來。</p><p>以最大區段和問題為例，用我們之後將介紹的符號，我們可以把([RefUndefined])改寫成：</p><pre><code class="spec">  mss = max . map sum . segments 
+</code></pre><p>其意思大約是「給定一串數字，找出它的所有連續區段，算每一個區段的和，然後傳回其中最大的。」接下來的問題是，<code class="haskell">mss</code> 有沒有比較快的實作？我們希望可以用代數方法，由 <code class="haskell">mss</code> 的規格出發：</p><pre><code class="spec">   max . map sum . segments
+=    <comment>{- <code class="haskell">segments</code> 的定義 -}</comment>
+   max . map sum . concat . map inits . tails
+=    <comment>{- 某定理 -}</comment>
+   ...
+=    <comment>{- 另一些定理 -}</comment>
+   max . scanr oplus 0 
+</code></pre><p>最後的 <code class="haskell">max . scanr oplus 0</code> 相當於前一節的程式，只是以不同的符號表示。</p><p>我們可以由規格出發，在符號上操作，將程式如同求代數的解一樣地算出來。只要每個小步驟都正確，最後的程式就是正確的。這套技術稱作「程式推導(program derivation)」<span id="ix-0-5"></span>或「程式演算(program calculation)」<span id="ix-0-6"></span>，將是本書重要的主題。而在本書的觀點中，函數編程相較於其他典範的特色與優勢是<em>函數語言是一套適合演算的符號系統</em>。</p><p><b>適合演算的符號</b> &emsp; 我們舉個例子，談談符號「適合演算」是怎麼回事。
+圖[RefUndefined]中顯示的是西元前四世紀左右希臘人使用的數字表示法。
+以希臘字母表為順序，$1$, $2$,\ldots 到 $9$ 分別寫成 \textalpha, \textbeta,\ldots \straighttheta.
+每遇到 $10$ 的乘冪便換一組符號，如 $10$, $20$, \ldots 寫成\textiota, \textkappa \ldots。
+$11$, $12$, $13$ 分別寫成 \textiota\textalpha, \textiota\textbeta, \textiota\textgamma,
+$21$, $22$, $23$ 則寫成 \textkappa\textalpha, \textkappa\textbeta, \textkappa\textgamma.
+$653$可寫成\textchi\textnu\textgamma.
+這套表示法的缺點包括不易表示大數，以及不易做演算：我們需要知道 \textdelta 加上 \textbeta 等於 \foreignlanguage{greek}{\stigma}, 以及 \textmugreek 加上 \textkappa 等於 \textxi。<input class="toggle" id="footnote-0-6-8" type="checkbox"/><label class="fnote-toggle" for="footnote-0-6-8">(註8) </label><span class="collapsible-footnote">西元前八世紀，希臘人曾使用以 I, \textPi, \textDelta, H 分別表示 $1$, $5$, $10$, $100$ 的表示法。後來被圖[RefUndefined]中的系統取代。無論如何，希臘人仍以此發展出了進步的數學。</span></p><div class="figure top" id="fig:greekalphnumerals" title="希臘數字。"><center></center></div><p>與之對比的是瑪雅數字。這套數字系統的年代不詳，據估計可能在西元四至世紀採用。一個點代表 $1$, 一條橫杠代表 $5$。 例如 $19$ 寫成 $\mayadigit{19}$. 瑪雅數字採用 $20$ 進位，較大的位數寫在上方。因此</p><p>代表 $7 (\mayadigit{7}) \times 20 + 11 (\mayadigit{11})$, 也就是 $151$.
+另有個例外：第三個數字為 $18$（而非 $20$）的乘冪 --- 因為 $18 \times 20 = 360$ 接近一年的日數。
+圖 [RefUndefined] 中左邊由上至下是以瑪雅數字寫成的 $3212199$.
+值得注意的是，此類<em>以符號的位置表示其量級</em>的數字表示法大都需要一個相當於「零」的佔位符號。
+在瑪雅數字中，該符號寫成 $\mayadigit{0}$。因此 $20$ 可寫成 $\dot{\raisebox{-1pt}{\vstretch{0.7}{\mayadigit{0}}}}$, 與只有一個點的 $1$ 區分。<input class="toggle" id="footnote-0-6-9" type="checkbox"/><label class="fnote-toggle" for="footnote-0-6-9">(註9) </label><span class="collapsible-footnote">一些早期數字表示法中有此種佔位符號，但並不見得把「零」視為可獨立存在的一個數。「將零視為一個數字」是數學史上的重要發明，許多數學性質都需有它的存在才得以描述。程式語言中也有類似的情況：有一個「不做任何事的指令」或一個「將輸入照樣傳回的函數(即<code class="haskell">id</code>)」對於描述程式的性質是很重要的。</span></p><div class="figure top" id="fig:mayanumerals" title="以瑪雅數字表示 $3212199$."><center></center></div><p>如何用瑪雅數字作加法？以下顯示的是 $151 + 55$:</p><p>我們可先把兩個個位數（$\mayadigit{11}$與$\mayadigit{15}$）和兩個 $20$ 位數（$\mayadigit{7}$與$\mayadigit{2}$）分別相加。
+其中，個位數相加的結果是 $\mayadigit{26}$ --- 超過了 $20$！
+於是我們把其中四個橫槓（即一個 $20$）往上進位成一個點，
+和 $20$ 位數的四個點結合成另一個橫槓。</p><p>有趣的是，我相信大部分的讀者即使可能是第一次看到這種數系，也從未使用過 $20$ 進位，
+還是可迅速理解以上的加法，甚至可以舉一反三地自己試試看。
+這就是一個<em>適合演算</em>的符號系統給我們的便利。</p><p>對本書來說，函數語言的價值便是 --- 它是個適於演算的語言。</p></div><div class="navi"><div class="previous">&laquo;<a href="Introduction-5.html#sec:correctness">0.5 正確性</a></div><div class="next"><a href="Introduction-7.html#sec:relevant-information">0.7 相關資料</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

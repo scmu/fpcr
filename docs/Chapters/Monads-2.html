@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -132,8 +132,8 @@
 <li class="pure-menu-item"><a href="SegProblems-2.html#sec:maximum-plateau-length">7.2 最長高原問題</a></li>
 <li class="pure-menu-item"><a href="SegProblems-3.html#sec:segProblems-ref">7.3 參考資料</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Monads.html#ch:monads">8 單子與副作用</a><input class="toggle" id="menu-li-8" type="checkbox"/><label class="menu-toggle" for="menu-li-8"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Monads-1.html#sec:exceptions">8.1 例外處理</a></li>
-<li class="pure-menu-item"><a href="Monads-2.html#sec:monad-class-laws">8.2 單子與單子律</a></li>
+<li class="pure-menu-item"><a href="Monads.html#ch:monads">8 單子與副作用</a><input class="toggle" id="menu-li-8" checked type="checkbox"/><label class="menu-toggle" for="menu-li-8"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Monads-1.html#sec:exceptions">8.1 例外處理</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:monad-class-laws">8.2 單子與單子律</a></li>
 <li class="pure-menu-item"><a href="Monads-3.html#sec:monad-reader">8.3 讀取單子</a><input class="toggle" id="menu-li-8-3" type="checkbox"/><label class="menu-toggle" for="menu-li-8-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Monads-3.html#sec:var-env-reader">8.3.1 變數與環境</a></li>
 <li class="pure-menu-item"><a href="Monads-3.html#sec:reader-is-monad">8.3.2 「讀取」副作用是單子</a></li>
 <li class="pure-menu-item"><a href="Monads-3.html#sec:monad-reader-laws">8.3.3 推論讀取單子程式的性質</a></li>
@@ -143,28 +143,47 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:monads">8 單子與副作用</h1></div><div class="navi"><div class="previous">&laquo;<a href="Monads-1.html#sec:exceptions">8.1 例外處理</a></div><div class="next"><a href="Monads-3.html#sec:monad-reader">8.3 讀取單子</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:monad-class-laws">8.2 單子與單子律</h2><p>第 <a href="Introduction.html#ch:intro">0 </a> 章提及，「抽象化」意指抽取出一個問題中最關鍵的元素。
+一個成功的抽象化能抓到同類問題的共通本質，因此可以推廣到其他相關的情境、問題，用同一套方法表達這些情境、解決這些問題。
+我們在第 <a href="Monads-1.html#sec:exceptions">8.1 </a> 節發現的便是一個關於計算與副作用的成功抽象化。</p><p>我們可以把第 <a href="Monads-1.html#sec:exceptions">8.1 </a> 節中的 <code class="haskell">Except a</code> 理解成一個 <em>尚待完成的計算</em>，或是一個<em>尚待執行的程式</em>。
+用 <code class="haskell">case</code> 去配對它便是把這個計算算出來、把程式執行出來。
+如果順利執行，計算結果的型別為 <code class="haskell">a</code>, 但也可能產生副作用。
+而由其型別建構子 <code class="haskell">Except</code> 可看出此處可能的副作用是「可能拋出例外」。
+運算子 <code class="haskell">(&gt;&gt;=)</code> 的功用是將小計算/程式串接起來，組成較大的計算/程式。</p><p>推廣出去，<code class="haskell">Except</code> 其實可以是任意一個型別建構元 <code class="haskell">m</code>: 一個型別為 <code class="haskell">m a</code> 的值表示一個尚待完成的計算，或是一個尚待執行的程式。如果順利執行，計算結果的型別為 <code class="haskell">a</code>, 但執行過程中可能產生副作用。
+至於究竟是什麼副作用，則看 <code class="haskell">m</code> 是什麼而定。
+此外，每個 <code class="haskell">m</code> 附帶兩個運算子：</p><ul><li><p><code class="haskell">return :: a -&gt; m a</code>;</p></li><li><p><code class="haskell">(&gt;&gt;=) :: m a -&gt; (a -&gt; m b) -&gt; m b</code>.</p></li></ul><p>它們三者合稱為一個<em>單子</em>(<em>monad</em>).<span id="ix-8-3"></span></p><p>給任一個值 <code class="haskell">x :: a</code>, 運算子 <code class="haskell">return x</code> 代表一個純粹傳回 <code class="haskell">x</code>, 沒有副作用的計算。以 <code class="haskell">m = Except</code> 為例，自然的選擇是令 <code class="haskell">return = Return</code>. 我們之後會看到其他例子。</p><p>運算子 <code class="haskell">(&gt;&gt;=)</code> 將小計算串接在一起。
+在 <code class="haskell">p &gt;&gt;= f</code> 之中，<code class="haskell">p :: m a</code> 是一個回傳型別將為 <code class="haskell">a</code>, 但可能有副作用的計算。
+如果 <code class="haskell">p</code> 被算出來，其結果會被傳給 <code class="haskell">f</code>.
+函數 <code class="haskell">f :: a -&gt; m b</code> 是一個拿到 <code class="haskell">p</code> 的結果後<em>算出一個計算的計算</em>.
+整個式子 <code class="haskell">p &gt;&gt;= f</code> 的型別也是 <code class="haskell">m b</code>.
+這是理解單子程式的一個重點：函數本身沒有副作用，但<em>函數可以算出含有副作用的程式</em>。
+如果我們把 <code class="haskell">f</code> 寫成 $\lambda$ 表示式，
+在 <code class="haskell">p &gt;&gt;= \x -&gt; e</code> 之中，<code class="haskell">p</code> 的結果被取名為 <code class="haskell">x</code>，而 <code class="haskell">e :: m b</code> 之中可以使用 <code class="haskell">x</code>.
+此處 <code class="haskell">(&gt;&gt;=)</code> 可理解成由兩個小計算 <code class="haskell">p</code> 與 <code class="haskell">e</code> 組出一個大計算的接著劑，兩個小計算用 <code class="haskell">x</code> 來溝通。</p><p>運算子 <code class="haskell">return</code> 與 <code class="haskell">(&gt;&gt;=)</code> 是用來組合出含有副作用的程式的元件，因此得滿足一些該有的性質。正式說來，</p><div class="theorem" id="def:monad" title="單子"><h5 class="theorem-title">定義 8.1  單子 </h5><p>一個單子(monad)<span id="ix-8-4"></span>包含一個型別建構子 <code class="haskell">m</code>,
+以及兩個運算子 <code class="haskell">return :: a -&gt; m a</code> 與 <code class="haskell">(&gt;&gt;=) :: m a -&gt; (a -&gt; m b) -&gt; m b</code>. 它們須滿足以下三條<em>單子律</em>：<span id="ix-8-5"></span></p><div class="equations"><ul><li><p id="eq:monad-right-id"><b>右單位律(right identity): </b> &emsp;
+<code class="haskell">p &gt;&gt;= return  </code> <code class="haskell">=  p </code></p></li><li><p id="eq:monad-left-id"><b>左單位律(left identity): </b> &emsp;
+<code class="haskell">return x &gt;&gt;= f  </code> <code class="haskell">=  f x </code></p></li><li><p id="eq:monad-assoc"><b>結合律(associativity): </b> &emsp;
+<code class="haskell">(p &gt;&gt;= f) &gt;&gt;= g  </code> <code class="haskell">=  p &gt;&gt;= (\x -&gt; f x &gt;&gt;= g) </code></p></li></ul></div></div><p><em>右單位律</em>若寫成 <code class="haskell">p &gt;&gt;= \x -&gt; return x</code> 也許更好理解。計算 <code class="haskell">p</code> 的結果 <code class="haskell">x</code> 被傳到 <code class="haskell">(&gt;&gt;=)</code> 的右邊，但後者只是單純地把 <code class="haskell">x</code> 再傳出。這和只寫 <code class="haskell">p</code> 得是一樣的。</p><p>在<em>左單位律</em>的左手邊 <code class="haskell">return x &gt;&gt;= f</code> 之中，函數 <code class="haskell">f</code> 接收 <code class="haskell">return x</code> 的結果 --- 而 <code class="haskell">return x</code> 的結果就是 <code class="haskell">x</code>! 因此這和 <code class="haskell">f x</code> 得是一樣的。</p><p>最後一條是 <code class="haskell">(&gt;&gt;=)</code> 的<em>結合律</em>：「用 <code class="haskell">p</code> 與 <code class="haskell">f</code> 串接出一個程式，再把 <code class="haskell">g</code> 串接到右邊」與「把 <code class="haskell">f</code> 與 <code class="haskell">g</code> 串接在一起，並把 <code class="haskell">p</code> 串接在它們左邊」得到的必須是一樣的程式。
+但由於型別的問題，在後者的情況我們需要一個 <code class="haskell">x</code> 表示 <code class="haskell">p</code> 的結果，前者則不用。</p><p>每定義一個新的單子，我們需選定一個型別 <code class="haskell">m</code>，定義 <code class="haskell">return</code> 與 <code class="haskell">(&gt;&gt;=)</code> 兩個運算子，然後證明它們滿足單子律。需要推論含單子的程式的性質與正確性時，這三條單子律也是我們會用到的性質。</p><p>最後一提：定義 <a href="#def:monad">8.1 </a> 並不是單子的唯一定義方式。其他等價的定義詳見 \todo{where}.</p><div class="exlist"><div class="exercise exer"><h5 class="exercise-title">練習 8.1 </h5><p>證明第 <a href="Monads-1.html#sec:exceptions">8.1 </a> 節中的定義滿足單子律。
+意即當 <code class="haskell">m = Except</code>, <code class="haskell">return = Return</code>, 而 <code class="haskell">(&gt;&gt;=)</code> 的定義如第 <a href="Monads-1.html#sec:exceptions">8.1 </a> 節所示時，三條單子律都成立。</p></div></div><p><b>單子 class</b> &emsp;
+既然 Haskell 有 type class 機制，我們可以把單子定義為一個 class:</p><pre><code class="spec">class Monad m where
+  return  :: a -&gt; m a
+  (&gt;&gt;=)   :: m a -&gt; (a -&gt; m b) -&gt; m b 
+</code></pre><p>如此明確規定一個屬於 <code class="haskell">Monad</code> 的型別建構子必須有 <code class="haskell">return</code> 與 <code class="haskell">(&gt;&gt;=)</code>.
+<code class="haskell">Except</code> 型別則是其中的一個特例：</p><pre><code class="spec">instance Monad Except where
+   return           = Return
+   Expt msg  &gt;&gt;= f  = Expt msg
+   Return x  &gt;&gt;= f  = f x 
+</code></pre><p>之後我們討論其他的 <code class="haskell">m</code> 時，也將把它們宣告為 <code class="haskell">Monad</code> 的特例。
+但這麼做只是為了兩個方便性：1. 讓不同的 <code class="haskell">m</code> 可以共用 <code class="haskell">return</code> 與 <code class="haskell">(&gt;&gt;=)</code> 兩個符號，不用重新取名；2. 看到使用 <code class="haskell">return</code> 與 <code class="haskell">(&gt;&gt;=)</code> 的程式時，可以暫時不指定它們到底使用那一個特例。
+若非為了這些小方便，單子與 type class 不一定得有關聯。</p><p>此外，Haskell 中的 type class 宣告也只保證 <code class="haskell">return</code> 與 <code class="haskell">(&gt;&gt;=)</code> 的型別是正確的。
+目前 Haskell 並無法保證使用者定義的 <code class="haskell">return</code> 與 <code class="haskell">(&gt;&gt;=)</code> 滿足前述的單子律。</p><p><b>副作用特定的運算子</b> &emsp;
+不知讀者是否想起：那麼 <code class="haskell">throw</code> 與 <code class="haskell">catch</code> 呢？
+他們也應該滿足一些性質，例如，<code class="haskell">throw msg &gt;&gt;= f = throw msg</code> （拋出例外後，後面的 <code class="haskell">f</code> 不會執行）和 <code class="haskell">catch (throw msg) hdl = hdl msg</code> （<code class="haskell">throw</code> 拋出的例外由 <code class="haskell">hdl</code> 處理）應該都是合理以及必要的性質。
+另一方面，它們是屬於「例外」這個副作用的運算子，其他的副作用並不見得會有它們。
+反之，別的副作用可能會有該副作用的特定運算子。例如，要談可變變數，可能會有個賦值運算子，這是 <code class="haskell">Except</code> 沒有的。</p><p>由此得知，用於表達副作用時，單子的運算子可分為兩大類：1. <code class="haskell">return</code> 與 <code class="haskell">(&gt;&gt;=)</code> 是各個副作用共通的，
+每個單子都必須定義 <code class="haskell">return</code> 與 <code class="haskell">(&gt;&gt;=)</code>, 並確保它們滿足單子律。2. 此外，每個副作用還可能擁有特有的運算子，它們可能也有些該滿足的性質。
+我們將在介紹各個副作用的小節中看到更多例子。</p></div><div class="navi"><div class="previous">&laquo;<a href="Monads-1.html#sec:exceptions">8.1 例外處理</a></div><div class="next"><a href="Monads-3.html#sec:monad-reader">8.3 讀取單子</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

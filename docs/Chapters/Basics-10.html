@@ -40,7 +40,7 @@
 <li class="pure-menu-item"><a href="Introduction-6.html#sec:calculable-programming-language">0.6 可演算的程式語言</a></li>
 <li class="pure-menu-item"><a href="Introduction-7.html#sec:relevant-information">0.7 相關資料</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Basics.html#ch:basics">1 值、函數、與定義</a><input class="toggle" id="menu-li-1" type="checkbox"/><label class="menu-toggle" for="menu-li-1"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Basics-1.html#sec:evaluation">1.1 值與求值</a></li>
+<li class="pure-menu-item"><a href="Basics.html#ch:basics">1 值、函數、與定義</a><input class="toggle" id="menu-li-1" checked type="checkbox"/><label class="menu-toggle" for="menu-li-1"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Basics-1.html#sec:evaluation">1.1 值與求值</a></li>
 <li class="pure-menu-item"><a href="Basics-2.html#sec:function-defns">1.2 函數定義</a></li>
 <li class="pure-menu-item"><a href="Basics-3.html#sec:higher-order-func">1.3 高階函數</a></li>
 <li class="pure-menu-item"><a href="Basics-4.html#sec:func-comp">1.4 函數合成</a></li>
@@ -55,7 +55,7 @@
 <li class="pure-menu-item"><a href="Basics-8.html#sec:list-combinators">1.8.3 串列上的種種組件函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Basics-9.html#sec:wholemeal">1.9 全麥編程</a></li>
-<li class="pure-menu-item"><a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:user-defined-data">1.10 自訂資料型別</a></li>
 <li class="pure-menu-item"><a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -143,28 +143,23 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:basics">1 值、函數、與定義</h1></div><div class="navi"><div class="previous">&laquo;<a href="Basics-9.html#sec:wholemeal">1.9 全麥編程</a></div><div class="next"><a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:user-defined-data">1.10 自訂資料型別</h2><p>本章目前為止給讀者看到的 <code class="haskell">data</code> 定義其實都是 Haskell 已內建的型別。
+使用者也可自己定義新資料型別。
+例如，我們可能定義一個新型別表達四個方向：</p><pre><code class="spec">data Direction = North | East | South | West 
+</code></pre><p>或著定義一個表示顏色的型別，用三個浮點數表達紅、綠、藍的比例：</p><pre><code class="haskell">data RGBColor = RGB Float Float Float 
+</code></pre><p>例：土耳其藍(turquoise)可寫成 <code class="haskell">RGB 0.25 0.875 0.8125</code>.
+下列函數則降低一個顏色的彩度：
+<input class="toggle" id="footnote-1-10-16" type="checkbox"/><label class="fnote-toggle" for="footnote-1-10-16">(註16) </label><span class="collapsible-footnote">這是一個簡便的做法：算出該顏色的灰度 <code class="haskell">gr</code>,
+然後計算每個原色與該灰度的線性內插。
+更準確的作法應將 RGB 轉成 HSV，以後者調整飽和度。</span></p><pre><code class="haskell">desaturate :: Float -&gt; RGBColor -&gt; RGBColor
+desaturate p (RGB r g b) =
+    RGB  (r +. p *. (gr -. r)) (g +. p *. (gr -. g)) (b +. p *. (gr -. b)) 
+  where gr = r *. 0.299 +. g *. 0.587 +. b *. 0.144 
+</code></pre><p>我們也可定義如 <code class="haskell">List</code> 一樣的遞迴資料型別。
+例如，資料結構中可能談到兩種二元樹狀結構，一種僅在內部節點有標示（稱作 internally labelled），另一種僅在葉節點有表示（稱作 externally labelled）。
+這兩種二元樹可分別表示如下：</p><pre><code class="haskell">data ITree a  = Null | Node a (ITree a) (ITree a) 
+data ETree a  = Tip a | Bin (ETree a) (ETree a) 
+</code></pre><p>怎麼編寫這種資料結構上的程式呢？我們將在下一章中說到。</p></div><div class="navi"><div class="previous">&laquo;<a href="Basics-9.html#sec:wholemeal">1.9 全麥編程</a></div><div class="next"><a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

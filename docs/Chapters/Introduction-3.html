@@ -32,9 +32,9 @@
         <!-- Hamburger icon -->
         <span></span>
     </a>
-<div id="menu"><div class="pure-menu"><h1 class="pure-menu-heading">函數程設與推論</h1><h2 class="pure-menu-heading">Functional Program Construction and Reasoning</h2><p><a href="../ToC.html">目錄</a></p><p><a href="../Preface.html">前言</a></p><nav class="nav" role="navigation"><ul class="pure-menu-list menu-level-1"><li class="pure-menu-item"><a href="Introduction.html#ch:intro">0 符號、演算、與抽象化</a><input class="toggle" id="menu-li-0" type="checkbox"/><label class="menu-toggle" for="menu-li-0"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Introduction-1.html#sec:knight-knave-island">0.1 騎士與惡棍之島</a></li>
+<div id="menu"><div class="pure-menu"><h1 class="pure-menu-heading">函數程設與推論</h1><h2 class="pure-menu-heading">Functional Program Construction and Reasoning</h2><p><a href="../ToC.html">目錄</a></p><p><a href="../Preface.html">前言</a></p><nav class="nav" role="navigation"><ul class="pure-menu-list menu-level-1"><li class="pure-menu-item"><a href="Introduction.html#ch:intro">0 符號、演算、與抽象化</a><input class="toggle" id="menu-li-0" checked type="checkbox"/><label class="menu-toggle" for="menu-li-0"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Introduction-1.html#sec:knight-knave-island">0.1 騎士與惡棍之島</a></li>
 <li class="pure-menu-item"><a href="Introduction-2.html#sec:let-symbols-work">0.2 讓符號為你工作</a></li>
-<li class="pure-menu-item"><a href="Introduction-3.html#sec:abstraction">0.3 抽象化</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:abstraction">0.3 抽象化</a></li>
 <li class="pure-menu-item"><a href="Introduction-4.html#sec:abstraction-and-expression">0.4 抽象化與表達力</a></li>
 <li class="pure-menu-item"><a href="Introduction-5.html#sec:correctness">0.5 正確性</a></li>
 <li class="pure-menu-item"><a href="Introduction-6.html#sec:calculable-programming-language">0.6 可演算的程式語言</a></li>
@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -143,28 +143,7 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:intro">0 符號、演算、與抽象化</h1></div><div class="navi"><div class="previous">&laquo;<a href="Introduction-2.html#sec:let-symbols-work">0.2 讓符號為你工作</a></div><div class="next"><a href="Introduction-4.html#sec:abstraction-and-expression">0.4 抽象化與表達力</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:abstraction">0.3 抽象化</h2><p>如前所述，我們解決問題的第一步是以符號將它表達出來。這一步稱作「<em>抽象化</em>(abstraction)」<span id="ix-0-4"></span>，通常是較難的一步。</p><div class="theorem" id="ex:mary-john-apple"><h5 class="theorem-title">例 0.1  </h5><p>Mary 有的蘋果數目是 John 的兩倍。Mary 發現她的蘋果中有一半已經壞掉了，於是丟了它們。John 則吃了一顆蘋果。現在 Mary 有的蘋果數目仍是 John 的兩倍。請問他們最初各有多少顆蘋果？</p></div><p>你會如何解這問題呢？如果回到第一原則，我們也許可以一步步嘗試：試試看 John 最初有一顆蘋果，Mary 有兩顆的情況是不是合理解答，然後試試看 John 有兩顆，Mary 有四顆的情況... 這是在語意上解問題。就如同我們解騎士與惡棍問題時用窮舉法一樣。</p><p>但許多人也許會用代數：把 Mary 最初的蘋果數目用$m$表示，John 的蘋果數目用$j$表示，寫成這樣的式子：</p><p>接下來，用高中程度的代數方法，就可以找出$m$和$j$的值了。</p><p>代數方法是純粹基於語法的技術：我們觀察式子的結構，決定該怎麼作（例如把第二個式子乘以二，兩式相減；或著把$m$代換成$2j$），而不需記得$m$和$j$分別是什麼意思。</p><p>不需依賴「意義」在此是個重要的優點：這表示這套代數方法和特定問題的意義無關，可應用在許許多多場合。可用來解這個問題，也可用來解雞兔問題... 只要能把問題表示成代數式子，就有一個機械化、不需費神思考的解法。</p><p>從「Mary 有的蘋果數目是 John 的兩倍... 」到$m = 2j; m/2 = 2(j-1)$的轉變是一個「抽象化」。抽象化在此的意義是<strong>將不重要的資訊拋棄，只『抽取出』此問題中最關鍵的元素</strong>。由於此處我們的目的是找出「Mary與John最初各有多少顆蘋果」，我們可猜想關於數字的資訊(例如 $m = 2j$)是重要的，並猜想其他的一些資訊（蘋果是壞掉還是被吃掉了？兩人丟/吃蘋果的先後順序？）可能是不重要的。因此我們決定只留下關於數字的資訊，並幸運地確實靠此解出了問題。</p><p>電腦是個只會處理符號的機器。實體世界的問題之所以能用電腦來解決，仰賴的就是「抽象化」這一步。有人說，整個計算科學就是關於抽象化的學問。</p><p>日常用語中，當我們說某事物「很抽象」，通常意味該事物模糊而難以理解。在計算科學中，「抽象」的事物才是最關鍵、最確實、最該把握的。我們前面才說過「數學符號讓事情變容易」，現在又說「抽象過的事物是最確實的」。看來學程式語言久了，讓我們越來越難與常人溝通。最後只好離群索居，躲到騎士與惡棍之島上捉弄來訪的遊客囉！</p></div><div class="navi"><div class="previous">&laquo;<a href="Introduction-2.html#sec:let-symbols-work">0.2 讓符號為你工作</a></div><div class="next"><a href="Introduction-4.html#sec:abstraction-and-expression">0.4 抽象化與表達力</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

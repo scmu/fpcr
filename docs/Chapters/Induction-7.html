@@ -58,7 +58,7 @@
 <li class="pure-menu-item"><a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a></li>
 <li class="pure-menu-item"><a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
+<li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" checked type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
 <li class="pure-menu-item"><a href="Induction-2.html#sec:induction-on-Nat">2.2 自然數上之歸納定義</a></li>
 <li class="pure-menu-item"><a href="Induction-3.html#sec:inductive-proof-on-Nat">2.3 自然數上之歸納證明</a></li>
 <li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists">2.4 串列與其歸納定義</a><input class="toggle" id="menu-li-2-4" type="checkbox"/><label class="menu-toggle" for="menu-li-2-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists-defn">2.4.1 串列上之歸納定義</a></li>
@@ -70,7 +70,7 @@
 <li class="pure-menu-item"><a href="Induction-6.html#sec:list-segments">2.6.3 串列區段</a></li>
 <li class="pure-menu-item"><a href="Induction-6.html#sec:fan-perm">2.6.4 插入、排列、子串列、與劃分</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Induction-7.html#sec:using-hints-from-symbols">2.7 再談「讓符號為你工作」</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:using-hints-from-symbols">2.7 再談「讓符號為你工作」</a></li>
 <li class="pure-menu-item"><a href="Induction-8.html#sec:other-inductive-datatypes">2.8 其他歸納資料結構</a></li>
 <li class="pure-menu-item"><a href="Induction-9.html#sec:induction-set-theory">2.9 由集合論看歸納法</a></li>
 <li class="pure-menu-item"><a href="Induction-10.html#sec:induction-variations">2.10 歸納定義的簡單變化</a></li>
@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -143,28 +143,85 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:induction">2 歸納定義與證明</h1></div><div class="navi"><div class="previous">&laquo;<a href="Induction-6.html#sec:more-inductive-defns">2.6 更多歸納定義與證明</a></div><div class="next"><a href="Induction-8.html#sec:other-inductive-datatypes">2.8 其他歸納資料結構</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:using-hints-from-symbols">2.7 再談「讓符號為你工作」</h2><p>看了這麼多歸納定義，我們做個較複雜的練習，並以此為例再談談「讓符號為你工作」。
+本節在初次閱讀時可略過。</p><p>以下的函數 <code class="haskell">ins</code> 將一個元素插到一個串列的空隙中。它和第<a href="Induction-6.html#sec:fan-perm">2.6.4 </a>節中的 <code class="haskell">fan</code> 類似但稍有不同 --- <code class="haskell">ins x xs</code> 不會把 <code class="haskell">x</code> 放到 <code class="haskell">xs</code> 的結尾。
+<input class="toggle" id="footnote-2-7-8" type="checkbox"/><label class="fnote-toggle" for="footnote-2-7-8">(註8) </label><span class="collapsible-footnote">本節不使用 <code class="haskell">fan</code> 而另外定義了 <code class="haskell">ins</code> 的原因僅是因為如此使得性質 ([RefUndefined]) 較單純而方便說明。</span>
+例如：<code class="haskell">ins 1 [2,3,4] = [[1,2,3,4],[2,1,3,4],[2,3,1,4]]</code>。</p><pre><code class="haskell">ins :: a -&gt; List a -&gt; List (List a)
+ins x []      = []
+ins x (y:ys)  = (x:y:ys) : map (y:) (ins x ys) 
+</code></pre><p>請證明對所有 <code class="haskell">x</code>, <code class="haskell">ys</code>, 與 <code class="haskell">zs</code>,</p><pre><code class="equation" id="eq:append-ins">  |map (++zs) (ins x ys) ++  map (ys++) (ins x zs)| &= |ins x (ys ++ zs) |</code>    (2.12 )
+</pre><p>意即：在 <code class="haskell">ys ++ zs</code> 之中插入 <code class="haskell">x</code> 的所有方法，
+是 1. 把 <code class="haskell">x</code> 插入 <code class="haskell">ys</code> 之中，並把每個結果的右邊接上 <code class="haskell">zs</code>,
+以及 2. 把 <code class="haskell">x</code> 插入 <code class="haskell">zs</code> 之中，並把每個結果的左邊接上 <code class="haskell">ys</code>.</p><p>面對一個如此冗長的式子，我們該如何著手？我們可猜想如此複雜的性質大概會需要歸納證明。
+但在哪個變數上做歸納呢？
+觀察([RefUndefined])，等號左手邊最外側的運算子是<code class="haskell">(++)</code>。
+計算 <code class="haskell">(++)</code> 時，根據定義，先被樣式配對的是 <code class="haskell">(++)</code> 左邊的參數，也就是 <code class="haskell">map (++zs) (ins x ys)</code>。
+再來，根據 <code class="haskell">map</code> 的定義，<code class="haskell">map (++zs) (ins x ys)</code> 的運算要有進展，得先把 <code class="haskell">ins x ys</code> 算出來。
+最後，根據 <code class="haskell">ins</code> 的定義，計算 <code class="haskell">ins x ys</code> 會先拆開 <code class="haskell">ys</code>.
+由此可知，等號左手邊的運算是從拆解 <code class="haskell">ys</code> 開始的。
+等號右手邊的情況也一樣：根據 <code class="haskell">ins</code> 與 <code class="haskell">(++)</code> 的定義，要計算 <code class="haskell">ins x (ys ++ zs)</code>，第一個被拆開的是 <code class="haskell">ys</code>. 因此，欲證明([RefUndefined])，合理的猜測是在 <code class="haskell">ys</code> 上做歸納！</p><p>我們省略 <code class="haskell">ys := []</code> 的情況，僅考慮歸納情況 <code class="haskell">ys := y:ys</code>。
+經代換後的式子是 <code class="haskell">map (++zs) (ins x (y:ys)) ++ map ((y:ys) ++) (ins x zs)</code>.
+我們採取的策略和證明定理<a href="Induction-3.html#thm:exp-plus-times">2.1 </a>時一樣：
+<em>想辦法湊出 <code class="haskell">map (++zs) (ins x ys) ++  map (ys++) (ins x zs)</code>, 以便使用歸納假設</em>。
+由此論證如下（步驟加上編號以利說明）：</p><pre><code class="haskell">     map (++zs) (ins x (y:ys)) ++ map ((y:ys) ++) (ins x zs)
+ ===     <comment>{- 1. <code class="haskell">ins</code> 與 <code class="haskell">map</code> 之定義 -}</comment>
+     (x:y:ys++zs) : map (++zs) (map (y:) (ins x ys)) ++ map ((y:ys) ++) (ins x zs)
+ ===     <comment>{- 2. <code class="haskell">map</code> 融合 -}</comment>
+     (x:y:ys++zs) : map ((++zs) . (y:)) (ins x ys) ++ map ((y:ys) ++) (ins x zs)
+ ===     <comment>{- 3. 由於 <code class="haskell">(++zs) . (y:) = (y:) . (++zs)</code> (習題 \ref{ex:append-cons}) -}</comment>
+     (x:y:ys++zs) : map ((y:) . (++zs)) (ins x ys) ++ map ((y:ys) ++) (ins x zs)
+ ===     <comment>{- 4. <code class="haskell">map</code> 融合 -}</comment>
+     (x:y:ys++zs) : map (y:) (map (++zs) (ins x ys)) ++ map ((y:ys) ++) (ins x zs)
+ ===     <comment>{- 5. 由於 <code class="haskell">((y:ys)++) = (y:).(ys++)</code> (習題 \ref{ex:cons-append}) -}</comment>
+     (x:y:ys++zs) : map (y:) (map (++zs) (ins x ys)) ++ map ((y:).(ys++)) (ins x zs)
+ ===     <comment>{- 6. <code class="haskell">map</code> 融合 -}</comment>
+     (x:y:ys++zs) : map (y:) (map (++zs) (ins x ys)) ++ map (y:) (map (ys++) (ins x zs))
+ ===     <comment>{- 7. 由於 <code class="haskell">map f (xs ++ ys) = map f xs ++ map f ys</code> -}</comment>
+     (x:y:ys++zs) : map (y:) (map (++zs) (ins x ys) ++ map (ys++) (ins x zs))
+ ===     <comment>{- 8. 歸納假設 -}</comment>
+     (x:y:ys++zs) : map (y:) (ins x (ys ++ zs))
+ ===     <comment>{- 9. <code class="haskell">ins</code> 與 <code class="haskell">(++)</code> 之定義 -}</comment>
+     ins x ((y:ys)++zs) 
+</code></pre><p>雖然步驟多、式子長，但策略確定後，整個證明的架構便很清楚。第 1 到 7 步都是為了可在第 8 步使用歸納而做的準備。
+為湊出 <code class="haskell">map (++zs) (ins x ys) ++ map (ys++) (ins x zs)</code>, 第 2 至第 4 步把 <code class="haskell">map (++zs)</code> 往裡推，把第一個 <code class="haskell">map (y:)</code> 往外提；第 5, 6 步則提出另一個 <code class="haskell">map (y:)</code>。式子變成 <code class="haskell">map (y:) ... ++ map (y:) ...</code> 的形式後，共同的 <code class="haskell">map (y:)</code> 可在第 7 步提出來。
+如此，終於可使用歸納假設了。
+<em>整個證明中，要配對哪個變數、把式子中的哪些項往哪兒移動，都被符號引導著而有線索可循。</em>
+證明中用到的兩個性質 <code class="haskell">(++zs) . (y:) = (y:) . (++zs)</code> 與 <code class="haskell">((y:ys)++) = (y:).(ys++)</code> 並非天外飛來，而是確立了目標後，因為有需求（兩者分別讓我們把 <code class="haskell">(++zs)</code> 與 <code class="haskell">(ys++)</code> 往右推，把 <code class="haskell">(y:)</code> 往左拉）而設計出並另外證明的性質。</p><p>初學者常犯的一個錯誤是：以為所有情況下、所有的變數都需要樣式配對。
+事實上，<em>過度的樣式配對是形式證明中希望避免的</em>。
+藉由觀察 ([RefUndefined])，我們決定對 <code class="haskell">ys</code> 做歸納，證明過程中發現如此便已經足夠。
+如果我們對 <code class="haskell">ys</code> 和 <code class="haskell">zs</code> 都做配對，將必須處理四種情況：<code class="haskell">ys,zs := [],[],[]</code>, <code class="haskell">ys,zs := [],z:zs</code>, <code class="haskell">ys,zs := [],z:zs</code> <code class="haskell">ys,zs := y:ys,z:zs</code>。一個待證明的性質若有 <code class="haskell">n</code> 個串列，似乎得分出 $2^n$ 種情況 --- 只有萬不得已我們才會這麼做。</p><p>最嚴重的問題並不是情況數目太多，而是過度的樣式配對破壞了證明的結構。
+如果對 <code class="haskell">zs</code> 做配對，許多人會很自然地想把 <code class="haskell">ins x (z:zs)</code> 展開。
+證明可能如此進行：</p><pre><code class="haskell">   map (++(z:zs)) (ins x (y:ys)) ++ map ((y:ys) ++) (ins x (z:zs))
+ ===   <comment>{- 將 <code class="haskell">(++)</code> 的左手邊展開 -}</comment>
+   (x:y:ys++(z:zs)) : map (++(z:zs)) (map (y:) (ins x ys)) ++
+     map ((y:ys) ++) (ins x (z:zs))
+ ===   <comment>{- 展開 <code class="haskell">ins x (z:zs)</code> -}</comment>
+   (x:y:ys++(z:zs)) : map (++(z:zs)) (map (y:) (ins x ys)) ++
+     map ((y:ys) ++) ((x:z:zs) : map (z:) (ins x zs))
+ ===   <comment>{- <code class="haskell">map</code> 的定義 -}</comment>
+   (x:y:ys++(z:zs)) : map (++(z:zs)) (map (y:) (ins x ys)) ++
+     ((y:ys ++ (x:z:zs)) : map ((y:ys) ++) (map (z:) (ins x zs))) 
+</code></pre><p>要從這樣的式子中再整理出
+<code class="haskell">map (++(z:zs)) (ins x (y:ys)) ++ map ((y:ys) ++) (ins x (z:zs))</code>
+以便做歸納假設，
+我們得看出如何把（本來不需展開的）<code class="haskell">ins x (z:zs)</code> 給收回來。
+式子的結構已經被破壞，操作起來的難度便大大提高了。
+<input class="toggle" id="footnote-2-7-9" type="checkbox"/><label class="fnote-toggle" for="footnote-2-7-9">(註9) </label><span class="collapsible-footnote">這其實是我於 2019 年開設的程式語言課程的期末考題。在十數位將 <code class="haskell">ins x (z:zs)</code> 展開的同學中，只有一位成功地將它收了回來。</span></p><div class="exlist"><div class="exercise exer" id="ex:cons-append"><h5 class="exercise-title">練習 2.29 </h5><p>證明：對所有 <code class="haskell">y</code> 與 <code class="haskell">ys</code>, <code class="haskell">(y:).(ys++) = ((y:ys)++)</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-29" type="checkbox"/><label class="lbl-toggle" for="ans-2-29">顯示答案</label><div class="collapsible-content"><h5>答案</h5><pre><code class="spec">   ((y:).(ys++)) xs
+=   <comment>{- definition of <code class="haskell">(.)</code> -}</comment>
+   y : (ys ++ xs)
+=   <comment>{- definition of <code class="haskell">(++)</code> -}</comment>
+   (y : ys) ++ xs 
+</code></pre></div></div><div class="exercise exer" id="ex:append-cons"><h5 class="exercise-title">練習 2.30 </h5><p>證明：對所有 <code class="haskell">y</code> 與 <code class="haskell">zs</code>, <code class="haskell">(++zs) . (y:) = (y:) . (++zs)</code>.
+以上兩者都是不需歸納、也不須狀況分析的單純證明。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-30" type="checkbox"/><label class="lbl-toggle" for="ans-2-30">顯示答案</label><div class="collapsible-content"><h5>答案</h5><pre><code class="spec">  ((++zs) . (y:)) xs
+=   <comment>{- definition of <code class="haskell">(.)</code> -}</comment>
+  (++zs) (y:xs)
+= (y:xs) ++ zs
+=   <comment>{- definition of <code class="haskell">(++)</code> -}</comment>
+   y :(xs ++ zs)
+=  (y:) ((++ zs) xs)
+=   <comment>{- definition of <code class="haskell">(.)</code> -}</comment>
+   ((y:) . (++zs)) xs 
+</code></pre></div></div></div></div><div class="navi"><div class="previous">&laquo;<a href="Induction-6.html#sec:more-inductive-defns">2.6 更多歸納定義與證明</a></div><div class="next"><a href="Induction-8.html#sec:other-inductive-datatypes">2.8 其他歸納資料結構</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

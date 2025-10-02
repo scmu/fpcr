@@ -143,3 +143,19 @@ This styles the menu heading.
 .fnote-toggle:hover { color: CadetBlue; }
 
 .collapsible-footnote { background-color: #eee2dc; }
+
+.navi .previous,
+.navi .previous a,
+.navi .next,
+.navi .next a {
+  background-color: #f1f1f1;
+  color: #999;
+}
+
+.navi .previous:hover,
+.navi .previous a:hover,
+.navi .next:hover,
+.navi .next a:hover {
+  background-color: #ddd;
+  color: #222;
+}

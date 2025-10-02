@@ -40,7 +40,7 @@
 <li class="pure-menu-item"><a href="Introduction-6.html#sec:calculable-programming-language">0.6 可演算的程式語言</a></li>
 <li class="pure-menu-item"><a href="Introduction-7.html#sec:relevant-information">0.7 相關資料</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Basics.html#ch:basics">1 值、函數、與定義</a><input class="toggle" id="menu-li-1" type="checkbox"/><label class="menu-toggle" for="menu-li-1"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Basics-1.html#sec:evaluation">1.1 值與求值</a></li>
+<li class="pure-menu-item"><a href="Basics.html#ch:basics">1 值、函數、與定義</a><input class="toggle" id="menu-li-1" checked type="checkbox"/><label class="menu-toggle" for="menu-li-1"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Basics-1.html#sec:evaluation">1.1 值與求值</a></li>
 <li class="pure-menu-item"><a href="Basics-2.html#sec:function-defns">1.2 函數定義</a></li>
 <li class="pure-menu-item"><a href="Basics-3.html#sec:higher-order-func">1.3 高階函數</a></li>
 <li class="pure-menu-item"><a href="Basics-4.html#sec:func-comp">1.4 函數合成</a></li>
@@ -56,7 +56,7 @@
 </ul></li>
 <li class="pure-menu-item"><a href="Basics-9.html#sec:wholemeal">1.9 全麥編程</a></li>
 <li class="pure-menu-item"><a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a></li>
-<li class="pure-menu-item"><a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:refs-basics">1.11 參考資料</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
 <li class="pure-menu-item"><a href="Induction-2.html#sec:induction-on-Nat">2.2 自然數上之歸納定義</a></li>
@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -143,28 +143,54 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:basics">1 值、函數、與定義</h1></div><div class="navi"><div class="previous">&laquo;<a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a></div><div class="next"><a href="Induction.html#ch:induction">2 歸納定義與證明</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:refs-basics">1.11 參考資料</h2><p>本章中的許多想法取自 <a href="../Biblio.html#Bird:98:Introduction">Bird [1998]</a> ，該書是我相當推薦的 Haskell 教材。</p><div class="infobox infobox" title="Haskell 為何叫 Haskell?"><h5 class="infobox-title">Haskell 為何叫 Haskell?</h5><p>1980 年代中期，程式語言學者們已各自開發出了許多個語法、語意類似但卻稍有不同、大都只在出生機構被使用的惰性純函數語言。沒有一個語言取得壓倒性的優勢。
+為溝通方便、以及為了讓整個領域能走向下一步，大家有了該設計個統合、共通的惰性純函數語言的共識。
+1988年一月，新語言設計小組在耶魯大學開會，眾多討論項目中包括幫語言取個名字。
+以下軼事節錄自 <a href="../Biblio.html#Hudak:07:Being">Hudak et al. [2007]</a> .</p><p>當天被提出的選項包括 Haskell, Vivaldi, Mozart, CFL (Common Functional Language), Curry, Frege, Peano, Nice, Fun, Light...等等。最後經程序選出的名字是 ``Curry'', 紀念邏輯學家 Haskell B. Curry --- 他在組件邏輯(combinatorial logic)、Curry-Howard 同構等領域的研究一直深遠影響函數語言學界。</p><p>但當天晚上就有人覺得這名字會招惹太多雙關語笑話。除了咖哩之外，小組成員覺得實在不行的是：TIM (three instruction machine) 是函數語言用的一種抽象機器，但 Tim Curry 則成了電影洛基恐怖秀（Rocky Horror Picture Show, 1975）的男主角。</p><p>於是新語言的名字就改成 Haskell 了。</p><p>小組成員 Paul Hudak 和 David Wise 寫信給 Curry 的遺孀 Virginia Curry，徵求她的同意。Hudak 後來親自登門拜訪，Virginia Curry 和他聊了之前的訪客（包含 Church 與 Kleene）的故事；後來她也去聽了 Hudak 關於 Haskell （語言）的演講，表現得十分友善。臨別前，她說：「其實呀，Haskell 一直都不喜歡他的名字。」</p></div><p><b>Currying</b> &emsp;
+Moses  <a href="../Biblio.html#Schonfinkel:24:Uber">[Sch{\"{o}}nfinkel 1924]</a> 提出多參數函數可用單參數函數表達。
+Haskell Curry 在許多著作中（例：<a href="../Biblio.html#Curry:80:Some">Curry [1980]</a> ）使用 currying，
+但當時並沒有 currying 一詞。
+為何此概念最後會以 Curry 命名呢？
+David A. Turner （Haskell 語言的前身之一 Miranda 的設計人）
+在一次網路討論  <a href="../Biblio.html#Sankar:97:Currying">[Sankar et al. 1997]</a> 中表示 currying 一詞由
+Christopher Strachey 取名，於 1967 年前後使用在其上課資料中。
+這種說法目前廣被大家接受，但我目前尚未找可佐證的上課資料。
+相反地，<a href="../Biblio.html#Strachey:67:Fundamental">Strachey [1967]</a> 之中明確表示他認為 currying
+的概念是由 Sch\"{o}nfinkel 發明的，並稱之為「Sch\"{o}nfinkel 的裝置」。
+<input class="toggle" id="footnote-1-11-17" type="checkbox"/><label class="fnote-toggle" for="footnote-1-11-17">(註17) </label><span class="collapsible-footnote">原文：``There is a device originated by Sch\"{o}nfinkel,
+for reducing operators with several operands to the successive application of single operand operators.''</span>
+但 currying 的想法可追溯得比 Sch\"{o}nfinkel 或 Curry 都早。
+F. L. Gottlob Frege 1891 年的
+\"{U}ber Funktion und Begriff (英譯 Function and Concept)
+ <a href="../Biblio.html#Frege:60:Function">[Frege 1960]</a> 結尾幾頁的概念即是 currying.</p><p><b>全麥編程</b> &emsp;
+「全麥編程」一詞由牛津大學 Geraint Jones 取名，由來可能是模仿健康食物的說詞。
+如 <a href="../Biblio.html#Bird:10:Pearls">Bird [2010, 第19章]</a> 便寫道，「全麥編程好處多多，可預防『索引症』(indexitis)，鼓勵合法的程式建構。」
+在該章之中，Richard Bird 以大量使用串列組件函數的全麥編程為起點，
+推導出能相當迅速地解數獨的程式。
+<a href="../Biblio.html#Hinze:09:La">Hinze [2009]</a> 以全麥編程為工具，示範了河內塔問題(Tower of Hanoi)
+的許多性質，以及其與謝爾賓斯基(Sierpi\'{n}ski)三角形的關係。
+其中寫道「函數語言擅長全麥編程。這個詞彙由 Geraint Jones 命名。
+全麥編程意謂由大處去想：處理整個串列，而不是一連串的元素；發展出整個解答的空間，而不是個別的解答；想像整個圖，而不是單一的路徑。對於已知的問題，全麥編程常給我們新洞察與新觀點。」
+<a href="../Biblio.html#Hutton:16:Programming">Hutton [2016, 第五章]</a> 則以編、解密碼為例。
+<em>凱撒加密</em>(<em>Caesar cipher</em>)為一種簡單的加密方式：
+將明文中的每個字母都往前或後偏移固定的量，例如當偏移量為 <code class="haskell">2</code> 時， <code class="haskell">'a'</code> 變成 <code class="haskell">'c'</code>，
+<code class="haskell">'b'</code> 變成 <code class="haskell">'d'</code> ... 一種解凱撒密碼的有效方式是計算密文中每個字母的分佈，和一般英文文章中的平均字母分佈做比較，藉以猜出偏移量。Graham Hutton 在書中示範如何用組件函數、完全不用遞迴地寫出編碼與解碼程式。以上都是相當值得一看的例子。</p><p><b>LISP 的串列</b> &emsp;
+誕生於 1958 年的 LISP <span id="ix-1-50"></span> 是目前仍被使用的高階程式語言中歷史第二悠久的 --- 最早的是 FORTRAN.
+但 LISP 與 FORTRAN 是風格截然不同的語言。
+雖然具有含副作用的指令，LISP 仍被認為是函數語言的先驅。</p><p>LISP 為「串列處理(list processing)」的縮寫。
+但事實上，LISP 中的聚合資料結構「<code class="haskell">S</code> 算式 (S-expression)」不只可用來表達串列。
+<code class="haskell">CONS</code> 函數做出的是一個序對，
+其中第一個元素被稱作 <code class="haskell">CAR</code> (contents of the address part of register),
+第二個稱作 <code class="haskell">CDR</code> (contents of the decrement part of register).
+如果 <code class="haskell">CDR</code> 的部分仍是一個 <code class="haskell">CONS</code> 做出的序對，或是特殊值 <code class="haskell">NIL</code>,
+整個結構表達的就是一個串列。
+<code class="haskell">S</code> 算式也可用來做出二元樹、語法樹... 等等。
+Haskell 串列的建構元 <code class="haskell">[]</code> 可唸成 <code>nil'', |(:)| 唸成</code>cons'', 這兩個詞彙都從 LISP 而來。</p><p>在前幾波人工智慧熱潮時，大家認為符號與邏輯的處理是人工智慧的基礎。
+但早期的程式語言大多針對數值運算而設計，會處理串列的 LISP 便被視為最適合做符號處理的語言 ---「人工智慧用的語言」。
+另一個被視為「人工智慧專用語言」的是奠基於述語邏輯與歸結(resolution)
+<span id="ix-1-51"></span>
+的 PROLOG.
+今日的人工智慧技術以神經網路為基礎，「人工智慧專用語言」的頭銜則給了 Python。</p></div><div class="navi"><div class="previous">&laquo;<a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a></div><div class="next"><a href="Induction.html#ch:induction">2 歸納定義與證明</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

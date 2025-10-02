@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -128,8 +128,8 @@
 <li class="pure-menu-item"><a href="Folds-5.html#sec:fold-on-other-data-structures">6.5 其他資料結構</a></li>
 <li class="pure-menu-item"><a href="Folds-6.html#sec:folds-ref">6.6 參考資料</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="SegProblems.html#ch:segment-problems">7 區段問題</a><input class="toggle" id="menu-li-7" type="checkbox"/><label class="menu-toggle" for="menu-li-7"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="SegProblems-1.html#sec:maximum-segment-sum">7.1 最大區段和</a></li>
-<li class="pure-menu-item"><a href="SegProblems-2.html#sec:maximum-plateau-length">7.2 最長高原問題</a></li>
+<li class="pure-menu-item"><a href="SegProblems.html#ch:segment-problems">7 區段問題</a><input class="toggle" id="menu-li-7" checked type="checkbox"/><label class="menu-toggle" for="menu-li-7"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="SegProblems-1.html#sec:maximum-segment-sum">7.1 最大區段和</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:maximum-plateau-length">7.2 最長高原問題</a></li>
 <li class="pure-menu-item"><a href="SegProblems-3.html#sec:segProblems-ref">7.3 參考資料</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Monads.html#ch:monads">8 單子與副作用</a><input class="toggle" id="menu-li-8" type="checkbox"/><label class="menu-toggle" for="menu-li-8"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Monads-1.html#sec:exceptions">8.1 例外處理</a></li>
@@ -143,28 +143,97 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
+<div id="main"><div class="header"><h1 class="chapter" id="ch:segment-problems">7 區段問題</h1></div><div class="navi"><div class="previous">&laquo;<a href="SegProblems-1.html#sec:maximum-segment-sum">7.1 最大區段和</a></div><div class="next"><a href="SegProblems-3.html#sec:segProblems-ref">7.3 參考資料</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:maximum-plateau-length">7.2 最長高原問題</h2><p>如果一個區段的每個元素都相等，我們稱之為一個「高原(plateau)」。
+本節考慮這個問題：給一個串列，找出其中最長的高原的長度。
+例如當輸入為 <code class="haskell">[2,3,3,2,2,2,1,6,6]</code> 時，輸出應為 <code class="haskell">3</code> --- 即最長的高原 <code class="haskell">[2,2,2]</code> 的長度。
+以下是本問題的一種可能的規格寫法：</p><pre><code class="haskell">lp :: List Int -&gt; Int
+lp = maximum . map length . filter plateau . segmentsP 
+</code></pre><p>其中 <code class="haskell">segmentsP</code> 算出所有的區段，<code class="haskell">plateau</code> 判斷一個區段是否為高原。
+過濾出所有的高原後，我們計算每個高原的長度，然後找出最大值。
+<input class="toggle" id="footnote-7-2-3" type="checkbox"/><label class="fnote-toggle" for="footnote-7-2-3">(註3) </label><span class="collapsible-footnote">函數 <code class="haskell">lp</code> 與 <code class="haskell">plateau</code> 可以有更通用的型別 <code class="haskell">Eq a =&gt; List a -&gt; Int</code>, <code class="haskell">Eq a =&gt; List a -&gt; Bool</code>.</span></p><p>函數 <code class="haskell">segmentsP</code> 和 <code class="haskell">segments</code> 類似，其定義為：</p><pre><code class="haskell">segmentsP :: List a -&gt; List (ListP a)
+segmentsP = concat . map initsP . tailsP 
+</code></pre><p>函數 <code class="haskell">initsP</code> 與 <code class="haskell">tailsP</code> 則與 <code class="haskell">inits</code> 與 <code class="haskell">tails</code> 類似，但只傳回非空的前後段，定義如下：</p><div class="multicols"><div class="mcol" width="0.5\textwidth"><pre><code class="haskell">initsP :: List a -&gt; List (ListP a)
+initsP []      = []
+initsP (x:xs)  = [x] : map (x:) (initsP xs) <comment>{-"~,"-}</comment>
 
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+</code></pre></div><div class="mcol" width="0.5\textwidth"><pre><code class="haskell">tailsP :: List a -&gt; List (ListP a)
+tailsP []      = []
+tailsP (x:xs)  = (x:xs) : tailsP xs 
+</code></pre></div></div><p>以上三個函數的回傳型別都是 <code class="haskell">List (ListP a)</code> ---
+每個傳回的前/後/區段都是非空的，但並非每個串列都有非空的前/後/區段。
+函數 <code class="haskell">lp</code> 仍可接受空串列作為輸入，但（我們等下將看到）在規格中使用 <code class="haskell">segmentsP</code> 將帶來不少方便。
+我們也可使用 <code class="haskell">segments</code> 定最長平原問題的規格，只是會增加一些不利於講解的細節。</p><p>函數 <code class="haskell">plateau</code> 可定義如下：</p><pre><code class="haskell">plateau :: ListP Int -&gt; Bool
+plateau [x]       = True
+plateau (x:y:xs)  = x == y ⋀ plateau (y:xs) 
+</code></pre><p>由於輸入是非空串列，<code class="haskell">plateau</code> 的定義中考慮的是「有一個元素」和「有兩個以上元素」的兩種情況。</p><div class="infobox infobox" title="區段問題不傳回區段？"><h5 class="infobox-title">區段問題不傳回區段？</h5><p>為何我們在最大區段和問題中只傳回最大區段的和、在最長高原問題中只傳回長度，而不傳回該區段本身呢？</p><p>\quad 這是許多演算法題目常見的簡化：當真正的問題是尋找「使得某值最大的聚合資料結構」時，我們常只要求解題者傳回該值，而不是整個聚合資料結構。如此做的好處之一是讓我們能暫時忽略「如何組出需傳回的資料結構」的細節，更專注在問題本身。這使得問題的規格與推導過程都簡單許多。</p><p>\quad 如果我們真的需要整個區段，我們總能將前述的簡單版程式擴充為傳回資料結構的程式。讀者不妨試試能否將第  頁的 <code class="haskell">mpsAll</code> 改寫為型別為
+<code class="haskell">List Int -&gt; List (Int × List Int)</code> 的程式 --- 對每個後段，計算其<em>最佳前段和，以及該前段</em>。您會發現程式結構並沒有改變，只是多了些繁瑣的細節。</p><p>\quad 另一個理由是：具有最大和的區段可能不只一個。在<em>函數</em>程式推導之中，如果我們要傳回區段，由於規格也是函數，我們似乎必須在規格中就決定傳回哪一個。若希望規格是「傳回<em>任一個</em>具有最大和的區段」，我們會需要更多機制，例如使用<em>關係</em>(<em>relation</em>)或使用單子。</p></div><p><b>前段-後段分解</b> &emsp;
+和最大區段和問題一樣，我們先嘗試把這個區段問題分解為「對每個後段，計算最佳前段」：</p><pre><code class="haskell">      maximum . map length . filter plateau . segmentsP
+ ===  maximum . map length . filter plateau . concat . map initsP . tailsP
+ ===     <comment>{- 因 <code class="haskell">filter p . concat = concat . map (filter p)</code> -}</comment>
+      maximum . map length . concat . map (filter plateau . initsP) . tailsP
+ ===     <comment>{- 因  <code class="haskell">map f . concat = concat . map (map f)</code>, <code class="haskell">map</code> 融合 -}</comment>
+      maximum . concat . map (map length . filter plateau . initsP) . tailsP
+ ===     <comment>{- 因 <code class="haskell">maximum . concat = maximum . map maximum</code>, <code class="haskell">map</code> 融合 -}</comment>
+      maximum . map (maximum . map length . filter plateau . initsP) . tailsP 
+</code></pre><p><b>嘗試使用掃描引理</b> &emsp;
+下一步：我們把 <code class="haskell">maximum . map length . filter plateau . initsP</code> 簡寫為 <code class="haskell">lpp</code>，
+並嘗試將它寫成 ([RefUndefined]) 的形式，以便使用掃描引理。演算如下：</p><pre><code class="haskell">      (maximum . map length . filter plateau . initsP $ (x:xs))
+ ===  (maximum . map length . filter plateau $ [x] : map (x:) (initsP xs))
+ ===    <comment>{- <code class="haskell">filter</code> 之定義，<code class="haskell">plateau [x] = True</code> -}</comment>
+      maximum (1 : map length (filter plateau (map (x:) (initsP xs))))
+ ===  1 ↑ maximum (map length (filter plateau (map (x:) (initsP xs)))) 
+</code></pre><p>演算至此的問題是：如何把 <code class="haskell">map (x:)</code> 提出來呢？
+定理<a href="Induction-6.html#thm:filter-map">2.4 </a>允許我們把 <code class="haskell">map</code> 搬到 <code class="haskell">filter</code> 的左邊：</p><pre><code class="spec"> filter p . map f = map f . filter (p . f) 
+</code></pre><p>至於 <code class="haskell">plateau . (x:)</code> 能否再化簡？觀察 <code class="haskell">plateau</code> 定義的第二個子句：</p><pre><code class="spec">plateau (x:y:xs)  = x == y ⋀ plateau (y:xs) 
+</code></pre><p>寫成函數組合的形式便是：</p><pre><code class="spec">plateau . (x:) = ((x ==) . head) ⋀: plateau 
+</code></pre><p>其中 <code class="haskell">(⋀:)</code> 為「提升成函數版」的 <code class="haskell">(⋀)</code>, 定義為</p><pre><code class="haskell">(⋀:) :: (a -&gt; Bool) -&gt; (a -&gt; Bool) -&gt; a -&gt; Bool
+(f ⋀: g) x = f x ⋀ g x 
+</code></pre><p>函數 <code class="haskell">(⋀) :: Bool -&gt; Bool -&gt; Bool</code> 拿兩個布林值、算出一個新布林值，<code class="haskell">(⋀:)</code> 則拿兩個函數 <code class="haskell">f, g :: a -&gt; Bool</code>，組合成另一個型別為 <code class="haskell">a -&gt; Bool</code> 的函數，其結果是 <code class="haskell">f</code> 與 <code class="haskell">g</code> 之傳回值的合取。函數 <code class="haskell">filter</code> 與 <code class="haskell">(⋀:)</code> 有如下的性質：</p><pre><code class="equation" id="eq:filter-conjunct">  |filter (p ⋀: q)| & |= filter p . filter q| \mbox{~~.}</code>    (7.3 )
+</pre><p>有了以上眾多性質，我們演算如下：</p><pre><code class="haskell">      filter plateau . map (x:)
+ ===    <comment>{- 定理 \ref{thm:filter-map} -}</comment>
+      map (x:) . filter (plateau . (x:))
+ ===    <comment>{- <code class="haskell">plateau</code> 之定義 -}</comment>
+      map (x:) . filter (((x ==) . head) ⋀: plateau)
+ ===    <comment>{- 因 \eqref{eq:filter-conjunct}: <code class="haskell">filter (p ⋀: q) = filter p . filter q</code> -}</comment>
+      map (x:) . filter plateau . filter ((x ==) . head) 
+</code></pre><p>現在整個式子成為 <code class="haskell">1 ↑ (maximum . map (length . (x:)) . filter plateau . filter ((x ==) . head) . initsP) $ xs</code>.</p><p>把 <code class="haskell">map (x:)</code> 往左搬之後，式子的右邊出現了 <code class="haskell">filter ((x ==) . head) (initsP xs)</code> --- 產生所有 <code class="haskell">xs</code> 的非空前段，取出第一個元素為 <code class="haskell">x</code> 的。但讀者們可能立刻發現：<code class="haskell">initsP</code> 傳回的每個前段的第一個元素都是一樣的！也就是說我們有以下性質。</p><p>考慮非空前段的好處在這兒可看出：<code class="haskell">head</code> 對非空串列才有值。</p><p>回到 <code class="haskell">lpp</code>，我們可繼續推導如下：</p><pre><code class="haskell">      lpp (x : xs)
+ ===   <comment>{- 前述演算, <code class="haskell">map</code> 融合 -}</comment>
+      1 ↑  (maximum . map (length . (x:)) . filter plateau .
+                  filter ((x ==) . head) . initsP $ (x : xs))
+ ===   <comment>{- 因 \eqref{eq:initsP-heads} -}</comment>
+      1 ↑  (maximum . map (length . (x:)) . filter plateau $
+                  if x == head xs then initsP xs else [])
+ ===   <comment>{- \eqref{eq:fn-if-distribute}: 函數分配進 <code class="haskell">if</code> -}</comment>
+      if x == head xs
+        then 1 ↑  (maximum . map (length . (x:)) . filter plateau . initsP $ xs)
+        else 1 ↑ (maximum . map (length . (x:)) . filter plateau $ [])
+ ===   <comment>{- <code class="haskell">length . (x:) = (1+) . length</code>, 及其他化簡 -}</comment>
+     if x == head xs
+        then 1 + (maximum . map length . filter plateau . initsP $ xs)
+        else 1
+ ===   <comment>{- <code class="haskell">lpp</code> 之定義 -}</comment>
+     if x == head xs then 1 + lpp xs else 1 
+</code></pre><p>由此我們得到</p><pre><code class="haskell">lpp [x]     = 1
+lpp (x:xs)  = if x == head xs then 1 + lpp xs else 1 
+</code></pre><p>然而，我們雖為 <code class="haskell">lpp</code> 推導出了一個歸納定義，該定義並不符合 ([RefUndefined])！
+後者要求 <code class="haskell">lpp</code> 的右手邊必須是 <code class="haskell">x ⊕ lpp xs</code> 的形式 --- 在 <code class="haskell">lpp xs</code> 之外不能有其他的 <code class="haskell">xs</code>, 而上述的 <code class="haskell">lpp</code> 右手邊多了一個 <code class="haskell">head xs</code>.</p><p>這時組對的技巧又派上用場了。定義：</p><pre><code class="spec">lpph xs = (lpp xs, head xs) 
+</code></pre><p>我們可推導出</p><pre><code class="haskell">lpph [x]     = (1, x)
+lpph (x:xs)  = (if x == y then 1 + n else 1, x) 
+   where (n,y) = lpph xs 
+</code></pre><p>該函數符合 ([RefUndefined]) 的形式，其中 <code class="haskell">e = (1,x)</code>, <code class="haskell">x ⊕ (y,n) = (if x == y then 1 + n else 1, x)</code>.</p><p><b>總結</b> &emsp;
+綜合目前為止的推導，函數 <code class="haskell">lpp</code> 的推導大架構如下：</p><pre><code class="haskell">      lpp
+ ===    <comment>{- 前段-後段分解 -}</comment>
+      maximum . map (maximum . map length . filter plateau . initsP) . tailsP
+ ===    <comment>{- 前述演算：尋找歸納定義 -}</comment>
+      maximum . map lpp . tailsP
+ ===    <comment>{- 因 <code class="haskell">lpp = fst . lpph</code>  -}</comment>
+      maximum . map (fst . lpph) . tailsP
+ ===    <comment>{- 掃描引理 -}</comment>
+      maximum . map fst . lpphAll 
+</code></pre><p>其中 <code class="haskell">lpphAll</code> 的定義如下：</p><pre><code class="haskell">lpphAll [x]     = [(1,x)]
+lpphAll (x:xs)  = (if x == y then 1 + n else 1, x) : (n,y) : ys 
+  where ((n,y) : ys) = lpphAll xs 
+</code></pre><p>這是一個使用線性時間、線性空間的演算法。</p></div><div class="navi"><div class="previous">&laquo;<a href="SegProblems-1.html#sec:maximum-segment-sum">7.1 最大區段和</a></div><div class="next"><a href="SegProblems-3.html#sec:segProblems-ref">7.3 參考資料</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

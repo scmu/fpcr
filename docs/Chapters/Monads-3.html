@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="函數程設與推論">
+    <title>函數程設與推論</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <!-- link rel="stylesheet" href="/css/pure/pure-min.css" -->
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <script> MathJax = {
+              loader: {
+                load: ['input/tex-base', 'output/chtml']
+                },
+              tex: {
+                inlineMath: [['$', '$']]
+             }};
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3.0.0/es5/startup.js">
+    </script>
+</head>
+<body>
+
+<div id="layout">
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+        <!-- Hamburger icon -->
+        <span></span>
+    </a>
+<div id="menu"><div class="pure-menu"><h1 class="pure-menu-heading">函數程設與推論</h1><h2 class="pure-menu-heading">Functional Program Construction and Reasoning</h2><p><a href="../ToC.html">目錄</a></p><p><a href="../Preface.html">前言</a></p><nav class="nav" role="navigation"><ul class="pure-menu-list menu-level-1"><li class="pure-menu-item"><a href="Introduction.html#ch:intro">0 符號、演算、與抽象化</a><input class="toggle" id="menu-li-0" type="checkbox"/><label class="menu-toggle" for="menu-li-0"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Introduction-1.html#sec:knight-knave-island">0.1 騎士與惡棍之島</a></li>
+<li class="pure-menu-item"><a href="Introduction-2.html#sec:let-symbols-work">0.2 讓符號為你工作</a></li>
+<li class="pure-menu-item"><a href="Introduction-3.html#sec:abstraction">0.3 抽象化</a></li>
+<li class="pure-menu-item"><a href="Introduction-4.html#sec:abstraction-and-expression">0.4 抽象化與表達力</a></li>
+<li class="pure-menu-item"><a href="Introduction-5.html#sec:correctness">0.5 正確性</a></li>
+<li class="pure-menu-item"><a href="Introduction-6.html#sec:calculable-programming-language">0.6 可演算的程式語言</a></li>
+<li class="pure-menu-item"><a href="Introduction-7.html#sec:relevant-information">0.7 相關資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Basics.html#ch:basics">1 值、函數、與定義</a><input class="toggle" id="menu-li-1" type="checkbox"/><label class="menu-toggle" for="menu-li-1"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Basics-1.html#sec:evaluation">1.1 值與求值</a></li>
+<li class="pure-menu-item"><a href="Basics-2.html#sec:function-defns">1.2 函數定義</a></li>
+<li class="pure-menu-item"><a href="Basics-3.html#sec:higher-order-func">1.3 高階函數</a></li>
+<li class="pure-menu-item"><a href="Basics-4.html#sec:func-comp">1.4 函數合成</a></li>
+<li class="pure-menu-item"><a href="Basics-5.html#sec:lambda-terms">1.5 $\lambda$ 算式</a></li>
+<li class="pure-menu-item"><a href="Basics-6.html#sec:elementary-datatypes">1.6 簡單資料型態</a><input class="toggle" id="menu-li-1-6" type="checkbox"/><label class="menu-toggle" for="menu-li-1-6"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Basics-6.html#sec:boolean">1.6.1 布林值</a></li>
+<li class="pure-menu-item"><a href="Basics-6.html#sec:char">1.6.2 字元</a></li>
+<li class="pure-menu-item"><a href="Basics-6.html#sec:pairs">1.6.3 序對</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Basics-7.html#sec:weak-head-normal-form">1.7 弱首範式</a></li>
+<li class="pure-menu-item"><a href="Basics-8.html#sec:lists">1.8 串列</a><input class="toggle" id="menu-li-1-8" type="checkbox"/><label class="menu-toggle" for="menu-li-1-8"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Basics-8.html#sec:list-deconstruct">1.8.1 串列解構</a></li>
+<li class="pure-menu-item"><a href="Basics-8.html#sec:list-generation">1.8.2 串列生成</a></li>
+<li class="pure-menu-item"><a href="Basics-8.html#sec:list-combinators">1.8.3 串列上的種種組件函數</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Basics-9.html#sec:wholemeal">1.9 全麥編程</a></li>
+<li class="pure-menu-item"><a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a></li>
+<li class="pure-menu-item"><a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
+<li class="pure-menu-item"><a href="Induction-2.html#sec:induction-on-Nat">2.2 自然數上之歸納定義</a></li>
+<li class="pure-menu-item"><a href="Induction-3.html#sec:inductive-proof-on-Nat">2.3 自然數上之歸納證明</a></li>
+<li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists">2.4 串列與其歸納定義</a><input class="toggle" id="menu-li-2-4" type="checkbox"/><label class="menu-toggle" for="menu-li-2-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists-defn">2.4.1 串列上之歸納定義</a></li>
+<li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists-proof">2.4.2 串列上之歸納證明</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Induction-5.html#sec:data-prog-proof">2.5 從資料、程式、到證明</a></li>
+<li class="pure-menu-item"><a href="Induction-6.html#sec:more-inductive-defns">2.6 更多歸納定義與證明</a><input class="toggle" id="menu-li-2-6" type="checkbox"/><label class="menu-toggle" for="menu-li-2-6"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction-6.html#sec:filter-takeWhile-dropWhile">2.6.1 <code class="haskell">filter</code>, <code class="haskell">takeWhile</code>, 與 <code class="haskell">dropWhile</code></a></li>
+<li class="pure-menu-item"><a href="Induction-6.html#sec:elem-neq-proof">2.6.2 <code class="haskell">elem</code> 與不等式證明</a></li>
+<li class="pure-menu-item"><a href="Induction-6.html#sec:list-segments">2.6.3 串列區段</a></li>
+<li class="pure-menu-item"><a href="Induction-6.html#sec:fan-perm">2.6.4 插入、排列、子串列、與劃分</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Induction-7.html#sec:using-hints-from-symbols">2.7 再談「讓符號為你工作」</a></li>
+<li class="pure-menu-item"><a href="Induction-8.html#sec:other-inductive-datatypes">2.8 其他歸納資料結構</a></li>
+<li class="pure-menu-item"><a href="Induction-9.html#sec:induction-set-theory">2.9 由集合論看歸納法</a></li>
+<li class="pure-menu-item"><a href="Induction-10.html#sec:induction-variations">2.10 歸納定義的簡單變化</a></li>
+<li class="pure-menu-item"><a href="Induction-11.html#sec:complete-induction">2.11 完全歸納</a></li>
+<li class="pure-menu-item"><a href="Induction-12.html#sec:well-founded-induction">2.12 良基歸納</a></li>
+<li class="pure-menu-item"><a href="Induction-13.html#sec:lexicographic-induction">2.13 詞典序歸納</a></li>
+<li class="pure-menu-item"><a href="Induction-14.html#sec:mutual-induction">2.14 交互歸納</a></li>
+<li class="pure-menu-item"><a href="Induction-15.html#sec:induction-ref">2.15 參考資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="SearchTrees.html#ch:induction-search-trees">3 搜尋樹</a><input class="toggle" id="menu-li-3" type="checkbox"/><label class="menu-toggle" for="menu-li-3"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="SearchTrees-1.html#sec:induction-binary-search-tree">3.1 二元搜尋樹</a></li>
+<li class="pure-menu-item"><a href="SearchTrees-2.html#sec:induction-red-black-tree">3.2 紅黑樹</a><input class="toggle" id="menu-li-3-2" type="checkbox"/><label class="menu-toggle" for="menu-li-3-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="SearchTrees-2.html#">3.2.1 紅黑樹插入</a></li>
+<li class="pure-menu-item"><a href="SearchTrees-2.html#">3.2.2 紅黑樹之性質：高度</a></li>
+<li class="pure-menu-item"><a href="SearchTrees-2.html#">3.2.3 紅黑樹之性質：平衡</a></li>
+<li class="pure-menu-item"><a href="SearchTrees-2.html#">3.2.4 紅黑樹之性質：顏色</a></li>
+</ul></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Semantics.html#ch:semantics">4 關於語意的基本概念</a><input class="toggle" id="menu-li-4" type="checkbox"/><label class="menu-toggle" for="menu-li-4"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Semantics-1.html#sec:denotational-semantics">4.1 指稱語意</a></li>
+<li class="pure-menu-item"><a href="Semantics-2.html#sec:operational-semantics">4.2 操作語意</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Derivation.html#ch:derivation">5 一般程式推導</a><input class="toggle" id="menu-li-5" type="checkbox"/><label class="menu-toggle" for="menu-li-5"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-1.html#sec:fold-unfold-transform">5.1 展開-收回轉換</a></li>
+<li class="pure-menu-item"><a href="Derivation-2.html#sec:efficiency-basics">5.2 關於執行效率</a></li>
+<li class="pure-menu-item"><a href="Derivation-3.html#sec:fold-unfold-transform-efficiency">5.3 用展開-收回轉換增進效率</a><input class="toggle" id="menu-li-5-3" type="checkbox"/><label class="menu-toggle" for="menu-li-5-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-3.html#sec:poly-horner">5.3.1 計算多項式 -- Horner 法則</a></li>
+<li class="pure-menu-item"><a href="Derivation-3.html#sec:exp-binary-roll">5.3.2 二進位表示法</a></li>
+<li class="pure-menu-item"><a href="Derivation-3.html#sec:wrap-reminder">5.3.3 小結與提醒</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Derivation-4.html#sec:var-cons">5.4 變數換常數</a></li>
+<li class="pure-menu-item"><a href="Derivation-5.html#sec:tupling">5.5 組對</a><input class="toggle" id="menu-li-5-5" type="checkbox"/><label class="menu-toggle" for="menu-li-5-5"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-5.html#sec:steep">5.5.1 陡串列</a></li>
+<li class="pure-menu-item"><a href="Derivation-5.html#sec:repl-tree">5.5.2 以串列標記樹狀結構</a></li>
+<li class="pure-menu-item"><a href="Derivation-5.html#sec:rep-minE">5.5.3 代換為最小標籤 --- 循環程式</a></li>
+<li class="pure-menu-item"><a href="Derivation-5.html#sec:tupling-conclude">5.5.4 小結與提醒</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a><input class="toggle" id="menu-li-5-6" type="checkbox"/><label class="menu-toggle" for="menu-li-5-6"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-6.html#sec:reversal-append">5.6.1 串列反轉與連接</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:accum-info-flow">5.6.2 由上到下的資訊流</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:tail-recursion">5.6.3 尾遞迴</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:tail-recursion-more">5.6.4 更多尾遞迴範例</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:tail-recursion-efficiency">5.6.5 尾遞迴的效率考量</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
+</ul></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-program-gen">6.2.2 以摺融合生成程式</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:scan-lemma">6.2.3 掃描</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:banana-split">6.2.4 香蕉船定理</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:accum-param-fold-fusion">6.2.5 累積參數與摺融合</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:bring-in-context">6.2.6 引入脈絡</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Folds-3.html#sec:foldl-listHomo-para">6.3 左摺、串列同構、與 Paramorphism</a><input class="toggle" id="menu-li-6-3" type="checkbox"/><label class="menu-toggle" for="menu-li-6-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-3.html#sec:foldl">6.3.1 左摺</a></li>
+<li class="pure-menu-item"><a href="Folds-3.html#sec:list-homomorphism">6.3.2 串列同構</a></li>
+<li class="pure-menu-item"><a href="Folds-3.html#sec:paramorphism">6.3.3 Paramorphism 與本原遞迴</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Folds-4.html#sec:foldN">6.4 自然數的摺</a></li>
+<li class="pure-menu-item"><a href="Folds-5.html#sec:fold-on-other-data-structures">6.5 其他資料結構</a></li>
+<li class="pure-menu-item"><a href="Folds-6.html#sec:folds-ref">6.6 參考資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="SegProblems.html#ch:segment-problems">7 區段問題</a><input class="toggle" id="menu-li-7" type="checkbox"/><label class="menu-toggle" for="menu-li-7"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="SegProblems-1.html#sec:maximum-segment-sum">7.1 最大區段和</a></li>
+<li class="pure-menu-item"><a href="SegProblems-2.html#sec:maximum-plateau-length">7.2 最長高原問題</a></li>
+<li class="pure-menu-item"><a href="SegProblems-3.html#sec:segProblems-ref">7.3 參考資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Monads.html#ch:monads">8 單子與副作用</a><input class="toggle" id="menu-li-8" checked type="checkbox"/><label class="menu-toggle" for="menu-li-8"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Monads-1.html#sec:exceptions">8.1 例外處理</a></li>
+<li class="pure-menu-item"><a href="Monads-2.html#sec:monad-class-laws">8.2 單子與單子律</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:monad-reader">8.3 讀取單子</a><input class="toggle" id="menu-li-8-3" checked type="checkbox"/><label class="menu-toggle" for="menu-li-8-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="#sec:var-env-reader">8.3.1 變數與環境</a></li>
+<li class="pure-menu-item"><a href="#sec:reader-is-monad">8.3.2 「讀取」副作用是單子</a></li>
+<li class="pure-menu-item"><a href="#sec:monad-reader-laws">8.3.3 推論讀取單子程式的性質</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Monads-4.html#sec:monad-state">8.4 狀態單子</a><input class="toggle" id="menu-li-8-4" type="checkbox"/><label class="menu-toggle" for="menu-li-8-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Monads-4.html#sec:hanoi">8.4.1 河內塔問題</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
+</ul></li>
+</ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:monads">8 單子與副作用</h1></div><div class="navi"><div class="previous">&laquo;<a href="Monads-2.html#sec:monad-class-laws">8.2 單子與單子律</a></div><div class="next"><a href="Monads-4.html#sec:monad-state">8.4 狀態單子</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:monad-reader">8.3 讀取單子</h2><p><span id="ix-8-6"></span></p><p>為了進入下一個例子，我們為算式型別加上變數：</p><pre><code class="spec">data Expr =  Num Int | Neg Expr | Add Expr Expr |
+             Var Name | Let Var Expr Expr 
+
+type Name = String 
+</code></pre><p><code class="haskell">Name</code> 是變數名稱，<code class="haskell">Var v</code> 是出現在算式中的變數，<code class="haskell">Let</code> 則用來宣告新的區域變數。
+例如，以下式子表達的是 <code class="haskell">let x = 3 + 1 in (x+4)+x</code>:</p><pre><code class="spec">Let "x" (Add (Num 3) (Num 1))
+   (Add (Add (Var "x") (Num 4)) (Var "x")) 
+</code></pre><p>變數 <code class="haskell">x</code> 的值為 <code class="haskell">3+1</code>, 因此整個算式的值是 <code class="haskell">((3+1) + 4) + (3+1) = 12</code>.</p><h3 class="subsection" id="sec:var-env-reader">8.3.1 變數與環境</h3><p>有了變數後，我們不能只問「<code class="haskell">Add (Var "x") (Var "y")</code> 的（整數）值是什麼」了，因為我們不知道 <code class="haskell">x</code> 和 <code class="haskell">y</code> 的值。
+有自由變數的算式得放在一個<em>環境</em>下才能談它的值。
+所謂「環境」是一個變數到值的函數，告訴我們每個變數的值。我們可以用一個串列表示：<input class="toggle" id="footnote-8-3-1" type="checkbox"/><label class="fnote-toggle" for="footnote-8-3-1">(註1) </label><span class="collapsible-footnote">或著，我們也可以定義 <code class="haskell">type Env = Name -&gt; Maybe Int</code>, 而 <code class="haskell">lookup env x = env x</code>.</span></p><pre><code class="spec">type Env = [(Name, Int)] 
+</code></pre><p>例如 <code class="haskell">Add (Var "x") (Num 4)</code> 在環境 <code class="haskell">[("x", 3), ("y", 6)]</code> 下的值是 <code class="haskell">7</code>.
+我們也假設有一個「查表」函數：</p><pre><code class="spec">lookup :: Env -&gt; Maybe Int 
+</code></pre><p>例如，當 <code class="haskell">env = [("x", 3), ("y", 6)]</code>，<code class="haskell">lookup env "x"</code> 是 <code class="haskell">Just 3</code>，
+<code class="haskell">lookup env "z"</code> 則是 <code class="haskell">Nothing</code>.</p><p>提醒一下讀者：<code class="haskell">Let</code> 是在宣告區域變數，而不是賦值。例如，下式表達 <code class="haskell">let x = 3 in x + (let x = 4 in x) + (-x)</code>：</p><pre><code class="spec">Let "x" (Num 3)
+    (Add (Add "x" (Let "x" (Num 4) (Var "x")))
+         (Neg (Var "x")))
+</code></pre><p>
+它的值是 <code class="haskell">3 + 4 + (-3)</code>，而不是 <code class="haskell">3 + 4 + (-4)</code> --- 內層宣告的 <code class="haskell">x</code> 僅是暫時遮蓋到外面的 <code class="haskell">x</code>。</p><p>有了這些鋪陳，我們看看新的 <code class="haskell">eval</code> 函數該怎麼寫。
+既然算式要在環境之下才有值，<code class="haskell">eval</code> 得把環境也納為參數之一：</p><pre><code class="spec">eval :: Expr -&gt; Env -&gt; Int
+</code></pre><p>函數 <code class="haskell">eval</code> 拿一個算式和一個環境，計算該算式的值。
+新的 <code class="haskell">eval</code> 中，最初的三個條款基本上是一樣的，只是多了一個參數 <code class="haskell">env</code> 得往下傳：</p><pre><code class="spec">eval (Num n)      env = n
+eval (Neg e)      env = - (eval e env)
+eval (Add e0 e1)  env = eval e0 env + eval e1 env 
+</code></pre><p>碰到變數時，我們到環境中查變數的值：</p><pre><code class="spec">eval (Var x) env = case lookup env x of Just v -&gt; return v 
+</code></pre><p>這裡的 <code class="haskell">case</code> 算式只處理了 <code class="haskell">Just</code> 的情形。
+如果 <code class="haskell">lookup</code> 傳回的是 <code class="haskell">Nothing</code>，也就是變數 <code class="haskell">x</code> 並不在環境 <code class="haskell">env</code> 中，該怎麼辦呢？我們等下再談。
+最後，碰到 <code class="haskell">Let x e0 e1</code> 時，我們先把 <code class="haskell">e0</code> 的值在 <code class="haskell">env</code> 這個環境之下算出，然後算 <code class="haskell">e1</code>:</p><pre><code class="spec">eval (Let x e0 e1) env =
+  let v = eval e0 env
+  in eval e1 ((x, v) : env)
+</code></pre><p>但計算 <code class="haskell">e1</code> 時須使用新的環境 <code class="haskell">(x, v) : env</code>，這讓 <code class="haskell">e1</code> 可以用到 <code class="haskell">x</code>。變數 <code class="haskell">x</code> 在新環境中的值是 <code class="haskell">v</code>.</p><p><b>算式的語意是函數</b> &emsp;
+第 [RefUndefined] 節開頭提及，
+算式沒有變數、沒有除法時，<code class="haskell">eval</code> 的型別是 <code class="haskell">Expr -&gt; Int</code> --- 此時一個算式的「意思」就是一個整數。
+有了除法後，為了表示可能拋出例外的函數，<code class="haskell">eval</code> 的型別變成 <code class="haskell">Expr -&gt; Except Int</code>.
+此時 <code class="haskell">Except a</code> 代表一個尚待完成、可能有副作用（拋出例外）的計算。</p><p>加上變數、考慮環境後， <code class="haskell">eval</code> 的型別變成了 <code class="haskell">Expr -&gt; (Env -&gt; Int)</code>：<code class="haskell">eval</code> 拿一個算式，傳回一個函數；該函數又拿一個環境，才算出一個整數值。
+也就是說，一個算式的語意是「拿一個環境，傳回一個整數的函數」。
+的確，既然算式算成的那個整數必須由環境決定，算式其實不能看作一個數值，而應該是從環境到整數的函數才對。
+算式 <code class="haskell">eval (Add (Var "x") (Var "y"))</code> 是一個函數，如果給它 <code class="haskell">[("x", 3), ("y", 2)]</code>, 我們得到 <code class="haskell">5</code>;
+如果給 <code class="haskell">[("x",4), ("y", -3)]</code>, 我們得到 <code class="haskell">1</code>.</p><p>如果把「給一個環境，傳回型別為 <code class="haskell">a</code> 的結果的函數」叫做 <code class="haskell">Reader a</code>, 也就是說定義 <code class="haskell">type Reader a = Env -&gt; a</code>，
+函數 <code class="haskell">eval</code> 的型別成了 <code class="haskell">Expr -&gt; Reader a</code>.
+此處，<code class="haskell">Reader a</code> 也可視為一個<em>尚待完成、可能發生副作用的計算</em>。
+此處可能的副作用包括「和環境詢問變數的值」。
+習慣上，我們把這種副作用稱作「讀者(reader)」或「讀取」。
+「給環境」的動作，就是執行運算，把值算出來。
+我們把其中兩個條款改寫成 $\lambda$ 算式：</p><pre><code class="spec">eval (Num n)      = \env -&gt;  n
+eval (Add e1 e2)  = \env -&gt; eval e1 env + eval e2 env
+</code></pre><p>可以理解成：<code class="haskell">eval (Num n)</code> 傳回一個計算，無論環境為何，該計算都傳回 <code class="haskell">n</code>;
+<code class="haskell">eval (Add e1 e2)</code> 也傳回一個計算，該計算拿到環境後，在同一個環境之下把 <code class="haskell">eval e1</code> 和 <code class="haskell">eval e2</code> 算成值，然後傳回他們的和。</p><p>然而，手動把 <code class="haskell">env</code> 傳來傳去是個重複性高、容易出錯、也嫌累贅的動作。在第 <a href="Monads-1.html#sec:exceptions">8.1 </a> 節中，我們把重複性地產生與拆開 <code class="haskell">Except</code> 型別的動作抽象成 <code class="haskell">return</code> 和 <code class="haskell">(&gt;&gt;=)</code>，
+使得 <code class="haskell">Except</code> 成為一個單子。
+對於本節的 <code class="haskell">Reader</code>, 我們也能設計出一組 <code class="haskell">return</code> 和 <code class="haskell">(&gt;&gt;=)</code>, 把重複的動作抽象掉，使得 <code class="haskell">Reader</code> 成為一個單子嗎？</p><h3 class="subsection" id="sec:reader-is-monad">8.3.2 「讀取」副作用是單子</h3><p><b>讀取單子</b> &emsp; 如第 <a href="Monads-2.html#sec:monad-class-laws">8.2 </a> 節所述，
+<code class="haskell">return</code> 製作一個沒有副作用的計算，<code class="haskell">(&gt;&gt;=)</code> 則用於把兩個計算接起來。
+把 <code class="haskell">m</code> 代換成 <code class="haskell">Reader</code>, 它們的型別分別是：</p><pre><code class="spec">return  :: a -&gt; Reader a
+(&gt;&gt;=)   :: Reader a -&gt; (a -&gt; Reader b) -&gt; Reader b 
+</code></pre><p>其中 <code class="haskell">Reader a = Env -&gt; a</code>.</p><p>函數 <code class="haskell">return</code> 比較單純：<code class="haskell">return x</code> 是一個無論 <code class="haskell">env</code> 是什麼，都傳回 <code class="haskell">x</code> 的計算：</p><pre><code class="spec">return x env = x 
+</code></pre><p>至於 <code class="haskell">m &gt;&gt;= f</code> 則可定義如下：</p><pre><code class="spec">(p &gt;&gt;= f) env = f (p env) env 
+</code></pre><p><code class="haskell">p &gt;&gt;= f</code> 的型別為 <code class="haskell">Reader b</code>, 意謂它可以收一個環境 <code class="haskell">env</code> 當參數，而等號右手邊必須算出一個型別為 <code class="haskell">b</code> 的結果。
+變數 <code class="haskell">p :: Reader a</code> 是一個尚待完成的計算，<code class="haskell">p env</code> 把它算出來，得到型別為 <code class="haskell">a</code> 的結果。
+函數 <code class="haskell">f</code> 的型別為 <code class="haskell">a -&gt; Reader b</code>, 因此 <code class="haskell">f (p env)</code> 意謂 <code class="haskell">f</code> 得到 <code class="haskell">p env :: a</code> 的結果，並<em>算出一個新的計算</em>. 這個計算又在得到 <code class="haskell">env</code> 之後才真正被算出來，最後型別為 <code class="haskell">b</code>.</p><p>有了 <code class="haskell">return</code> 與 <code class="haskell">(&gt;&gt;=)</code>, <code class="haskell">eval</code> 的前三個條款可改寫如下：</p><pre><code class="spec">eval :: Expr -&gt; Reader Int
+eval (Num n)      =  return n
+eval (Neg e)      =  eval e &gt;&gt;= \v -&gt; return (-v) 
+eval (Add e0 e1)  =  eval e0  &gt;&gt;= \v0 -&gt;
+                     eval e1  &gt;&gt;= \v1 -&gt;
+                     return (v0 + v1) 
+</code></pre><p>除了 <code class="haskell">Except</code> 變成 <code class="haskell">Reader</code> 之外和第 <a href="Monads-1.html#sec:exceptions">8.1 </a> 節完全相同！
+由於使用了單子這個適當的抽象，只要把型別從 <code class="haskell">Except</code> 變成 <code class="haskell">Reader</code>，主程式在不需大幅更動的情況下就可以沿用。使用單子，我們能<em>模組化地挑選我們想要的副作用</em>。</p><p><b>讀取單子的特定運算</b> &emsp;
+本節新添加的 <code class="haskell">Var</code> 與 <code class="haskell">Let</code> 兩個情況是第 <a href="Monads-1.html#sec:exceptions">8.1 </a> 節沒有的。
+要處理它們，需要讀取副作用特有的運算子。</p><p>處理 <code class="haskell">Var x</code> 時，<code class="haskell">eval</code> 得到環境中查變數 <code class="haskell">x</code> 的值。
+我們姑且先為此專門定義一個函數：</p><pre><code class="spec">lookupVar :: Var -&gt; Reader Int
+lookupVar x env = case lookup env x of Just v -&gt; return v 
+</code></pre><p>之後再考慮更通用的情況。
+有了它，<code class="haskell">eval</code> 遇上 <code class="haskell">Var x</code> 的條款可寫成：</p><pre><code class="spec">eval (Var x) = lookupVar x 
+</code></pre><p>計算 <code class="haskell">Let x e1 e2</code> 時，我們需要更動環境，把「<code class="haskell">x</code> 的值是 <code class="haskell">e1</code> 的值」這個資訊加到環境中，
+並在新環境內執行 <code class="haskell">eval e2</code>, 但執行完之後就回到原有的環境 --- 新環境只是局部的。
+由於這是常見的模式，我們可定義一個更通用的運算子。
+給定一個函數 <code class="haskell">f :: Env -&gt; Env</code> 用於製作局部的環境，
+如果目前的環境是 <code class="haskell">env</code>, 算式 <code class="haskell">local f p</code> 在新環境 <code class="haskell">f env</code> 之下執行 <code class="haskell">p</code>:</p><pre><code class="spec">local :: (Env -&gt; Env) -&gt; Reader a -&gt; Reader a
+local f p env = p (f env) 
+</code></pre><p>有了 <code class="haskell">local</code> 的幫忙，<code class="haskell">eval</code> 遇上 <code class="haskell">Let</code> 時可寫成：</p><pre><code class="spec">eval (Let x e0 e1) =  eval e0 &gt;&gt;= \v -&gt;
+                      local ((x,v):) (eval e1) 
+</code></pre><p>我們用 <code class="haskell">((x,v):)</code> 幫環境增加一筆資料，在這之下計算 <code class="haskell">eval e2</code>.</p><div class="exlist"><div class="exercise exer" id="ex:expand-reader-by-def"><h5 class="exercise-title">練習 8.2 </h5><p>使用本節的定義，將 <code class="haskell">eval (Add e0 e1) env</code> 與 <code class="haskell">eval (Let x e0 e1) env</code> 展開，確認它們和第 <a href="#sec:var-env-reader">8.3.1 </a> 節的定義一樣。意即：</p><pre><code class="spec">eval (Add e0 e1)    env = eval e0 env + eval e1 env 
+eval (Let x e0 e1)  env = eval e1 ((x, eval e0 env):env)  
+</code></pre></div><div class="wrap-collabsible"><input class="toggle" id="ans-8-2" type="checkbox"/><label class="lbl-toggle" for="ans-8-2">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>考慮 <code class="haskell">eval (Add e0 e1)</code>:</p><pre><code class="spec">     eval (Add e0 e1) env
+===     <comment>{- <code class="haskell">eval</code> 之定義 -}</comment>
+     (eval e0  &gt;&gt;= \v0 -&gt; eval e1  &gt;&gt;= \v1 -&gt; return (v0 + v1)) env
+===     <comment>{- <code class="haskell">(&gt;&gt;=)</code> 之定義 -}</comment>
+     (\v0 -&gt; eval e1 &gt;&gt;= \v1 -&gt; return (v0 + v1)) (eval e0 env) env
+===     <comment>{- 函數應用 -}</comment>
+     (eval e1 &gt;&gt;= \v1 -&gt; return (eval e0 env + v1)) env
+===     <comment>{- <code class="haskell">(&gt;&gt;=)</code> 之定義, 函數應用 -}</comment>
+     return (eval e0 env + eval e1 env) env
+===     <comment>{- <code class="haskell">return</code> 之定義 -}</comment>
+     eval e0 env + eval e1 env 
+</code></pre><p>考慮 <code class="haskell">eval (Let x e0 e1) env</code>:</p><pre><code class="spec">     eval (Let x e0 e1) env
+===     <comment>{- <code class="haskell">eval</code> 之定義 -}</comment>
+     (eval e0 &gt;&gt;= \v -&gt; local ((x,v):) (eval e1)) env
+===     <comment>{- <code class="haskell">(&gt;&gt;=)</code> 之定義, 函數應用 -}</comment>
+     local ((x,eval e0 env):) (eval e1) env
+===     <comment>{- <code class="haskell">local</code> 之定義 -}</comment>
+     eval e1 ((x, eval e0 env):env)  
+</code></pre></div></div></div><p><b>更通用的環境單子</b> &emsp;
+為了說明方便，目前為止我們假設「環境」是某個固定的型別: <code class="haskell">Env</code>.
+我們當然可以把這部份也抽象掉：</p><pre><code class="spec">type Reader e a = e -&gt; a  
+</code></pre><p>現在 <code class="haskell">Reader</code> 多吃一個參數 <code class="haskell">e</code>, 代表環境的型別。
+對任意的 <code class="haskell">e</code>, <code class="haskell">Reader e</code> 都是一個單子，
+函數 <code class="haskell">local</code> 更通用的型別是 <code class="haskell">(e -&gt; e) -&gt; Reader e a -&gt; Reader e a</code>.
+本節之前的每個 <code class="haskell">Reader</code> 都需代換成 <code class="haskell">Reader Env</code>.
+例如 <code class="haskell">eval</code> 的型別是 <code class="haskell">Expr -&gt; Reader Env Int</code>.
+但改變的都只有型別，程式不需變動。</p><p>函數 <code class="haskell">lookupVar :: Var -&gt; Reader Env Int</code> 只能在 <code class="haskell">e</code> 為 <code class="haskell">Env</code> 的情況下運作。
+更一般來說，讀取單子通常會有一個運算子 <code class="haskell">ask</code>, 把整個環境傳出來供我們使用：</p><pre><code class="spec">ask :: Reader e e
+ask env = env 
+</code></pre><p>函數 <code class="haskell">lookupVar</code> 則可改用 <code class="haskell">ask</code> 定義為：</p><pre><code class="spec">lookupVar :: Var -&gt; Reader Int
+lookupVar x =  ask &gt;&gt;= \env -&gt;
+               case lookup env x of Just v -&gt; return v 
+</code></pre><p>最後，本節之中讓 <code class="haskell">Reader e</code> 與前一節的 <code class="haskell">Except</code> 共用 <code class="haskell">return</code>, <code class="haskell">(&gt;&gt;=)</code> 等符號。
+若需在 Haskell 中如此，我們得將 <code class="haskell">Reader e</code> 宣告為 type class <code class="haskell">Monad</code> 的一個特例。
+但由於一些型別檢查的技術問題， Haskell 不允許用 <code class="haskell">type</code> 宣告的別名成為 type class 特例。
+我們得把 <code class="haskell">Reader</code> 用 <code class="haskell">data</code> 宣告成一個資料型別：<input class="toggle" id="footnote-8-3-2" type="checkbox"/><label class="fnote-toggle" for="footnote-8-3-2">(註2) </label><span class="collapsible-footnote">更普遍的做法是用 <code class="haskell">newtype</code> 宣告：<code class="haskell">newtype Reader e a = Reader { runReader :: (e -&gt; a) }</code>. 但本書不談 <code class="haskell">newtype</code>.</span></p><pre><code class="spec">data Reader e a = Reader (e -&gt; a) 
+
+instance Monad (Reader e) where
+    return a        = Reader (\e -&gt; a)
+    Reader r &gt;&gt;= f  = Reader (\e -&gt; f (r e) e) 
+</code></pre><h3 class="subsection" id="sec:monad-reader-laws">8.3.3 推論讀取單子程式的性質</h3><p>給一個單子程式，如何討論它的性質？
+比如說，對某一個 <code class="haskell">e</code>, 如何得知 <code class="haskell">eval</code> <code class="haskell">(Let "x" (Num 3)</code> <code class="haskell">(Let "y" (Num 4) e))</code>
+的值是什麼？
+它和 <code class="haskell">eval</code> <code class="haskell">(Let "y" (Num 4)</code> <code class="haskell">(Let "x" (Num 3) e))</code> 的值是否總是相等？</p><p>由於 <code class="haskell">eval</code> 是用 <code class="haskell">return</code>, <code class="haskell">(&gt;&gt;=)</code>, <code class="haskell">local</code> ... 等等運算子定義出來的，而這幾個運算子的定義也都已經有了，
+我們總是可以把他們的定義都展開，
+回到最基礎的層次證明任何我們想確認的性質。
+但一來如此的證明可能非常瑣碎，二來 <code class="haskell">return</code>, <code class="haskell">(&gt;&gt;=)</code> 等運算子的定義可能還會改變。
+我們是否能在稍微抽象一點的層次運作，假裝我們不知道這些單子運算子的定義，只討論它們具有什麼性質，並用這些性質來做證明？</p><p>我們應可以合理要求一個「正確」的讀取單子實作應該要滿足下列的性質。
+首先，假設 <code class="haskell">e</code> 是一個不含變數 <code class="haskell">v</code> 的算式：</p><pre><code class="equation" id="eq:reader-ask-return">|ask &gt;&gt;= \v -&gt; return e = return e | \mbox{如果 |v| 不出現在 |e| 之中。}</code>    (8.1 )
+</pre><p>等號兩邊都只是傳回 <code class="haskell">e</code> 的值，而 <code class="haskell">e</code> 的值不受 <code class="haskell">v</code> 影響，因此 <code class="haskell">ask</code> 是可以省略掉的。
+其次，連續使用 <code class="haskell">ask</code> 兩次可以縮減為一次就好：</p><pre><code class="equation" id="eq:reader-ask-ask">|ask &gt;&gt;= \v0 -&gt; ask &gt;&gt;= \v1 -&gt; f v0 v1 <comment>{-"~~"-}</comment>=<comment>{-"~~"-}</comment> ask &gt;&gt;= \v -&gt; f v v |</code>    (8.2 )
+</pre><p>在等號左手邊，我們把問了環境兩次之後的計算抽象為一個函數呼叫 <code class="haskell">f v0 v1</code>.
+在右手邊我們則讓 <code class="haskell">f</code> 的兩個參數都是 <code class="haskell">v</code> --- 詢問環境一次的結果。</p><p>下面兩個式子討論當 <code class="haskell">local</code> 遇上 <code class="haskell">return</code> 與 <code class="haskell">(&gt;&gt;=)</code> 時會如何：</p><div class="equations"><ul><li><p id="eq:reader-local-return"> <code class="haskell">local g (return e)</code> <code class="haskell">= return e</code></p></li><li><p id="eq:reader-local-bind"> <code class="haskell">local g (p &gt;&gt;= f)</code> <code class="haskell">= local g p &gt;&gt;= (local g . f)</code></p></li></ul></div><p>在 ([RefUndefined]) 的左手邊，改變環境之後立刻 <code class="haskell">return e</code>, 其實和單純做 <code class="haskell">return e</code> 一樣。
+性質 ([RefUndefined]) 則告訴我們 <code class="haskell">local g</code> 可以分配到 <code class="haskell">(&gt;&gt;=)</code> 的兩側。由於型別之故，<code class="haskell">(&gt;&gt;=)</code> 的左邊是 <code class="haskell">local g p</code>, 右邊則得用函數合成 <code class="haskell">(.)</code>.</p><p>最後，下列性質將 <code class="haskell">local</code> 與 <code class="haskell">ask</code> 關聯在一起：</p><pre><code class="equation" id="eq:reader-local-ask">|local g ask = ask &gt;&gt;= (return . g) |</code>    (8.3 )
+</pre><p>在 <code class="haskell">local g</code> 的環境之下做 <code class="haskell">ask</code>, 相當於先做 <code class="haskell">ask</code>, 然後把得到的環境交給 <code class="haskell">g</code> 加工。
+我們可說算式 ([RefUndefined]) 藉由這兩個運算子的互動定義出了 <code class="haskell">local</code> 的「意思」。</p><p>有了這些性質，我們不需引用 <code class="haskell">local</code>, <code class="haskell">ask</code>, <code class="haskell">(&gt;&gt;=)</code> ... 等等的定義，也可論證讀取單子程式的性質了。例如，我們來看看 <code class="haskell">let x = 4 in x + x</code> 的值會是什麼：</p><pre><code class="spec">     eval (Let "x" (Num 4) (Add (Var "x") (Var "x")))
+===    <comment>{- <code class="haskell">eval</code> 之定義 -}</comment>
+     eval (Num 4) &gt;&gt;= \v -&gt; local (("x",v):) (eval (Add (Var "x") (Var "x")))
+===    <comment>{- <code class="haskell">eval</code> 之定義 -}</comment>
+     return 4 &gt;&gt;= \v -&gt; local (("x",v):) (eval (Add (Var "x") (Var "x")))
+===    <comment>{- 單子律：左單位律 \eqref{eq:monad-left-id} -}</comment>
+     local (("x",4):) (eval (Add (Var "x") (Var "x")))
+===    <comment>{- <code class="haskell">eval</code> 之定義 -}</comment>
+     local (("x",4):) (  eval (Var "x") &gt;&gt;= \v0 -&gt;
+                         eval (Var "x") &gt;&gt;= \v1 -&gt; return (v0 + v1))
+===    <comment>{- \eqref{eq:reader-local-bind} -}</comment>
+     local (("x",4):) (eval (Var "x")) &gt;&gt;= \v0 -&gt;
+     local (("x",4):) (eval (Var "x")) &gt;&gt;= \v1 -&gt;
+     local (("x",4):) (return (v0 + v1))
+</code></pre><p>我們將 <code class="haskell">local (("x",4):) (eval (Var "x"))</code> 抽出來化簡：</p><pre><code class="spec">    local (("x",4):) (eval (Var "x"))
+===   <comment>{- <code class="haskell">eval</code> 與 <code class="haskell">lookupVar</code> 之定義 -}</comment>
+    local (("x",4):) (ask &gt;&gt;= \env -&gt; case lookup env "x" of Just v -&gt; return v)
+===   <comment>{- \eqref{eq:reader-local-bind} -}</comment>
+    local (("x",4):) ask &gt;&gt;= \env -&gt;
+    local (("x",4):) (case lookup env "x" of Just v -&gt; return v)
+===   <comment>{- \eqref{eq:reader-local-ask}, 左單位律 \eqref{eq:monad-left-id} -}</comment>
+    local (("x",4):) (case lookup (("x",4):env) "x" of Just v -&gt; return v)
+===   <comment>{- <code class="haskell">lookup (("x",4):env) "x" = Just 4</code> -}</comment>
+    local (("x",4):) (return 4)
+===   <comment>{- \eqref{eq:reader-local-return} -}</comment>
+    return 4 
+</code></pre><p>由此我們得知 <code class="haskell">local (("x",4):) (eval (Var "x"))</code> 就是 <code class="haskell">return 4</code>.
+將它放回原式中：</p><pre><code class="spec">     local (("x",4):) (eval (Var "x")) &gt;&gt;= \v0 -&gt;
+     local (("x",4):) (eval (Var "x")) &gt;&gt;= \v1 -&gt;
+     local (("x",4):) (return (v0 + v1))
+===   <comment>{- 前述計算 -}</comment>
+     return 4 &gt;&gt;= \v0 -&gt; return 4 &gt;&gt;= \v1 -&gt; return (v0 + v1)
+===   <comment>{- 單子律：左單位律 \eqref{eq:monad-left-id} -}</comment>
+     return (4 + 4) 
+</code></pre><p>因此，<code class="haskell">eval (Let "x" (Num 4) (Add (Var "x") (Var "x")))</code> 就是 <code class="haskell">return 8</code>.</p><p>提醒讀者注意一點：<code class="haskell">eval (Let "x" (Num 4) (Add (Var "x") (Var "x")))</code> 和 <code class="haskell">return 8</code> 都不是基礎型別，而是「尚待完成的計算」。
+論證單子程式時我們常常不是在基礎型別的層次上運作，而是證明一個計算與另一個計算是等價的。
+這意味著它們傳回同樣的值，也發生同樣的副作用。
+我們日後會看到更多此類的例子。</p><div class="exlist"><div class="exercise exer"><h5 class="exercise-title">練習 8.3 </h5><p>證明對所有 <code class="haskell">e :: Expr</code>,</p><pre><code class="spec">  eval (Let "x" (Num 3) (Let "y" (Num 4) e)) =
+    eval (Let "y" (Num 4) (Let "x" (Num 3) e)) 
+</code></pre><p>如果 <code class="haskell">(("x",3):) . (("y",4):) = (("y",4):) . (("x",3):)</code> 成立。</p></div><div class="exercise exer"><h5 class="exercise-title">練習 8.4 </h5><p>然而，<code class="haskell">(("x",3):) . (("y",4):) = (("y",4):) . (("x",3):)</code> 並不成立。</p></div></div><p>我們稍早曾遇到這個問題：如果給這樣的式子 <code class="haskell">eval (Var "x") [("y",0)]</code>,
+變數 <code class="haskell">x</code> 並不在環境中，<code class="haskell">lookup</code> 將傳回 <code class="haskell">Nothing</code>，這時該怎麼辦？</p><p>我們可以再擴充 <code class="haskell">Reader</code> 的型別，讓 <code class="haskell">eval</code> 也可以傳回一個 <code class="haskell">Except</code> 結果：</p><pre><code class="spec">type ReaderExcept e a = e -&gt; Except a
+</code></pre><p>而 <code class="haskell">return</code> 和 <code class="haskell">(&gt;&gt;=)</code> 也得隨之擴充：</p><pre><code class="spec">return a = \env -&gt; Just a
+rm &gt;&gt;= f = \env -&gt; case rm env of
+                    Just v -&gt; f v env
+                    Nothing -&gt; Nothing
+</code></pre><p>這個 <code class="haskell">ReaderExcept</code> 型別綜合了讀取單子與例外單子的功能，其 <code class="haskell">return</code> 與 <code class="haskell">(&gt;&gt;=)</code> 定義也像是兩個單子定義的混合。
+但這並不是令人相當滿意的做法。<code class="haskell">ReaderExcept</code> 比起 <code class="haskell">Reader</code> 又更複雜了一點。日後我們也許會想要有更多功能，例如狀態、輸出入等。<code class="haskell">ReaderExcept</code> 已經夠抽象難解了，我們並不希望設計、維護越來越龐大的單子。</p><p>既然 Maybe 單子讓一個程式加上「例外」的副作用，讀取單子讓一個程式加上可存取環境的功能，我們能否把這兩項功能分別模組化地加入呢？</p><p>也就是說，給了兩個單子 M1 和 M2, 能否把他們的功能加在一起，產生另一個新單子呢？</p></div><div class="navi"><div class="previous">&laquo;<a href="Monads-2.html#sec:monad-class-laws">8.2 單子與單子律</a></div><div class="next"><a href="Monads-4.html#sec:monad-state">8.4 狀態單子</a>&raquo;</div></div></div></div>
+
+<script src="../js/ui.js"></script>
+
+</body>
+</html>

@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -120,9 +120,9 @@
 <li class="pure-menu-item"><a href="Folds-2.html#sec:accum-param-fold-fusion">6.2.5 累積參數與摺融合</a></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:bring-in-context">6.2.6 引入脈絡</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Folds-3.html#sec:foldl-listHomo-para">6.3 左摺、串列同構、與 Paramorphism</a><input class="toggle" id="menu-li-6-3" type="checkbox"/><label class="menu-toggle" for="menu-li-6-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-3.html#sec:foldl">6.3.1 左摺</a></li>
-<li class="pure-menu-item"><a href="Folds-3.html#sec:list-homomorphism">6.3.2 串列同構</a></li>
-<li class="pure-menu-item"><a href="Folds-3.html#sec:paramorphism">6.3.3 Paramorphism 與本原遞迴</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:foldl-listHomo-para">6.3 左摺、串列同構、與 Paramorphism</a><input class="toggle" id="menu-li-6-3" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="#sec:foldl">6.3.1 左摺</a></li>
+<li class="pure-menu-item"><a href="#sec:list-homomorphism">6.3.2 串列同構</a></li>
+<li class="pure-menu-item"><a href="#sec:paramorphism">6.3.3 Paramorphism 與本原遞迴</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-4.html#sec:foldN">6.4 自然數的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-5.html#sec:fold-on-other-data-structures">6.5 其他資料結構</a></li>
@@ -143,28 +143,66 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a></div><div class="next"><a href="Folds-4.html#sec:foldN">6.4 自然數的摺</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:foldl-listHomo-para">6.3 左摺、串列同構、與 Paramorphism</h2><p>為了完整性，本節介紹與串列的摺相關的另外幾個組件函數。
+初次閱讀時可跳過本節。</p><h3 class="subsection" id="sec:foldl">6.3.1 左摺</h3><p>除了 <code class="haskell">foldr</code>, Haskell 的標準函式庫有另一個函數 <code class="haskell">foldl</code>, 名字中的字母 <code class="haskell">l</code> 為「左」之意：
+<code class="haskell">foldr</code> 將串列中的元素往右括，<code class="haskell">foldl</code> 則往左括，例如，</p><pre><code class="spec"> foldl rhd e [x0,x1,x2,x3] = (((e `rhd` x0) `rhd` x1) `rhd` x2) `rhd` x3 
+</code></pre><p>有了 <code class="haskell">foldl</code>, 串列反轉可直接定義為 <code class="haskell">reverse = foldl (\xs x -&gt; x:xs) []</code>.</p><p>函數 <code class="haskell">foldl</code> 可在輸入串列的長度上歸納定義如下：</p><pre><code class="spec">foldl :: (b -&gt; a -&gt; b) -&gt; b -&gt; List a -&gt; b
+foldl rhd e []         = e
+foldl rhd e (xs++[z])  = foldl rhd e xs `rhd` z
+</code></pre><p>由於運算元 <code class="haskell">rhd</code> 右邊的參數才是目前的元素，其型別為 <code class="haskell">b -&gt; a -&gt; b</code>.
+由此出發，我們不難導出下述將串列從左邊開始拆解的定義：</p><pre><code class="spec">foldl rhd e []      = e
+foldl rhd e (x:xs)  = foldl rhd (e `rhd` x) xs 
+</code></pre><p>我們可注意到這是一個尾遞迴定義，<span id="ix-6-14"></span>
+因此，如果將 <code class="haskell">sum</code>, <code class="haskell">prod</code> 等函數定義為 <code class="haskell">foldl (+) 0</code>, <code class="haskell">foldl (*) 1</code> 等等，執行時可不佔用堆疊的空間。
+由於這個特性，對一些將 Haskell 用於著重效率的應用的人們來說，<code class="haskell">foldl</code> 才是他們較常使用的「摺」。
+<input class="toggle" id="footnote-6-3-2" type="checkbox"/><label class="fnote-toggle" for="footnote-6-3-2">(註2) </label><span class="collapsible-footnote">為了效率因素更常被使用的可能是另一個嚴格(strict)版的函數 <code class="haskell">foldl'</code>, 該函數在遞迴呼叫前會先將 <code class="haskell">e `rhd` x</code> 規約成正規式，避免尚待計算的算式被累積著。</span></p><p>關於 <code class="haskell">foldl</code> 與 <code class="haskell">foldr</code> 的關係，<a href="../Biblio.html#Bird:98:Introduction">Bird [1998]</a> 提及了三個定理。首先，</p><div class="theorem" id="thm:first-duality" title="第一對偶定理(The First Duality Theorem)"><h5 class="theorem-title">定理 6.14  第一對偶定理(The First Duality Theorem) </h5><p>如果 <code class="haskell">oplus :: a -&gt; a -&gt; a</code> 滿足遞移律，以 <code class="haskell">e :: a</code> 為單位元素，則 <code class="haskell">foldr oplus e xs = foldl oplus e xs</code>.</p></div><p>提醒一下：該定理及本節的其他定理中，<code class="haskell">xs</code> 需為歸納定義、有限長度的串列。
+遞移律意指 <code class="haskell">x ⊕ (y ⊕ z) = (x ⊕ y) ⊕ z</code> --- 由於此項要求，<code class="haskell">oplus</code> 的型別得是 <code class="haskell">a -&gt; a -&gt; a</code>. 由於 <code class="haskell">(+)</code>, <code class="haskell">(*)</code>, <code class="haskell">(↓)</code>, <code class="haskell">(↑)</code> 等運算元都有遞移律，<code class="haskell">sum</code>, <code class="haskell">prod</code>, <code class="haskell">maixmum</code>, <code class="haskell">minimum</code> 等函數都可用 <code class="haskell">foldl</code> 定義。事實上，他們在標準 Haskell Report 中的定義便是如此。</p><p>定理<a href="#thm:first-duality">6.14 </a>其實是下述定理的特例。
+函數 <code class="haskell">foldl</code> 有個尾遞迴定義，其中參數 <code class="haskell">e</code> 的角色就像是個累積參數。
+第<a href="Derivation-6.html#sec:tail-recursion">5.6.3 </a>節中曾提及，尾遞迴函數時常和遞移律有關。
+函數 <code class="haskell">foldl</code> 是否也牽涉了某種遞移律呢？</p><div class="theorem" id="thm:second-duality" title="第二對偶定理(The Second Duality Theorem)"><h5 class="theorem-title">定理 6.15  第二對偶定理(The Second Duality Theorem) </h5><p>如果二元運算元 <code class="haskell">lhd :: a -&gt; b -&gt; b</code> 及 <code class="haskell">rhd :: b -&gt; a -&gt; b</code> 滿足 <code class="haskell">x `lhd` (y `rhd` z) = (x `lhd` y) `rhd` z</code> 以及 <code class="haskell">x `lhd` e = e `rhd` x</code>，
+則 <code class="haskell">foldr lhd e xs = foldl rhd e xs</code>.</p></div><p>定理 <a href="#thm:second-duality">6.15 </a> 中的 <code class="haskell">x `lhd` (y `rhd` z) = (x `lhd` y) `rhd` z</code> 可視為一種擴充到兩個運算元的遞移律。定理 <a href="#thm:first-duality">6.14 </a> 則是 <code class="haskell">lhd = rhd</code> 的特殊情況。</p><p>定理 <a href="#thm:second-duality">6.15 </a> 的證明頗值得研究：</p><div class="proof"><b>證明 </b><p>我們在 <code class="haskell">xs</code> 上做歸納。基底狀況 <code class="haskell">xs := []</code> 中，等號兩邊都歸約為 <code class="haskell">e</code>.
+至於 <code class="haskell">xs := x : xs</code> 的情況，我們把兩邊都化簡並使用歸納假設，推論如下：</p><pre><code class="haskell">      foldr lhd e (x:xs)
+ ===    <comment>{- <code class="haskell">foldr</code> 之定義 -}</comment>
+      x `lhd` foldr lhd e xs
+ ===    <comment>{- 歸納假設 -}</comment>
+      x `lhd` foldl rhd e xs
+ ===    <comment>{- 論證如後述 -}</comment>
+      foldl rhd (x `lhd` e) xs
+ ===    <comment>{- 假設： <code class="haskell">x `lhd` e = e `rhd` x</code> -}</comment>
+      foldl rhd (e `rhd` x) xs
+ ===    <comment>{- <code class="haskell">foldl</code> 之定義 -}</comment>
+      foldl rhd e (x:xs) 
+</code></pre><p>在等式推論中段，我們希望 <code class="haskell">x `lhd` foldl rhd e xs = foldl rhd (e `rhd` x) xs</code>.
+這會需要另一個歸納證明。
+但我們若直接證明此等式，到中途便會無法進行，且會發現我們需要稍做一下推廣，改證明一個較強的性質：</p><pre><code class="equation" id="eq:sndDualityGen">  |x `lhd` foldl rhd y xs = foldl rhd (x `lhd` y) xs |</code>    (6.1 )
+</pre><p>兩者的差別是後者不針對特定的值 <code class="haskell">e</code>, 而是任何的 <code class="haskell">y</code>.
+這是一個「較強的性質反而比較好證明」的例子。</p><p>等式([RefUndefined])的證明如此進行：在 <code class="haskell">xs := []</code> 的情況中，等號兩側都規約為 <code class="haskell">x `lhd` y</code>.
+歸納情況 <code class="haskell">xs := z : xs</code> 證明如下：</p><pre><code class="haskell">      x `lhd` foldl rhd y (z:xs)
+ ===    <comment>{- <code class="haskell">foldl</code> 之定義 -}</comment>
+      x `lhd` foldl rhd (y `rhd` z) xs
+ ===    <comment>{- 歸納假設 -}</comment>
+      foldl rhd (x `lhd` (y `rhd` z)) xs
+ ===    <comment>{- 假設：<code class="haskell">x `lhd` (y `rhd` z) = (x `lhd` y) `rhd` z</code> -}</comment>
+      foldl rhd ((x `lhd` y) `rhd` z) xs
+ ===    <comment>{- <code class="haskell">foldl</code> 之定義 -}</comment>
+      foldl rhd (x `lhd` y) (z:xs) 
+</code></pre></div><p>最後一個對偶定理則確認了我們的一個直覺理解：將一個串列反轉做 <code class="haskell">foldl</code>, 便相當於 <code class="haskell">foldr</code>:</p><div class="theorem" id="thm:third-duality" title="第三對偶定理(The Third Duality Theorem)"><h5 class="theorem-title">定理 6.16  第三對偶定理(The Third Duality Theorem) </h5><p>對所有 <code class="haskell">f :: a -&gt; b -&gt; b</code>, <code class="haskell">e :: b</code>, 以及 <code class="haskell">xs :: List a</code>,
+<code class="haskell">foldr f e xs = foldl (flip f) e (reverse xs)</code>.
+其中 <code class="haskell">flip f x y = f y x</code>.</p></div><h3 class="subsection" id="sec:list-homomorphism">6.3.2 串列同構</h3><p>考慮函數 <code class="haskell">h :: List a -&gt; b</code>. 如果存在 <code class="haskell">e :: b</code>, <code class="haskell">f :: a -&gt; b</code>, 和 <code class="haskell">odot :: b -&gt; b -&gt; b</code> 使得 <code class="haskell">h</code> 滿足下列等式：</p><pre><code class="spec">h []          = e
+h [x]         = f x
+h (xs ++ ys)  = h xs ⊙ h ys 
+</code></pre><p>我們便說 <code class="haskell">h</code> 是一個<em>串列同構</em>(<em>list homomorphism</em>), 記為 <code class="haskell">h = hom odot f e</code>.
+<span id="ix-6-15"></span>
+注意第三個等式蘊含 <code class="haskell">odot</code>（至少在 <code class="haskell">h</code> 的值域內）須滿足結合律：
+<code class="haskell">h xs ⊙ (h ys ⊙ h zs) = h (xs++(ys++zs)) = h ((xs++ys)++zs) = (h xs ⊙ h ys) ⊙ h zs</code>.</p><p>串列同構有平行計算的可能性：計算 <code class="haskell">hom odot f e xs</code> 時，如果 <code class="haskell">xs</code> 有不只一個元素，我們可將 <code class="haskell">xs</code> 由中間任意截成兩段，分別給不同的處理器計算，再將結果用 <code class="haskell">odot</code> 結合。</p><p>顯然，<code class="haskell">hom dot f e</code> 可以寫成 <code class="haskell">foldr</code>, 也能寫成 <code class="haskell">foldl</code>:</p><pre><code class="haskell">  hom odot f e  === foldr (\x y -&gt; f x ⊙ y) e
+                === foldl (\y x -&gt; y ⊙ f x) e 
+</code></pre><p>下述定理則告訴我們反過來也成立：如果 <code class="haskell">h</code> 同時可寫成 <code class="haskell">foldr</code> 及 <code class="haskell">foldl</code>, 則 <code class="haskell">h</code> 是一個串列同構：</p><div class="theorem" id="thm:third-homo-thm" title="第三同構定理(The Third Homomorphism Theorem)"><h5 class="theorem-title">定理 6.17  第三同構定理(The Third Homomorphism Theorem) </h5><p>考慮 <code class="haskell">h :: List a -&gt; b</code>。如果存在 <code class="haskell">e :: b</code>, <code class="haskell">lhd :: a -&gt; b -&gt; b</code>, 及 <code class="haskell">rhd :: b -&gt; a -&gt; b</code> 使得 <code class="haskell">h = foldr lhd e = foldl rhd e</code>,
+則存在 <code class="haskell">odot :: b -&gt; b -&gt; b</code> 使得 <code class="haskell">h = hom odot f e</code> （其中 <code class="haskell">f x = x `lhd` e = e `rhd` x</code>）.</p></div><h3 class="subsection" id="sec:paramorphism">6.3.3 Paramorphism 與本原遞迴</h3><p>如果我們把 <code class="haskell">foldr</code> 的限制放寬，允許 <code class="haskell">xs</code> 出現在遞迴呼叫之外，得到的模式稱為 <em>paramorphism</em>.
+串列版的 paramorphism 可定義如下：</p><pre><code class="haskell">para :: (a -&gt; List a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
+para f e []      = e
+para f e (x:xs)  = f x xs (para f e xs) 
+</code></pre><pre><code class="spec">para f e = fst . foldr (\x (y, xs) -&gt; (f x xs y, x:xs)) (e, []) 
+</code></pre></div><div class="navi"><div class="previous">&laquo;<a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a></div><div class="next"><a href="Folds-4.html#sec:foldN">6.4 自然數的摺</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

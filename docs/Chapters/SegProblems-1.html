@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -128,7 +128,7 @@
 <li class="pure-menu-item"><a href="Folds-5.html#sec:fold-on-other-data-structures">6.5 其他資料結構</a></li>
 <li class="pure-menu-item"><a href="Folds-6.html#sec:folds-ref">6.6 參考資料</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="SegProblems.html#ch:segment-problems">7 區段問題</a><input class="toggle" id="menu-li-7" type="checkbox"/><label class="menu-toggle" for="menu-li-7"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="SegProblems-1.html#sec:maximum-segment-sum">7.1 最大區段和</a></li>
+<li class="pure-menu-item"><a href="SegProblems.html#ch:segment-problems">7 區段問題</a><input class="toggle" id="menu-li-7" checked type="checkbox"/><label class="menu-toggle" for="menu-li-7"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-selected pure-menu-item"><a href="#sec:maximum-segment-sum">7.1 最大區段和</a></li>
 <li class="pure-menu-item"><a href="SegProblems-2.html#sec:maximum-plateau-length">7.2 最長高原問題</a></li>
 <li class="pure-menu-item"><a href="SegProblems-3.html#sec:segProblems-ref">7.3 參考資料</a></li>
 </ul></li>
@@ -143,28 +143,96 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
+<div id="main"><div class="header"><h1 class="chapter" id="ch:segment-problems">7 區段問題</h1></div><div class="navi"><div class="previous">&laquo;<a href="SegProblems.html#ch:segment-problems">7 區段問題</a></div><div class="next"><a href="SegProblems-2.html#sec:maximum-plateau-length">7.2 最長高原問題</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:maximum-segment-sum">7.1 最大區段和</h2><p>給定一個串列。請問它的眾多區段中，總和最大的和是多少？
+這個<em>最大區段和</em>(<em>maximum segment sum</em>)<span id="ix-7-1"></span>問題可說是最經典的區段問題。
+我們可將其寫成如下的規格：</p><pre><code class="haskell">mss :: List Int -&gt; Int
+mss = maximum . map sum . segments 
+</code></pre><p>這幾乎便是問題的字面翻譯：算出所有的區段，對每個區段算其和，然後挑出最大的一個。
+<input class="toggle" id="footnote-7-1-1" type="checkbox"/><label class="fnote-toggle" for="footnote-7-1-1">(註1) </label><span class="collapsible-footnote">函數 <code class="haskell">maximum :: List Int -&gt; Int</code> 的定義見例<a href="Induction-10.html#ex:maximumP">2.12 </a>. 我們得假設整數中有個 <code class="haskell">-infty</code> 作為 <code class="haskell">maximum []</code> 的結果。若要避免 <code class="haskell">-infty</code>，可注意到 <code class="haskell">inits</code>, <code class="haskell">tails</code>, 和 <code class="haskell">segments</code> 都不會傳回空串列 --- 它們的型別都可寫成更嚴格的 <code class="haskell">ListP (List a)</code>。因此我們可改用例<a href="Induction-10.html#ex:maximumP">2.12 </a>中的 <code class="haskell">maximumP</code>. 本節的推導稍加修改後即可適用。</span>
+當輸入串列長度為 $n$, 這個定義本身是一個時間複雜度為 $O(n^3)$ 的演算法 --- 該串列的區段有 $O(n^2)$ 個，每個都需分別算總和。
+我們能導出一個更快的演算法嗎？</p><p><b>前段-後段分解</b> &emsp;許多區段問題的推導都以如下方式開頭：將 <code class="haskell">segments</code> 展開成 <code class="haskell">inits</code> 與 <code class="haskell">tails</code>, 並將 <code class="haskell">maximum</code> 往右推，與 <code class="haskell">inits</code> 放在一起：</p><pre><code class="haskell">      maximum . map sum . segments
+ ===  maximum . map sum . concat . map inits . tails
+ ===   <comment>{- <code class="haskell">map f . concat = concat . map (map f)</code> (習題 \ref{ex:map-concat}) -}</comment>
+      maximum . concat . map (map sum) . map inits . tails
+ ===   <comment>{- <code class="haskell">maximum . concat = maximum . map maximum</code> -}</comment>
+      maximum . map maximum . map (map sum) . map inits . tails
+ ===   <comment>{- <code class="haskell">map</code> 融合 （定理\ref{thm:map-fusion}） -}</comment>
+      maximum . map (maximum . map sum . inits) . tails 
+</code></pre><p>細看 <code class="haskell">maximum . map sum . inits</code> 這個子算式，其意思是「給定一個串列，計算其所有<em>前段</em>的和的最大值」。我們為這個子算式取個名字，令 <code class="haskell">mps = maximum . map sum . inits</code>，其中 <code class="haskell">mps</code> 為「最大前段和 maximum prefix sum」的縮寫。經由上述演算，我們得知</p><pre><code class="spec">  mss = maximum . map mps . tails 
+</code></pre><p>意思是：要找出所有區段的最大和，我們可以對<em>每一個後段，找出其最大前段和</em>。</p><p>這是解許多區段問題的常見模式：要解決最佳區段問題，先試著解最佳前段問題。
+要算出最佳區段，可<em>對每一個後段，算出其最佳前段</em>。
+<input class="toggle" id="footnote-7-1-2" type="checkbox"/><label class="fnote-toggle" for="footnote-7-1-2">(註2) </label><span class="collapsible-footnote">反過來當然也可以。如果我們定義 <code class="haskell">segments = concat . map tails . inits</code>, 此處的策略就變成「對每個前段，算出其最佳後段」。</span></p><p><b>使用掃描引理</b> &emsp;
+接下來我們注意到 <code class="haskell">map mps . tails</code> 這個子算式。回顧<em>掃描引理</em>(<a href="Folds-2.html#lma:scan-lemma">6.11 </a>), 重複如下：</p><pre><code class="spec">map (foldr f e) . tails = scanr f e = foldr (\x ys -&gt; f x (head ys) : ys) [e] 
+</code></pre><p>如果我們能把 <code class="haskell">mps</code> 變成一個 <code class="haskell">foldr</code>，
+<code class="haskell">map mps . tails</code> 可改寫為 <code class="haskell">scanr</code>.
+如果該摺的步驟函數只花常數時間，我們就有了一個線性時間的演算法了！</p><p>如何把 <code class="haskell">mps</code> 變成摺呢？由於 <code class="haskell">inits</code> 是摺，我們可使用摺融合。
+此處的計算和例<a href="Folds-2.html#ex:minimumMapSumInits">6.9 </a>很類似，我們可以把 <code class="haskell">map sum</code> 與 <code class="haskell">maximum</code> 分兩次融合進 <code class="haskell">inits</code>, 也可以一次把 <code class="haskell">maximum . map sum</code> 融合進 <code class="haskell">inits</code>.
+這次我們試試看後者。
+基底值 <code class="haskell">maximum (map sum [[]]) = 0</code>.
+我們想要尋找滿足融合條件
+<code class="haskell">maxmium (map sum ([] : map (x:) xss)) = step x (maximum (map sum xss))</code>
+的函數 <code class="haskell">step</code>.
+計算如下：</p><pre><code class="haskell">      maximum (map sum ([] : map (x:) xss))
+ ===    <comment>{- <code class="haskell">map</code> 與 <code class="haskell">sum</code> 之定義  -}</comment>
+      maximum (0 : map sum (map (x:) xss))
+ ===    <comment>{- <code class="haskell">map</code> 融合  -}</comment>
+      maximum (0 : map (sum . (x:)) xss)
+ ===    <comment>{- <code class="haskell">sum</code> 之定義 -}</comment>
+      maximum (0 : map ((x+). sum) xss)
+ ===    <comment>{- <code class="haskell">maximum</code> 之定義 -}</comment>
+      0 ↑ maximum (map ((x+). sum) xss)
+ ===    <comment>{- <code class="haskell">maximum . map (x+) = (x+) . maximum</code> -}</comment>
+      0 ↑ (x + maximum (map sum xss)) 
+</code></pre><p>因此我們推導出了：</p><pre><code class="haskell">      maximum . map sum . inits
+ ===  maximum . map sum . foldr (\x xss -&gt; [] : map (x:) xss) [[]]
+ ===   <comment>{- 摺融合定理，融合條件如上 -}</comment>
+      foldr (\x s -&gt; 0 ↑ (x + s)) 0 
+</code></pre><p>注意：步驟函數推導的最後一步中，為了將 <code class="haskell">maximum</code> 往右推，使用了如下的性質</p><pre><code class="equation" id="eq:max-mapadd">  |maximum . map (x+)|&|= (x+) . maximum| \mbox{~~.}</code>    (7.1 )
+</pre><p>在 ([RefUndefined]) 的左手邊，我們將一個串列的每個元素都加上 <code class="haskell">x</code>, 然後取最大值。
+性質 ([RefUndefined]) 告訴我們，其實我們可以先取最大值，然後做一個加法即可。
+這個步驟允許我們在每一步省下了 $O(n)$ 個加法，是使得整個演算法之所以能加速的關鍵一步。
+而 ([RefUndefined]) 的證明只需使用例行的歸納法，但其中的關鍵一步需要如下的分配律：</p><pre><code class="equation" id="eq:plus-max">|x + (y ↑ z)| &|= (x + y) ↑ (x + z)| \mbox{~~.}</code>    (7.2 )
+</pre><p>加法與<code class="haskell">max</code>的分配率是使我們能有一個線性時間演算法的關鍵性質。</p><p>既然 <code class="haskell">mps</code> 已經是一個摺，我們可以使用掃描引理：</p><pre><code class="haskell">      maximum . map sum . segments
+ ===    <comment>{- 上述計算 -}</comment>
+      maximum . map (foldr (\x s -&gt; 0 ↑ (x + s)) 0) . tails
+ ===    <comment>{- 掃描引理\ref{lma:scan-lemma} -}</comment>
+      maximum . scanr (\x s -&gt; 0 ↑ (x + s)) 0 
+</code></pre><p>我們得到</p><pre><code class="spec">mss = maximum . scanr (\x s -&gt; 0 ↑ (x + s)) 0 
+</code></pre><p>這是一個使用線性時間、線性空間的演算法。</p><p>藉由程式推導，我們不僅找到了一個較快的演算法，也找出了使得該演算法之所以成立的根本性質。
+這使我們能輕易將該演算法推廣：不僅是加法與<code class="haskell">max</code>，該演算法能用在任何滿足 ([RefUndefined]) 的一組運算元之上。</p><div class="exlist"><div class="exercise exer" id="ex:max-mapadd"><h5 class="exercise-title">練習 7.1 </h5><p>證明性質 ([RefUndefined])。</p></div></div><p><b>常數空間</b> &emsp;
+使用掃描引理導出的 <code class="haskell">mss</code> 能在線性時間內對輸入串列的每個後段算出其 <code class="haskell">mps</code> （即「最大前段和」）並存放在一個串列中。
+方法是使用一個 <code class="haskell">scanr</code> 將串列由右到左走訪一遍，在每一步將 <code class="haskell">x</code> 與 <code class="haskell">mps xs</code> 的值（存放在串列中）相加，並和 <code class="haskell">0</code> 比大小。
+每個 <code class="haskell">mps</code> 值之中最大的那個，便是我們要的答案。
+在函數語言圈內，關於最大區段和的討論大多到此為止：我們已經有了一個漂亮的線性時間演算法了。</p><p>若要再挑惕，這個演算法的不盡滿意之處是需要線性的空間 --- <code class="haskell">scanr</code> 會產生一個中間串列，由 <code class="haskell">maximum</code> 消掉。
+我們有可能把 <code class="haskell">maximum</code> 與 <code class="haskell">scanr</code> 融合，得到一個不產生中間串列的演算法嗎？根據摺融合定理，我們將需要找到滿足以下融合條件的函數 <code class="haskell">step</code>：</p><pre><code class="spec"> maximum (0 ↑ (x + head ys) : ys) = step x (maximum ys) 
+</code></pre><p>這顯然做不到：從 <code class="haskell">maximum ys</code> 是無法取出 <code class="haskell">head ys</code> 的。</p><p>這時就用得上<em>組對</em>的技巧了 --- 既然需要 <code class="haskell">head</code>，就把它一併歸納地算出來吧！
+定義：</p><pre><code class="spec">  msps = fork maximum head . scanr (\x s -&gt; 0 ↑ (x + s)) 0 
+</code></pre><p>要把 <code class="haskell">fork maximum head</code> 融入 <code class="haskell">scanr</code>, 我們依融合條件推導：</p><pre><code class="spec">     fork maximum head (0 ↑ (x + head ys) : ys)
+===    <comment>{- <code class="haskell">fork</code> 之定義 -}</comment>
+     (maximum (0 ↑ (x + head ys) : ys), head (0 ↑ (x + head ys) : ys))
+===    <comment>{- <code class="haskell">maximum</code> 與 <code class="haskell">head</code> 之定義 -}</comment>
+     ((0 ↑ (x + head ys)) ↑ maximum ys, 0 ↑ (x + head ys))
+===    <comment>{- 取出 <code class="haskell">(maximum ys, head ys)</code> -}</comment>
+     (\m s -&gt; ((0 ↑ (x + s)) ↑ m, 0 ↑ (x + s))) (maximum ys, head ys)
+===    <comment>{- 取出重複項 <code class="haskell">0 ↑ (x + s)</code> -}</comment>
+     (\m s -&gt; let s' = 0 ↑ (x + s) in (s' ↑ m, s')) (maximum ys, head ys)  
+</code></pre><p>我們得到</p><pre><code class="spec">mss'' = fst . msps 
 
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+msps :: List Int -&gt; (Int × Int)
+msps = foldr (\m s -&gt; let s' = 0 ↑ (x + s) in (s' ↑ m, s')) (0,0) 
+</code></pre><p>或著，我們把 <code class="haskell">msps</code> 的 <code class="haskell">foldr</code> 定義展開，也許比較容易理解：</p><pre><code class="haskell" id="code:msps">msps []      =  (0,0)
+msps (x:xs)  =  let  (m,s) = msps xs
+                     s' = 0 ↑ (x + s)
+                in   (s' ↑ m, s') 
+</code></pre><p>這是一個使用線性時間、常數空間計算最大區段和的演算法。當 <code class="haskell">(m,s) = msps xs</code>, <code class="haskell">m</code> 是 <code class="haskell">xs</code> 的最大區段和，<code class="haskell">s</code> 則是 <code class="haskell">xs</code> 的最大前段和。
+每考慮一個新元素 <code class="haskell">x</code>, 最大前段和被更新為 <code class="haskell">0 ↑ (x + s)</code> --- 如果把 <code class="haskell">x</code> 接上後仍是正數，<code class="haskell">x+s</code> 就是最好的前段和，否則最大前段和是空串列的和 <code class="haskell">0</code>.
+新的最大前段和再與 <code class="haskell">m</code> 比較，得到新的最大區段和。</p><div class="infobox infobox" title="指令式版本的最大區段和"><h5 class="infobox-title">指令式版本的最大區段和</h5><p>根據第<a href="Derivation-6.html#sec:tail-recursion">5.6.3 </a>節的討論，當輸入串列<code class="haskell">[x0..xN1]</code> 被逆向存放在陣列 <code class="haskell">X</code> 之中，函數 <code class="haskell">msps</code> 相當於以下的指令式程式：</p><pre><code class="spec" id="code:mss:imperative">i, m, s := 0, 0, 0;
+do i /= N -&gt;  s := 0 ↑ (X i + s) ;
+              m := m ↑ s ;
+              i := i + 1
+od ;
+return m
+</code></pre><p>這在指令式程式推導的領域中也是一個經典範例。</p></div></div><div class="navi"><div class="previous">&laquo;<a href="SegProblems.html#ch:segment-problems">7 區段問題</a></div><div class="next"><a href="SegProblems-2.html#sec:maximum-plateau-length">7.2 最長高原問題</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

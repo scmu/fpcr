@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -132,39 +132,51 @@
 <li class="pure-menu-item"><a href="SegProblems-2.html#sec:maximum-plateau-length">7.2 最長高原問題</a></li>
 <li class="pure-menu-item"><a href="SegProblems-3.html#sec:segProblems-ref">7.3 參考資料</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Monads.html#ch:monads">8 單子與副作用</a><input class="toggle" id="menu-li-8" type="checkbox"/><label class="menu-toggle" for="menu-li-8"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Monads-1.html#sec:exceptions">8.1 例外處理</a></li>
+<li class="pure-menu-item"><a href="Monads.html#ch:monads">8 單子與副作用</a><input class="toggle" id="menu-li-8" checked type="checkbox"/><label class="menu-toggle" for="menu-li-8"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Monads-1.html#sec:exceptions">8.1 例外處理</a></li>
 <li class="pure-menu-item"><a href="Monads-2.html#sec:monad-class-laws">8.2 單子與單子律</a></li>
 <li class="pure-menu-item"><a href="Monads-3.html#sec:monad-reader">8.3 讀取單子</a><input class="toggle" id="menu-li-8-3" type="checkbox"/><label class="menu-toggle" for="menu-li-8-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Monads-3.html#sec:var-env-reader">8.3.1 變數與環境</a></li>
 <li class="pure-menu-item"><a href="Monads-3.html#sec:reader-is-monad">8.3.2 「讀取」副作用是單子</a></li>
 <li class="pure-menu-item"><a href="Monads-3.html#sec:monad-reader-laws">8.3.3 推論讀取單子程式的性質</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Monads-4.html#sec:monad-state">8.4 狀態單子</a><input class="toggle" id="menu-li-8-4" type="checkbox"/><label class="menu-toggle" for="menu-li-8-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Monads-4.html#sec:hanoi">8.4.1 河內塔問題</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:monad-state">8.4 狀態單子</a><input class="toggle" id="menu-li-8-4" checked type="checkbox"/><label class="menu-toggle" for="menu-li-8-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="#sec:hanoi">8.4.1 河內塔問題</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:monads">8 單子與副作用</h1></div><div class="navi"><div class="previous">&laquo;<a href="Monads-3.html#sec:monad-reader">8.3 讀取單子</a></div><div class="next"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:monad-state">8.4 狀態單子</h2><p><span id="ix-8-7"></span></p><p>沿用第 <a href="Monads-1.html#sec:exceptions">8.1 </a> 節之中的型別：</p><pre><code class="spec">data Expr = Num Int | Neg Expr | Add Expr Expr | Div Expr Expr  
+</code></pre><p>這次我們暫且忽略分母為零的可能，而考慮另一個應用：我們想知道計算過程中做了多少次除法。
+指令式語言中，一個常見的作法是用一個可變變數來計數。
+在函數語言中我們怎麼模擬這種行為呢？</p><p>在指令式語言中，可變變數的值常用來表示整個系統目前的「狀態(state)」：諸如已處理過的資料個數、處理中的元素號碼、棋盤上每個棋子的位置... 等等。因此我們把「存取可變變數」的能力稱作<em>狀態</em>(<em>state</em>)副作用。</p><p>經過前幾節的熟悉，我們現在應可以更抽象地、<em>由上而下</em>地想像單子了：對於一個我們需要的副作用，先假設其單子存在，考慮它該有哪些運算子、這些運算子該滿足什麼性質、用它們如何寫程式。
+然後才考慮這個單子的實作。對於狀態這個副作用，我們該怎麼設計其運算子呢？</p><p>在命令式語言中，<code class="haskell">x := x + 1</code> 這行指令把可變變數 <code class="haskell">x</code> 的值遞增。這一行看似單純的指令其實包含幾項特性：</p><ul><li><p>變數是有名字的；</p></li><li><p>當變數名字出現在 <code class="haskell">:=</code> 的右手邊，表示讀取變數的值；</p></li><li><p>當變數名字出現在 <code class="haskell">:=</code> 的左手邊，表示將值寫入該變數。</p></li></ul><p>函數語言中討論狀態副作用時偏好用單純些、使用時比較繁瑣、但比較好討論性質的設計：變數沒有名字，並且把「讀取」與「寫入」兩個動作分為單獨的運算子。</p><p>具體說來，令 <code class="haskell">State s a</code> 表示一個結果型別為 <code class="haskell">a</code>, 但在執行時可讀寫一個型別為 <code class="haskell">s</code> 的可變變數的計算。我們要求 <code class="haskell">State s</code> 是一個單子 --- 意謂存在著滿足單子律的
+<code class="haskell">return :: a -&gt; State s a</code> 和 <code class="haskell">(&gt;&gt;=) :: State s a -&gt; (a -&gt; State s b) -&gt; State s b</code>。
+一個型別為 <code class="haskell">State s a</code> 的運算中隱藏的可變變數沒有名字，只能用下述兩個運算子存取：</p><pre><code class="spec">get  :: State s s  
+put  :: s -&gt; State s () 
+</code></pre><p>運算子 <code class="haskell">get</code> 和第 <a href="Monads-3.html#sec:monad-reader">8.3 </a> 節中的 <code class="haskell">ask</code> 類似，讀出該可變變數的值；<code class="haskell">put e</code> 則把 <code class="haskell">e</code> 的值寫到可變變數中，並傳回 <code class="haskell">()</code>。
+例如，當 <code class="haskell">s = Int</code>, 我們可以定義如下的操作 <code class="haskell">inc</code>，把可變變數加一：</p><pre><code class="spec">inc :: State Int ()
+inc = get &gt;&gt;= \v -&gt; put (1+v) 
+</code></pre><p>關於 <code class="haskell">put</code> 有幾件事情可提醒。首先，當我們呼叫 <code class="haskell">put e</code>, 其中的 <code class="haskell">e</code> 已經是一個型別為 <code class="haskell">s</code> 的純數值，不含副作用。
+例如在 <code class="haskell">inc</code> 之中，我們必須先將變數的值 <code class="haskell">get</code> 出來（這是一個有副作用的動作），才能計算新的值並寫回去。
+這讓程式寫起來很繁瑣，但也使得推論程式的性質容易許多。
+其次，關於 <code class="haskell">put e</code> 的型別 <code class="haskell">State s ()</code>. 回想：<code class="haskell">()</code> 是一個只有一個值的型別，該值在 Haskell 中也寫作 <code class="haskell">()</code>. 給定 <code class="haskell">e :: s</code> 後，<code class="haskell">put e :: State s ()</code> 是一個會存取型別為 <code class="haskell">s</code> 的可變變數，並傳回 <code class="haskell">()</code> 的計算。在此，「傳回 <code class="haskell">()</code>」可理解為傳回一個不帶資訊的值，僅表達「我做完了」。</p><p>這個傳回值既然沒有資訊，通常不會被用上。因此當 <code class="haskell">put</code> 不是函數的最後一個動作時，程式常有如下的模樣：</p><pre><code class="spec">   ... put e &gt;&gt;= \_ -&gt; ...
+</code></pre><p>由於「執行一段程式，但只需要它的副作用，不需要它的結果」這件事在本章還會常常發生，我們另外訂一個運算元：</p><pre><code class="spec">(&gt;&gt;) :: m a -&gt; m b -&gt; m b
+p &gt;&gt; q = p &gt;&gt;= \_ -&gt; q 
+</code></pre><p>如此一來 <code class="haskell">put e &gt;&gt;= \_ -&gt; q</code> 可以簡寫成 <code class="haskell">put e &gt;&gt; q</code>.
+（注意： <code class="haskell">p &gt;&gt; q</code> 並不要求 <code class="haskell">p</code> 的傳回值型別為 <code class="haskell">()</code>.）</p><p>回到 <code class="haskell">get</code> 與 <code class="haskell">put</code>。
+如果它們的某個實作確實表達了我們前面口述的意圖，該實作應該會滿足以下的規則：</p><div class="equations"><ul><li><p id="eq:state-get-put"><b>get-put:</b> &emsp;
+<code class="haskell">get &gt;&gt;= put</code> <code class="haskell">= return () </code></p></li><li><p id="eq:state-put-get"><b>put-get:</b> &emsp;
+<code class="haskell">put e &gt;&gt; get</code> <code class="haskell">= put e &gt;&gt; return e </code></p></li><li><p id="eq:state-put-put"><b>put-put:</b> &emsp;
+<code class="haskell">put e0 &gt;&gt; put e1</code> <code class="haskell">= put e1 </code></p></li></ul></div><p>以及一個和第 <a href="Monads-3.html#sec:monad-reader">8.3 </a> 節中的 <code class="haskell">ask</code> 類似的性質：</p><pre><code class="equation" id="eq:state-get-get" title="get-get:">|get &gt;&gt;= \v0 -&gt; get v1 &gt;&gt;= \v1 -&gt; f v0 v1  =  get &gt;&gt;= \v -&gt; f v v |</code>    (8.4 )
+</pre><p>其中，<strong>get-put</strong> 意謂：將可變變數的值讀出後立刻寫入相當於什麼都不做。
+規則 <strong>put-get</strong> 意謂：剛做完 <code class="haskell">put e</code> 之後立刻讀取可變變數的值，必定得到 <code class="haskell">e</code>.
+規則 <strong>put-put</strong> 意謂：連做兩個 <code class="haskell">put</code> 之後，只有第二個 <code class="haskell">put</code> 寫入的值會被留下。
+規則 <strong>get-get</strong> 則意謂：連做兩次 <code class="haskell">get</code> 所得到的值必定相同，可以只 <code class="haskell">get</code> 一次就好。</p><p>如前所述，用 <code class="haskell">get</code> 與 <code class="haskell">put</code> 可定義出 <code class="haskell">inc</code>, 而我們只需在 <code class="haskell">eval</code> 遇到 <code class="haskell">Div</code> 的情況中呼叫 <code class="haskell">inc</code>，就可記錄做了多少次除法了：</p><pre><code class="spec">eval (Div e0 e1) =  eval e1  &gt;&gt;= \v1 -&gt;
+                    eval e0  &gt;&gt;= \v0 -&gt;
+                    inc &gt;&gt;
+                    return (v0 `div` v1) 
+</code></pre><p>函數 <code class="haskell">eval</code> 的其他條款可完全不變，只需把所用單子的型別改成 <code class="haskell">State Int</code>.
+由於單子捕捉了含副作用的程式的共通模式，我們只需選用不同的副作用運算子，就可在不更動大部分程式的情況下使用我們需要的副作用。</p><h3 class="subsection" id="sec:hanoi">8.4.1 河內塔問題</h3><p>本節以河內塔問題為例子，示範狀態單子的推論。</p><pre><code class="spec">hanoi 0        = return ()
+hanoi (Suc n)  = hanoi n &gt;&gt; inc &gt;&gt; hanoi n 
+</code></pre><p><code class="haskell">hanoi n = put (2^n -1)</code>.</p></div><div class="navi"><div class="previous">&laquo;<a href="Monads-3.html#sec:monad-reader">8.3 讀取單子</a></div><div class="next"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

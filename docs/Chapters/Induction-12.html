@@ -58,7 +58,7 @@
 <li class="pure-menu-item"><a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a></li>
 <li class="pure-menu-item"><a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" checked type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
+<li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" checked type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
 <li class="pure-menu-item"><a href="Induction-2.html#sec:induction-on-Nat">2.2 自然數上之歸納定義</a></li>
 <li class="pure-menu-item"><a href="Induction-3.html#sec:inductive-proof-on-Nat">2.3 自然數上之歸納證明</a></li>
 <li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists">2.4 串列與其歸納定義</a><input class="toggle" id="menu-li-2-4" type="checkbox"/><label class="menu-toggle" for="menu-li-2-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists-defn">2.4.1 串列上之歸納定義</a></li>
@@ -75,7 +75,7 @@
 <li class="pure-menu-item"><a href="Induction-9.html#sec:induction-set-theory">2.9 由集合論看歸納法</a></li>
 <li class="pure-menu-item"><a href="Induction-10.html#sec:induction-variations">2.10 歸納定義的簡單變化</a></li>
 <li class="pure-menu-item"><a href="Induction-11.html#sec:complete-induction">2.11 完全歸納</a></li>
-<li class="pure-menu-item"><a href="Induction-12.html#sec:well-founded-induction">2.12 良基歸納</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:well-founded-induction">2.12 良基歸納</a></li>
 <li class="pure-menu-item"><a href="Induction-13.html#sec:lexicographic-induction">2.13 詞典序歸納</a></li>
 <li class="pure-menu-item"><a href="Induction-14.html#sec:mutual-induction">2.14 交互歸納</a></li>
 <li class="pure-menu-item"><a href="Induction-15.html#sec:induction-ref">2.15 參考資料</a></li>
@@ -143,21 +143,91 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:induction">2 歸納定義與證明</h1></div><div class="navi"><div class="previous">&laquo;<a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></div><div class="next"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a>&raquo;</div></div><div class="content"><p>「全麥編程」的觀念鼓勵我們以小組件組織出大程式。
-但這些個別組件該如何實作呢？或著，沒有合用的組件時該怎麼辦？
-我們可以回到更基礎的層次，用<em>遞迴</em>(recursion)<span id="ix-2-1"></span>定義它們。
-「遞迴」意指一個值的定義又用到它本身，是數學中常見的定義方式。
-在早期的編程教材中，遞迴常被視為艱澀、難懂、進階的主題。
-但在函數程設中，遞迴是唯一可使程式不定次數地重複一項計算的方法。
-一旦跨過了門檻，遞迴其實是個很清晰、簡潔地描述事情的方式。</p><p>對於遞迴，許多初學者一方面不習慣、覺得如此構思程式很違反「直覺」，另一方面也納悶：以自己定義自己，到底是什麼意思？
-這兩個難處其實都談到了好問題。
-對於前者，我們希望發展一些引導我們構思遞迴程式的思路；希望有了這些依據，能使寫遞迴程式變得直覺而自然。
-關於後者，其實並非所有遞迴定義都有「意思」 --- 有些「不好」的遞迴並沒有定義出東西。我們討論遞迴的意義時必須限定在「好」的、有意義的程式上。最好有些方式確保我們寫出的遞迴定義是好的。</p><p>在本章我們將討論一種型式較單純的遞迴：<em>歸納</em>(induction)<span id="ix-2-2"></span>。
-對上述兩個問題，本章的回應是：先有歸納定義出的資料結構，再依附著該資料結構撰寫歸納定義的程式，是一種思考、解決程式問題的好方法，也是一種理解遞迴程式的方式。
-此外，依循這種方法也能確保該定義是「好」的。
-我們將從數學歸納法出發，發現歸納程式與數學歸納法的相似性 --- 寫程式和證明其實是很相似的活動。</p><p>本書以 Haskell 為學習工具，但在之後的幾章，我們僅使用 Haskell 的一小部分。
-Haskell 支援無限大的資料結構，也允許我們寫出不會終止的程式。
-但我們將假設所有資料結構都是有限的（除非特別指明），所有函數皆會好好終止（也就是說函數都是「<em>全函數</em>(total function)」<span id="ix-2-3"></span>--- 對每一個值，都會好好地算出一個結果，不會永遠算下去，也不會丟回一個錯誤）。這麼做的理由將在本章解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></div><div class="next"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:induction">2 歸納定義與證明</h1></div><div class="navi"><div class="previous">&laquo;<a href="Induction-11.html#sec:complete-induction">2.11 完全歸納</a></div><div class="next"><a href="Induction-13.html#sec:lexicographic-induction">2.13 詞典序歸納</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:well-founded-induction">2.12 良基歸納</h2><p><em>良基歸納</em>(<em>well-founded induction</em>)
+<span id="ix-2-37"></span>
+可視為完全歸納的再推廣。
+如果說完全歸納的主角是自然數，使用的是自然數上的「小於<code class="haskell">(&lt;)</code>」關係，良基歸納則將其推廣到任何型別，使用任一個<em>良基序</em>。</p><div class="theorem"><h5 class="theorem-title">定義 2.16  </h5><p>給定某型別 <code class="haskell">A</code> 之上的二元關係 <code class="haskell">(&lt;:)</code>。如果從任意一個 <code class="haskell">a0 :: A</code> 開始，均<em>不</em>存在無限多個滿足如下關係的 <code class="haskell">a1</code>, <code class="haskell">a2</code>\ldots :</p><pre><code class="equation">   \ldots |&lt;: a2 &lt;: a1 &lt;: a0| \mbox{~~,}</code>    (2.19 )
+</pre><p>則 <code class="haskell">(&lt;:)</code> 可稱為一個<em>良基序</em>(<em>well-founded ordering</em>)<span id="ix-2-38"></span>。</p></div><p>把<code class="haskell">b &lt;: a</code> 簡稱為「<code class="haskell">b</code> 小於 <code class="haskell">a</code>」。
+上述定義可以這麼地直覺理解：
+給定任一個 <code class="haskell">a0 :: A</code>，我們找一個滿足 <code class="haskell">a1 &lt;: a0</code> 的值 <code class="haskell">a1</code>。
+這種 <code class="haskell">a1</code> 可能已不存在，但如果存在，我們再找一個滿足 <code class="haskell">a2 &lt;: a1</code> 的 <code class="haskell">a2</code>.
+說 <code class="haskell">(&lt;:)</code> 是個良基序的意思便是前述過程不可能永遠做下去：總有一天我們得停在一個「最小」的某<em>基底</em> <code class="haskell">an :: A</code>。</p><p>舉例說明：自然數上的「小於<code class="haskell">(&lt;)</code>」關係是個良基序，但整數上的<code class="haskell">(&lt;)</code>關係則不是 --- 由於負數的存在。實數上的<code class="haskell">(&lt;)</code>關係也不是。良基序並非得是個全序(total order)。例如，我們可定義序對上的比較關係如下：</p><pre><code class="spec">  (x1,y1) &lt;: (x2,y2)  &lt;=&gt;  x1 &lt; x2 ⋀ y1 &lt; y2 
+</code></pre><p>其中 <code class="haskell">x1</code>, <code class="haskell">y1</code>, <code class="haskell">x2</code>, <code class="haskell">y2</code> 都是自然數。
+這麼一來，不論 <code class="haskell">(1,4) &lt;: (2,3)</code> 或 <code class="haskell">(2,3) &lt;: (1,4)</code> 都不成立，但 <code class="haskell">(&lt;:)</code> 仍是個良基序 --- 任何兩個自然數形成的序對不論以什麼方式遞減，最晚也得停在 <code class="haskell">(0,0)</code>.</p><p>如果 <code class="haskell">(&lt;:)</code> 是個良基序，我們便可在其上做歸納。以直覺來理解的話，如果某函數定義成如此的形式（假設這幾個子句已經包括參數的所有可能情況）：</p><pre><code class="spec">f :: A -&gt; B
+f b = ....                 <comment>{- 一些基底情況 -}</comment>
+f x = ... f y ... f z ...  <comment>{- 如果 <code class="haskell">y &lt;: x</code> 且 <code class="haskell">z &lt;: x</code> -}</comment>
+</code></pre><p>由任何 <code class="haskell">f x</code> 開始，若 <code class="haskell">x</code> 不是基底情況之一，我們需遞迴呼叫 <code class="haskell">f y</code> 和 <code class="haskell">f z</code>。
+但 <code class="haskell">y</code> 和 <code class="haskell">z</code> 在 <code class="haskell">(&lt;:)</code> 這個序上比 <code class="haskell">x</code>「小」了一點。
+此後即使再做遞迴呼叫，每次使用的參數又更小了一點。
+而由於 <code class="haskell">(&lt;:)</code> 是良基序，<code class="haskell">f</code> 的參數不可能永遠「小」下去 --- <code class="haskell">f</code> 非得停在某個基底情況不可。
+因此 <code class="haskell">f</code> 必須正常終止。
+同樣的原則也用在證明上：</p><blockquote><p>給定述語<code class="haskell">P :: A -&gt; Bool</code> 以及 <code class="haskell">A</code> 之上的良基序 <code class="haskell">(&lt;:)</code>。若</p><ul><li><p>對所有滿足 <code class="haskell">y &lt;: x</code> 的值 <code class="haskell">y</code>，<code class="haskell">P y</code> 皆 成立，則 <code class="haskell">P x</code> 亦成立，</p></li></ul><p>則我們可得知 <code class="haskell">P</code> 對所有 <code class="haskell">A</code> 皆成立。</p></blockquote><p>或著可寫成如下形式：</p><pre><code class="equation" title="良基歸納：">|(forall x . P x)   &lt;==  (forall x . P x  &lt;== (forall y &lt;: x . P y)) <comment>{-"~~,\\"-}</comment>
+<comment>{-"\qquad\mbox{其中 $(\lhd)$ 為一個良基序。}"-}</comment>|</code>    (2.20 )
+</pre><p><b>終止證明與良基歸納</b> &emsp;
+我們已在許多地方強調：確定程式正常終止是很重要的。
+我們也知道以簡單歸納與完全歸納定義出的程式均是會正常終止的。
+但這兩種歸納定義的限制很多。雖然我們已舉了許多例子，仍有些程式難以套入它們所要求的模板中。
+相較之下，良基歸納寬鬆許多。大部分我們已知、會終止的程式都可視為良基歸納定義。</p><p>或著，上述段落應該反過來說。
+在函數程設中，欲證明某個遞迴定義的函數會終止，最常見的方式是證明該函數每次遞迴呼叫時使用的參數都在某個度量上「變小」了，而這個度量又不可能一直變小下去。
+因此該函數遲早得碰到基底狀況。
+換句話說，該函數每次遞迴呼叫的參數符合某個良基序；
+<em>當我們如此證明一個函數會終止，其實就相當於在論證該函數是一個良基歸納定義</em>。
+在指令式編程中證明某迴圈會終止的做法也類似。
+最常見的方式是證明該迴圈每多執行一次，某個量值就會變小，而該量值是不可能一直變小的。
+也就是說這些量值在每趟迴圈執行時的值符合某個良基序。</p><p>以下我們將看幾個遞迴定義的例子。請讀者們想想：這些函數總會正常終止嗎？為何？如果它們是良基歸納，使用的良基序是什麼？</p><div class="theorem" id="ex:quicksort" title="快速排序"><h5 class="theorem-title">例 2.17  快速排序 </h5><p>以下是大家熟悉的<em>快速排序</em>(quicksort)
+<span id="ix-2-39"></span>  <a href="../Biblio.html#Hoare:62:Quicksort">[Hoare 1962]</a>:</p><pre><code class="spec">qsort :: List Int -&gt; List Int
+qsort []      = []
+qsort (x:xs)  = qsort ys ++ [x] ++ qsort zs 
+  where (ys,zs) = (filter (&lt;=x) xs, filter (&lt;x) xs) 
+</code></pre><p>空串列是已經排序好的。當輸入為非空串列 <code class="haskell">x:xs</code>，我們將 <code class="haskell">xs</code> 分為小於等於 <code class="haskell">x</code> 的，以及大於 <code class="haskell">xs</code> 的，分別遞迴排序，再將結果接在一起。</p><p>函數 <code class="haskell">qsort</code> 會正常終止，因為每次遞迴呼叫時，作為參數的串列都會減少至少一個元素（因為 <code class="haskell">x</code> 被取出了），而串列的長度又不可能小於 <code class="haskell">0</code>. 若要稍微形式地談這件事，可從良基歸納的觀點來看。如果定義：</p><pre><code class="spec">ys &lt;: xs  &lt;=&gt;  length ys &lt; length xs 
+</code></pre><p>在 <code class="haskell">qsort (x:xs)</code> 子句中，<code class="haskell">ys &lt;: xs</code> 和 <code class="haskell">zs &lt;: xs</code> 均被滿足，而 <code class="haskell">(&lt;:)</code> 是一個良基序。因此 <code class="haskell">qsort</code> 是一個奠立在 <code class="haskell">(&lt;:)</code> 之上的良基歸納定義。</p></div><div class="theorem" id="eg:mergesort" title="合併排序"><h5 class="theorem-title">例 2.18  合併排序 </h5><p>在串列上，合併排序<span id="ix-2-40"></span>也是很常使用的排序方式。
+我們在第<a href="Basics-9.html#sec:wholemeal">1.9 </a>節中示範過以全麥編程方式寫成、由下往上的合併排序。
+此處的寫法則更接近大家一般的認知：拿到一個長度為 <code class="haskell">n</code> 的串列，將之分割為長度大致為 <code class="haskell">n/2</code> 的兩段，分別排序之後合併。
+同樣地，假設我們已有一個函數 <code class="haskell">merge :: List Int -&gt; List Int -&gt; List Int</code>,
+如果 <code class="haskell">xs</code> 與 <code class="haskell">ys</code> 已經排序好，<code class="haskell">merge xs ys</code> 將它們合併為一個排序好的串列。
+合併排序可寫成：</p><pre><code class="spec">msort :: List Int -&gt; List Int
+msort []   = []
+msort [x]  = [x]
+msort xs   = merge (msort ys) (msort zs) 
+  where (ys,zs) = (take (n `div` 2) xs, drop (n `div` 2) xs) 
+</code></pre><p>要論證 <code class="haskell">msort</code> 會正常終止，或著說，要將 <code class="haskell">msort</code> 視為一個良基歸納定義，我們可用和例<a href="#ex:quicksort">2.17 </a>中一樣的良基序<code class="haskell">(&lt;:)</code>.</p><p>但此處請讀者小心檢查：在 <code class="haskell">msort xs</code> 子句中，<code class="haskell">ys &lt;: xs</code> 和 <code class="haskell">zs &lt;: xs</code> 有被滿足嗎？
+當 <code class="haskell">length xs = n</code>, 串列 <code class="haskell">ys</code> 與 <code class="haskell">zs</code> 的長度分別是 <code class="haskell">n `div` 2</code> 和 <code class="haskell">n - n `div` 2</code>. 當 <code class="haskell">length xs = 1</code> 時，<code class="haskell">ys</code> 與 <code class="haskell">zs</code> 的長度分別是... <code class="haskell">0</code> 和 <code class="haskell">1</code> --- <code class="haskell">zs</code> 並沒有變短！</p><p>這是為何我們需要 <code class="haskell">msort [x]</code> 這個子句把 <code class="haskell">length xs = 1</code> 的情況分開處理。如果沒有這個子句，<code class="haskell">msort</code> 將有可能不終止 --- 讀者不妨試試看。</p></div><div class="theorem" id="eg:gcd" title="最大公因數"><h5 class="theorem-title">例 2.19  最大公因數 </h5><p>歐幾里得(Euclid)的《幾何原本》成書於西元前三百年，其中描述「計算最大公因數」<span id="ix-2-41"></span>的做法可能是世界上最古老的演算法。
+以下函數計算兩個自然數 <code class="haskell">(m,n)</code> 的最大公因數。
+如果兩數相等，它們的最大公因數也是自身。
+若兩數不相等，其最大公因數會是「大數減小數」與「小數」的最大公因數：</p><pre><code class="haskell">gcd :: (Nat × Nat) -&gt; Nat
+gcd (m,n)  | m == n     = n
+           | otherwise  = gcd ((m ↑ n) - (m ↓ n), m ↓ n) 
+</code></pre><p>這個程式總會正常終止嗎？為什麼？</p><p>事實上，若 <code class="haskell">m</code> 或 <code class="haskell">n</code> 其中之一為 <code class="haskell">0</code>, <code class="haskell">gcd (m,n)</code> 是不會終止的 ---
+讀者不妨也試試看。
+若 <code class="haskell">m</code>, <code class="haskell">n</code> 均為<em>正</em>整數呢？
+首先我們先確立：如果初始的 <code class="haskell">m</code>, <code class="haskell">n</code> 均為正整數，<code class="haskell">gcd</code> 每次遞迴呼叫拿到的參數也都是正整數 ---
+確實如此，因為如果 <code class="haskell">m &gt; 0</code>, <code class="haskell">n &gt; 0</code>, 且 <code class="haskell">m /= n</code>, 那麼 <code class="haskell">(m ↑ n) - (m ↓ n)</code> 與 <code class="haskell">m ↓ n</code> 都不會是零或負數。
+接下來我們可論證：如果 <code class="haskell">m</code>, <code class="haskell">n</code> 均為正整數，每次遞迴呼叫中，<em>兩參數的和</em>都變小了一些。確實：</p><pre><code class="spec">   (m ↑ n) - (m ↓ n) + (m ↓ n)
+=  m ↑ n
+&lt;   <comment>{- <code class="haskell">m</code>, <code class="haskell">n</code> 均為正整數 -}</comment>
+   m + n 
+</code></pre><p>因此，我們可得知 <code class="haskell">gcd</code> 在 <code class="haskell">m</code>, <code class="haskell">n</code> 均為正整數時會正常終止。
+如果把 <code class="haskell">gcd</code> 當作一個良基歸納，我們用了如下的良基序：</p><pre><code class="spec">  (m1, n1) &lt;: (m2, n2)  &lt;=&gt;   m1+n1 &lt; m2+n2 
+</code></pre><p>其中 <code class="haskell">m1</code>, <code class="haskell">n1</code>, <code class="haskell">m2</code>, <code class="haskell">n2</code> 均為正整數。</p></div><div class="theorem" id="ex:interleave" title="Curried 函數"><h5 class="theorem-title">例 2.20  Curried 函數 </h5><p>下述函數 <code class="haskell">interleave</code> 將兩個參數中的元素交錯放置。
+例如 <code class="haskell">interleave [1,2,3] [4,5] = [1,4,2,5,3]</code>.</p><pre><code class="haskell">interleave :: List a -&gt; List a -&gt; List a
+interleave []      ys  = ys
+interleave xs      []  = xs
+interleave (x:xs)  ys  = x : interleave ys xs 
+</code></pre><p>這可視為一個良基歸納定義嗎？
+若將 <code class="haskell">interleave</code> 做為傳回函數的高階函數看待，我們比較難看出它是定義在什麼良基序上的。
+但若把 <code class="haskell">interleave</code> 的兩個參數一起考慮，我們不難看出什麼度量在遞迴呼叫後「變小」了：兩個參數長度的和！</p><p>凡是遇到像 <code class="haskell">interleave</code> 的 curried 函數，我們也可考慮它的 uncurried 版本：</p><pre><code class="haskell">interleave' :: (List a × List a)-&gt; List a
+interleave' ([],    ys)  = ys
+interleave' (xs,    [])  = xs
+interleave' (x:xs,  ys)  = x : interleave' (ys,xs) 
+</code></pre><p>函數 <code class="haskell">interleave'</code> 是個良基定義 --- 參數中的兩個串列雖然交換位置，但它們長度的總和會變小。也就是說 <code class="haskell">interleave'</code> 可視為定義在這個良基序上的函數：</p><pre><code class="spec">  (xs1,ys1) &lt;: (xs2,ys2)  &lt;=&gt;  length xs1 + length ys1 &lt; length xs2 + length ys2 
+</code></pre><p>凡是 <code class="haskell">interleave'</code> 有的性質，不難找出 <code class="haskell">interleave</code> 的相對應版本；
+證明 <code class="haskell">interleave</code> 的性質時，可當成是在證明 <code class="haskell">interleave'</code> 的相對性質。
+因此我們也會比較寬鬆地說 <code class="haskell">interleave</code> 也是 <code class="haskell">(&lt;:)</code> 之上的良基歸納定義。</p></div><div class="theorem" id="eg:McCarthy91"><h5 class="theorem-title">例 2.21  </h5><p>下列函數被稱作「McCarthy 91 函數」：</p><pre><code class="haskell">mc91 :: Nat -&gt; Nat
+mc91 n  | n &gt; 100    = n - 10
+        | otherwise  = mc91 (mc91 (n + 11)) 
+</code></pre><p>讀者不妨先猜猜看 <code class="haskell">mc91</code> 會傳回什麼？答案是，<code class="haskell">mc</code> 和以下函數是等價的：</p><pre><code class="spec">mc91'  | n &gt; 100    = n - 10
+       | otherwise  = 91 
+</code></pre><p>\todo{finish this.}</p></div></div><div class="navi"><div class="previous">&laquo;<a href="Induction-11.html#sec:complete-induction">2.11 完全歸納</a></div><div class="next"><a href="Induction-13.html#sec:lexicographic-induction">2.13 詞典序歸納</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

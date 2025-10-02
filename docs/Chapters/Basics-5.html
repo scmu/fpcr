@@ -40,11 +40,11 @@
 <li class="pure-menu-item"><a href="Introduction-6.html#sec:calculable-programming-language">0.6 可演算的程式語言</a></li>
 <li class="pure-menu-item"><a href="Introduction-7.html#sec:relevant-information">0.7 相關資料</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Basics.html#ch:basics">1 值、函數、與定義</a><input class="toggle" id="menu-li-1" type="checkbox"/><label class="menu-toggle" for="menu-li-1"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Basics-1.html#sec:evaluation">1.1 值與求值</a></li>
+<li class="pure-menu-item"><a href="Basics.html#ch:basics">1 值、函數、與定義</a><input class="toggle" id="menu-li-1" checked type="checkbox"/><label class="menu-toggle" for="menu-li-1"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Basics-1.html#sec:evaluation">1.1 值與求值</a></li>
 <li class="pure-menu-item"><a href="Basics-2.html#sec:function-defns">1.2 函數定義</a></li>
 <li class="pure-menu-item"><a href="Basics-3.html#sec:higher-order-func">1.3 高階函數</a></li>
 <li class="pure-menu-item"><a href="Basics-4.html#sec:func-comp">1.4 函數合成</a></li>
-<li class="pure-menu-item"><a href="Basics-5.html#sec:lambda-terms">1.5 $\lambda$ 算式</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:lambda-terms">1.5 $\lambda$ 算式</a></li>
 <li class="pure-menu-item"><a href="Basics-6.html#sec:elementary-datatypes">1.6 簡單資料型態</a><input class="toggle" id="menu-li-1-6" type="checkbox"/><label class="menu-toggle" for="menu-li-1-6"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Basics-6.html#sec:boolean">1.6.1 布林值</a></li>
 <li class="pure-menu-item"><a href="Basics-6.html#sec:char">1.6.2 字元</a></li>
 <li class="pure-menu-item"><a href="Basics-6.html#sec:pairs">1.6.3 序對</a></li>
@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -143,28 +143,45 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:basics">1 值、函數、與定義</h1></div><div class="navi"><div class="previous">&laquo;<a href="Basics-4.html#sec:func-comp">1.4 函數合成</a></div><div class="next"><a href="Basics-6.html#sec:elementary-datatypes">1.6 簡單資料型態</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:lambda-terms">1.5 $\lambda$ 算式</h2><p>雖說函數是一級市民，在本書之中，目前為止，仍有一項功能是其他型別擁有、函數卻還沒有的：寫出一個<em>未命名</em>的值的能力。
+整數、真假值都能不經命名、直接寫在算式中，例如，
+我們可寫 <code class="haskell">smaller (square 3) 4</code>, 而不需要先定義好</p><pre><code class="spec">num1, num2 :: Int
+num1  = 3
+num2  = 4 
+</code></pre><p>才能說 <code class="haskell">smaller (square num1) num2</code>. 但使用函數時，似乎非得
+先給個名字，才能使用它：</p><pre><code class="spec">square :: Int -&gt; Int
+square x = ... 
+quad = twice square 
+</code></pre><p>如果為了某些原因（例如，如果在我們的程式中 <code class="haskell">square</code> 只會被用到一次），我們不想給 <code class="haskell">square</code> 一個名字，我們能不能直接把它寫出來呢？</p><p>$\lambda$ 算式便是允許我們這麼做的語法。
+以直觀的方式解釋，<code class="haskell">\x -&gt; e</code> 便是一個函數，其中 <code class="haskell">x</code> 是參數，
+<code class="haskell">e</code> 是函數本體。
+例如，<code class="haskell">(\x -&gt; x * x)</code> 是一個函數，計算其輸入(<code class="haskell">x</code>)的平方。
+如果我們不想給 <code class="haskell">square</code> 一個名字, 我們可將 <code class="haskell">quad</code> 定義為：</p><pre><code class="spec">quad = twice (\x -&gt; x * x) 
+</code></pre><p>寫成 $\lambda$ 算式的函數也可直接作用在參數上，例如 <code class="haskell">(\x -&gt; e1) e2</code>。
+這個式子歸約的結果通常表示為<code class="haskell">e1[e2/x]</code>,
+意思是「將 <code class="haskell">e1</code> 之中的 <code class="haskell">x</code> 代換為 <code class="haskell">e2</code>」。
+例如，算式 <code class="haskell">(\x -&gt; x * x) (3+4)</code> 可歸約為 <code class="haskell">(3+4) * (3+4)</code>.</p><div class="theorem" id="lambda-examples"><h5 class="theorem-title">例 1.10  </h5><p>以下是一些 $\lambda$ 算式的例子：</p><ul><li><p>函數 <code class="haskell">(\x -&gt; 1 + x)</code> 把輸入遞增 --- 和 <code class="haskell">(1+)</code> 相同。
+其實，把 <code class="haskell">(1+)</code> 的語法糖去掉後，得到的就是這個 $\lambda$ 算式。</p></li><li><p><code class="haskell">(\x -&gt; \y -&gt; x + 2 * x * y)</code> 是一個傳回 $\lambda$ 算式的函數。</p><ul><li><p><code class="haskell">(\x -&gt; \y -&gt; x + 2 * x * y) (3+4)</code> 可歸約為
+<code class="haskell">(\y -&gt; (3+4) + 2 * (3+4) * y)</code>。注意 <code class="haskell">\x</code> 不見了，
+函數本體中的 <code class="haskell">x</code> 被代換成 <code class="haskell">3+4</code>，<code class="haskell">\y -&gt; ..</code> 則仍留著。</p></li><li><p><code class="haskell">(\x -&gt; \y -&gt; x + 2 * x * y) (3+4) 5</code> 可歸約為
+<code class="haskell">(3+4) + 2 * (3+4) * 5</code>.</p></li></ul></li><li><p>由於傳回函數的函數是常見的，Haskell (如同 $\lambda$-calculus)
+提供較短的語法。上述例子中的函數也可簡寫成：
+<code class="haskell">(\x y -&gt; x + 2 * x * y)</code>.</p></li><li><p>函數也可以當參數。例如，<code class="haskell">(\x -&gt; x 3 3) (+)</code> 可歸約為 <code class="haskell">(+) 3 3</code>, 或 <code class="haskell">3 + 3</code>.</p></li><li><p>以下是 <code class="haskell">(\f x -&gt; f x x) (\y -&gt; 2 * y) 3</code> 的求值過程：</p></li></ul><pre><code class="spec">   (\f x -&gt; f x x) (\y z -&gt; 2 * y + z) 3
+=  (\x -&gt; (\y -&gt; 2 * y + z) x x) 3
+=  (\y -&gt; 2 * y + z) 3 3
+=  2 * 3 + 3
+=  9 
+</code></pre><ul><li><p>在 <code class="haskell">\x -&gt; e</code> 之中，<code class="haskell">x</code> 是範圍限於 <code class="haskell">e</code> 的區域識別字。
+因此：</p></li></ul><pre><code class="spec">   (\f x -&gt; x + f x) (\x -&gt; x + x) 3
+=  (\x -&gt; x + (\x -&gt; x + x) x) 3
+=  3 + (\x -&gt; x + x) 3
+=  3 + 3 + 3
+=  9 
+</code></pre></div><p>有了 $\lambda$ 算式後，函數 <code class="haskell">smaller</code> 又有另一種寫法：</p><pre><code class="spec">smaller :: Int -&gt; Int -&gt; Int
+smaller = \x y -&gt; if x &lt;= y then x else y 
+</code></pre><p>事實上，$\lambda$ 算式可視為更基礎的機制 ---
+目前為止我們所介紹的種種語法結構都僅是 $\lambda$ 算式的語法糖，都可展開、轉譯為 $\lambda$ 算式。
+Haskell 的 $\lambda$ 算式源於一套稱為 <em>$\lambda$ 演算</em> (<em>$\lambda$ calculus</em>)的形式語言 --- 這是一個為了研究計算本質而發展出的理論，也是函數語言的理論核心。我們將在爾後的章節中做更詳盡的介紹。\todo{which?}</p></div><div class="navi"><div class="previous">&laquo;<a href="Basics-4.html#sec:func-comp">1.4 函數合成</a></div><div class="next"><a href="Basics-6.html#sec:elementary-datatypes">1.6 簡單資料型態</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

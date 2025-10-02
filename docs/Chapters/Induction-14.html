@@ -58,7 +58,7 @@
 <li class="pure-menu-item"><a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a></li>
 <li class="pure-menu-item"><a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
+<li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" checked type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
 <li class="pure-menu-item"><a href="Induction-2.html#sec:induction-on-Nat">2.2 自然數上之歸納定義</a></li>
 <li class="pure-menu-item"><a href="Induction-3.html#sec:inductive-proof-on-Nat">2.3 自然數上之歸納證明</a></li>
 <li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists">2.4 串列與其歸納定義</a><input class="toggle" id="menu-li-2-4" type="checkbox"/><label class="menu-toggle" for="menu-li-2-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists-defn">2.4.1 串列上之歸納定義</a></li>
@@ -77,7 +77,7 @@
 <li class="pure-menu-item"><a href="Induction-11.html#sec:complete-induction">2.11 完全歸納</a></li>
 <li class="pure-menu-item"><a href="Induction-12.html#sec:well-founded-induction">2.12 良基歸納</a></li>
 <li class="pure-menu-item"><a href="Induction-13.html#sec:lexicographic-induction">2.13 詞典序歸納</a></li>
-<li class="pure-menu-item"><a href="Induction-14.html#sec:mutual-induction">2.14 交互歸納</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:mutual-induction">2.14 交互歸納</a></li>
 <li class="pure-menu-item"><a href="Induction-15.html#sec:induction-ref">2.15 參考資料</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="SearchTrees.html#ch:induction-search-trees">3 搜尋樹</a><input class="toggle" id="menu-li-3" type="checkbox"/><label class="menu-toggle" for="menu-li-3"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="SearchTrees-1.html#sec:induction-binary-search-tree">3.1 二元搜尋樹</a></li>
@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -143,28 +143,31 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:induction">2 歸納定義與證明</h1></div><div class="navi"><div class="previous">&laquo;<a href="Induction-13.html#sec:lexicographic-induction">2.13 詞典序歸納</a></div><div class="next"><a href="Induction-15.html#sec:induction-ref">2.15 參考資料</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:mutual-induction">2.14 交互歸納</h2><p>許多工作無法由一個函數獨立完成，而需要許多函數彼此呼叫。本章最後談談這類的<em>交互歸納</em>(mutual induction)定義。<span id="ix-2-44"></span>
+下列函數定義中，<code class="haskell">even</code> 判斷其輸入是否為偶數。第二個子句告訴我們：如果 <code class="haskell">n</code> 是奇數， <code class="haskell">Suc n</code> 便是偶數。但如何判斷一個數字是否為奇數？如果 <code class="haskell">n</code> 是偶數，<code class="haskell">Suc n</code> 便是奇數：</p><div class="multicols"><div class="mcol" width="0.5\textwidth"><pre><code class="spec">even :: Nat -&gt; Bool
+even Zero     = True
+even (Suc n)  = odd n  
+</code></pre></div><div class="mcol" width="0.5\textwidth"><pre><code class="spec">odd :: Nat -&gt; Bool
+odd Zero     = False
+odd (Suc n)  = even n 
+</code></pre></div></div><p>這類彼此呼叫的定義可以視為一整個大定義。
+為讓讀者習慣，我們先把 <code class="haskell">even</code> 與 <code class="haskell">odd</code> 的定義改寫為 $\lambda$ 算式與 <code class="haskell">case</code>:</p><div class="multicols"><div class="mcol" width="0.5\textwidth"><pre><code class="spec">even = \n -&gt;  case n of
+                Zero   -&gt; True
+                Suc n  -&gt; odd n  
+</code></pre></div><div class="mcol" width="0.5\textwidth"><pre><code class="spec">odd = \n -&gt;  case n of
+               Zero   -&gt; False
+               Suc n  -&gt; even n 
+</code></pre></div></div><p>上述的定義可以合併成一個：<code class="haskell">evenOdd</code> 是一個序對，其中有兩個函數 <code class="haskell">Nat -&gt; Bool</code>，其中是 <code class="haskell">fst evenOdd</code> 就是 <code class="haskell">even</code>，<code class="haskell">snd evenOdd</code> 就是 <code class="haskell">odd</code>:</p><pre><code class="haskell">evenOdd :: ((Nat -&gt; Bool) × (Nat -&gt; Bool))
+evenOdd = (  \n -&gt; case n of<comment>{-"~~"-}</comment>  Zero   -&gt; True
+                                      Suc n  -&gt; snd evenOdd n,
+             \n -&gt; case n of<comment>{-"~~"-}</comment>  Zero   -&gt; False
+                                      Suc n  -&gt; fst evenOdd n) 
+</code></pre><div class="exlist"><div class="exercise exer" id="ex:zip-inits-tails"><h5 class="exercise-title">練習 2.45 </h5><p>證明 <code class="haskell">all (xs ==) (zipWith (++) (inits xs) (tails xs))</code>. (unfinished)</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-45" type="checkbox"/><label class="lbl-toggle" for="ans-2-45">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>在 <code class="haskell">xs</code> 上做歸納。</p><pre><code class="spec">    all ((x:xs) ==) (zipWith (++) (inits (x:xs)) (tails (x:xs)))
+&lt;=&gt; all ((x:xs) ==) (zipWith (++) ([]: map (x:) (inits xs)) ((x:xs):tails xs))
+&lt;=&gt; all ((x:xs) ==) (([] ++ (x:xs)) : zipWith (++) (map (x:) (inits xs)) (tails xs))
+&lt;=&gt; ((x:xs) == (x:xs)) ⋀
+    all ((x:xs) ==) (zipWith (++) (map (x:) (inits xs)) (tails xs))
+</code></pre></div></div></div></div><div class="navi"><div class="previous">&laquo;<a href="Induction-13.html#sec:lexicographic-induction">2.13 詞典序歸納</a></div><div class="next"><a href="Induction-15.html#sec:induction-ref">2.15 參考資料</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

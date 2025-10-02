@@ -40,7 +40,7 @@
 <li class="pure-menu-item"><a href="Introduction-6.html#sec:calculable-programming-language">0.6 可演算的程式語言</a></li>
 <li class="pure-menu-item"><a href="Introduction-7.html#sec:relevant-information">0.7 相關資料</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Basics.html#ch:basics">1 值、函數、與定義</a><input class="toggle" id="menu-li-1" type="checkbox"/><label class="menu-toggle" for="menu-li-1"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Basics-1.html#sec:evaluation">1.1 值與求值</a></li>
+<li class="pure-menu-item"><a href="Basics.html#ch:basics">1 值、函數、與定義</a><input class="toggle" id="menu-li-1" checked type="checkbox"/><label class="menu-toggle" for="menu-li-1"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Basics-1.html#sec:evaluation">1.1 值與求值</a></li>
 <li class="pure-menu-item"><a href="Basics-2.html#sec:function-defns">1.2 函數定義</a></li>
 <li class="pure-menu-item"><a href="Basics-3.html#sec:higher-order-func">1.3 高階函數</a></li>
 <li class="pure-menu-item"><a href="Basics-4.html#sec:func-comp">1.4 函數合成</a></li>
@@ -49,7 +49,7 @@
 <li class="pure-menu-item"><a href="Basics-6.html#sec:char">1.6.2 字元</a></li>
 <li class="pure-menu-item"><a href="Basics-6.html#sec:pairs">1.6.3 序對</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Basics-7.html#sec:weak-head-normal-form">1.7 弱首範式</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:weak-head-normal-form">1.7 弱首範式</a></li>
 <li class="pure-menu-item"><a href="Basics-8.html#sec:lists">1.8 串列</a><input class="toggle" id="menu-li-1-8" type="checkbox"/><label class="menu-toggle" for="menu-li-1-8"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Basics-8.html#sec:list-deconstruct">1.8.1 串列解構</a></li>
 <li class="pure-menu-item"><a href="Basics-8.html#sec:list-generation">1.8.2 串列生成</a></li>
 <li class="pure-menu-item"><a href="Basics-8.html#sec:list-combinators">1.8.3 串列上的種種組件函數</a></li>
@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -143,28 +143,40 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:basics">1 值、函數、與定義</h1></div><div class="navi"><div class="previous">&laquo;<a href="Basics-6.html#sec:elementary-datatypes">1.6 簡單資料型態</a></div><div class="next"><a href="Basics-8.html#sec:lists">1.8 串列</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:weak-head-normal-form">1.7 弱首範式</h2><p>我們現在可把第<a href="Basics-1.html#sec:evaluation">1.1 </a>節中提及的求值與範式談得更仔細些。
+第一次閱讀的讀者可把本節跳過。
+回顧 <code class="haskell">fst</code> 使用樣式配對的定義 <code class="haskell">fst (x,y) = x</code>.
+假設我們把 <code class="haskell">swap</code> 定義如下：</p><pre><code class="spec">swap p = (snd p, fst p) 
+</code></pre><p>考慮 <code class="haskell">fst (swap (3,'a'))</code> 該怎麼求值：</p><pre><code class="spec">   fst (swap (3,'a'))
+=   <comment>{- <code class="haskell">swap</code> 的定義 -}</comment>
+   fst (snd (3,'a'), fst (3,'a'))
+=   <comment>{- <code class="haskell">fst</code> 的定義 -}</comment>
+   snd (3,'a')
+=   <comment>{- <code class="haskell">snd</code> 的定義 -}</comment>
+   'a' 
+</code></pre><p>在第一步中，由於 <code class="haskell">fst</code> 使用樣式配對，我們得先把 <code class="haskell">swap (3,'a')</code> 算出來。
+若把 <code class="haskell">swap (3,'a')</code> 算到底，得到的範式是 <code class="haskell">('a',3)</code>.
+但如第一步中所顯示，如果目的只是為了配對 <code class="haskell">(x,y)</code> 這個樣式，
+我們並不需要把 <code class="haskell">swap (3,'a')</code> 算完，只需算到 <code class="haskell">(snd (3,'a'), fst (3,'a'))</code>
+即可 --- <code class="haskell">x</code> 可對應到 <code class="haskell">snd (3,'a')</code>, <code class="haskell">y</code> 可對應到 <code class="haskell">fst (3,'a')</code>,
+<code class="haskell">fst</code> 的計算便可以進行。在下一步中，子算式 <code class="haskell">fst (3,'a')</code> 便被丟棄了，
+並沒有必要算出來。</p><p>做樣式配對時，Haskell 只會把算式歸約到剛好足以與樣式配對上的程度。
+當樣式的深度只有一層（如<code class="haskell">(x,y)</code>）時，與之配對的式子會被歸約成一種
+稱作<em>弱首範式</em>(<em>weak head normal form</em>)%
+<span id="ix-1-36"></span>的形式。
+弱首範式有其嚴格定義，但本書讀者只需知道：算式會被歸約到<em>露出最外面的建構元</em>，（在此例中是被歸約成 <code class="haskell">(_,_)</code> 的形式），然後便停下來。</p><div class="theorem" id="eg:swap"><h5 class="theorem-title">例 1.14  </h5><p>回顧 <code class="haskell">swap</code> 的兩種定義方式，分別命名為</p><pre><code class="spec">swap1 (x,y)  = (y,x)  
+swap2 p      = (snd p, fst p) 
+</code></pre><p>若考慮不終止的參數，兩者的行為並不盡然相同。
+定義 <code class="haskell">three (x,y) = 3</code>, 並
+假設 <code class="haskell">undefined</code> 是一個沒有範式的式子 --- 一旦開始對 <code class="haskell">undefined</code> 求值，便停不下來。
+試計算 <code class="haskell">three (swap1 undefined)</code> 和 <code class="haskell">three (swap2 undefined)</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-1-11" type="checkbox"/><label class="lbl-toggle" for="ans-1-11">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>由於 <code class="haskell">three</code> 使用樣式配對，計算 <code class="haskell">three (swap1 undefined)</code> 時得把 <code class="haskell">swap1 undefined</code> 歸約成弱首範式。
+同理，計算 <code class="haskell">swap1 undefined</code> 時，第一步便是先試圖把 <code class="haskell">undefined</code> 歸約成弱首範式，然後便停不下來了。</p><p>至於 <code class="haskell">three (swap2 undefined)</code> 則可如下地求值：</p><pre><code class="spec">   three (swap2 undefined)
+=   <comment>{- <code class="haskell">swap2</code> 之定義 -}</comment>
+   three (snd undefined, fst  undefined)
+=   <comment>{- <code class="haskell">three</code> 之定義 -}</comment>
+   3 
+</code></pre><p>第一步中，<code class="haskell">swap2 undefined</code> 則依照範式順序求值的原則展開為 <code class="haskell">(snd undefined, fst  undefined)</code> --- 這是一個序對，只是該序對含有兩個沒有範式的元素。
+該序對可對應到樣式 <code class="haskell">(x,y)</code>, 因此整個式子歸約為 <code class="haskell">3</code>.</p><p>附帶一提，<code class="haskell">three undefined</code> 是一個不停止的計算。</p></div></div></div><div class="navi"><div class="previous">&laquo;<a href="Basics-6.html#sec:elementary-datatypes">1.6 簡單資料型態</a></div><div class="next"><a href="Basics-8.html#sec:lists">1.8 串列</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

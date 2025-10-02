@@ -58,9 +58,9 @@
 <li class="pure-menu-item"><a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a></li>
 <li class="pure-menu-item"><a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
+<li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" checked type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
 <li class="pure-menu-item"><a href="Induction-2.html#sec:induction-on-Nat">2.2 自然數上之歸納定義</a></li>
-<li class="pure-menu-item"><a href="Induction-3.html#sec:inductive-proof-on-Nat">2.3 自然數上之歸納證明</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:inductive-proof-on-Nat">2.3 自然數上之歸納證明</a></li>
 <li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists">2.4 串列與其歸納定義</a><input class="toggle" id="menu-li-2-4" type="checkbox"/><label class="menu-toggle" for="menu-li-2-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists-defn">2.4.1 串列上之歸納定義</a></li>
 <li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists-proof">2.4.2 串列上之歸納證明</a></li>
 </ul></li>
@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -143,28 +143,63 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:induction">2 歸納定義與證明</h1></div><div class="navi"><div class="previous">&laquo;<a href="Induction-2.html#sec:induction-on-Nat">2.2 自然數上之歸納定義</a></div><div class="next"><a href="Induction-4.html#sec:induction-lists">2.4 串列與其歸納定義</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:inductive-proof-on-Nat">2.3 自然數上之歸納證明</h2><p>上一節中我們定出了函數 <code class="haskell">exp</code>。如果定義正確，<code class="haskell">exp b n</code> 算的應是 $\Varid{b}^\Varid{n}$.
+例如，我們知道 $\Varid{b}^\Varid{m+n} = \Varid{b}^\Varid{m} \times \Varid{b}^\Varid{n}$. 我們定出的函數 <code class="haskell">exp</code> 是否真有此性質呢？</p><div class="theorem" id="thm:exp-plus-times"><h5 class="theorem-title">定理 2.1  </h5><p>對任何 <code class="haskell">b, m, n :: Nat</code>, <code class="haskell">exp b (m + n) = exp b m * exp b n</code>.</p></div><p>我們試著證明定理<a href="#thm:exp-plus-times">2.1 </a>。數學歸納法是我們目前唯一的工具，
+而要使用它，第一個問題是：該用 <code class="haskell">b</code>, <code class="haskell">m</code>, 或 <code class="haskell">n</code> 的哪一個來做歸納呢（意即把哪一個拆解）？</p><p>觀察定理<a href="#thm:exp-plus-times">2.1 </a>中待證明式的等號兩邊，並參照 <code class="haskell">exp</code>, <code class="haskell">(+)</code>, 與 <code class="haskell">(*)</code>的定義。
+等號左手邊的 <code class="haskell">exp b (m + n)</code> 之中，化簡 <code class="haskell">exp b</code> 前得知道 <code class="haskell">m + n</code> 究竟是 <code class="haskell">Zero</code> 還是 <code class="haskell">Suc k</code>。
+而根據 <code class="haskell">(+)</code> 的定義，化簡 <code class="haskell">m + n</code> 前需知道 <code class="haskell">m</code> 究竟是 <code class="haskell">Zero</code> 還是 <code class="haskell">Suc k</code>.
+再看右手邊，根據 <code class="haskell">(*)</code> 的定義，要化簡 <code class="haskell">exp b m * exp b n</code> 得先化簡 <code class="haskell">exp b m</code>, 而後者也得知道 <code class="haskell">m</code> 是什麼。對兩邊的分析都指向：我們應針對 <code class="haskell">m</code> 做歸納！</p><p>策略擬定後，我們便試試看吧！</p><div class="proof" title="證明定理 thm:exp-plus-times"><b>證明 </b><p>欲證明 <code class="haskell">exp b (m + n) = exp b m * exp b n</code>, 我們在 <code class="haskell">m</code> 之上做歸納。
+<code class="haskell">m</code> 要不就是 <code class="haskell">Zero</code>, 要不就是 <code class="haskell">Suc k</code>.</p><p><strong>情況</strong> <code class="haskell">m := Zero</code>. 此時需證明 <code class="haskell">exp b (Zero + n) = exp b Zero * exp b n</code>. 推論如下：</p><pre><code class="haskell">   exp b (Zero + n)
+ ===    <comment>{- <code class="haskell">(+)</code> 之定義 -}</comment>
+   exp b n
+ ===    <comment>{- 因 <code class="haskell">1 * k = k</code> -}</comment>
+   1 *: exp b n
+ ===    <comment>{- <code class="haskell">exp</code> 之定義 -}</comment>
+   exp b Zero *: exp b n 
+</code></pre><p><strong>情況</strong> <code class="haskell">m := Suc m</code>. 此時需證明 <code class="haskell">exp b ((Suc m) + n) = exp b (Suc m) * exp b n</code>, 但可假設 <code class="haskell">exp b (m + n) = exp b m * exp b n</code> 已成立。推論如下：</p><pre><code class="haskell">   exp b ((Suc m) + n)
+ ===    <comment>{- <code class="haskell">(+)</code> 之定義 -}</comment>
+   exp b (Suc (m + n))
+ ===    <comment>{- <code class="haskell">exp</code> 之定義 -}</comment>
+   b *: exp b (m + n)
+ ===    <comment>{- 歸納假設 -}</comment>
+   b *: (exp b m *: exp b n)
+ ===    <comment>{- <code class="haskell">(*)</code> 之結合律 -}</comment>
+   (b *: exp b m) *: exp b n
+ ===    <comment>{- <code class="haskell">exp</code> 之定義 -}</comment>
+   exp b (Suc m) *: exp b n 
+</code></pre></div><p>對這個證明，讀者是否有所懷疑？最大的疑問可能在「假設 <code class="haskell">exp b (m + n) = exp b m * exp b n</code> 成立」這句上。這不就是我們要證明的性質嗎？在證明中假設它成立，似乎是用該性質自己在證明自己。這是可以的嗎？</p><p>為清楚說明，我們回顧一下第<a href="Induction-1.html#sec:math-induction">2.1 </a>節中的數學歸納法（並把區域識別字改為 <code class="haskell">k</code> 以避免混淆）：</p><pre><code class="equation" title="自然數上之歸納法：">  |(forall k . P k)  &lt;==   P Zero ⋀ (forall k . P (Suc k) &lt;== P k) |</code>    (2.2 )
+</pre><p>證明<a href="#thm:exp-plus-times">2.1 </a>欲證的是 <code class="haskell">exp b (m + n) = exp b m * exp b n</code>，並在 <code class="haskell">m</code> 上做歸納。
+更精確地說，就是選用了下述的 <code class="haskell">P</code>:
+<input class="toggle" id="footnote-2-3-4" type="checkbox"/><label class="fnote-toggle" for="footnote-2-3-4">(註4) </label><span class="collapsible-footnote">在程式推導圈子中，<code class="haskell">(&lt;=&gt;)</code> 常用來代表「只用在真假值上、且滿足結合律的等號」。本書中使用 <code class="haskell">(&lt;=&gt;)</code> 以和 <code class="haskell">(=)</code> 做區分。</span></p><pre><code class="spec">P m &lt;=&gt; (exp b (m + n) = exp b m * exp b n) 
+</code></pre><p>在證明中改變的是 <code class="haskell">m</code>，而 <code class="haskell">b</code> 與 <code class="haskell">n</code> 是固定的。數學歸納法可證明 <code class="haskell">(forall m . P m)</code>, 展開後正是 <code class="haskell">(forall m . exp b (m + n) = exp b m * exp b n)</code>. 而根據數學歸納法，我們需提供 <code class="haskell">P Zero</code> 與 <code class="haskell">(forall m . P (Suc m) &lt;== P m)</code> 的證明。</p><p>證明<a href="#thm:exp-plus-times">2.1 </a>中「{\bf 情況} <code class="haskell">m := Zero</code>」的部分，就是 <code class="haskell">P Zero</code> 的證明。
+而「{\bf 情況} <code class="haskell">m := Suc m</code>」則是 <code class="haskell">(forall m . P (Suc m) &lt;== P m)</code> 的證明。
+「假設 <code class="haskell">exp b (m + n) = exp b m * exp b n</code> 成立」指的是假設 <code class="haskell">P m</code> 成立，我們在此前提之下試圖證明 <code class="haskell">P (Suc m)</code>.
+因此，證明 <a href="#thm:exp-plus-times">2.1 </a> 並沒有「用該性質自己證明自己」。
+我們是以一個比較小的結果（<code class="haskell">P m</code>）證明稍大一點的結果（<code class="haskell">P (Suc m)</code>）。
+就如同我們寫歸納程式時，假設 <code class="haskell">f n</code> 已經算出，試著用它定出 <code class="haskell">f (Suc n)</code>.</p><p>在證明之中，如 <code class="haskell">P m</code> 這種在歸納步驟假設成立的性質被稱作<em>歸納假設</em>(induction hypothesis)。<span id="ix-2-5"></span></p><p><b>程式與證明</b> &emsp; 證明<a href="#thm:exp-plus-times">2.1 </a>還有一些能啟發我們之處。方才，我們看到 <code class="haskell">exp b (m + n) = exp b m * exp b n</code>， 決定以數學歸納法證明，但接下來怎麼著手？怎麼選定在哪個變數上做歸納？</p><p>答案是：分析該式中程式的行為。程式怎麼拆其參數，我們在證明中就怎麼拆。
+我們試圖證明某些程式的性質，但程式本身便提供了證明可怎麼進行的提示。
+「使證明的結構符合程式的結構」是許多證明的秘訣。
+並非所有證明都可以如此完成，但本原則在許多情況下適用。</p><p>再看看 <code class="haskell">exp</code>, <code class="haskell">(+)</code>, <code class="haskell">(*)</code> 等函數的定義。
+為何他們都分出了兩個情況：<code class="haskell">Zero</code> 與 <code class="haskell">Suc n</code>, 並且 <code class="haskell">Suc n</code> 的情況使用到該函數對於 <code class="haskell">n</code> 的值？
+因為自然數的資料型別是這麼定的！
+自然數只可能是<code class="haskell">Zero</code> 或 <code class="haskell">Suc n</code>，而後者是由 <code class="haskell">n</code> 做出來的。
+因此程式也如此寫。程式的結構依循與其處理的資料型別之結構。</p><p>資料、程式、與證明原來有著這樣的關係：<em>證明的結構依循著程式的結構，而程式的結構又依循著資料型別的結構</em>。歸納定義出了一個型別後，自然知道怎麼在上面寫歸納程式；歸納程式有了，自然知道如何做關於這些程式的歸納證明。一切由定義資料結構開始。掌握這個原則，大部分的證明就不是難事。</p><p><b>讓符號為你工作</b> &emsp; 再考慮證明<a href="#thm:exp-plus-times">2.1 </a>中的狀況<code class="haskell">m := Suc m</code>. 假想由你做這個證明，由第一行 <code class="haskell">exp b ((Suc m) + n)</code> 開始。接下來該怎麼進行？</p><p>既然我們已經打定主意用數學歸納法，在證明的某處必定會使用<code class="haskell">exp b (m + n) = exp b m * exp b n</code>這個歸納假設。
+因此，證明前幾行的目的便是想辦法將 <code class="haskell">exp b ((Suc m) + n)</code> 中的 <code class="haskell">Suc</code> 往外提，將 <code class="haskell">exp b</code> 往內側推，使得式子中出現 <code class="haskell">exp b (m + n)</code>。一旦成功，就可運用歸納假設，將其改寫成 <code class="haskell">exp b m * exp b n</code>！
+接下的就是機械化地收尾、將式子整理成 <code class="haskell">exp b (Suc m) * exp b n</code> 了。</p><p>這呼應到第<a href="Introduction-2.html#sec:let-symbols-work">0.2 </a>節所說的「讓符號為你工作」。
+光從語意上想，我們不易理解為何 <code class="haskell">exp b ((Suc m) + n)</code> 能夠等於 <code class="haskell">exp b (Suc m) * exp b n</code>. 但符號給我們線索。
+我們可觀察式子的結構，暫時不去想語意；
+我們的目標是操作、移動這些符號，將它們轉換成可使用歸納假設的形式。
+因此，接下來的演算推導便有所依據而非盲目進行：已知目標是把某符號往外提或往內推，
+我們就可尋找、使用可達到此目的的規則。
+這些規則包括已知函數的定義、或諸如分配律、遞移律、結合律等等數學性質。
+若很明顯地缺了一個想要的性質，也許可以把它當作引理另外證證看。
+符號幫助我們，使我們的思考清晰而有方向。</p><div class="exlist"><div class="exercise exer" id="ex:proof-no-induction"><h5 class="exercise-title">練習 2.1 </h5><p>證明 <code class="haskell">1 * k = k</code>. 這個證明並不需要歸納。</p></div><div class="exercise exer" id="ex:add-associative"><h5 class="exercise-title">練習 2.2 </h5><p>證明 <code class="haskell">(+)</code> 之結合律: <code class="haskell">m + (n + k) = (m + n) + k</code>. 此證明中你使用的述語是什麼？</p></div><div class="exercise exer" id="ex:add-right-id"><h5 class="exercise-title">練習 2.3 </h5><p>證明 <code class="haskell">k + 1 = k</code>. 你需要使用歸納法嗎？用什麼述語？</p></div></div><p>最後，說到自然數上的歸納定義，似乎不得不提<em>階層</em>(factorial)。用非正式的寫法，<code class="haskell">fact n = n * (n-1) * (n-2) * ... * 1</code>.
+<span id="ix-2-6"></span>
+\label{ex:factorial}
+形式化的定義如下：</p><pre><code class="haskell">fact :: Nat -&gt; Nat
+fact Zero     = 1
+fact (Suc n)  = (Suc n) *: fact n 
+</code></pre><p>我們在定理 <a href="Induction-6.html#thm:length-perms">2.5 </a> 中將會談到階層與排列的關係。</p></div><div class="navi"><div class="previous">&laquo;<a href="Induction-2.html#sec:induction-on-Nat">2.2 自然數上之歸納定義</a></div><div class="next"><a href="Induction-4.html#sec:induction-lists">2.4 串列與其歸納定義</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="函數程設與推論">
+    <title>函數程設與推論</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <!-- link rel="stylesheet" href="/css/pure/pure-min.css" -->
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <script> MathJax = {
+              loader: {
+                load: ['input/tex-base', 'output/chtml']
+                },
+              tex: {
+                inlineMath: [['$', '$']]
+             }};
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3.0.0/es5/startup.js">
+    </script>
+</head>
+<body>
+
+<div id="layout">
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+        <!-- Hamburger icon -->
+        <span></span>
+    </a>
+<div id="menu"><div class="pure-menu"><h1 class="pure-menu-heading">函數程設與推論</h1><h2 class="pure-menu-heading">Functional Program Construction and Reasoning</h2><p><a href="../ToC.html">目錄</a></p><p><a href="../Preface.html">前言</a></p><nav class="nav" role="navigation"><ul class="pure-menu-list menu-level-1"><li class="pure-menu-item"><a href="Introduction.html#ch:intro">0 符號、演算、與抽象化</a><input class="toggle" id="menu-li-0" type="checkbox"/><label class="menu-toggle" for="menu-li-0"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Introduction-1.html#sec:knight-knave-island">0.1 騎士與惡棍之島</a></li>
+<li class="pure-menu-item"><a href="Introduction-2.html#sec:let-symbols-work">0.2 讓符號為你工作</a></li>
+<li class="pure-menu-item"><a href="Introduction-3.html#sec:abstraction">0.3 抽象化</a></li>
+<li class="pure-menu-item"><a href="Introduction-4.html#sec:abstraction-and-expression">0.4 抽象化與表達力</a></li>
+<li class="pure-menu-item"><a href="Introduction-5.html#sec:correctness">0.5 正確性</a></li>
+<li class="pure-menu-item"><a href="Introduction-6.html#sec:calculable-programming-language">0.6 可演算的程式語言</a></li>
+<li class="pure-menu-item"><a href="Introduction-7.html#sec:relevant-information">0.7 相關資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Basics.html#ch:basics">1 值、函數、與定義</a><input class="toggle" id="menu-li-1" type="checkbox"/><label class="menu-toggle" for="menu-li-1"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Basics-1.html#sec:evaluation">1.1 值與求值</a></li>
+<li class="pure-menu-item"><a href="Basics-2.html#sec:function-defns">1.2 函數定義</a></li>
+<li class="pure-menu-item"><a href="Basics-3.html#sec:higher-order-func">1.3 高階函數</a></li>
+<li class="pure-menu-item"><a href="Basics-4.html#sec:func-comp">1.4 函數合成</a></li>
+<li class="pure-menu-item"><a href="Basics-5.html#sec:lambda-terms">1.5 $\lambda$ 算式</a></li>
+<li class="pure-menu-item"><a href="Basics-6.html#sec:elementary-datatypes">1.6 簡單資料型態</a><input class="toggle" id="menu-li-1-6" type="checkbox"/><label class="menu-toggle" for="menu-li-1-6"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Basics-6.html#sec:boolean">1.6.1 布林值</a></li>
+<li class="pure-menu-item"><a href="Basics-6.html#sec:char">1.6.2 字元</a></li>
+<li class="pure-menu-item"><a href="Basics-6.html#sec:pairs">1.6.3 序對</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Basics-7.html#sec:weak-head-normal-form">1.7 弱首範式</a></li>
+<li class="pure-menu-item"><a href="Basics-8.html#sec:lists">1.8 串列</a><input class="toggle" id="menu-li-1-8" type="checkbox"/><label class="menu-toggle" for="menu-li-1-8"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Basics-8.html#sec:list-deconstruct">1.8.1 串列解構</a></li>
+<li class="pure-menu-item"><a href="Basics-8.html#sec:list-generation">1.8.2 串列生成</a></li>
+<li class="pure-menu-item"><a href="Basics-8.html#sec:list-combinators">1.8.3 串列上的種種組件函數</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Basics-9.html#sec:wholemeal">1.9 全麥編程</a></li>
+<li class="pure-menu-item"><a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a></li>
+<li class="pure-menu-item"><a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
+<li class="pure-menu-item"><a href="Induction-2.html#sec:induction-on-Nat">2.2 自然數上之歸納定義</a></li>
+<li class="pure-menu-item"><a href="Induction-3.html#sec:inductive-proof-on-Nat">2.3 自然數上之歸納證明</a></li>
+<li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists">2.4 串列與其歸納定義</a><input class="toggle" id="menu-li-2-4" type="checkbox"/><label class="menu-toggle" for="menu-li-2-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists-defn">2.4.1 串列上之歸納定義</a></li>
+<li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists-proof">2.4.2 串列上之歸納證明</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Induction-5.html#sec:data-prog-proof">2.5 從資料、程式、到證明</a></li>
+<li class="pure-menu-item"><a href="Induction-6.html#sec:more-inductive-defns">2.6 更多歸納定義與證明</a><input class="toggle" id="menu-li-2-6" type="checkbox"/><label class="menu-toggle" for="menu-li-2-6"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction-6.html#sec:filter-takeWhile-dropWhile">2.6.1 <code class="haskell">filter</code>, <code class="haskell">takeWhile</code>, 與 <code class="haskell">dropWhile</code></a></li>
+<li class="pure-menu-item"><a href="Induction-6.html#sec:elem-neq-proof">2.6.2 <code class="haskell">elem</code> 與不等式證明</a></li>
+<li class="pure-menu-item"><a href="Induction-6.html#sec:list-segments">2.6.3 串列區段</a></li>
+<li class="pure-menu-item"><a href="Induction-6.html#sec:fan-perm">2.6.4 插入、排列、子串列、與劃分</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Induction-7.html#sec:using-hints-from-symbols">2.7 再談「讓符號為你工作」</a></li>
+<li class="pure-menu-item"><a href="Induction-8.html#sec:other-inductive-datatypes">2.8 其他歸納資料結構</a></li>
+<li class="pure-menu-item"><a href="Induction-9.html#sec:induction-set-theory">2.9 由集合論看歸納法</a></li>
+<li class="pure-menu-item"><a href="Induction-10.html#sec:induction-variations">2.10 歸納定義的簡單變化</a></li>
+<li class="pure-menu-item"><a href="Induction-11.html#sec:complete-induction">2.11 完全歸納</a></li>
+<li class="pure-menu-item"><a href="Induction-12.html#sec:well-founded-induction">2.12 良基歸納</a></li>
+<li class="pure-menu-item"><a href="Induction-13.html#sec:lexicographic-induction">2.13 詞典序歸納</a></li>
+<li class="pure-menu-item"><a href="Induction-14.html#sec:mutual-induction">2.14 交互歸納</a></li>
+<li class="pure-menu-item"><a href="Induction-15.html#sec:induction-ref">2.15 參考資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="SearchTrees.html#ch:induction-search-trees">3 搜尋樹</a><input class="toggle" id="menu-li-3" type="checkbox"/><label class="menu-toggle" for="menu-li-3"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="SearchTrees-1.html#sec:induction-binary-search-tree">3.1 二元搜尋樹</a></li>
+<li class="pure-menu-item"><a href="SearchTrees-2.html#sec:induction-red-black-tree">3.2 紅黑樹</a><input class="toggle" id="menu-li-3-2" type="checkbox"/><label class="menu-toggle" for="menu-li-3-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="SearchTrees-2.html#">3.2.1 紅黑樹插入</a></li>
+<li class="pure-menu-item"><a href="SearchTrees-2.html#">3.2.2 紅黑樹之性質：高度</a></li>
+<li class="pure-menu-item"><a href="SearchTrees-2.html#">3.2.3 紅黑樹之性質：平衡</a></li>
+<li class="pure-menu-item"><a href="SearchTrees-2.html#">3.2.4 紅黑樹之性質：顏色</a></li>
+</ul></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Semantics.html#ch:semantics">4 關於語意的基本概念</a><input class="toggle" id="menu-li-4" type="checkbox"/><label class="menu-toggle" for="menu-li-4"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Semantics-1.html#sec:denotational-semantics">4.1 指稱語意</a></li>
+<li class="pure-menu-item"><a href="Semantics-2.html#sec:operational-semantics">4.2 操作語意</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Derivation.html#ch:derivation">5 一般程式推導</a><input class="toggle" id="menu-li-5" type="checkbox"/><label class="menu-toggle" for="menu-li-5"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-1.html#sec:fold-unfold-transform">5.1 展開-收回轉換</a></li>
+<li class="pure-menu-item"><a href="Derivation-2.html#sec:efficiency-basics">5.2 關於執行效率</a></li>
+<li class="pure-menu-item"><a href="Derivation-3.html#sec:fold-unfold-transform-efficiency">5.3 用展開-收回轉換增進效率</a><input class="toggle" id="menu-li-5-3" type="checkbox"/><label class="menu-toggle" for="menu-li-5-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-3.html#sec:poly-horner">5.3.1 計算多項式 -- Horner 法則</a></li>
+<li class="pure-menu-item"><a href="Derivation-3.html#sec:exp-binary-roll">5.3.2 二進位表示法</a></li>
+<li class="pure-menu-item"><a href="Derivation-3.html#sec:wrap-reminder">5.3.3 小結與提醒</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Derivation-4.html#sec:var-cons">5.4 變數換常數</a></li>
+<li class="pure-menu-item"><a href="Derivation-5.html#sec:tupling">5.5 組對</a><input class="toggle" id="menu-li-5-5" type="checkbox"/><label class="menu-toggle" for="menu-li-5-5"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-5.html#sec:steep">5.5.1 陡串列</a></li>
+<li class="pure-menu-item"><a href="Derivation-5.html#sec:repl-tree">5.5.2 以串列標記樹狀結構</a></li>
+<li class="pure-menu-item"><a href="Derivation-5.html#sec:rep-minE">5.5.3 代換為最小標籤 --- 循環程式</a></li>
+<li class="pure-menu-item"><a href="Derivation-5.html#sec:tupling-conclude">5.5.4 小結與提醒</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a><input class="toggle" id="menu-li-5-6" type="checkbox"/><label class="menu-toggle" for="menu-li-5-6"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Derivation-6.html#sec:reversal-append">5.6.1 串列反轉與連接</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:accum-info-flow">5.6.2 由上到下的資訊流</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:tail-recursion">5.6.3 尾遞迴</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:tail-recursion-more">5.6.4 更多尾遞迴範例</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:tail-recursion-efficiency">5.6.5 尾遞迴的效率考量</a></li>
+<li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
+</ul></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-program-gen">6.2.2 以摺融合生成程式</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:scan-lemma">6.2.3 掃描</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:banana-split">6.2.4 香蕉船定理</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:accum-param-fold-fusion">6.2.5 累積參數與摺融合</a></li>
+<li class="pure-menu-item"><a href="Folds-2.html#sec:bring-in-context">6.2.6 引入脈絡</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Folds-3.html#sec:foldl-listHomo-para">6.3 左摺、串列同構、與 Paramorphism</a><input class="toggle" id="menu-li-6-3" type="checkbox"/><label class="menu-toggle" for="menu-li-6-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-3.html#sec:foldl">6.3.1 左摺</a></li>
+<li class="pure-menu-item"><a href="Folds-3.html#sec:list-homomorphism">6.3.2 串列同構</a></li>
+<li class="pure-menu-item"><a href="Folds-3.html#sec:paramorphism">6.3.3 Paramorphism 與本原遞迴</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Folds-4.html#sec:foldN">6.4 自然數的摺</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:fold-on-other-data-structures">6.5 其他資料結構</a></li>
+<li class="pure-menu-item"><a href="Folds-6.html#sec:folds-ref">6.6 參考資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="SegProblems.html#ch:segment-problems">7 區段問題</a><input class="toggle" id="menu-li-7" type="checkbox"/><label class="menu-toggle" for="menu-li-7"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="SegProblems-1.html#sec:maximum-segment-sum">7.1 最大區段和</a></li>
+<li class="pure-menu-item"><a href="SegProblems-2.html#sec:maximum-plateau-length">7.2 最長高原問題</a></li>
+<li class="pure-menu-item"><a href="SegProblems-3.html#sec:segProblems-ref">7.3 參考資料</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Monads.html#ch:monads">8 單子與副作用</a><input class="toggle" id="menu-li-8" type="checkbox"/><label class="menu-toggle" for="menu-li-8"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Monads-1.html#sec:exceptions">8.1 例外處理</a></li>
+<li class="pure-menu-item"><a href="Monads-2.html#sec:monad-class-laws">8.2 單子與單子律</a></li>
+<li class="pure-menu-item"><a href="Monads-3.html#sec:monad-reader">8.3 讀取單子</a><input class="toggle" id="menu-li-8-3" type="checkbox"/><label class="menu-toggle" for="menu-li-8-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Monads-3.html#sec:var-env-reader">8.3.1 變數與環境</a></li>
+<li class="pure-menu-item"><a href="Monads-3.html#sec:reader-is-monad">8.3.2 「讀取」副作用是單子</a></li>
+<li class="pure-menu-item"><a href="Monads-3.html#sec:monad-reader-laws">8.3.3 推論讀取單子程式的性質</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Monads-4.html#sec:monad-state">8.4 狀態單子</a><input class="toggle" id="menu-li-8-4" type="checkbox"/><label class="menu-toggle" for="menu-li-8-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Monads-4.html#sec:hanoi">8.4.1 河內塔問題</a></li>
+</ul></li>
+<li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
+</ul></li>
+</ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Folds-4.html#sec:foldN">6.4 自然數的摺</a></div><div class="next"><a href="Folds-6.html#sec:folds-ref">6.6 參考資料</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:fold-on-other-data-structures">6.5 其他資料結構</h2><p>既然串列與自然數都有摺，其他的資料結構也可以有。</p><p><b>二元樹</b> &emsp; 回顧我們提及的兩種常見二元樹：</p><pre><code class="spec">data ITree a  = Null   | Node a (ITree a) (ITree a) 
+data ETree a  = Tip a  | Bin (ETree a) (ETree a) 
+</code></pre><p>其中 <code class="haskell">ITree</code> 的摺可定義如下：</p><pre><code class="haskell">foldIT :: (a -&gt; b -&gt; b -&gt; b) -&gt; b -&gt; ITree a -&gt; b
+foldIT f e Null          = e
+foldIT f e (Node x t u)  = f x (foldIT f e t) (foldIT f e u) 
+</code></pre><p>內標記二元樹 <code class="haskell">ITree</code> 的兩個建構元之型別分別為 <code class="haskell">Null :: ITree a</code> 與 <code class="haskell">Node :: a -&gt; ITree a -&gt; ITree a -&gt; ITree a</code>. 和串列的摺一樣，內標記二元樹的摺將一個 <code class="haskell">ITree a</code> 轉成一個型別為 <code class="haskell">b</code> 的值 --- 藉由將 <code class="haskell">Null</code> 代換為基底值 <code class="haskell">e :: b</code>, 以及將 <code class="haskell">Node</code> 代換為步驟函數 <code class="haskell">f :: a -&gt; b -&gt; b -&gt; b</code>.</p><p>外標記二元樹的摺則可定義如下：</p><pre><code class="haskell">foldET :: (b -&gt; b -&gt; b) -&gt; (a -&gt; b) -&gt; ETree a -&gt; b
+foldET f k (Tip x)    = k x
+foldET f k (Bin t u)  = f (foldET f k t) (foldET f k u) 
+</code></pre><p>型別 <code class="haskell">ETree</code> 的建構元分別為 <code class="haskell">Tip :: a -&gt; ETree a</code> 和 <code class="haskell">Bin :: ETree a -&gt; ETree a -&gt; ETree a</code>.
+由於 <code class="haskell">Tip</code> 是一個由 <code class="haskell">a</code> 到 <code class="haskell">ETree a</code> 的函數，取代它的得是一個型別為 <code class="haskell">a -&gt; b</code> 的<em>基底函數</em>.
+取代 <code class="haskell">Bin</code> 的步驟函數之型別則為 <code class="haskell">b -&gt; b -&gt; b</code>. 有了這兩者，我們便可將 <code class="haskell">ETree a</code> 轉換為 <code class="haskell">b</code>.</p><p>例如，第<a href="Induction-8.html#sec:other-inductive-datatypes">2.8 </a>節中曾提到幾個定義在樹之上的函數：<code class="haskell">tags</code> 傳回一個 <code class="haskell">ITree</code> 的所有標記；<code class="haskell">size</code> 傳回其大小；<code class="haskell">minE</code> 傳回一個 <code class="haskell">ETree</code> 的最小元素，<code class="haskell">mapE f</code> 對樹中的每個標記做 <code class="haskell">f</code>. 它們都可用摺定義：</p><pre><code class="spec">tags    = foldIT (\x xs ys -&gt; xs ++ [x] ++ ys) [] 
+size    = foldIT (\x m n -&gt; 1 + m + n) 0 
+minE    = foldET min id 
+mapE f  = foldET Bin f 
+</code></pre><p>兩個二元樹的摺也有它們的融合定理：</p><div class="theorem" id="thm:fold-fusion-ITree" title="摺融合定理(|ITree|版)"><h5 class="theorem-title">定理 6.20  摺融合定理(|ITree|版) </h5><p><span id="ix-6-17"></span>
+給定 <code class="haskell">f :: a -&gt; b -&gt; b -&gt; b</code>, <code class="haskell">e :: b</code>, <code class="haskell">h :: b -&gt; c</code>, 與 <code class="haskell">g :: a -&gt; c -&gt; c -&gt; c</code>.
+如果融合條件 <code class="haskell">h (f x y z) = g x (h y) (h z)</code> 對任何 <code class="haskell">x :: a</code> 與在 <code class="haskell">foldIT f e</code> 值域中的 <code class="haskell">y, z :: b</code> 成立，
+我們有 <code class="haskell">h . foldIT f e = foldIT g (h e)</code>.</p></div><div class="theorem" id="thm:fold-fusion-ETree" title="摺融合定理(|ETree|版)"><h5 class="theorem-title">定理 6.21  摺融合定理(|ETree|版) </h5><p>給定 <code class="haskell">f :: b -&gt; b -&gt; b</code>, <code class="haskell">k :: a -&gt; b</code>, <code class="haskell">h :: b -&gt; c</code>, 與 <code class="haskell">g :: c -&gt; c -&gt; c</code>.
+如果融合條件 <code class="haskell">h (f x y) = g (h x) (h y)</code> 對任何在 <code class="haskell">foldET f k</code> 值域中的 <code class="haskell">x, y :: b</code> 成立，我們有
+<code class="haskell">h . foldET f k = foldET g (h . k)</code>.</p></div><p>兩個定理的融合條件都依循著與串列版相同的原則：當 <code class="haskell">h</code> 與步驟函數碰在一起，融合條件讓我們將 <code class="haskell">h</code> 往裡推。
+兩個定理都可用單純的歸納法證明。</p><div class="exlist"><div class="exercise exer" id="ex:fold-length-tags-size"><h5 class="exercise-title">練習 6.13 </h5><p>以摺融合定理證明 <code class="haskell">length (tags t) = size t</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-6-13" type="checkbox"/><label class="lbl-toggle" for="ans-6-13">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>即證明 <code class="haskell">length . tags = size</code>.
+回顧 <code class="haskell">tags = foldIT (\x xs ys -&gt; xs ++ [x] ++ ys) []</code>
+使用摺融合，由於 <code class="haskell">length [] = 0</code> 以及
+<code class="haskell">length (xs ++ [x] ++ ys) = 1 + length xs + length ys</code>,
+我們得到 <code class="haskell">length . tags = foldIT (\x m n -&gt; 1 + m + n) 0 = size</code>.</p></div></div><div class="exercise exer" id="ex:foldET-mapE-fusion"><h5 class="exercise-title">練習 6.14 </h5><p>串列有 <code class="haskell">foldr</code>-<code class="haskell">map</code> 融合定理(<a href="Folds-2.html#thm:foldr-map-fusion">6.4 </a>)，<code class="haskell">ETree</code> 也有類似的 <code class="haskell">foldET</code>-<code class="haskell">mapE</code> 融合定理。請寫出該定理並證明之。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-6-14" type="checkbox"/><label class="lbl-toggle" for="ans-6-14">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p><code class="haskell">ETree</code> 上的 <code class="haskell">foldET</code>-<code class="haskell">mapE</code> 融合定理為：</p><pre><code class="spec">  foldET f k . mapE g = foldET f (k . g) 
+</code></pre><p>由於 <code class="haskell">mapE g = foldET Bin f</code>, 欲證明上式可用摺融合定理。
+其融合條件 <code class="haskell">foldET f k (Bin t u) = f (foldET f k t) (foldET f k u)</code> 恰巧是 <code class="haskell">foldET</code> 之定義。</p></div></div><div class="exercise exer" id="ex:foldIT-mapI-fusion"><h5 class="exercise-title">練習 6.15 </h5><p>函數 <code class="haskell">mapI :: (a -&gt; b) -&gt; ITree a -&gt; ITree b</code> 將一個 <code class="haskell">a -&gt; b</code> 的函數作用在 <code class="haskell">ITree</code> 的每一個標記上。
+請用 <code class="haskell">foldIT</code> 定義 <code class="haskell">mapI</code>, 並寫下 <code class="haskell">foldIT</code> 與 <code class="haskell">mapI</code> 的融合定理並證明之。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-6-15" type="checkbox"/><label class="lbl-toggle" for="ans-6-15">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>函數 <code class="haskell">mapI</code> 可定義如下：</p><pre><code class="spec">  mapI f = foldIT (\x t u -&gt; Node (f x) t u) Null 
+</code></pre><p>考慮 <code class="haskell">foldIT f e . mapI g</code> 之融合。其基底值為 <code class="haskell">foldIT f e Null = e</code>.
+步驟函數的推導如下：</p><pre><code class="spec">      foldIT f e (Node (g x) t u)
+ ===    <comment>{- <code class="haskell">foldIT</code> 之定義 -}</comment>
+      f (g x) (foldIT f e t) (foldIT f e u)  
+</code></pre><p>因此 <code class="haskell">foldIT f e . mapI g = foldIT (\x y z -&gt; f (g x) y z) e</code>.</p></div></div><div class="exercise exer" id="ex:fold-fusion-minE-mapE"><h5 class="exercise-title">練習 6.16 </h5><p>以摺融合定理證明 <code class="haskell">minE (mapE (x +) t) = x + minE t</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-6-16" type="checkbox"/><label class="lbl-toggle" for="ans-6-16">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>即證明 <code class="haskell">minE . mapE (x+) = (x+) . minE</code>.
+推論如下：</p><pre><code class="spec">      minE . mapE (x+)
+ ===    <comment>{- <code class="haskell">foldET</code>-<code class="haskell">mapE</code> 融合，見習題 \ref{ex:foldET-mapE-fusion} -}</comment>
+      foldET min (id . (x+))
+ ===    <comment>{- <code class="haskell">foldET</code> 融合，如下述 -}</comment>
+      (x+) . minE 
+</code></pre><p>融合的基底函數為 <code class="haskell">id . (x+) = (x+) . id</code>,
+融合條件則為 <code class="haskell">x + (y ↓ z) = (x + y) ↓ (x + z)</code>。</p></div></div><div class="exercise exer" id="ex:fold-ITree-append-tags"><h5 class="exercise-title">練習 6.17 </h5><p>將 <code class="haskell">(++) . tags</code> 融合，以便推導出一個在線性時間內收集 <code class="haskell">ITree</code> 內所有標籤的演算法。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-6-17" type="checkbox"/><label class="lbl-toggle" for="ans-6-17">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>回想 <code class="haskell">tags = foldIT (\x xs ys -&gt; xs ++ [x] ++ ys) []</code>.
+融合後之基底值為 <code class="haskell">(++) [] = id</code>.
+融合後之步驟函數 <code class="haskell">step</code> 須滿足
+<code class="haskell">(++) (xs ++ [x] ++ ys) = step x (xs++) (ys++)</code>.
+但由於左手邊的 <code class="haskell">(++)</code> 還需一個參數才能化簡，我們在左右兩邊各補上一個參數 <code class="haskell">zs</code>.
+演算如下：</p><pre><code class="spec">      (++) (xs ++ [x] ++ ys) zs
+ ===  (xs ++ [x] ++ ys) ++ zs
+ ===    <comment>{- <code class="haskell">(++)</code> 之遞移律 -}</comment>
+      xs ++ (x : (ys ++ zs))
+ ===    <comment>{- <code class="haskell">(.)</code> 之定義 -}</comment>
+      ((xs++) . (x:) . (ys++)) zs 
+</code></pre><p>因此我們得到 <code class="haskell">(++) . tags = foldIT (\x f g -&gt; f . (x:) . g) id</code>.</p></div></div></div><p><b>非空串列</b> &emsp;
+第<a href="Induction-10.html#sec:induction-variations">2.10 </a>節中曾提及我們可把至少有一個元素的串列想像成一個資料結構：<code class="haskell">data ListP a = [a] | a : ListP a</code>. 此種串列的摺可定義為：</p><pre><code class="haskell">foldrn :: (a -&gt; b -&gt; b) -&gt; (a -&gt; b) -&gt; ListP a -&gt; b
+foldrn f k [x]     = k x
+foldrn f k (x:xs)  = f x (foldrn f k xs) 
+</code></pre><div class="theorem" id="eg:foldrn-partsP"><h5 class="theorem-title">例 6.22  </h5><p>例<a href="Induction-10.html#ex:partsP">2.13 </a>中的 <code class="haskell">partsP</code> 可以寫成</p><pre><code class="haskell">partsP :: ListP a -&gt; List (ListP (ListP a))
+partsP = foldrn (\x -&gt; concat . map (extend x)) wrap3 
+  where  extend x (ys:yss) = [[x]:ys:yss, (x:ys):yss]
+         wrap3 x = [[[x]]] 
+</code></pre></div><p>我們考慮一個定義在非空串列上的簡單演算法推導練習。
+其次，這也將是一個使用 <code class="haskell">foldrn</code> 與「引入脈絡」的例子，
+<span id="ix-6-18"></span></p><p>下述函數 <code class="haskell">ascending :: ListP Int -&gt; Bool</code> 判斷一個串列是否為遞增：</p><pre><code class="haskell">ascending [x]       = True
+ascending (x:y:xs)  = x &lt;= y ⋀ ascending (y:xs) 
+</code></pre><p>給定一個整數串列，如何將它切成一個個區段，使得每個區段都是遞增的？
+如果我們讓每個元素都自己成一段，似乎是滿足需求，但這沒什麼意思。
+我們希望讓遞增區段盡量連續，也就是說，我們要區段數目最少的分割法。
+下述函數 <code class="haskell">upHills</code> 將輸入串列以最精簡的方式切成段：</p><pre><code class="spec">upHills :: List Int -&gt; List (List Int)
+upHills = shortest . filter (all ascending) . partsP 
+</code></pre><p>其中 <code class="haskell">partsP</code> 把串列任意切段，<code class="haskell">filter (all ascending)</code> 挑出每個區段都是遞增的分割法，而 <code class="haskell">shortest</code> 挑選元素數目最少的串列。
+我們能由此導出一個比較快的演算法嗎？</p><p>我們先將 <code class="haskell">filter (all ascending)</code> 融入 <code class="haskell">partsP</code> 之中。
+經過一些稍繁瑣但原則上並不困難的計算，我們可得：</p><pre><code class="haskell"> filter (all ascending) . partsP ===
+    foldrn (\x -&gt; concat . map (extendAsc x)) wrap3 
+</code></pre><p>這和 <code class="haskell">partsP</code> 的差別只在 <code class="haskell">extend</code> 變成了 <code class="haskell">extendAsc</code>. 後者的定義為：</p><pre><code class="haskell">extendAsc x (ys:yss) = if x &gt;= head ys  then [[x]:ys:yss, (x:ys):yss]
+                                        else [[x]:ys:yss] 
+</code></pre><p>函數 <code class="haskell">extendAsc</code> 比 <code class="haskell">extend</code> 多做了一個檢查，只在 <code class="haskell">x &gt;= head ys</code> 時將 <code class="haskell">(x:ys):yss</code> 列為一個可能選項。
+注意：由於 <code class="haskell">ys</code> 的型別是 <code class="haskell">ListP Int</code>, <code class="haskell">head</code> 一定可成功。
+如果我們使用 <code class="haskell">List Int</code>, 在這裡就得多做些條件判斷。
+雖然每個非空串列 <code class="haskell">ListP</code> 都可用 <code class="haskell">List</code> 表達, 有些問題使用 <code class="haskell">ListP</code> 描述時會比較便於證明與推論。</p><p>接著我們試圖融合 <code class="haskell">shortest</code> 與 <code class="haskell">filter (all ascending) . partsP</code>.
+基底函數為 <code class="haskell">(shortest . wrap3) x = shortest [[[x]]] = [[x]]</code>.
+至於步驟函數，我們希望找到滿足下述融合條件的 <code class="haskell">step</code>:</p><pre><code class="spec">  shortest (concat (map (extendAsc x) ysss)) === step x (shortest ysss) 
+</code></pre><p>由左手邊開始，由於 <code class="haskell">shortest</code> 可分配進 <code class="haskell">concat</code> （意即 <code class="haskell">shortest . concat = shortest . map shortest</code>），我們可推論：</p><pre><code class="spec">     shortest (concat (map (extendAsc x) ysss))
+ ===   <comment>{- <code class="haskell">shortest</code> 分配進 <code class="haskell">concat</code>; <code class="haskell">map</code> 融合 -}</comment>
+     shortest (map (shortest . extendAsc x) ysss) 
+</code></pre><p>為了有些進展，我們看看 <code class="haskell">shortest . extendAsc x</code> 能如何化簡。
+將輸入（非空串列）寫成 <code class="haskell">ys : yss</code>:</p><pre><code class="spec">      shortest (extendAsc x (ys:yss)) =
+ ===    <comment>{- <code class="haskell">extend'</code> 之定義; 提出 <code class="haskell">if</code> -}</comment>
+      if x &gt;= head ys  then shortest [[x]:ys:yss, (x:ys):yss]
+                       else shortest [[x]:ys:yss]
+ ===    <comment>{- <code class="haskell">shortest</code> 挑選較短之串列 -}</comment>
+      if x &gt;= head ys then (x:ys):yss else [x]:ys:yss 
+</code></pre><p>因此，融合條件的左手邊可歸約如下：</p><pre><code class="spec">     shortest (map (shortest . extendAsc x) ysss)
+===    <comment>{- 前述推導 -}</comment>
+     shortest (map (\(ys:yss) -&gt;  if x &gt;= head ys then (x:ys):yss
+                                       else [x]:ys:yss) ysss) 
+</code></pre><p>我們希望繼續將 <code class="haskell">shortest</code> 往裡推，但此時似乎卡住了。</p><pre><code class="spec">     shortest (map (\(ys:yss) -&gt;  if x &gt;= head (head (head ysss)) then (x:ys):yss
+                                       else [x]:ys:yss) ysss) 
+===  shortest (  if x &gt;= head (head (head ysss))
+                 then map (\(ys:yss) -&gt; (x:ys):yss) ysss
+                 else map (\(ys:yss) -&gt; [x]:ys:yss) ysss)
+===  if x &gt;= head (head (head ysss))
+       then shortest (map (\(ys:yss) -&gt; (x:ys):yss) ysss)
+       else shortest (map (\(ys:yss) -&gt; [x]:ys:yss) ysss)
+===  if x &gt;= head (head (head ysss))
+       then (\(ys:yss) -&gt; (x:ys):yss) (shortest ysss)
+       else (\(ys:yss) -&gt; [x]:ys:yss) (shortest ysss)
+===  let (ys:yss) = shortest ysss
+     in  if x &gt;= head ys
+         then (x:ys):yss else [x]:ys:yss 
+</code></pre><pre><code class="spec">upHills = foldrn step (\x -&gt; [[x]]) 
+  where  step x (ys:yss) = if x &gt;= head ys  then (x:ys):yss
+                                            else [x]:ys:yss 
+</code></pre><div class="exlist"><div class="exercise exer" id="ex:filtAscPExtend"><h5 class="exercise-title">練習 6.18 </h5><p>將 <code class="haskell">filter (all ascending) . partsP</code> 融合為 <code class="haskell">foldrn (\x -&gt; concat . map (extendAsc x)) wrap3</code>, 並在過程中推導 <code class="haskell">extendAsc</code> 的定義。
+您可能用得上習題<a href="Folds-2.html#ex:map-filter-split">6.6 </a>提及的性質：
+如果 <code class="haskell">filter p (f x) = if p x then g x else []</code>, 則 <code class="haskell">concat . map (filter p . f) = concat . map g . filter p</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-6-18" type="checkbox"/><label class="lbl-toggle" for="ans-6-18">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>基底函數為 <code class="haskell">filter (all ascending) . wrap3 = wrap3</code>.
+為求出步驟函數，我們推論：</p><pre><code class="haskell">      filter (all ascending) (concat (map (extend x) ysss))
+ ===    <comment>{- <code class="haskell">filter p . concat = concat . map (filter p)</code>, <code class="haskell">map</code> 融合 -}</comment>
+      concat (map (filter (all ascending) . extend x) ysss)
+ ===    <comment>{- 推導 <code class="haskell">extendAsc</code>, 如下述 -}</comment>
+      concat (map (extendAsc x) (filter (all ascending) ysss)) 
+</code></pre><p>欲使得最後一步成立，我們使用習題<a href="Folds-2.html#ex:map-filter-split">6.6 </a>中的性質，
+試圖找到滿足下述條件的 <code class="haskell">extendAsc</code>：</p><pre><code class="spec">  filter (all ascending) (extend x yss) =
+      if all ascending yss then extendAsc x yss else [] 
+</code></pre><p>我們演算如下：</p><pre><code class="haskell">      filter (all ascending) (extend x (ys:yss))
+ ===  filter (all ascending) [[x]:ys:yss, (x:ys):yss]
+ ===     <comment>{- <code class="haskell">filter</code> 之定義; 因 <code class="haskell">ascending [x] = True</code> -}</comment>
+      if all ascending (ys:yss) then
+           ([x]:ys:yss) : filter (all ascending) [(x:ys):yss]
+         else filter (all ascending) [(x:ys):yss]
+ ===     <comment>{- <code class="haskell">filter</code> 與 <code class="haskell">ascending</code> 之定義；重安排 <code class="haskell">if</code> 的幾個分支 -}</comment>
+      if all ascending (ys:yss) then
+             if x &gt;= head ys  then [[x]:ys:yss, (x:ys):yss]
+                                    else [[x]:ys:yss]
+         else []
+ ===     <comment>{- 抽取出 <code class="haskell">extendAsc</code> 如下 -}</comment>
+      if all ascending (ys:yss) then extend' x (ys:yss) else []
+</code></pre><p>其中 <code class="haskell">extendAsc</code> 的定義如下：</p><pre><code class="haskell">extendAsc x (ys:yss) = if x &gt;= head ys  then [[x]:ys:yss, (x:ys):yss]
+                                        else [[x]:ys:yss] 
+</code></pre></div></div></div></div><div class="navi"><div class="previous">&laquo;<a href="Folds-4.html#sec:foldN">6.4 自然數的摺</a></div><div class="next"><a href="Folds-6.html#sec:folds-ref">6.6 參考資料</a>&raquo;</div></div></div></div>
+
+<script src="../js/ui.js"></script>
+
+</body>
+</html>

@@ -40,10 +40,10 @@
 <li class="pure-menu-item"><a href="Introduction-6.html#sec:calculable-programming-language">0.6 可演算的程式語言</a></li>
 <li class="pure-menu-item"><a href="Introduction-7.html#sec:relevant-information">0.7 相關資料</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Basics.html#ch:basics">1 值、函數、與定義</a><input class="toggle" id="menu-li-1" type="checkbox"/><label class="menu-toggle" for="menu-li-1"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Basics-1.html#sec:evaluation">1.1 值與求值</a></li>
+<li class="pure-menu-item"><a href="Basics.html#ch:basics">1 值、函數、與定義</a><input class="toggle" id="menu-li-1" checked type="checkbox"/><label class="menu-toggle" for="menu-li-1"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Basics-1.html#sec:evaluation">1.1 值與求值</a></li>
 <li class="pure-menu-item"><a href="Basics-2.html#sec:function-defns">1.2 函數定義</a></li>
 <li class="pure-menu-item"><a href="Basics-3.html#sec:higher-order-func">1.3 高階函數</a></li>
-<li class="pure-menu-item"><a href="Basics-4.html#sec:func-comp">1.4 函數合成</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:func-comp">1.4 函數合成</a></li>
 <li class="pure-menu-item"><a href="Basics-5.html#sec:lambda-terms">1.5 $\lambda$ 算式</a></li>
 <li class="pure-menu-item"><a href="Basics-6.html#sec:elementary-datatypes">1.6 簡單資料型態</a><input class="toggle" id="menu-li-1-6" type="checkbox"/><label class="menu-toggle" for="menu-li-1-6"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Basics-6.html#sec:boolean">1.6.1 布林值</a></li>
 <li class="pure-menu-item"><a href="Basics-6.html#sec:char">1.6.2 字元</a></li>
@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -143,28 +143,97 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:basics">1 值、函數、與定義</h1></div><div class="navi"><div class="previous">&laquo;<a href="Basics-3.html#sec:higher-order-func">1.3 高階函數</a></div><div class="next"><a href="Basics-5.html#sec:lambda-terms">1.5 $\lambda$ 算式</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:func-comp">1.4 函數合成</h2><p>拿到一個函數 <code class="haskell">f</code>，我們能做的基本操作包括把 <code class="haskell">f</code> 作用在某個參數上、
+把 <code class="haskell">f</code> 傳給別的函數...
+此外，另一個常用的基本操作是將 <code class="haskell">f</code> 和別的函數<em>合成</em>(<em>compose</em>)
+<span id="ix-1-18"></span><span id="ix-1-19"></span>
+為一個新函數。
+<input class="toggle" id="footnote-1-4-9" type="checkbox"/><label class="fnote-toggle" for="footnote-1-4-9">(註9) </label><span class="collapsible-footnote">Robert Gl\"{u}ck 認為函數上應有三個基本操作：
+函數應用、函數合成、以及求一個函數的反函數。
+前兩者已經提到，第三者則是大部分語言欠缺的。</span>
+「合成」運算子在 Haskell 中寫成<code class="haskell">(.)</code>.
+這個運算子的形式定義如下（我們先看定義本體，待會兒再看型別）：</p><pre><code class="spec">(f . g) x  = f (g x) 
+</code></pre><p>若用口語說，<code class="haskell">f . g</code> 是將 <code class="haskell">f</code> 和 <code class="haskell">g</code>兩個函數「串起來」得到的新函數：
+輸入 <code class="haskell">x</code> 先丟給 <code class="haskell">g</code>, 後者算出的結果再傳給 <code class="haskell">f</code>.</p><div class="theorem" id="eg:square-double"><h5 class="theorem-title">例 1.7  </h5><p><code class="haskell">square . double</code> 與 <code class="haskell">double . square</code> 都是由 <code class="haskell">Int</code> 到 <code class="haskell">Int</code> 的函數.
+直覺上，前者把輸入先給 <code class="haskell">double</code>, 其結果再給 <code class="haskell">square</code>。
+後者則反過來。
+如何了解它們的行為？既然它們是函數，我們便餵給它們一個參數，看看會展開成什麼！
+兩者分別展開如下：</p><div class="multicols"><div class="mcol" width="0.4\textwidth"><pre><code class="spec">   (square . double) x
+=    <comment>{- <code class="haskell">(.)</code> 的定義 -}</comment>
+   square (double x)
+=  (x + x) * (x + x) 
+</code></pre></div><div class="mcol" width="0.4\textwidth"><pre><code class="spec">   (double . square) x
+=    <comment>{- <code class="haskell">(.)</code> 的定義 -}</comment>
+   double (square x)
+=  (x * x) + (x * x) 
+</code></pre></div></div><p>所以，如果輸入為 <code class="haskell">x</code>, <code class="haskell">(square . double) x</code> 計算 $(2x)^2$;
+<code class="haskell">(double . square) x</code> 則是 $2x^2$.</p></div><p>但，並不是所有函數都可以串在一起：
+<code class="haskell">f . g</code> 之中，<code class="haskell">g</code> 的輸出型別和 <code class="haskell">f</code> 的輸入型別必須一致才行。
+運算子 <code class="haskell">(.)</code> 包括型別的完整定義為：</p><pre><code class="spec">(.) :: (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+(f . g) x  = f (g x) 
+</code></pre><p>如果 <code class="haskell">g</code> 的型別是 <code class="haskell">a -&gt; b</code>, <code class="haskell">f</code> 的型別是 <code class="haskell">b -&gt; c</code>, 將他們串接起來後，
+便得到一個型別為 <code class="haskell">a -&gt; c</code> 的函數。</p><p>有了<code class="haskell">(.)</code>, 函數 <code class="haskell">twice</code> 可以定義如下：</p><pre><code class="spec">twice    :: (a -&gt; a) -&gt; (a -&gt; a)
+twice f  = f . f  
+</code></pre><p>確實，根據 <code class="haskell">(.)</code> 的定義，<code class="haskell">twice f x = (f . f) x = f (f x)</code>，和 <code class="haskell">twice</code> 原來的定義相同。</p><p>為了討論函數合成的性質，我們先介紹一個函數 <code class="haskell">id</code>:</p><pre><code>id :: a -&gt; a
+id x = x 
+</code></pre><p>它又稱作<em>單位函數</em>或<em>恆等函數</em>。<span id="ix-1-20"></span>
+這是一個似乎沒有在做什麼的函數：給任何輸入，<code class="haskell">id</code> 都原封不動地把它送到輸出 ---
+這也反映在他的型別 <code class="haskell">a -&gt; a</code> 上。
+這個函數有什麼重要性呢？
+原來，<code class="haskell">(.)</code> 滿足結合律，並且以 <code class="haskell">id</code> 為單位元素（這也是「單位函數」這名字的由來）：</p><p>用數學術語來說的話，<code class="haskell">id</code> 與 <code class="haskell">(.)</code> 形成一個<em>幺半群</em> (<em>monoid</em>)。
+<span id="ix-1-21"></span>
+函數 <code class="haskell">id</code> 的重要性就如同 <code class="haskell">0</code> 在代數中的重要性（<code class="haskell">0</code> 與 <code class="haskell">(+)</code> 也是一個幺半群）。我們在許多計算、證明中都會見到它。</p><p>以下我們試著證明 <code class="haskell">(.)</code> 的結合律。我們想論證
+<code class="haskell">(f . g) . h = f . (g . h)</code>，但該如何下手？
+該等式的等號左右兩邊都是函數。
+當我們說兩個整數相等，意思很清楚：如果等號左邊是 <code class="haskell">0</code>, 右邊也是 <code class="haskell">0</code>;
+如果左邊是 <code class="haskell">1</code>, 右邊也是 <code class="haskell">1</code>... 但說兩個函數「相等」，是什麼意思呢？</p><div class="theorem" id="def:extensional-eq" title="外延相等(extensional equality)"><h5 class="theorem-title">定義 1.8  外延相等(extensional equality) </h5><p>給定兩個型別相同的函數 <code class="haskell">f</code> 和 <code class="haskell">g</code>, 當我們說它們<em>外延相等</em>(<em>extensionally equal</em>)<span id="ix-1-22"></span>，
+意思是給任何一個輸入，<code class="haskell">f</code> 和 <code class="haskell">g</code> 都算出相等的輸出。也就是：
+<code class="haskell">(forall x. f x = g x)</code>.</p><p>本書中，當我們寫兩個函數相等(<code class="haskell">f = g</code>)時，指的便是外延相等，除非例外註明。</p></div><p>在外延相等的假設下，證明 <code class="haskell">(f . g) . h = f . (g . h)</code> 也就是證明對任何一個 <code class="haskell">x</code>, <code class="haskell">((f . g) . h) x = (f . (g . h)) x</code> 均成立. 我們推論如下：</p><pre><code class="spec">  ((f . g) . h) x
+=  <comment>{- <code class="haskell">(.)</code> 的定義 -}</comment>
+  (f . g) (h x)
+=  <comment>{- <code class="haskell">(.)</code> 的定義 -}</comment>
+  f (g (h x))
+=  <comment>{- <code class="haskell">(.)</code> 的定義 -}</comment>
+  f ((g . h) x) 
+=  <comment>{- <code class="haskell">(.)</code> 的定義 -}</comment>
+  (f . (g . h)) x 
+</code></pre><p>既然 <code class="haskell">(f . g) . h = f . (g . h)</code>，我們便可統一寫成 <code class="haskell">f . g . h</code>, 不用加括號了。</p><div class="exlist"><div class="exercise exer" id="ex:identity-law"><h5 class="exercise-title">練習 1.6 </h5><p>證明 <code class="haskell">id . f = f = f . id</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-1-6" type="checkbox"/><label class="lbl-toggle" for="ans-1-6">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>根據外延相等，我們需證明 <code class="haskell">(forall x . id . f = f = f . id)</code>.
+推論如下：</p><pre><code class="spec">   (id . f) x
+=    <comment>{- <code class="haskell">(.)</code> 之定義 -}</comment>
+   id (f x)
+=    <comment>{- <code class="haskell">id</code> 之定義 -}</comment>
+   f x
+=    <comment>{- <code class="haskell">id</code> 之定義 -}</comment>
+   f (id x)
+=    <comment>{- <code class="haskell">(.)</code> 之定義 -}</comment>
+   (f . id) x 
+</code></pre></div></div></div><p>合成 <code class="haskell">(.)</code> 也是一個中序運算子。和其他中序運算子一樣，其優先性低於函數應用。
+因此，當我們寫 <code class="haskell">f . g x</code>, 指的是 <code class="haskell">f . (g x)</code> --- <code class="haskell">g x</code> 為一個函數，
+和 <code class="haskell">f</code> 合成，而不是 <code class="haskell">(f . g) x</code> （後者根據 <code class="haskell">(.)</code> 的定義，是 <code class="haskell">f (g x)</code>）。</p><div class="theorem" id="eg:smaller-square-legal"><h5 class="theorem-title">例 1.9  </h5><p>下列程式中，有些是合法的 Haskell 式子、有些則有型別錯誤。
+對每個程式，如果它是合法的，請找出它的型別，並說說看該程式做什麼。
+如果有型別錯誤，請簡述為什麼。</p><ol><li><p><code class="haskell">square . smaller 3</code>;</p></li><li><p><code class="haskell">smaller 3 . square</code>;</p></li><li><p><code class="haskell">smaller (square 3)</code>;</p></li><li><p><code class="haskell">smaller . square 3</code>.</p></li></ol></div><div class="wrap-collabsible"><input class="toggle" id="ans-1-6" type="checkbox"/><label class="lbl-toggle" for="ans-1-6">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>前三者都是 <code class="haskell">Int -&gt; Int</code>。</p><ol><li><p>根據 <code class="haskell">(.)</code> 的定義，<code class="haskell">(square . smaller 3) x = square (smaller 3 x)</code>.
+因此 <code class="haskell">square . smaller 3</code> 是一個函數，將其輸入和 <code class="haskell">3</code> 比較，取較小者的平方。</p></li><li><p><code class="haskell">(smaller 3 . square) x = smaller 3 (square x)</code>. 因此它讀入 <code class="haskell">x</code>, 並在 <code class="haskell">3</code> 或 <code class="haskell">x^2</code> 之中選較小的那個。</p></li><li><p><code class="haskell">smaller (square 3)</code> 是一個函數，讀入 <code class="haskell">x</code> 之後，選擇 <code class="haskell">x</code> 與 <code class="haskell">3^2</code> 之中較小的那個。</p></li><li><p><code class="haskell">smaller . square 3</code> 有型別錯誤： <code class="haskell">square 3</code> 不是一個函數（而是一個整數），
+無法和 <code class="haskell">smaller</code> 合成。</p></li></ol></div></div><p id="para:fun-apply"><b>函數應用運算子</b> &emsp;
+本書中有些時候會將許多函數組合成一串，例如 <code class="haskell">square . double . (+1) . smaller 3</code>
+。由於函數應用的優先順序比一般二元運算元高，把上述式子應用在參數 <code class="haskell">5</code> 之上時得寫成</p><pre><code class="spec">  (square . double . (+1) . smaller 7) 5 
+</code></pre><p>（這個式子的值為 $(2\times(5+1))^2$。）
+每次都得加一對括號似乎有些累贅。Haskell 另有一個運算子<code class="haskell">($)</code>, 唸作 ``apply'', 代表函數應用：
+<span id="ix-1-23"></span></p><pre><code class="spec">($) :: (a -&gt; b) -&gt; a -&gt; b
+f $ x = f x 
+</code></pre><p><code class="haskell">f $ x</code> 和 <code class="haskell">f x</code> 意思一樣。那麼我們為何需要這個運算子呢？原因之一是
+<code class="haskell">($)</code> 的優先度比 <code class="haskell">(.)</code> 低，因此上式可省去括號改寫如下：</p><pre><code class="spec">  square . double . (+1) . smaller 7 $ 5 
+</code></pre><p>運算子 <code class="haskell">($)</code> 的另一個重要意義是：「函數應用」這個動作有了符號，
+成為可以獨立討論的事物。例如，<code class="haskell">($)</code> 可以當作參數。
+一個這麼做的例子是習題 <a href="Basics-6.html#ex:uncurry-apply">1.11 </a>。</p><p id="para:const"><b>常量函數</b> &emsp;
+既然介紹了 <code class="haskell">id</code>, 本節也順便介紹一個以後將使用到的基本組件。
+給定 <code class="haskell">x</code> 之後，函數 <code class="haskell">const x</code> 是一個 <em>不論拿到什麼函數，都傳回 <code class="haskell">x</code></em>的函數。
+函數 <code class="haskell">const</code> 的定義如下：</p><pre><code class="spec">const :: a -&gt; b -&gt; a
+const x y = x 
+</code></pre><p>第<a href="Basics-1.html#sec:evaluation">1.1 </a>節開頭的範例 <code class="haskell">three</code> 可定義為 <code class="haskell">three = const 3</code>.</p><p>「無論如何都傳回 <code class="haskell">x</code>」聽來好像是個沒用的函數，
+但和 <code class="haskell">id</code> 一樣，我們日後會看到它在演算、證明中時常用上。
+事實上，<em>組件邏輯</em>理論告訴我們：所有函數都可以由 <code class="haskell">id</code>, <code class="haskell">const</code>, 和下述的 <code class="haskell">subst</code> 三個函數組合出來。</p><pre><code class="spec">subst :: (a -&gt; b -&gt; c) -&gt; (a -&gt; b) -&gt; (a -&gt; c)
+subst f g x = f x (g x) 
+</code></pre></div><div class="navi"><div class="previous">&laquo;<a href="Basics-3.html#sec:higher-order-func">1.3 高階函數</a></div><div class="next"><a href="Basics-5.html#sec:lambda-terms">1.5 $\lambda$ 算式</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

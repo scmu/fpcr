@@ -58,7 +58,7 @@
 <li class="pure-menu-item"><a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a></li>
 <li class="pure-menu-item"><a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
+<li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" checked type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
 <li class="pure-menu-item"><a href="Induction-2.html#sec:induction-on-Nat">2.2 自然數上之歸納定義</a></li>
 <li class="pure-menu-item"><a href="Induction-3.html#sec:inductive-proof-on-Nat">2.3 自然數上之歸納證明</a></li>
 <li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists">2.4 串列與其歸納定義</a><input class="toggle" id="menu-li-2-4" type="checkbox"/><label class="menu-toggle" for="menu-li-2-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists-defn">2.4.1 串列上之歸納定義</a></li>
@@ -74,7 +74,7 @@
 <li class="pure-menu-item"><a href="Induction-8.html#sec:other-inductive-datatypes">2.8 其他歸納資料結構</a></li>
 <li class="pure-menu-item"><a href="Induction-9.html#sec:induction-set-theory">2.9 由集合論看歸納法</a></li>
 <li class="pure-menu-item"><a href="Induction-10.html#sec:induction-variations">2.10 歸納定義的簡單變化</a></li>
-<li class="pure-menu-item"><a href="Induction-11.html#sec:complete-induction">2.11 完全歸納</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:complete-induction">2.11 完全歸納</a></li>
 <li class="pure-menu-item"><a href="Induction-12.html#sec:well-founded-induction">2.12 良基歸納</a></li>
 <li class="pure-menu-item"><a href="Induction-13.html#sec:lexicographic-induction">2.13 詞典序歸納</a></li>
 <li class="pure-menu-item"><a href="Induction-14.html#sec:mutual-induction">2.14 交互歸納</a></li>
@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -143,28 +143,71 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:induction">2 歸納定義與證明</h1></div><div class="navi"><div class="previous">&laquo;<a href="Induction-10.html#sec:induction-variations">2.10 歸納定義的簡單變化</a></div><div class="next"><a href="Induction-12.html#sec:well-founded-induction">2.12 良基歸納</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:complete-induction">2.11 完全歸納</h2><p>說到遞迴定義，費氏數(Fibonacci number)
+<span id="ix-2-33"></span>是最常見的教科書例子之一。
+簡而言之，第零個費氏數是 <code class="haskell">0</code>, 第一個費氏數是 <code class="haskell">1</code>, 之後的每個費氏數是之前兩個的和。
+寫成遞迴定義如下：</p><pre><code class="spec">fib :: Nat -&gt; Nat
+fib 0      = 0
+fib 1      = 1
+fib (2+n)  = fib (1+n) + fib n 
+</code></pre><p>但這和我們之前談到的歸納定義稍有不同。
+我們已知定義 <code class="haskell">f (Suc n)</code> 時可假設 <code class="haskell">f</code> 在 <code class="haskell">n</code> 之上已有定義。
+但在 <code class="haskell">fib</code> 的定義中，<code class="haskell">fib (2+n)</code> 用到了 <code class="haskell">fib</code> 的前<em>兩個</em>值。這樣的定義是可以的嗎？</p><p>函數 <code class="haskell">fib</code> 的定義可以視為<em>完全歸納</em><span id="ix-2-34"></span>%
+（又稱作<em>強歸納</em>）的例子。
+回顧：先前介紹的數學歸納法中，使 <code class="haskell">P n</code> 成立的前提之一是「對所有 <code class="haskell">n</code>, 若 <code class="haskell">P n</code> 成立， <code class="haskell">P (Suc n)</code> 亦成立」。完全歸納則把這個前提增強如下：</p><blockquote><p>給定述語<code class="haskell">P :: Nat -&gt; Bool</code>. 若</p><ul><li><p>對所有小於 <code class="haskell">n</code> 的值 <code class="haskell">i</code>，<code class="haskell">P i</code> 皆 成立，則 <code class="haskell">P n</code> 亦成立，</p></li></ul><p>則我們可得知 <code class="haskell">P</code> 對所有自然數皆成立。</p></blockquote><p>以更形式化的方式可寫成：</p><pre><code class="equation" id="eq:complete-induction" title="完全歸納：">  |(forall n . P n)   &lt;==  (forall n . P n  &lt;== (forall i &lt; n . P i)) |</code>    (2.17 )
+</pre><p>請注意：前提 <code class="haskell">P n  &lt;== (forall i &lt; n . P i)</code> 隱含 <code class="haskell">P 0</code> 成立，因為當 <code class="haskell">n := 0</code>, 由於沒有自然數 <code class="haskell">i</code> 滿足 <code class="haskell">i &lt; n</code>, 算式 <code class="haskell">(forall i &lt; n . P i)</code> 可化簡為 <code class="haskell">True</code>.</p><p>在完全歸納法之中，證明 <code class="haskell">P n</code> 時，我們可假設 <code class="haskell">P</code> 對<em>所有</em>小於 <code class="haskell">n</code> 的值都已成立了。
+對寫程式的人來說，有了完全歸納法，表示我們日後定義自然數上的函數 <code class="haskell">f :: Nat -&gt; a</code> 時，每個 <code class="haskell">f n</code> 都可以自由使用 <code class="haskell">f</code> 在<em>所有</em>小於 <code class="haskell">n</code> 的輸入之上的值。因此 <code class="haskell">fib (2+n)</code> 可以用到 <code class="haskell">fib (1+n)</code> 與 <code class="haskell">fib n</code>, 因為 <code class="haskell">n &lt; 1+n &lt; 2+n</code>.</p><div class="theorem" id="eg:complete-induction-example"><h5 class="theorem-title">例 2.15  </h5><p>關於完全歸納，離散數學教科書中的一個常見例子是「試證明所有自然數都可寫成不相同的二的乘冪的和」，例如 $50 = 2^5 + 2^4 + 2$.
+這可用完全歸納證明。我們以半形式的方式論述如下：
+令 <code class="haskell">P n</code> 為「$n$可寫成一串不相同的二的乘冪的和」. 對所有 <code class="haskell">n</code>, 我們想要證明 <code class="haskell">P n  &lt;== (forall i &lt; n . P i)</code>. 當 <code class="haskell">n</code> 為 <code class="haskell">Zero</code>, 這一串數字即是空串列。
+當 <code class="haskell">n</code> 大於零，</p><ul><li><p>我們可找到最接近 <code class="haskell">n</code> 但不超過 <code class="haskell">n</code> 的二之乘冪，稱之為 <code class="haskell">m</code>（也就是 $m = 2^k$ 而且 $m \leq n < 2\times m$）.</p></li><li><p>由於 $n$ 不是 <code class="haskell">Zero</code>, $m$ 也不是 <code class="haskell">Zero</code>. 也因此 <code class="haskell">n - m &lt; n</code>.</p></li><li><p>依據歸納假設 <code class="haskell">(forall i &lt; n . P i)</code>, 以及 <code class="haskell">n - m &lt; n</code>, <code class="haskell">P (n-m)</code> 成立 --- <code class="haskell">n - m</code> 可以寫成不相同的二的乘冪的和。</p></li><li><p>也因此 <code class="haskell">n</code> 可寫成不相同的二的乘冪的和 --- 把 <code class="haskell">n-m</code> 加上 $m$ 即可.</p></li></ul><p>上述證明僅用口語描述，因為如果形式化地寫下這個證明，就等同於寫個將自然數轉成一串二的乘冪的程式，並證明其正確性！下述函數 <code class="haskell">binary</code> 做這樣的轉換，例如，<code class="haskell">binary 50 = [32,16,2]</code>:</p><pre><code class="haskell">binary :: Nat -&gt; List Nat
+binary Zero  = []
+binary n     = m : binary (n - m) 
+   where  m     = last (takeWhile (&lt;=n) twos)
+          twos  = iterate (2 *:) 1 
+</code></pre><p>函數 <code class="haskell">binary</code> 是一個完全歸納定義，和上述的證明對應得相當密切：串列 <code class="haskell">twos</code> 是 <code class="haskell">[1,2,4,8...]</code> 等等所有二的乘冪，<code class="haskell">m</code> 是其中最接近而不超過 <code class="haskell">n</code> 的。
+遞迴呼叫 <code class="haskell">binary (n - m)</code> 是許可的，因為 <code class="haskell">n - m &lt; n</code>, 而根據完全歸納，我們已假設對所有 <code class="haskell">i &lt; n</code>, <code class="haskell">binary i</code> 皆有定義。</p></div><p>有了完全歸納法，我們在定義自然數上的函數時可允許更靈活的函數定義：</p><pre><code class="spec">f :: Nat -&gt; a
+f b = ....                 <comment>{- 一些基底情況 -}</comment>
+f n = ... f m ... f k ...  <comment>{- 如果 <code class="haskell">m &lt; n</code> 且 <code class="haskell">k &lt; n</code> -}</comment>
+</code></pre><p><code class="haskell">f n</code> 的右手邊可以出現不只一個遞迴呼叫，只要參數都小於 <code class="haskell">n</code>.
+但我們必須<em>確定上述定義中的幾個子句足以包含所有狀況，沒有狀況被遺漏</em>。
+例如，我們若 把 <code class="haskell">fib</code> 定義中的 <code class="haskell">fib 1 = ...</code> 基底狀況去掉，
+計算 <code class="haskell">fib 2 = fib 1 + fib 0</code> 時便會出錯。</p><div class="exlist"><div class="exercise exer" id="ex:sum-binary"><h5 class="exercise-title">練習 2.43 </h5><p>證明 <code class="haskell">sum (binary n) = n</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-43" type="checkbox"/><label class="lbl-toggle" for="ans-2-43">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>使用完全歸納。</p><p><strong>狀況</strong> <code class="haskell">n := Zero</code>: 等號兩邊都歸約為 <code class="haskell">[]</code>.</p><p><strong>狀況</strong> <code class="haskell">n &gt; Zero</code>。
+假設對於任何 <code class="haskell">0 &lt;= i &lt; n</code>, <code class="haskell">sum (binary i) = i</code>.</p><pre><code class="spec">   sum (binary n) =
+=    <comment>{- 令 <code class="haskell">m = last (takeWhile (&lt;=n) twos)</code>, <code class="haskell">sum</code> 之定義 -}</comment>
+   m + sum (binary (n - m))
+=    <comment>{- 因 <code class="haskell">n - m &lt; n</code>, 歸納假設 -}</comment>
+   m + (n - m)
+=  n 
+</code></pre></div></div><div class="exercise exer" id="ex:fib-alpha"><h5 class="exercise-title">練習 2.44 </h5><p>證明當 <code class="haskell">n &gt;= 1</code>, <code class="haskell">fib (2+n) &gt; {-"\alpha^n"-}</code>, 其中
+$\alpha = (1+\sqrt{5})/2$. 這個證明可用 <code class="haskell">n := 1</code> 和 <code class="haskell">n := 2</code> 當基底狀況。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-44" type="checkbox"/><label class="lbl-toggle" for="ans-2-44">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>本證明的關鍵性質是 $\alpha^2 = (3+\sqrt{5})/2 = \alpha + 1$.
+使用完全歸納證明 <code class="haskell">fib (2+n) &gt; {-"\alpha^n"-}</code>，以 <code class="haskell">n := 1</code> 和 <code class="haskell">n := 2</code> 當基底狀況。</p><p><strong>狀況</strong> <code class="haskell">n := 1</code>: <code class="haskell">fib 3 = 2 &gt; {-"\alpha"-}</code>.</p><p><strong>狀況</strong> <code class="haskell">n := 2</code>: <code class="haskell">fib 4 = 3 &gt; {-"(3+\sqrt{5})/2 = \alpha^2"-}</code>.</p><p><strong>狀況</strong> <code class="haskell">n := 2+n</code> 且 <code class="haskell">2+n &gt; 4</code>。
+假設對於任何 <code class="haskell">3 &lt;= i &lt; 2+n</code>, <code class="haskell">fib i &gt; {-"\alpha^{i-2}"-}</code>. 論證：</p><pre><code class="spec">    fib (2+n)
+ =  fib (1+n) + fib n
+ &gt;    <comment>{- 歸納假設 -}</comment>
+    <comment>{-"\alpha^{n-1}"-}</comment> + <comment>{-"\alpha^{n-2}"-}</comment>
+ =    <comment>{- 提出 $\alpha^{n-2}$-}</comment>
+    <comment>{-"(\alpha + 1) \times \alpha^{n-2}"-}</comment>
+ =    <comment>{- $\alpha^2 = \alpha + 1$ -}</comment>
+    <comment>{-"\alpha^2 \times \alpha^{n-2}"-}</comment>
+ =  <comment>{-"\alpha^n"-}</comment> 
+</code></pre></div></div></div><p><b>完全歸納 vs 簡單歸納</b> &emsp;
+完全歸納有個較早的稱呼：<em>強歸納</em>(strong induction)。<span id="ix-2-35"></span>
+原本的歸納法則相對被稱呼為<em>簡單歸納</em>或<em>弱歸納</em>。
+強/弱歸納的稱呼可能使人以為完全歸納比簡單歸納更強 --- 意謂前者能證明出一些後者無法證明的定理。
+事實上，完全歸納與簡單歸納是等價的：能用一個方法證出的定理，用另一個方法也能證出。
+因此，使用哪一個純粹只是方便性的考量。</p><p>反應在程式設計上，給任一個完全歸納定義函數 <code class="haskell">f :: Nat -&gt; A</code>, 我們總能做出一個以簡單歸納定義的函數 <code class="haskell">fs :: Nat -&gt; List A</code>,
+滿足 <code class="haskell">fs n = map f [n, n-1, ... 0]</code>.
+例如，函數 <code class="haskell">fibs n</code> 傳回 <code class="haskell">[fib n, fib (n-1).., fib 0]</code>.</p><pre><code class="haskell">fibs :: Nat -&gt; List Nat
+fibs 0        = [0]
+fibs 1        = [1,0]
+fibs (Suc n)  = (x1+x0) : x1 : x0 : xs  
+    where (x1:x0:xs) = fibs n 
+</code></pre><p>由 <code class="haskell">fib</code> 到 <code class="haskell">fibs</code> 的轉換可能令讀者想起演算法中的<em>動態規劃</em>(<em>dynamic programming</em>)<span id="ix-2-36"></span>。我們將在日後談到這個話題。</p><p><b>串列上的完全歸納</b> &emsp;
+串列與自然數是類似的資料結構。串列上的完全歸納原則便是將 <code class="haskell">Zero</code> 代換為 <code class="haskell">[]</code>,
+將 <code class="haskell">Suc</code> 代換為 <code class="haskell">(x:)</code>. 至於「小於」的關係，可定義為：</p><pre><code class="spec">ys &lt; xs  &lt;=&gt; ys ∈ tails xs ⋀ ys /= xs 
+</code></pre><p>也就是說 <code class="haskell">ys</code> 是 <code class="haskell">xs</code> 的一個後段，但不是 <code class="haskell">xs</code> 自己。
+有了如上定義，串列上的完全歸納法是：</p><pre><code class="equation" title="串列的完全歸納：">|(forall xs . P xs)   &lt;==  (forall xs . P xs  &lt;== (forall ys &lt; xs . P ys)) |</code>    (2.18 )
+</pre><p>應用在編程上，當定義 <code class="haskell">f (xs:)</code> 時，遞迴呼叫可作用在 <code class="haskell">xs</code> 的任何後段上。</p><p>但對許多串列上的函數而言，這樣的模式還不夠靈活。我們得用下一節說到的良基歸納。</p></div><div class="navi"><div class="previous">&laquo;<a href="Induction-10.html#sec:induction-variations">2.10 歸納定義的簡單變化</a></div><div class="next"><a href="Induction-12.html#sec:well-founded-induction">2.12 良基歸納</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

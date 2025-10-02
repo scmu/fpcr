@@ -110,7 +110,7 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
 <li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
@@ -132,7 +132,7 @@
 <li class="pure-menu-item"><a href="SegProblems-2.html#sec:maximum-plateau-length">7.2 最長高原問題</a></li>
 <li class="pure-menu-item"><a href="SegProblems-3.html#sec:segProblems-ref">7.3 參考資料</a></li>
 </ul></li>
-<li class="pure-menu-item"><a href="Monads.html#ch:monads">8 單子與副作用</a><input class="toggle" id="menu-li-8" type="checkbox"/><label class="menu-toggle" for="menu-li-8"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Monads-1.html#sec:exceptions">8.1 例外處理</a></li>
+<li class="pure-menu-item"><a href="Monads.html#ch:monads">8 單子與副作用</a><input class="toggle" id="menu-li-8" checked type="checkbox"/><label class="menu-toggle" for="menu-li-8"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-selected pure-menu-item"><a href="#sec:exceptions">8.1 例外處理</a></li>
 <li class="pure-menu-item"><a href="Monads-2.html#sec:monad-class-laws">8.2 單子與單子律</a></li>
 <li class="pure-menu-item"><a href="Monads-3.html#sec:monad-reader">8.3 讀取單子</a><input class="toggle" id="menu-li-8-3" type="checkbox"/><label class="menu-toggle" for="menu-li-8-3"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Monads-3.html#sec:var-env-reader">8.3.1 變數與環境</a></li>
 <li class="pure-menu-item"><a href="Monads-3.html#sec:reader-is-monad">8.3.2 「讀取」副作用是單子</a></li>
@@ -143,28 +143,73 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
+<div id="main"><div class="header"><h1 class="chapter" id="ch:monads">8 單子與副作用</h1></div><div class="navi"><div class="previous">&laquo;<a href="Monads.html#ch:monads">8 單子與副作用</a></div><div class="next"><a href="Monads-2.html#sec:monad-class-laws">8.2 單子與單子律</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:exceptions">8.1 例外處理</h2><p><span id="ix-8-1"></span></p><p>假設我們添了一個整數除法運算元：</p><pre><code class="spec">data Expr = Num Int | Neg Expr | Add Expr Expr | Div Expr Expr  
+</code></pre><p>我們便碰到了一個小難題：要怎麼處理分母是零的狀況呢？</p><p>Haskell 的 <code class="haskell">div</code> 函數可做整數除法。碰到分母為零時，<code class="haskell">div</code> 和大部分語言的除法函數一樣讓整個程式當掉。我們不希望程式當掉，因此得在呼叫 <code class="haskell">div</code> 前先檢查一下分母是否為零。但當分母真為零，<code class="haskell">eval</code> 應該傳回什麼呢？</p><pre><code class="spec">eval (Div e0 e1) =  let v1 = eval e1
+                    in if v1 /= 0 then eval e0 `div` v1 else ???
+</code></pre><p><b>用 |Maybe| 表達部份函數</b> &emsp;
+一種看法是，有了除法後，<code class="haskell">eval</code> 對於某些輸入沒有對應的值，因此 <code class="haskell">eval</code> 成了一個部份 (partial) 函數。<span id="ix-8-2"></span></p><p>操作上，我們希望 Haskell 提供拋出例外的功能，<code class="haskell">eval</code> 無值可傳的時候便拋出例外。在程式的另外某處可能接住這些例外，另行處理。
+本章開頭提及，一個傳回 <code class="haskell">Int</code>、但可能拋出例外的函數可用傳回 <code class="haskell">Except Int</code> 的全函數來模擬。<code class="haskell">Except</code> 再給一次如下：</p><pre><code class="spec">data Except b = Expt String | Return b 
 
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
+</code></pre><p>我們把 <code class="haskell">eval</code> 的型別改為 <code class="haskell">Expr -&gt; Except Int</code>, 正常運算結束便傳回 <code class="haskell">Return</code>, 碰到分母為零的情形則傳回 <code class="haskell">Expt</code>.</p><p>這個版本的 <code class="haskell">eval</code> 該怎麼寫呢？碰到 <code class="haskell">Num n</code> 自然是傳回 <code class="haskell">Return n</code>:</p><pre><code class="spec">eval (Num n) = Return n 
+</code></pre><p>處理 <code class="haskell">Neg e</code> 的條款則比以前稍微複雜了。我們得檢查 <code class="haskell">eval e</code> 的結果，若是 <code class="haskell">Return v</code>，應傳回 <code class="haskell">-v</code>，但也需包上一個 <code class="haskell">Return</code>. 如果遇到 <code class="haskell">Expt msg</code>, 表示 <code class="haskell">e</code> 的運算失敗了，我們只好把 <code class="haskell">Expt msg</code> 再往上傳。</p><pre><code class="spec">eval (Neg e) =  case eval e of
+                  Return v  -&gt; Return (-v)
+                  Expt msg  -&gt; Expt msg  
+</code></pre><p><code class="haskell">Add</code> 的情況下，程式碼看來更冗長了些：</p><pre><code class="spec">eval (Add e0 e1) =  case eval e0 of
+                     Return v0  -&gt;  case eval e1 of
+                                      Return v1  -&gt; Return (v0 + v1)
+                                      Expt msg   -&gt; Expt msg
+                     Expt msg   -&gt;  Expt msg  
+</code></pre><p>我們得分別檢查 <code class="haskell">eval e0</code> 與 <code class="haskell">eval e1</code> 的結果是 <code class="haskell">Return</code> 或是 <code class="haskell">Expt</code>，因此用兩層 <code class="haskell">case</code> 分出了四個狀況 --- 雖然它們是重複性很高的程式碼。
+最後是 <code class="haskell">Div e0 e1</code> 的情況，我們先計算 <code class="haskell">e1</code>, 如果是零的話傳回 <code class="haskell">Expt</code>, 含錯誤訊息 <code class="haskell">"division by zero"</code>, 否則做除法運算。
+在這過程中我們也需要許多 <code class="haskell">case</code> ：</p><pre><code class="spec">eval (Div e0 e1) =  case eval e1 of
+                     Return 0   -&gt;  Expt "division by zero"
+                     Return v1  -&gt;  case eval e0 of
+                                      Return v0  -&gt; Return (v0 `div` v1)
+                                      Expt msg   -&gt; Expt msg
+                     Expt msg   -&gt;  Expt msg  
+</code></pre><p>很自然地，我們會希望把這些例行公事抽象掉。</p><p><b>|Except| 作為單子</b> &emsp;
+再看一次處理 <code class="haskell">Neg</code> 的條款：</p><pre><code class="spec">eval (Neg e) =  case eval e of
+                  Return v  -&gt; Return (-v)
+                  Expt msg  -&gt; Expt msg 
+</code></pre><p>我們真正想表達的僅是「把 <code class="haskell">eval e</code> 的結果送給 <code class="haskell">\v -&gt; Return (-v)</code> --- 如果有結果的話」。這只是多加了一點手續的函數應用 (application)。回想 Haskell 有個函數應用運算元<code class="haskell">($) :: (a -&gt; b) -&gt; a -&gt; b</code>.
+給定 <code class="haskell">f :: a -&gt; b</code> 和 <code class="haskell">x :: a</code>, 那麼 <code class="haskell">f $ x</code> 就是把 <code class="haskell">x</code> 餵給 <code class="haskell">f</code>（也就是 <code class="haskell">f x</code>）。
+也許我們可以自己定義一個函數應用運算元 <code class="haskell">(=&lt;&lt;)</code>. 概念上，<code class="haskell">f =&lt;&lt; x</code> 仍是把 <code class="haskell">x</code> 餵給 <code class="haskell">f</code>，但 <code class="haskell">x</code> 的型別是 <code class="haskell">Except a</code>, <code class="haskell">f</code> 的型別是 <code class="haskell">a -&gt; Except b</code>, 而「檢查 <code class="haskell">x</code> 是 <code class="haskell">Return</code> 或 <code class="haskell">Expt</code>」的動作就可藏在 <code class="haskell">(=&lt;&lt;)</code> 之中（讀者可把 <code class="haskell">(=&lt;&lt;)</code> 的型別和 <code class="haskell">($)</code> 做比較）：</p><pre><code class="spec">(=&lt;&lt;) :: (a -&gt; Except b) -&gt; Except a -&gt; Except b
+f =&lt;&lt; Return x  = f x
+f =&lt;&lt; Expt msg  = Expt msg 
+</code></pre><p>如此一來，<code class="haskell">eval (Neg e)</code> 的條款可簡潔地寫成：</p><pre><code class="spec">eval (Neg e) = (\v -&gt; Return (-v)) =&lt;&lt; eval e  
 
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+</code></pre><p> 如果定義 <code class="haskell">negate x = -x</code>, 上式的右手邊可以更簡潔地寫成 <code class="haskell">Return . negate =&lt;&lt; eval e</code>.</p><p>但，目前較常見的習慣是把這個運算子的左右顛倒：參數寫前面，函數寫後面。也就是定義:</p><pre><code class="spec">(&gt;&gt;=) : Except a -&gt; (a -&gt; Except b) -&gt; Except b
+Just x   &gt;&gt;= f = f x
+Nothing  &gt;&gt;= f = Nothing 
+</code></pre><p>運算子 <code class="haskell">(&gt;&gt;=)</code> 唸作 ``bind'', 是我們將會細談的重要元素。
+有了它，函數 <code class="haskell">eval</code> 的前兩個條款可以改寫如下：</p><pre><code class="spec">eval (Num n)  = return n
+eval (Neg e)  = eval e &gt;&gt;= \v -&gt; return (-v) 
+</code></pre><p>我們把 <code class="haskell">Return</code> 寫成函數：<code class="haskell">return = Return</code>。等下會解釋為什麼。
+注意：依照 Haskell 的運算元優先順序，
+<code class="haskell">m &gt;&gt;= \v -&gt; e</code> 會被理解成 <code class="haskell">m &gt;&gt;= (\v -&gt; e)</code>.
+<code class="haskell">Add</code> 和 <code class="haskell">Div</code> 的情況也可以用 <code class="haskell">(&gt;&gt;=)</code> 改寫:</p><pre><code class="spec">eval (Add e0 e1) =  eval e0  &gt;&gt;= \v0 -&gt;
+                    eval e1  &gt;&gt;= \v1 -&gt;
+                    return (v0 + v1)
+eval (Div e0 e1) =  eval e1  &gt;&gt;= \v1 -&gt;
+                    if v1 == 0 then throw "division by zero"
+                    else  eval e0 &gt;&gt;= \v0 -&gt;
+                          return (v0 `div` v1) 
+</code></pre><p>此處我們把 <code class="haskell">Expt</code> 寫成 <code class="haskell">throw</code>.</p><p>如此一來，我們的程式變得簡短了一些。例如，<code class="haskell">eval (Add e0 e1)</code> 直覺上彷彿在說「把 <code class="haskell">eval e0</code> 的結果叫做 <code class="haskell">v0</code>, <code class="haskell">eval e1</code> 的結果叫做 <code class="haskell">v1</code>, 然後傳回 <code class="haskell">v0 + v1</code>」，至於判斷 <code class="haskell">eval e0</code> 與 <code class="haskell">eval v1</code> 到底是 <code class="haskell">Return</code> 還是 <code class="haskell">Expt</code> 的動作則藏在 <code class="haskell">(&gt;&gt;=)</code> 之中了。
+但引入 <code class="haskell">(&gt;&gt;=)</code> 這個抽象的用意並不只是把程式變短，而是可推廣到其他的副作用之上。這將是接下來幾小節的主題。</p><p>提醒一下：
+有些讀者可能認為 <code class="haskell">eval</code> 的後兩個條款看來像命令式語言：<code class="haskell">eval e1 &gt;&gt;= \v1 -&gt; ..</code> 看來就像是 <code class="haskell">v1 := eval e1</code> --- 把 <code class="haskell">eval e1</code> 的值寫到 <code class="haskell">v1</code> 中。
+但其實 <code class="haskell">(&gt;&gt;=)</code> 並沒有賦值（改變變數現有的值）之意，要做比較的話，它更像是增強版的 <code class="haskell">let</code>.
+算式 <code class="haskell">p &gt;&gt;= \x -&gt; e</code> 就像是 <code class="haskell">let x = p in e</code>.
+兩者都是「把 <code class="haskell">p</code> 的值算出，給予一個名字 <code class="haskell">x</code>, 然後計算 <code class="haskell">e</code>」。
+差別則是：</p><ul><li><p><code class="haskell">let</code> 處理純的值：在 <code class="haskell">let x = p in e</code> 之中，如果 <code class="haskell">p</code> 的型別是 <code class="haskell">a</code>, <code class="haskell">x</code> 的型別也是 <code class="haskell">a</code>; 算式 <code class="haskell">e</code> 的型別若是 <code class="haskell">b</code>, 整個式子的型別也是 <code class="haskell">b</code>; <code class="haskell">e</code> 的型別相同。</p></li><li><p><code class="haskell">(&gt;&gt;=)</code> 處理含有 <code class="haskell">Except</code> 的值：在 <code class="haskell">p &gt;&gt;= \x -&gt; e</code> 之中，</p><ul><li><p><code class="haskell">p</code> 的型別得有 <code class="haskell">Except</code>. 如果 <code class="haskell">p</code> 的型別是 <code class="haskell">Except a</code>, 則 <code class="haskell">x</code> 的型別是 <code class="haskell">a</code>;</p></li><li><p><code class="haskell">e</code> 的型別得有 <code class="haskell">Except</code>. 如果 <code class="haskell">e</code> 的型別是 <code class="haskell">Except b</code>, 整個式子的型別也是 <code class="haskell">Except b</code>.</p></li><li><p>因此 <code class="haskell">\x -&gt; e</code> 是一個型別為 <code class="haskell">a -&gt; Except b</code> 的函數。</p></li></ul></li></ul><p><b>捕捉例外</b> &emsp;
+最後，我們可以定義一個捕捉例外的運算子。算式 <code class="haskell">catch p hdl</code> 嘗試配對 <code class="haskell">p</code> 的值，
+如果是 <code class="haskell">Return x</code>, 就傳回結果 <code class="haskell">x</code>；如果是 <code class="haskell">Expt msg</code>, 就把錯誤訊息 <code class="haskell">msg</code> 交給例外處理函數 <code class="haskell">hdl</code>。
+當 <code class="haskell">p</code> 的型別是 <code class="haskell">Except a</code>, <code class="haskell">catch p hdl</code> 的型別也是 <code class="haskell">a</code>, 而 <code class="haskell">hdl</code> 的型別必須是 <code class="haskell">String -&gt; a</code>:</p><pre><code class="spec">catch :: Except a -&gt; (String -&gt; a) -&gt; a
+catch (Return x)  hdl = x
+catch (Expt msg)  hdl = hdl msg 
+</code></pre><p>例如，下式嘗試計算 <code class="haskell">e</code> 並把結果轉成字串。如果 <code class="haskell">e</code> 能正常計算，字串會是 <code class="haskell">"Result:"</code> 開頭，否則是 <code class="haskell">"Error:"</code> 開頭：</p><pre><code class="spec">   catch (eval e)  (\v -&gt; "Result: " ++ show v)
+                   (\msg -&gt; "Error: " ++ msg)  
+</code></pre><p>下式則無論如何都傳回 <code class="haskell">Int</code>, 如果 <code class="haskell">e</code> 之中出現了分母為零的除法，我們便傳回 <code class="haskell">65536</code>:</p><pre><code class="spec">   catch (eval e) id (const 65536) 
+</code></pre></div><div class="navi"><div class="previous">&laquo;<a href="Monads.html#ch:monads">8 單子與副作用</a></div><div class="next"><a href="Monads-2.html#sec:monad-class-laws">8.2 單子與單子律</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

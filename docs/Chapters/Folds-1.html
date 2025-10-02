@@ -110,8 +110,8 @@
 <li class="pure-menu-item"><a href="Derivation-6.html#sec:difference-list">5.6.6 函數作為串列</a></li>
 </ul></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-1.html#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
-<li class="pure-menu-item"><a href="Folds-1.html#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
+<li class="pure-menu-item"><a href="Folds.html#ch:fold">6 摺</a><input class="toggle" id="menu-li-6" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-selected pure-menu-item"><a href="#sec:folds-on-lists">6.1 串列的摺</a><input class="toggle" id="menu-li-6-1" checked type="checkbox"/><label class="menu-toggle" for="menu-li-6-1"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="#sec:more-folds-on-lists">6.1.1 更多串列上的摺</a></li>
+<li class="pure-menu-item"><a href="#sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</a></li>
 </ul></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a><input class="toggle" id="menu-li-6-2" type="checkbox"/><label class="menu-toggle" for="menu-li-6-2"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-fusion-theorem-proof">6.2.1 將摺融合用於定理證明</a></li>
 <li class="pure-menu-item"><a href="Folds-2.html#sec:foldr-program-gen">6.2.2 以摺融合生成程式</a></li>
@@ -143,28 +143,72 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div><div class="content"><p><span id="ix-6-1"></span></p><p>第<a href="Induction.html#ch:induction">2 </a>章中的許多歸納函數定義都循著同一個固定模式。
-以 <code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 為例：</p><pre><code class="spec">sum :: List Int -&gt; Int
-sum []      = <comment>{-"{\color{burntorange}"-}</comment>0<comment>{-"}"-}</comment>
-sum (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>x  +<comment>{-"}\,"-}</comment> sum xs 
-
-length :: List a -&gt; Nat
-length []      = <comment>{-"{\color{burntorange}"-}</comment>Zero<comment>{-"}"-}</comment>
-length (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>Suc<comment>{-"}"-}</comment> (length xs) 
-
-map :: (a -&gt; b) -&gt; List a -&gt; List b
-map f []      = <comment>{-"{\color{burntorange}"-}</comment>[]<comment>{-"}"-}</comment>
-map f (x:xs)  = <comment>{-"{\color{burntorange}"-}</comment>f x  :<comment>{-"\,}"-}</comment> map f xs 
-</code></pre><p>它們都在輸入為 <code class="haskell">[]</code> 時傳回某個基底值，在輸入為 <code class="haskell">x:xs</code> 時在 <code class="haskell">xs</code> 上遞迴呼叫，
-並將呼叫結果稍作加工。
-三者的不同之處只在橘色的部分，即基底值以及用於加工的函數：<code class="haskell">sum</code> 使用 <code class="haskell">0</code> 與 <code class="haskell">(+)</code>, <code class="haskell">length</code> 使用 <code class="haskell">Zero</code> 與 <code class="haskell">Suc</code>, <code class="haskell">map f</code> 則使用 <code class="haskell">[]</code> 與 <code class="haskell">(f x :)</code>.
-如果說「抽象化」是一個高階程式語言給我們的最重要能力，我們能否將這個模式抽象出來呢？</p><p>我們把上述三個定義中橘色的部分抽出變成參數，將餘下的函數稱為 <code class="haskell">foldr</code>:</p><pre><code class="spec">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
-foldr f e []      = e
-foldr f e (x:xs)  = f x (foldr f e xs) 
-</code></pre><p>如此一來，<code class="haskell">sum</code>, <code class="haskell">length</code>, 與 <code class="haskell">map f</code> 都是 <code class="haskell">foldr</code> 的特例：</p><pre><code class="spec">sum     = foldr (+) 0 
-length  = foldr (\x n -&gt; Suc n) Zero 
-map f   = foldr (\x ys -&gt; f x : ys) [] 
-</code></pre><p>函數 <code class="haskell">foldr</code> 是串列上的「摺(fold)」 --- <code class="haskell">foldr</code> 一詞是 fold 與「右邊(right)」的縮寫，意謂該函數是一個往右結合的摺。我們將在下一節解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Derivation-6.html#sec:accumulating-param">5.6 累積參數</a></div><div class="next"><a href="Folds-1.html#sec:folds-on-lists">6.1 串列的摺</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:fold">6 摺</h1></div><div class="navi"><div class="previous">&laquo;<a href="Folds.html#ch:fold">6 摺</a></div><div class="next"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:folds-on-lists">6.1 串列的摺</h2><p>「摺」有許多方式可理解。
+我們可說 <code class="haskell">foldr</code> 捕捉了最常見的一種歸納定義模式，並將它形式化地表達出來。
+在第<a href="Induction.html#ch:induction">2 </a>章中，許多函數定義都遵循這樣的模式：</p><pre><code class="spec">h :: List a -&gt; b
+h []      = e
+h (x:xs)  = ... x ... h xs ...
+</code></pre><p>在 <code class="haskell">h []</code> 的情況傳回某個基底值；在 <code class="haskell">h (x:xs)</code> 的情況中可使用 <code class="haskell">x</code> 與 <code class="haskell">h xs</code> 的值。
+如果上述定義中 <code class="haskell">...</code> 之處<em>沒有出現 <code class="haskell">xs</code></em>, 則 <code class="haskell">h</code> 的定義就能寫成一個 <code class="haskell">foldr</code>.</p><p>我們也可將 <code class="haskell">foldr</code> 視為組件(combinator)函數之一。<span id="ix-6-1"></span>
+第<a href="Basics-8.html#sec:list-combinators">1.8.3 </a>節之中介紹了組件函數的觀念：
+如同 <code class="haskell">map</code>, <code class="haskell">take</code>, <code class="haskell">drop</code>, <code class="haskell">zip</code> 等等的組件函數捕捉了常見的程式設計模式。
+每個組件負責一項單一、通用、易重用的功能。
+函數 <code class="haskell">foldr</code> 也可視為一個組件，只是它比一些其他組件更抽象、更通用 --- 我們稍後將發現許多我們見過的組件函數都是 <code class="haskell">foldr</code> 的特例。</p><p>還有一個理解 <code class="haskell">foldr</code> 的方式：<code class="haskell">foldr</code> 替換了串列中的建構元。
+回顧：任何有限長度的串列都是由 <code class="haskell">[]</code> 開始，有限次地套用 <code class="haskell">(:)</code> 而來。
+例如 <code class="haskell">[x0,x1,x2]</code> 是 <code class="haskell">x0 : (x1 : (x2 : []))</code> 的簡寫。
+考慮 <code class="haskell">foldr oplus e [x0,x1,x2]</code>:</p><pre><code class="spec">     foldr oplus e (x0 : (x1 : (x2 : [])))
+===  x0 ⊕ foldr oplus e (x1 : (x2 : []))
+===  x0 ⊕ (x1 ⊕ foldr oplus e (x2 : []))
+===  x0 ⊕ (x1 ⊕ (x2 ⊕ foldr oplus e []))
+===  x0 ⊕ (x1 ⊕ (x2 ⊕ e)) 
+</code></pre><p>我們可看到 <code class="haskell">foldr</code> 將串列走訪一次，將每個 <code class="haskell">(:)</code> 替換成 <code class="haskell">oplus</code>, 將 <code class="haskell">[]</code> 替換成 <code class="haskell">e</code>.
+式子中的括號往右邊結合，這是 <code class="haskell">foldr</code> 的名字中字母 <code class="haskell">r</code> 的由來。
+這種理解也便於解釋 <code class="haskell">foldr</code> 的型別。
+回想串列的兩個建構元，</p><ul><li><p><code class="haskell">[]</code> 的型別是 <code class="haskell">List a</code>,</p></li><li><p><code class="haskell">(:)</code> 的型別是 <code class="haskell">a -&gt; List a -&gt; List a</code>.</p></li></ul><p>函數 <code class="haskell">foldr oplus e</code> 接收一個 <code class="haskell">List a</code>，把其中的建構元分別替換為 <code class="haskell">e</code> 與 <code class="haskell">oplus</code>，藉此算出一個型別為 <code class="haskell">b</code> 的值。因此，</p><ul><li><p><code class="haskell">e</code> 是輸入為 <code class="haskell">[]</code> 時立刻傳回的值，其型別必須是 <code class="haskell">b</code>.</p></li><li><p>至於 <code class="haskell">oplus</code> 的型別，考慮 <code class="haskell">x0 ⊕ (x1 ⊕ (x2 ⊕ e))</code> 這個式子。
+其中 <code class="haskell">x0</code> 的型別為 <code class="haskell">a</code>, <code class="haskell">x1 ⊕ (x2 ⊕ e)</code> 是建構元已被替換過的串列，型別應該為 <code class="haskell">b</code>.
+而 <code class="haskell">oplus</code> 拿到這兩個輸入後，得算出一個型別為 <code class="haskell">b</code> 的值.
+因此 <code class="haskell">oplus</code> 的型別為 <code class="haskell">a -&gt; b -&gt; b</code>.</p></li></ul><p>注意：<code class="haskell">e</code> 與 <code class="haskell">oplus</code> 的型別分別是將 <code class="haskell">[]</code> 與 <code class="haskell">(:)</code> 的型別中的 <code class="haskell">List a</code> 代換成 <code class="haskell">b</code> 而來。
+綜合言之，
+<code class="haskell">foldr</code> 的型別是 <code class="haskell">(a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b</code>.</p><p>為方便說明，此後我們將 <code class="haskell">foldr oplus e</code> 之中的 <code class="haskell">e</code> 稱作<em>基底值</em>(<em>base value</em>)<span id="ix-6-2"></span>，將 <code class="haskell">oplus</code> 稱作<em>步驟函數</em>(<em>step function</em>)<span id="ix-6-3"></span>.
+函數 <code class="haskell">foldr</code> 的型別可以理解為：給一個型別為 <code class="haskell">a -&gt; b -&gt; b</code> 的步驟函數，和一個型別為 <code class="haskell">b</code> 的基底值，<code class="haskell">foldr</code> 就能將一個 <code class="haskell">List a</code> 轉換為 <code class="haskell">b</code>.</p><p>串列的摺(<code class="haskell">foldr</code>)只是一個常用的特例 ---「將資料結構中的建構元代換掉」的動作也可推廣到其他資料結構上。
+我們在之後的章節中將看到一些其他資料結構上的摺。</p><p>下一節將舉更多使用 <code class="haskell">foldr</code> 的例子。
+在那之前我們再次提醒讀者：在 <code class="haskell">foldr oplus e (x:xs)</code> 的狀況中，<code class="haskell">oplus</code> 可以使用 <code class="haskell">x</code> 與 <code class="haskell">foldr oplus e xs</code> 的結果，但不能直接使用 <code class="haskell">xs</code>.</p><h3 class="subsection" id="sec:more-folds-on-lists">6.1.1 更多串列上的摺</h3><p>回顧起來，我們可發現第<a href="Induction.html#ch:induction">2 </a>章介紹的許多函數都是 <code class="haskell">foldr</code>.</p><div class="theorem" id="eg:foldr"><h5 class="theorem-title">例 6.1  </h5><p>以下函數都可寫成 <code class="haskell">foldr</code>:</p><ul><li><p><code class="haskell">concat = foldr (++) []</code>.</p></li><li><p><code class="haskell">filter p = foldr (\ x xs -&gt; if p x then x:xs else xs) []</code>,</p></li><li><p><code class="haskell">takeWhile p = foldr (\x xs -&gt; if p x then x:xs else []) []</code>,</p></li><li><p><code class="haskell">elem x = foldr (\y b -&gt; x == y ⋁ b) False</code>,</p></li><li><p><code class="haskell">all p = foldr (\x b -&gt; p x ⋀ b) True</code>.</p></li></ul></div><p>串列連接 <code class="haskell">(++) :: List a -&gt; List a -&gt; List a</code> 雖是個二元運算，
+若將 <code class="haskell">(++ ys) :: List a -&gt; List a</code> 視為一個函數，它可寫成一個 <code class="haskell">foldr</code>:</p><pre><code class="spec"> (++ ys) = foldr (:) ys 
+</code></pre><p>一個重要的特例是當 <code class="haskell">ys = []</code> 時。對任何 <code class="haskell">xs</code>, <code class="haskell">xs ++ [] = xs</code>. 因此 <code class="haskell">(++[])</code> 是串列上的 <code class="haskell">id</code>:</p><pre><code class="spec">id :: List a -&gt; List a
+id = foldr (:) [] 
+</code></pre><p>確實，將一個串列中的 <code class="haskell">(:)</code> 代換成 <code class="haskell">(:)</code>, <code class="haskell">[]</code> 代換成 <code class="haskell">[]</code>, 我們還是得到原來的串列。
+我們日後還會用到「串列上的 <code class="haskell">id</code> 是一個 <code class="haskell">foldr</code>」的性質。</p><p>計算所有前段的函數 <code class="haskell">inits :: List a -&gt; List (List a)</code> 可寫成 <code class="haskell">foldr</code>:
+<span id="ix-6-4"></span></p><pre><code class="haskell">inits = foldr (\x xss -&gt; [] : map (x:) xss) [[]] 
+</code></pre><p>計算所有後段的 <code class="haskell">tails :: List a -&gt; List (List a)</code> 也可以寫成 <code class="haskell">foldr</code>，但需要用一個小性質。
+回顧其定義：
+<span id="ix-6-5"></span></p><pre><code class="spec">tails []      = [[]]
+tails (x:xs)  = (x:xs) : tails xs 
+</code></pre><p>乍看之下這不符合 <code class="haskell">foldr</code> 的模式：參數 <code class="haskell">xs</code> 出現在 <code class="haskell">... : tails xs</code> 的左邊，但在 <code class="haskell">foldr</code> 的模式中，<code class="haskell">xs</code> 不能出現在遞迴呼叫之外。
+幸好 <code class="haskell">tails</code> 有一個剛好在此有用的小特性：<code class="haskell">tails xs</code> 傳回的所有後段中，第一個就是 <code class="haskell">xs</code> 本身：<code class="haskell">head (tails xs) = xs</code>.
+因此我們可將 <code class="haskell">tails</code> 寫成：</p><pre><code class="haskell">tails = foldr (\x xss -&gt; (x : head xss) : xss) [[]] 
+</code></pre><p>由於 <code class="haskell">tails</code> 永遠傳回非空串列，使用 <code class="haskell">head xss</code> 是安全的。</p><div class="exlist"><div class="exercise exer" id="ex:perms-sublists-splits-foldr"><h5 class="exercise-title">練習 6.1 </h5><p>請將以下函數寫成 <code class="haskell">foldr</code>:</p><ol><li><p><code class="haskell">perms :: List a -&gt; List (List a)</code> (見第<a href="Induction-6.html#sec:fan-perm">2.6.4 </a>節),</p></li><li><p><code class="haskell">sublists :: List a -&gt; List (List a)</code> (見第<a href="Induction-6.html#sec:fan-perm">2.6.4 </a>節),</p></li><li><p><code class="haskell">splits :: List a -&gt; List (List a × List a)</code> （見習題<a href="Induction-6.html#ex:splits">2.27 </a>）。</p></li></ol></div><div class="wrap-collabsible"><input class="toggle" id="ans-6-1" type="checkbox"/><label class="lbl-toggle" for="ans-6-1">顯示答案</label><div class="collapsible-content"><h5>答案</h5><ol><li><p><code class="haskell">perms = foldr (\x xss -&gt; concat (map (fan x) xss)) [[]]</code></p></li><li><p><code class="haskell">sublists = foldr (\x xss -&gt; xss ++ map (x:) xss) [[]]</code></p></li><li><p><code class="haskell">splits</code> 可定義如下：</p></li></ol><pre><code class="haskell">splits = foldr spl [([],[])] 
+  where  spl x ((xs,ys):zss) =
+           ([],x:xs++ys) : map ((x:) *** id) ((xs,ys):zss) 
+</code></pre></div></div></div><h3 class="subsection" id="sec:not-foldr">6.1.2 不是 <code class="haskell">foldr</code> 的函數</h3><p>並非所有輸入為串列的函數都是 <code class="haskell">foldr</code>.
+最明顯的例子是 <code class="haskell">tail</code>: 我們無法由 <code class="haskell">x</code> 和 <code class="haskell">tail xs</code> 算出 <code class="haskell">tail (x:xs)</code>。
+例如，<code class="haskell">tail [1,2,3] = [2,3]</code>，但 <code class="haskell">tail [2,3] = [3]</code>, 而 <code class="haskell">[2,3]</code> 無法由 <code class="haskell">1</code> 和 <code class="haskell">[3]</code> 組出來。</p><p>另一個例子是 <code class="haskell">dropWhile p</code>. 回顧其定義：</p><pre><code class="spec">dropWhile p []      = []
+dropWhile p (x:xs)  = if p x then dropWhile p xs else x:xs 
+</code></pre><p>在歸納情況中，<code class="haskell">else</code> 的分支需傳回 <code class="haskell">x:xs</code> --- <code class="haskell">xs</code> 出現在遞迴呼叫以外的地方。這樣的程式不是 <code class="haskell">foldr</code>。
+當然，這只表示 <code class="haskell">dropWhile p</code> 的<em>這個</em>定義不符合 <code class="haskell">foldr</code> 的模式.
+是否有其他的方式能將 <code class="haskell">dropWhile p</code> 寫成 <code class="haskell">foldr</code> 呢？
+不論 <code class="haskell">dropWhile p</code> 是怎麼定義的，考慮
+<code class="haskell">dropWhile even [4,3,6,2] = [3,6,2]</code>, 但 <code class="haskell">dropWhile even [3,6,2] = []</code> ---
+看來，<code class="haskell">dropWhile p</code> 丟掉了太多資訊，使得我們無法保證能從 <code class="haskell">dropWhile p xs</code> 重組出 <code class="haskell">dropWhile p (x:xs)</code>。
+因此，<code class="haskell">dropWhile p</code> 和 <code class="haskell">tail</code> 一樣，是先天上無法寫成 <code class="haskell">foldr</code> 的。</p><div class="exlist"><div class="exercise exer" id="ex:fan-foldr"><h5 class="exercise-title">練習 6.2 </h5><p>考慮第<a href="Induction-6.html#sec:fan-perm">2.6.4 </a>節的函數 <code class="haskell">fan</code>:</p><pre><code class="spec">fan :: a -&gt; List a -&gt; List (List a)
+fan y []      = [[y]]
+fan y (x:xs)  = (y:x:xs) : map (x:) (fan y xs) 
+</code></pre><p>為何這個定義目前的形式不是一個 <code class="haskell">foldr</code>?
+有沒有可能將 <code class="haskell">fan y</code> 寫成一個 <code class="haskell">foldr</code> 呢？</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-6-2" type="checkbox"/><label class="lbl-toggle" for="ans-6-2">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>由於 <code class="haskell">xs</code> 出現在遞迴呼叫以外的地方 --- <code class="haskell">((y:x:xs) :)</code>, 此處的 <code class="haskell">fan</code> 定義並不是一個 <code class="haskell">foldr</code>.
+但由於 <code class="haskell">tail (head (fan y xs)) = xs</code>
+（例如，<code class="haskell">fan 5 [1,2,3] = [[5,1,2,3],[1,5,2,3],[1,2,5,3],[1,2,3,5]]</code>,
+因此 <code class="haskell">tail (head (fan 5 [1,2,3])) = [1,2,3]</code>），
+我們可將 <code class="haskell">fan</code>寫成：</p><pre><code class="haskell">fan' y = foldr (\x xss -&gt; (y:x: tail (head xss)) : map (x:) xss) [[y]] 
+</code></pre></div></div></div></div><div class="navi"><div class="previous">&laquo;<a href="Folds.html#ch:fold">6 摺</a></div><div class="next"><a href="Folds-2.html#sec:foldr-fusion">6.2 摺融合定理</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

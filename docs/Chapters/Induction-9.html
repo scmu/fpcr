@@ -58,7 +58,7 @@
 <li class="pure-menu-item"><a href="Basics-10.html#sec:user-defined-data">1.10 自訂資料型別</a></li>
 <li class="pure-menu-item"><a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></li>
 </ul></li>
-<li class="pure-menu-selected pure-menu-item"><a href="#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" checked type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
+<li class="pure-menu-item"><a href="Induction.html#ch:induction">2 歸納定義與證明</a><input class="toggle" id="menu-li-2" checked type="checkbox"/><label class="menu-toggle" for="menu-li-2"></label><ul class="pure-menu-list menu-level-2 collapsible-menu"><li class="pure-menu-item"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a></li>
 <li class="pure-menu-item"><a href="Induction-2.html#sec:induction-on-Nat">2.2 自然數上之歸納定義</a></li>
 <li class="pure-menu-item"><a href="Induction-3.html#sec:inductive-proof-on-Nat">2.3 自然數上之歸納證明</a></li>
 <li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists">2.4 串列與其歸納定義</a><input class="toggle" id="menu-li-2-4" type="checkbox"/><label class="menu-toggle" for="menu-li-2-4"></label><ul class="pure-menu-list menu-level-3 collapsible-menu"><li class="pure-menu-item"><a href="Induction-4.html#sec:induction-lists-defn">2.4.1 串列上之歸納定義</a></li>
@@ -72,7 +72,7 @@
 </ul></li>
 <li class="pure-menu-item"><a href="Induction-7.html#sec:using-hints-from-symbols">2.7 再談「讓符號為你工作」</a></li>
 <li class="pure-menu-item"><a href="Induction-8.html#sec:other-inductive-datatypes">2.8 其他歸納資料結構</a></li>
-<li class="pure-menu-item"><a href="Induction-9.html#sec:induction-set-theory">2.9 由集合論看歸納法</a></li>
+<li class="pure-menu-selected pure-menu-item"><a href="#sec:induction-set-theory">2.9 由集合論看歸納法</a></li>
 <li class="pure-menu-item"><a href="Induction-10.html#sec:induction-variations">2.10 歸納定義的簡單變化</a></li>
 <li class="pure-menu-item"><a href="Induction-11.html#sec:complete-induction">2.11 完全歸納</a></li>
 <li class="pure-menu-item"><a href="Induction-12.html#sec:well-founded-induction">2.12 良基歸納</a></li>
@@ -143,21 +143,79 @@
 <li class="pure-menu-item"><a href="Monads-5.html#sec:monads-ref">8.5 參考資料</a></li>
 </ul></li>
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
-<div id="main"><div class="header"><h1 class="chapter" id="ch:induction">2 歸納定義與證明</h1></div><div class="navi"><div class="previous">&laquo;<a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></div><div class="next"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a>&raquo;</div></div><div class="content"><p>「全麥編程」的觀念鼓勵我們以小組件組織出大程式。
-但這些個別組件該如何實作呢？或著，沒有合用的組件時該怎麼辦？
-我們可以回到更基礎的層次，用<em>遞迴</em>(recursion)<span id="ix-2-1"></span>定義它們。
-「遞迴」意指一個值的定義又用到它本身，是數學中常見的定義方式。
-在早期的編程教材中，遞迴常被視為艱澀、難懂、進階的主題。
-但在函數程設中，遞迴是唯一可使程式不定次數地重複一項計算的方法。
-一旦跨過了門檻，遞迴其實是個很清晰、簡潔地描述事情的方式。</p><p>對於遞迴，許多初學者一方面不習慣、覺得如此構思程式很違反「直覺」，另一方面也納悶：以自己定義自己，到底是什麼意思？
-這兩個難處其實都談到了好問題。
-對於前者，我們希望發展一些引導我們構思遞迴程式的思路；希望有了這些依據，能使寫遞迴程式變得直覺而自然。
-關於後者，其實並非所有遞迴定義都有「意思」 --- 有些「不好」的遞迴並沒有定義出東西。我們討論遞迴的意義時必須限定在「好」的、有意義的程式上。最好有些方式確保我們寫出的遞迴定義是好的。</p><p>在本章我們將討論一種型式較單純的遞迴：<em>歸納</em>(induction)<span id="ix-2-2"></span>。
-對上述兩個問題，本章的回應是：先有歸納定義出的資料結構，再依附著該資料結構撰寫歸納定義的程式，是一種思考、解決程式問題的好方法，也是一種理解遞迴程式的方式。
-此外，依循這種方法也能確保該定義是「好」的。
-我們將從數學歸納法出發，發現歸納程式與數學歸納法的相似性 --- 寫程式和證明其實是很相似的活動。</p><p>本書以 Haskell 為學習工具，但在之後的幾章，我們僅使用 Haskell 的一小部分。
-Haskell 支援無限大的資料結構，也允許我們寫出不會終止的程式。
-但我們將假設所有資料結構都是有限的（除非特別指明），所有函數皆會好好終止（也就是說函數都是「<em>全函數</em>(total function)」<span id="ix-2-3"></span>--- 對每一個值，都會好好地算出一個結果，不會永遠算下去，也不會丟回一個錯誤）。這麼做的理由將在本章解釋。</p></div><div class="navi"><div class="previous">&laquo;<a href="Basics-11.html#sec:refs-basics">1.11 參考資料</a></div><div class="next"><a href="Induction-1.html#sec:math-induction">2.1 數學歸納法</a>&raquo;</div></div></div></div>
+<div id="main"><div class="header"><h1 class="chapter" id="ch:induction">2 歸納定義與證明</h1></div><div class="navi"><div class="previous">&laquo;<a href="Induction-8.html#sec:other-inductive-datatypes">2.8 其他歸納資料結構</a></div><div class="next"><a href="Induction-10.html#sec:induction-variations">2.10 歸納定義的簡單變化</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:induction-set-theory">2.9 由集合論看歸納法</h2><p>歸納證明為何成立？本節試圖以集合論的角度理解歸納法，試圖建立幾個觀念：當我們說某型別是「歸納定義」的，常常代表它是具有某個結構的最小集合。而歸納證明可以理解為證明某型別是所有滿足某性質的事物的子集。本節於初次閱讀時可跳過。</p><p><b>序理論回顧</b> &emsp; 為了本章的完整性，我們在這兒回顧一些重要定義。
+對學過序理論或抽象代數的讀者來說，以下概念應不陌生。
+如果您還不熟悉這些定義，由於它們在程式語言語意中常常使用，值得花些時間弄懂。</p><div class="theorem" id="def:preorder" title="前序、偏序"><h5 class="theorem-title">定義 2.6  前序、偏序 </h5><p>給定集合$S$, 令 $(\leq)$ 為 $S$ 上的一個二元關係。如果 $(\leq)$ 滿足：</p><ul><li><p><em>自反律</em>：對所有 $x \in S$, <code class="haskell">x &lt;= x</code>.<span id="ix-2-12"></span></p></li><li><p><em>遞移律</em>：對所有 $x,y,z \in S$, <code class="haskell">x &lt;= y ⋀ y &lt;= z ==&gt; x &lt;= z</code>,<span id="ix-2-13"></span></p></li></ul><p>則 $(\leq)$ 被稱為$S$ 上的一個<em>前序</em>(<em>preorder</em>).
+<span id="ix-2-14"></span>
+如果 $(\leq)$ 除上述兩性質外還滿足：</p><ul><li><p><em>反對稱律</em>：對所有 $x,y \in S$, <code class="haskell">x &lt;= y ⋀ y &lt;= x ==&gt; x = y</code>.</p></li></ul><p>則 $(\leq)$ 被稱為$S$ 上的一個<em>偏序</em>(<em>partial order</em>).
+<span id="ix-2-15"></span>
+如果 $S$ 上有偏序 $(\leq)$, 我們常把它們放在一起，稱 $(S,(\leq))$ 為一個<em>偏序集合</em>(<em>partially ordered set</em>, 或 <em>poset</em>).
+<span id="ix-2-16"></span>
+<span id="ix-2-17"></span></p></div><div class="theorem" id="def:min-max-bound" title="最小上界、最大下界"><h5 class="theorem-title">定義 2.7  最小上界、最大下界 </h5><p>給定偏序集合 $(S,(\leq))$，考慮其子集 $T \subseteq S$:</p><ul><li><p>如果 $x \in S$ 滿足 $(\forall y \in T: y \leq x)$, 則 $x$ 是 $T$ 的一個<em>上界</em>(<em>upper bound</em>).
+<span id="ix-2-18"></span></p></li><li><p>如果 $T$ 的所有上界中存在「最小」的，該值稱作 $T$ 的<em>最小上界</em>(<em>supremum</em>, 或 <em>least upper bound</em>), 記為 $\Varid{sup}~T$.
+<span id="ix-2-19"></span>
+<span id="ix-2-20"></span>
+依據定義，$\Varid{sup}~T$ 滿足 $(\forall y \in T: y \leq x) \Rightarrow \Varid{sup}~T \leq x$.</p></li><li><p>如果 $x \in S$ 滿足 $(\forall y \in T: y \geq x)$, 則 $x$ 是 $T$ 的一個<em>下界</em>(<em>lower bound</em>).
+<span id="ix-2-21"></span></p></li><li><p>如果 $T$ 的所有下界存在「最大」的，該值稱作 $T$ 的<em>最大下界</em>(<em>infimum</em>, 或<em>greatest lower bound</em>), 記為 $\Varid{inf}~T$.
+<span id="ix-2-22"></span>
+<span id="ix-2-23"></span>
+依據定義，$\Varid{inf}~T$ 滿足 $(\forall y \in T: y \geq x) \Rightarrow \Varid{inf}~T \geq x$.</p></li></ul></div><div class="theorem" id="def:lattice" title="格、完全格"><h5 class="theorem-title">定義 2.8  格、完全格 </h5><p>考慮偏序集合 $(S,(\leq))$:</p><ul><li><p>如果對任何 $x, y \in S$, <code class="haskell">sup {x,y}</code> 和 <code class="haskell">inf {x,y}</code> 均存在且都在 $S$ 之中，則 $(S,(\leq))$ 是一個格 (lattice)。
+<span id="ix-2-24"></span></p></li><li><p>如果對任何 $T \subseteq S$，$\Varid{sup}~T$ 和 $\Varid{inf}~T$ 均存在且都在 $S$ 之中，則 $(S,(\leq))$ 是一個完全格 (complete lattice)。
+<span id="ix-2-25"></span></p></li></ul></div><p>在本節之中我們只會考慮一種格。令 $D$ 代表所有範式（如 <code class="haskell">Zero</code>, <code class="haskell">Suc Zero</code>, <code class="haskell">True</code>, <code class="haskell">1 : 2 : []</code>, <code class="haskell">(\x -&gt; x)</code>...）的集合，我們考慮的格是 ${\cal P}D$，即 $D$ 的所有子集形成的集合。其上的偏序就是子集關係 $(\subseteq)$.</p><p><b>定點</b> &emsp; 再回顧一些與<em>定點</em>相關的理論。</p><div class="theorem" id="def:fixed-point" title="定點"><h5 class="theorem-title">定義 2.9  定點 </h5><p>給定完全格 <code class="haskell">(A, (&lt;=))</code> 和函數 <code class="haskell">f :: A -&gt; A</code>,</p><ol><li><p>如果 <code class="haskell">f x &lt;= x</code>, 我們說 <code class="haskell">x</code> 是 <code class="haskell">f</code> 的一個<em>前定點</em> (<em>prefixed point</em>).
+<span id="ix-2-26"></span></p></li><li><p>如果 <code class="haskell">f x = x</code>, 我們說 <code class="haskell">x</code> 是 <code class="haskell">f</code> 的一個<em>定點</em> (<em>fixed point</em>).<span id="ix-2-27"></span></p></li><li><p>如果 <code class="haskell">f x &gt;= x</code>, 我們說 <code class="haskell">x</code> 是 <code class="haskell">f</code> 的一個<em>後定點</em> (<em>postfixed point</em>).</p></li></ol></div><div class="theorem" id="def:mu-nu" title="最小前定點、最大後定點"><h5 class="theorem-title">定義 2.10  最小前定點、最大後定點 </h5><p>給定完全格 <code class="haskell">(A, (&lt;=))</code> 和函數 <code class="haskell">f :: A -&gt; A</code>,</p><ul><li><p>如果 <code class="haskell">f</code> 的前定點之中存在最小值，我們將它記為 <code class="haskell">mu f</code>.
+根據此定義，<code class="haskell">mu f</code> 滿足 <code class="haskell">f x &lt;= x ==&gt; mu f &lt;= x</code>.
+<span id="ix-2-28"></span></p></li><li><p>如果 <code class="haskell">f</code> 的後定點之中存在最大值，我們將它記為 <code class="haskell">nu f</code>.
+根據此定義，<code class="haskell">nu f</code> 滿足 <code class="haskell">x &lt;= f x ==&gt; x &lt;= nu f</code>.
+<span id="ix-2-29"></span></p></li></ul></div><div class="theorem" id="thm:f-muf"><h5 class="theorem-title">定理 2.11  </h5><p>給定完全格 <code class="haskell">(A, (&lt;=))</code> 和函數 <code class="haskell">f :: A -&gt; A</code>,</p><ul><li><p><code class="haskell">f</code> 的最小前定點 <code class="haskell">mu f</code> 也是最小的定點，</p></li><li><p><code class="haskell">f</code> 的最小前定點 <code class="haskell">nu f</code> 也是最大的定點。</p></li></ul></div><p><b>歸納定義</b> &emsp; 回顧自然數的定義：</p><pre><code class="spec">  data Nat = Zero | Suc Nat 
+</code></pre><p>第<a href="Induction-1.html#sec:math-induction">2.1 </a>節對這行定義的解釋是：</p><ol><li><p><code class="haskell">Zero</code> 的型別是 <code class="haskell">Nat</code>;</p></li><li><p>如果 <code class="haskell">n</code> 的型別是 <code class="haskell">Nat</code>, <code class="haskell">Suc n</code> 的型別也是 <code class="haskell">Nat</code>;</p></li><li><p>此外，沒有其他型別是 <code class="haskell">Nat</code> 的東西。</p></li></ol><p>如果我們把一個型別視作一個集合，上述條件定出了怎麼樣的集合呢？
+<input class="toggle" id="footnote-2-9-10" type="checkbox"/><label class="fnote-toggle" for="footnote-2-9-10">(註10) </label><span class="collapsible-footnote">請注意：「把型別視為集合」僅在簡單的語意之中成立。本書後來將會討論更複雜的語意，屆時型別並不只是集合。</span>
+用 <code class="haskell">Nat</code> 表示我們定出的這個新型別。上述第 1.點告訴我們 <code class="haskell">Zero</code> 是 <code class="haskell">Nat</code> 的成員，也就是 <code class="haskell">{Zero} ⊆ Nat</code>. 第 2.點則表示，從 <code class="haskell">Nat</code> 這個集合中取出任一個元素 <code class="haskell">n</code>, 加上 <code class="haskell">Suc</code>, 得到的結果仍會在 <code class="haskell">Nat</code> 之中。也就是說 <code class="haskell">{Suc n | n ∈ Nat} ⊆ Nat</code>. 集合基本定理告訴我們 <code class="haskell">X ⊆ Z ⋀ Y ⊆ Z</code> 和
+<code class="haskell">X ∪ Y ⊆ Z</code> 是等價的，所以：
+<input class="toggle" id="footnote-2-9-11" type="checkbox"/><label class="fnote-toggle" for="footnote-2-9-11">(註11) </label><span class="collapsible-footnote"><code class="haskell">X ⊆ Z ⋀ Y ⊆ Z &lt;=&gt; X ∪ Y ⊆ Z</code> 被稱為「<code class="haskell">(∪)</code> 的泛性質」。</span></p><pre><code class="equation" id="eq:Nat-Ind-0">    |{Zero} ∪ { Suc n || n ∈ Nat }| & ~\subseteq~ |Nat| \mbox{~~.}</code>    (2.15 )
+</pre><p>意思是說，如果我們定義一個<em>集合到集合</em>的函數 <code class="haskell">NatF</code>:</p><pre><code class="spec">  NatF X = {Zero} ∪ { Suc n | n ∈ X } 
+</code></pre><p>那麼 ([RefUndefined]) 可以改寫為</p><pre><code class="equation">   |NatF Nat| &~\subseteq~ |Nat| \mbox{~~,}</code>    (2.16 )
+</pre><p>也就是說，<code class="haskell">Nat</code> 是 <code class="haskell">NatF</code> 的一個前定點！</p><p>至於 3.呢？它告訴我們 <code class="haskell">Nat</code> 僅含恰巧能滿足 1.和 2.的元素，沒有多餘。
+意即，<code class="haskell">Nat</code> 是<em>滿足 1.和 2.的集合之中最小的</em>。
+若有另一個集合 <code class="haskell">Z</code> 也滿足 1.和 2., 我們必定有 <code class="haskell">Nat ⊆ Z</code>.
+也就是說 <code class="haskell">Nat</code> 是 <code class="haskell">NatF</code> 的最小前定點：<code class="haskell">Nat = mu NatF</code>!</p><p>給定述語<code class="haskell">P</code>, 我們把所有「滿足 <code class="haskell">P</code> 的值形成的集合」也記為 <code class="haskell">P</code>.
+<input class="toggle" id="footnote-2-9-12" type="checkbox"/><label class="fnote-toggle" for="footnote-2-9-12">(註12) </label><span class="collapsible-footnote">對任何 <code class="haskell">A</code>, 函數 <code class="haskell">P :: A -&gt; Bool</code> 和「滿足 <code class="haskell">P</code> 的 <code class="haskell">A</code> 形成的集合」是同構的。我們可把它們等同視之。</span>
+數學歸納法的目的是證明所有自然數都滿足 <code class="haskell">P</code>。
+但，「所有自然數都滿足 <code class="haskell">P</code>」其實就是 <code class="haskell">Nat ⊆ P</code>.</p><p>如何證明 <code class="haskell">Nat ⊆ P</code>? 如前所述，<code class="haskell">Nat</code> 是 <code class="haskell">NatF</code> 的最小前定點。
+如果 <code class="haskell">P</code> 恰巧也是 <code class="haskell">NatF</code> 的一個前定點，<code class="haskell">Nat ⊆ P</code> 一定得成立。
+寫成推論如下：</p><pre><code class="spec">    Nat ⊆ P
+&lt;==   <comment>{- <code class="haskell">Nat</code> 是 <code class="haskell">NatF</code> 的最小前定點，定義\ref{def:mu-nu} -}</comment>
+    NatF P ⊆ P
+&lt;=&gt;   <comment>{- <code class="haskell">NatF</code> 的定義 -}</comment>
+    {Zero} ∪ {Suc n | n ∈ P}  ⊆   P
+&lt;=&gt;   <comment>{- <code class="haskell">(∪)</code> 的泛性質：<code class="haskell">X ∪ Y ⊆ Z  &lt;=&gt;  X ⊆ Z ⋀ Y ⊆ Z</code> -}</comment>
+    {Zero} ⊆ P  ⋀  {Suc n | n ∈ P} ⊆ P 
+</code></pre><p>也就是說，如果證出<code class="haskell">{Zero} ⊆ P</code> 和 <code class="haskell">{Suc n | n ∈ P} ⊆ P</code>，我們就有 <code class="haskell">Nat ⊆ P</code>。其中，</p><ol><li><p><code class="haskell">{Zero} ⊆ P</code> 翻成口語便是「<code class="haskell">P</code> 對 <code class="haskell">Zero</code> 成立」，</p></li><li><p><code class="haskell">{Suc n | n ∈ P} ⊆ P</code> 則是「若 <code class="haskell">P</code> 對 <code class="haskell">n</code> 成立，<code class="haskell">P</code> 對 <code class="haskell">Suc n</code> 亦成立」。</p></li></ol><p>正是數學歸納法的兩個前提！</p><p>原來，<em>數學歸納法之所以成立，是因為自然數被定義為某函數的最小前定點</em>。
+事實上，當我們說某型別是「歸納定義」的，意思便是它是某個函數的最小前定點。</p><p>以串列為例。為單純起見，先考慮元素皆為 <code class="haskell">Nat</code> 的串列。
+如下的定義</p><pre><code class="spec">data ListNat  =  []  |  Nat : ListNat 
+</code></pre><p>可理解為 <code class="haskell">ListNat = mu ListNatF</code>，而 <code class="haskell">ListNatF</code> 定義為：</p><pre><code class="spec">  ListNatF X = { [] } ∪ { n : xs | xs ∈ X, n ∈ Nat  } 
+</code></pre><p>至於如下定義的、有型別參數的串列，</p><pre><code class="spec">data List a  =  []  |  a : List a 
+</code></pre><p>則可理解為 <code class="haskell">List a = mu(ListF a)</code> --- <code class="haskell">List a</code> 是 <code class="haskell">ListF a</code> 的最小前定點，其中 <code class="haskell">ListF</code> 定義如下：</p><pre><code class="spec">  ListF A X = { [] } ∪ { x : xs | xs ∈ X, x ∈ A } 
+</code></pre><p>給定某型別 <code class="haskell">A</code>, 當我們要證明某性質 <code class="haskell">P</code> 對所有 <code class="haskell">List A</code> 都成立，實質上是想要證明 <code class="haskell">List A ⊆ P</code> （同樣地，此處 <code class="haskell">P</code> 代表所有使述語 <code class="haskell">P</code> 成立的值之集合）。我們推論如下：</p><pre><code class="spec">  List A ⊆ P
+&lt;==   <comment>{- <code class="haskell">List a = mu(ListF a)</code> -}</comment>
+  ListF A P ⊆ P
+&lt;=&gt;   <comment>{- <code class="haskell">ListF</code> 之定義 -}</comment>
+  { [] } ∪ { x : xs | xs ∈ P, x ∈ A } ⊆ P
+&lt;=&gt;   <comment>{- <code class="haskell">(∪)</code> 的泛性質 -}</comment>
+  {[]} ⊆ P   ⋀  { x : xs | xs ∈ P, x ∈ A } ⊆ P 
+</code></pre><p>其中 <code class="haskell">{[]} ⊆ P</code> 翻成口語即是「<code class="haskell">P []</code> 成立」；
+<code class="haskell">{ x : xs | xs ∈ P, x ∈ A } ⊆ P</code> 則是
+「若 <code class="haskell">P xs</code> 成立，對任何 <code class="haskell">x::A</code>, <code class="haskell">P (x:xs)</code> 成立」。</p><p>我們之所以能做自然數與串列的歸納證明，因為它們都是歸納定義出的型別 ---
+它們都被定義成某函數的最小前定點。若非如此，歸納證明就不適用了。
+那麼，有不是歸納定義出的型別嗎？</p><p>讀者可能注意到，本節起初同時談到最小前定點與最大後定點，但後來只討論了前者。
+事實上，我們也可以把一個資料型別定義為某函數的最大後定點。
+這時我們說該資料型別是個<em>餘歸納</em>(<em>coinductive</em>)定義，如此訂出的型別稱為<em>餘資料</em>(<em>codata</em>)。
+<span id="ix-2-30"></span><span id="ix-2-31"></span>
+歸納定義出的資料結構是有限的，而餘歸納定義的型別可能包括無限長的資料結構。
+寫餘資料相關的證明，另有一套稱作餘歸納(coinduction)的方法，
+而餘歸納也影響到我們如何寫與餘資料相關的程式。
+餘歸納和歸納的相關理論剛好是漂亮的對偶。我們將在 \todo{where} 介紹餘歸納。</p><div class="exlist"><div class="exercise exer" id="ex:ITree-ETree-mu"><h5 class="exercise-title">練習 2.36 </h5><p>回顧第<a href="Basics-10.html#sec:user-defined-data">1.10 </a>節中介紹的兩種樹狀結構：</p><pre><code class="spec">data ITree a  = Null | Node a (ITree a) (ITree a) 
+data ETree a  = Tip a | Bin (ETree a) (ETree a) 
+</code></pre><p>說說看它們分別是什麼函數的最小前定點，並找出它們的歸納原則。</p></div></div></div><div class="navi"><div class="previous">&laquo;<a href="Induction-8.html#sec:other-inductive-datatypes">2.8 其他歸納資料結構</a></div><div class="next"><a href="Induction-10.html#sec:induction-variations">2.10 歸納定義的簡單變化</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 
