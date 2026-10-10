@@ -3,6 +3,8 @@ body {
   color: #777;
 }
 
+body a { color: #557a95}
+
 code { color: #008b8b; }
 code comment { color: DarkSalmon; }
 
