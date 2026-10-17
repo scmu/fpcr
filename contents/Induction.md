@@ -100,7 +100,7 @@ Haskell 支援無限大的資料結構，也允許我們寫出不會終止的程
 
 ## 自然數上之歸納定義 {#sec:induction-on-Nat}
 
-數學歸納法和編程有什麼關係呢？考慮一個例子：給定 |b, n :: Nat|, 我們希望寫個函數 |exp| 計算乘冪，使得 |exp b n = {-"\Varid{b}^{\Varid{n}}"-}|. 我們先把型別寫下：
+數學歸納法和編程有什麼關係呢？考慮一個例子：給定 |b, n :: Nat|, 我們希望寫個函數 |exp| 計算乘冪，使得 |exp b n =|{.lhsonly ctnt="\,$\\Varid{b}^{\\Varid{n}}$"}{.htmlonly ctnt="&thinsp;$b^n$"}. 我們先把型別寫下：
 ```spec
 exp :: Nat -> Nat -> Nat
 exp b n = ?
@@ -111,8 +111,8 @@ exp :: Nat -> Nat -> Nat
 exp b Zero     = ?
 exp b (Suc n)  = ?
 ```
-{.nobreak}其中，|exp b Zero| 較簡單：顯然應該是 $\Varid{b}^0 = 1$. 至於 |exp b (Suc n)| 的右手邊該怎麼寫？似乎很難一步定出來。
-但*假設 |exp b n| 已經順利算出了$\Varid{b}^{\Varid{n}}$*, 由於 $\Varid{b}^{1+\Varid{n}} = \Varid{b} \times \Varid{b}^{\Varid{n}}$, |exp b (Suc n)| 與之的關係可寫成：
+{.nobreak}其中，|exp b Zero| 較簡單：顯然應該是{.lhsonly ctnt="$\\Varid{b}^0 = 1$"}{.htmlonly ctnt="$b^0=1$"}. 至於 |exp b (Suc n)| 的右手邊該怎麼寫？似乎很難一步定出來。
+但*假設 |exp b n| 已經順利算出了{.lhsonly ctnt="$\\Varid{b}^{\\Varid{n}}$"}{.htmlonly ctnt="$b^n$"}*, 由於 {.lhsonly ctnt="$\\Varid{b}^{1+\\Varid{n}} = \\Varid{b} \\times \\Varid{b}^{\\Varid{n}}$"} {.htmlonly ctnt="$b^{1+n} = b \\times b^n$"}, |exp b (Suc n)| 與之的關係可寫成：
 ```spec
 exp b (Suc n) = b * exp b n {-"~~."-}
 ```
@@ -227,7 +227,7 @@ Zero     + n  = n
 
 ## 自然數上之歸納證明 {#sec:inductive-proof-on-Nat}
 
-上一節中我們定出了函數 |exp|。如果定義正確，|exp b n| 算的應是 $\Varid{b}^\Varid{n}$.
+上一節中我們定出了函數 |exp|。如果定義正確，|exp b n| 算的應是 {.lhsonly ctnt="$\\Varid{b}^\\Varid{n}$"}{.htmlonly ctnt="$b^n$"}.
 例如，我們知道 $\Varid{b}^\Varid{m+n} = \Varid{b}^\Varid{m} \times \Varid{b}^\Varid{n}$. 我們定出的函數 |exp| 是否真有此性質呢？
 
 ::: {.theorem #thm:exp-plus-times}
