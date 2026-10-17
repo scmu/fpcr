@@ -20,7 +20,7 @@ import qualified Chapters.Induction as Induction
 指令式語言與函數語言都能做程式推導，而且有許多道理可相通。
 本書討論函數語言的程式推導。
 一個簡單、典型的函數程式語言推導可能有如下的形式：
-```texonly
+```lhsonly
 %{
 %format en = "\Varid{e}_{\Varid{n}}"
 ```
@@ -54,14 +54,14 @@ Dijkstra 說道：
 >  如此一來，我們能選擇證明的結構，然後設計一個能用這種方法證明出來的程式。
 >  這還有個額外的好處：正確性考量可以成為程式該怎麼寫的引導與啟發。[@Dijkstra:74:Programming]
 
-```texonly
+```lhsonly
    % to prove the correctness of a given program, was in a sense putting the cart before the horse. A much more promising approach turned out to be letting correctness proof and program grow hand in hand: with the choice of the structure of the correctness proof one designs a program for which this proof is applicable. The fact that then the correctness concerns turn out to act as an inspiring heuristic guidance is an added benefit.\cite{Dijkstra:74:Programming}
 ```
 Dijkstra 的最後一句話帶到了程式推導的第三個理由：
 提倡者認為，程式推導的種種方法與技巧可以引導我們去分析、思考、解決問題；
 這是解問題、甚至發現新演算法的方法（@Backhouse:03:Program, @Backhouse:11:Algorithmic）。
 藉由良好的符號設計，我們可以發現常見的程式推導模式，並將其推廣到其他有類似性質的問題上。
-```texonly
+```lhsonly
 %} % format en
 ```
 
@@ -74,7 +74,7 @@ Dijkstra 的最後一句話帶到了程式推導的第三個理由：
 ## 展開-收回轉換 {#sec:fold-unfold-transform}
 
 考慮這麼一個例子：給定一個整數形成的串列，我們想計算其每個數的平方的和。例如當輸入是|[2,6,5,3]|, 我們希望算出 $2^2 + 6^2 + 5^2 + 3^2 = 74$. 這項工作可以簡短地描述如下：
-```texonly
+```lhsonly
 \begin{flalign}
 \qquad\quad
 |sumsq| &|= sum . map square {-"~~."-}| &
@@ -130,7 +130,7 @@ sumsqDer1 x xs =
 ```
 {.nobreak}可得知對任何 |x| 與 |xs|, |sum (x:xs)| 歸約的結果和 |square x + sumsq xs| 會是相同的。
 總結說來，藉由計算，我們發現 |sumsq| 滿足以下兩條性質：
-```texonly
+```lhsonly
 \begin{flalign}
 \qquad\quad
 \begin{split}
@@ -159,7 +159,7 @@ sumsqDer1 x xs =
 程式推導確保程式的正確性 --- 意即*導出的程式與原本的規格是同一個函數*。
 但新程式的效率仍須單獨分析。這是下一節的主題。
 
-```texonly
+```lhsonly
 % ```haskell
 % pos :: Eq a => a -> List a -> Int
 % pos x = length . takeWhile (x /=) {-"~~."-}
@@ -300,7 +300,7 @@ rld ((n,x):xs)  = repeatN (n,x) ++ rld xs {-"~~."-}
 :::
 :::
 
-```texonly
+```lhsonly
 % :::{.exer #ex:pos-length-takeWhile}
 % There is another way to define |pos| such that
 % |pos x xs| yields the index of the first occurrence of |x| in |xs|:
@@ -566,7 +566,7 @@ iterate f x = x : map f (iterate f x) {-"~~."-}
 在 |poly| 之中，|iterate| 雖產生無限長的餘資料，但立刻被 |zipWith| 截短了。
 ^[此處我們假設 |as| 為有限長的串列，並把 |zipWith| 視為在其第一個參數之上的歸納定義。]
 若我們試著展開 |poly x [a,b,c,d]|, 會得到：
-```texonly
+```lhsonly
 %{
 %format (quad f) = f"^4"
 ```
@@ -578,7 +578,7 @@ iterate f x = x : map f (iterate f x) {-"~~."-}
      (1 : (1*x) : (1*x*x) : (1*x*x*x) : map (quad (*x)) (iterate (*x) 1)))
 =  a {-"\,"-}+{-"\,"-} b *x {-"\,"-}+{-"\,"-} c * x * x {-"\,"-}+{-"\,"-} d * x * x * x {-"~~."-}
 ```
-```texonly
+```lhsonly
 %}
 ```
 可看到式子越長，便累積越多個 |(*x)|。當 |as| 長度為 |n|, 需要的乘法數目為 $O(n^2)$.
@@ -634,7 +634,7 @@ poly x (a : as)  = a + (poly as) * x {-"~~."-}
 這條規則在 William George Horner 1819 年的一篇論文中出現並證明，因此通常被稱作 *Horner 法則*\index{Horner法則 Horner's rule}，
 雖然 Horner 本人和許多歷史學家們都相信該規則可被追溯得更早。
 
-```texonly
+```lhsonly
 % % map f (iterate f x) = iterate f (f x)
 % % zipWith (⊗) as . map (⊗X) = map (⊗X) . zipWith (⊗) as, 如果 ⊗ 滿足結合律
 % % sum . map (×X) = (×X) . sum, a special case of foldr ⊕ e . map (⊗X) = (⊗X) . foldr ⊕ e, 如果 (a ⊕ b) ⊗ X = (a ⊗ X) ⊕ (b ⊗ X), 且 e ⊗ X = e.
@@ -677,7 +677,7 @@ exp b Zero     = 1
 exp b (Suc n)  = b *: exp b n {-"~~."-}
 ```
 {.nobreak}以這個演算法計算 $b^n$ 時會需要 $O(n)$ 個乘法。是否有更快的做法呢？
-```texonly
+```lhsonly
 %{
 %format tt = "\mymathbb{1}"
 %format ff = "\mymathbb{0}"
@@ -763,7 +763,7 @@ exp b n  | even n  = square (exp b (n `div` 2))
 :::
 
 
-```texonly
+```lhsonly
 
 %} % for tt and ff
 ```
@@ -1050,7 +1050,7 @@ repl (Bin t u)  xs = Bin (repl t (take n xs)) (repl u (drop n xs))
 {.nobreak}如果 |t| 是一個向左傾斜的二元樹，|repl t xs| 不僅會反覆計算 |size|，也會反覆地將 |take| 與 |drop| 用在 |xs| 上，使得上述的 |repl| 成為一個 $O(n^2)$ 的演算法。
 利用組對的技巧，我們能讓 |repl| 的時間複雜度小一些嗎？
 
-```texonly
+```lhsonly
 %{
 %format n1
 %format n2
@@ -1123,7 +1123,7 @@ repTailDer1 t u xs =
   where n = size (Bin t u)
         (n1, n2) = (size t, size u)
 ```
-```texonly
+```lhsonly
 %} % format n1 and n2
 ```
 因此我們得到：
@@ -1439,7 +1439,7 @@ sumlen (x:xs)  =  let (s,l) = sumlen xs
                   in (x + s, 1 + l) {-"~~."-}
 ```
 {.nobreak}然後平均便可定義成 |average' xs = let (s,l) = sumlen xs in s/l|.
-```texonly
+```lhsonly
 %函數 |average| 中，串列 |xs| 需要留在記憶體中的時間較長：|sum xs| 計算過後，|xs| 不能立刻被丟掉，而必須留在記憶體中，等著計算 |length xs|.
 %而 |average'| 只走訪 |xs'| 一次，|xs| 可以邊走訪邊丟棄。
 %\todo{Shall we mention this? Shall we run some experiments?}
@@ -1896,7 +1896,7 @@ revcat (x:xs)  ys = revcat xs (x:ys) {-"~~."-}
 如果這是一個遞迴呼叫，則稱之為*尾遞迴*(*tail recursion*)。
 \index{tail recursion 尾遞迴}
 
-```texonly
+```lhsonly
 %{
 %format e1
 %format e2
@@ -1926,7 +1926,7 @@ do xs /= [] ->
 od ;
 return ys
 ```
-```texonly
+```lhsonly
 %} %GCL
 ```
 而該迴圈的恆式(loop invariant)是什麼呢？
@@ -1971,7 +1971,7 @@ sumAcc xs y = y + sum xs {-"~~."-}
 sumAcc []      y = y
 sumAcc (x:xs)  y = sumAcc xs (y + x) {-"~~."-}
 ```
-```texonly
+```lhsonly
 %{
 %format x0
 %format x1
@@ -1982,7 +1982,7 @@ sumAcc (x:xs)  y = sumAcc xs (y + x) {-"~~."-}
 左手邊的程式將串列 |XS| 加總，使用的兩個變數 |xs| 與 |y| 對應到 |sumAcc| 的兩個參數。
 在右邊的程式中，我們假設輸入資料 |[x0, x1.. xN1]| 依序被存放在一個陣列 |X| 中。陣列有 |N| 個元素，其索引範圍為 |[0.. N-1]|.
 我們把陣列視為索引到內容的函數，因此 |X i| 存放著 |xi|.
-```texonly
+```lhsonly
 %format do = "\mathbf{do}"
 %format od = "\mathbf{od}"
 ```
@@ -2006,7 +2006,7 @@ return y
 ```
 :::
 :::
-```texonly
+```lhsonly
 %} %GCL
 ```
 確實，這就是我們一般用指令式語言加總一個串列/陣列時的常見迴圈寫法：
@@ -2075,7 +2075,7 @@ loop (xs ++ [x])  z = loop xs (x `oplus` z) {-"~~."-}
 {.nobreak}但此時要用 |loop| 計算出 |f xs|，得先將 |xs| 反轉：|f xs = loop (reverse xs) e|.
 這具體印證了我們的觀察：在串列上歸納定義出的函數，處理元素的順序和通常寫法的迴圈是相反的。
 
-```texonly
+```lhsonly
 %{
 %format x0
 %format x1
@@ -2095,7 +2095,7 @@ do i /= N ->  z  := X i `oplus` z ;
 od ;
 return z {-"~~."-}
 ```
-```texonly
+```lhsonly
 %} %GCL
 ```
 
@@ -2116,7 +2116,7 @@ expAcc b n x = x * exp b n {-"~~."-}
 然後我們針對 |n| 為零、|n| 為非零的偶數，以及 |n| 為奇數三種情況作分析。
 當 |n := 0|, |expAcc b 0 x = x|. 當 |n| 為偶數時，可以被改寫成 |2*n|.
 以下的推導中我們將 |exp b n| 寫成 $b^n$, 並假設它已有乘冪該有的各種性質：
-```texonly
+```lhsonly
 %{
 %format exp b (n) = b "^{" n "}"
 ```
@@ -2147,7 +2147,7 @@ expAccDer2 b n x =
  ===    {- |expAcc| 之定義 -}
       expAcc b n (x * b) {-"~~."-}
 ```
-```texonly
+```lhsonly
 %} %exp
 ```
 將語法改寫成 Haskell 能接受的形式（例如將 |2 * n| 與 |n| 改寫成 |n| 與 |n `div` 2|）之後，我們得到這樣的程式：
@@ -2163,7 +2163,7 @@ expAcc b n x  | even  n = expAcc (b * b) (n `div` 2) x
 :::{.exer #ex:expAcc-loop}
 本節的 |expAcc| 函數相當於怎樣的指令式語言迴圈？其迴圈恆式為何？
 :::
-```texonly
+```lhsonly
 %{
 %format do = "\mathbf{do}"
 %format od = "\mathbf{od}"
@@ -2181,7 +2181,7 @@ od;
 return x
 ```
 {.nobreak}其迴圈恆式為 |exp B N = x * exp b n|.
-```texonly
+```lhsonly
 %} % GCL
 ```
 :::
@@ -2220,7 +2220,7 @@ fact (Suc n)  = (Suc n) *: fact n {-"~~."-}
 ```
 {.nobreak}因此我們有了下述定義。由於 |fact n = factAcc n 1|.
 這相當於右邊的迴圈：
-```texonly
+```lhsonly
 %{
 %format do = "\mathbf{do}"
 %format od = "\mathbf{od}"
@@ -2241,7 +2241,7 @@ return y {-"~~."-}
 ```
 :::
 :::
-```texonly
+```lhsonly
 %} %GCL
 ```
 在推導 |factAcc| 的歸納定義時，我們不僅用到 |(*:)| 的結合律，也用到了 |y *: 1 = y|.
@@ -2292,7 +2292,7 @@ mulAcc m n k  | even n  = mulAcc (m `div` 2) (2*n) k
 :::
 
 :::{.exlist}
-```texonly
+```lhsonly
 %{
 %format exp b (n) = b "^{" n "}"
 ```
@@ -2353,7 +2353,7 @@ dtoN'der1 d ds n =
 dtoNAcc []      n = n
 dtoNAcc (d:ds)  n = dtoNAcc ds (n * 10 + d) {-"~~."-}
 ```
-```texonly
+```lhsonly
 %} %exp
 ```
 :::

@@ -216,14 +216,14 @@ fan y (x:xs)  = (y:x:xs) : map (x:) (fan y xs) {-"~~."-}
 （例如，|fan 5 [1,2,3] = [[5,1,2,3],[1,5,2,3],[1,2,5,3],[1,2,3,5]]|,
 因此 |tail (head (fan 5 [1,2,3])) = [1,2,3]|），
 我們可將 |fan|寫成：
-```texonly
+```lhsonly
 %{
 %format fan' = "\Varid{fan}"
 ```
 ```haskell
 fan' y = foldr (\x xss -> (y:x: tail (head xss)) : map (x:) xss) [[y]] {-"~~."-}
 ```
-```texonly
+```lhsonly
 %} %fan'
 ```
 :::
@@ -558,7 +558,7 @@ noOverdraft = (>= 0) . minimum . map sum . inits {-"~~."-}
 ```
 {.nobreak}我們試著導出一個比較快速的版本。
 
-```texonly
+```lhsonly
 %{
 %format step1
 %format step2
@@ -631,7 +631,7 @@ geqMinimumSumInits =
   noOverdraft = and . map (>=0) . map sum . inits {-"~~,"-}
 ```
 {.nobreak}函數 |map (>= 0)| 將無法融合進 |map sum . inits| 之中。
-```texonly
+```lhsonly
 %} %format
 ```
 :::
@@ -1320,7 +1320,7 @@ fib2 = foldN (\(x,y) -> (x+y,x)) (1,0) {-"~~."-}
 :::
 :::
 
-```texonly
+```lhsonly
 % \Exercise WRONG. Needing a different representation of |Nat|.
 % 回顧：|exp b n| 計算 $b^n$;
 % 在第\@ref{sec:tail-recursion-more}節中我們使用累積參數的技巧，定義下述函數
@@ -1577,7 +1577,7 @@ extendAsc x (ys:yss) = if x >= head ys  then [[x]:ys:yss, (x:ys):yss]
  ===    {- |shortest| 挑選較短之串列 -}
       if x >= head ys then (x:ys):yss else [x]:ys:yss {-"~~."-}
 ```
-```texonly
+```lhsonly
 %
 %      concat (map (filter (all ascending) . extend x) ysss)
 % ===  concat (map (\ (ys:yss) -> if all ascending (ys:yss) then extend' x (ys:yss) else []) ysss)

@@ -65,7 +65,7 @@ mss = maximum . map sum . segments {-"~~,"-}
 當輸入串列長度為 $n$, 這個定義本身是一個時間複雜度為 $O(n^3)$ 的演算法 --- 該串列的區段有 $O(n^2)$ 個，每個都需分別算總和。
 我們能導出一個更快的演算法嗎？
 
-```texonly
+```lhsonly
 %format infty = "\infty"
 ```
 
@@ -215,7 +215,7 @@ maxhd xs = (maximum xs, head xs)
      (\m s -> let s' = 0 `max` (x + s) in (s' `max` m, s')) (maximum ys, head ys)  {-"~~."-}
 ```
 {.nobreak}我們得到
-```texonly
+```lhsonly
 %{
 %format mss'' = mss
 ```
@@ -232,7 +232,7 @@ msps (x:xs)  =  let  (m,s) = msps xs
                      s' = 0 `max` (x + s)
                 in   (s' `max` m, s') {-"~~."-}
 ```
-```texonly
+```lhsonly
 %} %mss''
 ```
 {.nobreak}這是一個使用線性時間、常數空間計算最大區段和的演算法。當 |(m,s) = msps xs|, |m| 是 |xs| 的最大區段和，|s| 則是 |xs| 的最大前段和。
@@ -241,7 +241,7 @@ msps (x:xs)  =  let  (m,s) = msps xs
 
 
 :::{.infobox title="指令式版本的最大區段和"}
-```texonly
+```lhsonly
 %{
 %format x0
 %format xN1 = "\Varid{x}_{N-1}"
@@ -258,7 +258,7 @@ od ;
 return m
 ```
 {.nobreak}這在指令式程式推導的領域中也是一個經典範例。
-```texonly
+```lhsonly
 %} %GCL
 ```
 :::
@@ -266,7 +266,7 @@ return m
 
 ## 最長高原問題 {#sec:maximum-plateau-length}
 
-```texonly
+```lhsonly
 %format initsP = "\Varid{inits}^{+}"
 %format tailsP = "\Varid{tails}^{+}"
 %format segmentsP = "\Varid{segments}^{+}"
@@ -362,7 +362,7 @@ lppDer2 x xs =
       maximum (1 : map length (filter plateau (map (x:) (initsP xs))))
  ===  1 `max` maximum (map length (filter plateau (map (x:) (initsP xs)))) {-"~~."-}
 ```
-```texonly
+```lhsonly
 %format &&: = "\mathbin{\dot{\wedge}}"
 ```
 
@@ -405,7 +405,7 @@ lppDer3 x =
 {.nobreak}現在整個式子成為 |1 `max` (maximum . map (length . (x:)) . filter plateau . filter ((x ==) . head) . initsP) $ xs|.
 
 把 |map (x:)| 往左搬之後，式子的右邊出現了 |filter ((x ==) . head) (initsP xs)| --- 產生所有 |xs| 的非空前段，取出第一個元素為 |x| 的。但讀者們可能立刻發現：|initsP| 傳回的每個前段的第一個元素都是一樣的！也就是說我們有以下性質。
-```texonly
+```lhsonly
 \begin{flalign}
 \qquad\quad
 \begin{split}
@@ -532,7 +532,7 @@ Gibbons 的這篇文章是很好的函數程式推導簡介。
 
 :::{.infobox title="Shamos 的最大區段和演算法"}
 以下是我根據個人理解將 Shamos 的**演算法3**寫成的 Python 程式。
-```texonly
+```lhsonly
 %{
 %format def = "\mathbf{def}"
 %format for = "\mathbf{for}"
@@ -572,7 +572,7 @@ def mss(l,u):
 
     return (maxInL `max` maxCrossing `max` maxInR)
 ```
-```texonly
+```lhsonly
 %}
 ```
 :::

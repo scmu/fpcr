@@ -187,7 +187,7 @@ redBlack t =  sorted t && balanced t && semiRB t && color t == Blk {-"~~."-}
 
 ::: {.figure .top title="在紅黑樹中插入新元素後做的四種旋轉。" #fig:red-black-rotate}
 ::: {.center}
-```texonly
+```lhsonly
 \includegraphics[width=0.6\textwidth]{Pics/red-black-rotate.pdf}
 ```
 :::
@@ -294,37 +294,46 @@ rotate s x t = B s x t {-"~~."-}
 在 |t| 之上做歸納。以下只列出幾個代表性狀況。
 
 {.nobreak}**狀況** |t := E|.
-```spec
-   bheight (ins k E)
-=  bheight (R E k E)
-=  0
-=  bheight E {-"~~."-}
+```{.haskell .invisible}
+bheightInsBase k =
+```
+```haskell
+      bheight (ins k E)
+ ===  bheight (R E k E)
+ ===  0
+ ===  bheight E {-"~~."-}
 ```
 
 {.nobreak}**狀況** |t := R t x u|, |k <  x|:
-```spec
-   bheight (ins k (R t x u))
-=    {- |ins| 之定義；|k < x| -}
-   bheight (R (ins k t) x u)
-=    {- |bheight| 之定義 -}
-   bheight (ins k t) `max` bheight u
-=    {- 歸納假設 -}
-   bheight t `max` bheight u
-=    {- |bheight| 之定義 -}
-   bheight (R t x u) {-"~~."-}
+```{.haskell .invisible}
+bheightInsIndR k t x u =
+```
+```haskell
+      bheight (ins k (R t x u))
+ ===    {- |ins| 之定義；|k < x| -}
+      bheight (R (ins k t) x u)
+ ===    {- |bheight| 之定義 -}
+      bheight (ins k t) `max` bheight u
+ ===    {- 歸納假設 -}
+      bheight t `max` bheight u
+ ===    {- |bheight| 之定義 -}
+      bheight (R t x u) {-"~~."-}
 ```
 
 {.nobreak}**狀況** |t := B t x u|, |k <  x|:
-```spec
-   bheight (ins k (B t x u))
-=    {- |ins| 之定義；|k < x| -}
-   bheight (balance (ins k t) x u)
-=    {- 引理 \ref{lma:redblack-bheight-rotate} -}
-   1 + (bheight (ins k t) `max` bheight u)
-=    {- 歸納假設 -}
-   1 + (bheight t `max` bheight u)
-=    {- |bheight| 之定義 -}
-   bheight (B t x u) {-"~~."-}
+```{.haskell .invisible}
+bheightInsIndB k t x u =
+```
+```.haskell
+      bheight (ins k (B t x u))
+ ===    {- |ins| 之定義；|k < x| -}
+      bheight (balance (ins k t) x u)
+ ===    {- 引理 \ref{lma:redblack-bheight-rotate} -}
+      1 + (bheight (ins k t) `max` bheight u)
+ ===    {- 歸納假設 -}
+      1 + (bheight t `max` bheight u)
+ ===    {- |bheight| 之定義 -}
+      bheight (B t x u) {-"~~."-}
 ```
 :::
 
@@ -335,16 +344,19 @@ rotate s x t = B s x t {-"~~."-}
 以下只舉一種狀況為例。
 
 {.nobreak}**狀況** |(t,z,u) := (R (R t x u) y v, z, w)|:
-```spec
-   bheight (rotate (R (R t x u) y v) z w)
-=    {- |rotate| 之定義 -}
-   bheight (R (B t x u) y (B v z w))
-=    {- |bheight| 之定義 -}
-   (1+ (bheight t `max` bheight u)) `max` (1+ (bheight v `max` bheight w))
-=    {- 由於 |(k+x) `max` (k+y) = k + (x `max` y)|, |max| 有結合律 -}
-   1 + (((bheight t `max` bheight u) `max` bheight v) `max` bheight w)
-=    {- |bheight| 之定義 -}
-   1 + (bheight ((R (R t x u) y v)) `max` bheight w)
+```{.haskell .invisible}
+bheightRotateRR t x u y v z w =
+```
+```haskell
+      bheight (rotate (R (R t x u) y v) z w)
+ ===    {- |rotate| 之定義 -}
+      bheight (R (B t x u) y (B v z w))
+ ===    {- |bheight| 之定義 -}
+     (1+ (bheight t `max` bheight u)) `max` (1+ (bheight v `max` bheight w))
+ ===    {- 由於 |(k+x) `max` (k+y) = k + (x `max` y)|, |max| 有結合律 -}
+      1 + (((bheight t `max` bheight u) `max` bheight v) `max` bheight w)
+ ===    {- |bheight| 之定義 -}
+      1 + (bheight ((R (R t x u) y v)) `max` bheight w)
 ```
 :::
 
@@ -378,19 +390,22 @@ balanced t && balanced u &&
 以下只示範一種歸納情況。
 
 {.nobreak}**狀況** |t := B t x u|, |k < x|:
-```spec
-   balanced (ins k (B t x u))
-=    {- |ins| 之定義；|k < x| -}
-   balanced (rotate (ins k t) x u)
-<==  {- 引理 \ref{lma:red-black-balanced-rotate} -}
-   balanced (ins k t) && balanced u && bheight (ins k t) = bheight u
-=    {- 定理 \ref{thm:redblack-bheight-ins} -}
-   balanced (ins k t) && balanced u && bheight t = bheight u
-<==  {- 歸納假設 -}
-   balanced t && balanced u && bheight t = bheight u
-=    {- |balanced| 之定義 -}
-   balanced (B t x u) {-"~~."-}
-```spec
+```{.haskell .invisible}
+isBalancedInd k t x u =
+```
+```haskell
+      balanced (ins k (B t x u))
+ ===    {- |ins| 之定義；|k < x| -}
+      balanced (rotate (ins k t) x u)
+ <==    {- 引理 \ref{lma:red-black-balanced-rotate} -}
+      balanced (ins k t) && balanced u && bheight (ins k t) == bheight u
+ ===    {- 定理 \ref{thm:redblack-bheight-ins} -}
+      balanced (ins k t) && balanced u && bheight t == bheight u
+ <==    {- 歸納假設 -}
+      balanced t && balanced u && bheight t == bheight u
+ ===    {- |balanced| 之定義 -}
+      balanced (B t x u) {-"~~."-}
+```
 :::
 :::{.exer}
 證明引理\@ref{lma:red-black-balanced-rotate}.
@@ -399,24 +414,27 @@ balanced t && balanced u &&
 以下只示範其中一種狀況。
 
 {.nobreak}**狀況**: |(t,x,u) := (R (R t x u) y v, z, w)|.
-```spec
-  balanced (rotate (R (R t x u) y v) z w)
-=    {- |rotate| 之定義 -}
-  balanced (R (B t x u) y (B v z w))
-=    {- |balanced| 之定義 -}
-  bheight (B t x u) = bheight (B v z w) &&
-  balanced (B t x u) && balanced (B v z w)
-=    {- |bheight| 之定義 -}
-  1 + (bheight t `max` bheight u) = 1+ (bheight v `max` beight w) &&
-  bheight t = bheight u && balanced t && balanced u &&
-  bheight v = bheight w && balanced v && balanced w
-<==  {- |balanced| 與 |bheight| 之定義；算數性質 -}
-  bheight (R t x u) = bheight v &&
-  balanced (R t x u) && balanced v && balanced w &&
-  bheight t `max` bheight u `max` bheight v = bheight w
-=    {- |balanced| 與 |bheight| 之定義 -}
-  balanced (R (R t x u) y v) && balanced w &&
-   bheight R (R t x u) y v = bheight w {-"~~."-}
+```{.haskell .invisible}
+balancedRotate k t x u y v z w =
+```
+```haskell
+    balanced (rotate (R (R t x u) y v) z w)
+ ===    {- |rotate| 之定義 -}
+    balanced (R (B t x u) y (B v z w))
+ ===    {- |balanced| 之定義 -}
+    bheight (B t x u) == bheight (B v z w) &&
+    balanced (B t x u) && balanced (B v z w)
+ ===    {- |bheight| 之定義 -}
+    1 + (bheight t `max` bheight u) == 1+ (bheight v `max` bheight w) &&
+    bheight t == bheight u && balanced t && balanced u &&
+    bheight v == bheight w && balanced v && balanced w
+ <==  {- |balanced| 與 |bheight| 之定義；算數性質 -}
+    bheight (R t x u) == bheight v &&
+    balanced (R t x u) && balanced v && balanced w &&
+    bheight t `max` bheight u `max` bheight v == bheight w
+ ===    {- |balanced| 與 |bheight| 之定義 -}
+    balanced (R (R t x u) y v) && balanced w &&
+      bheight (R (R t x u) y v) == bheight w {-"~~."-}
 ```
 :::
 :::
@@ -482,30 +500,36 @@ infrared t          =  False {-"~~."-}
 在 |t| 之上做歸納。我們只舉出兩個具代表性的例子：
 
 {.nobreak}**狀況**: |t := B t x u|, |k < x|:
+```{.haskell .invisible}
+semiRBInsInd1 k t x u =
+```
 ```spec
    semiRB (ins k (B t x u))
-=    {- |ins| 之定義, |k < x| -}
+ ===    {- |ins| 之定義, |k < x| -}
    semiRB (rotate (ins k t) x u)
-<==  {- 引理 \ref{lma:red-black-semiRB-rotate} -}
+ <==  {- 引理 \ref{lma:red-black-semiRB-rotate} -}
    (infrared (ins k t) || semiRB (ins k t)) && semiRB u
-<==  {- 歸納假設，\eqref{eq:red-black-semiRB-ins-infrared} -}
+ <==  {- 歸納假設，\eqref{eq:red-black-semiRB-ins-infrared} -}
    semiRB t && semiRB u
-=    {- |semiRB| 之定義 -}
+ ===    {- |semiRB| 之定義 -}
    semiRB (B t x u) {-"~~."-}
 ```
 
 {.nobreak}**狀況**:  |t := R t x u|, |k < x|:
-```spec
+```{.haskell .invisible}
+semiRBInsInd2 k t x u =
+```
+```haskell
    infrared (ins k (R t x u))
-=    {- |ins| 之定義 -}
+ ===    {- |ins| 之定義 -}
    infrared (R (ins k t) x u)
-=    {- |infrared| 之定義 -}
-   (color (ins k t) = Blk || color u = Blk) && semiRB (ins k t) && semiRB u
-=    {- 歸納假設 -}
-   (color (ins k t) = Blk || color u = Blk) && semiRB t && color t = Blk && semiRB u
-<==  {- 命題邏輯: |((P |||| Q) && R) <== (Q && R)| -}
-   color t = color u = Blk && semiRB t && semiRB u
-=   {- |semiRB| 之定義 -}
+ ===    {- |infrared| 之定義 -}
+   (color (ins k t) == Blk || color u == Blk) && semiRB (ins k t) && semiRB u
+ ===    {- 歸納假設 -}
+   (color (ins k t) == Blk || color u == Blk) && semiRB t && color t == Blk && semiRB u
+ <==    {- 命題邏輯: |((P |||| Q) && R) <== (Q && R)| -}
+   color t == color u == Blk && semiRB t && semiRB u
+ ===    {- |semiRB| 之定義 -}
    semiRB (R t x u) {-"~~."-}
 ```
 :::

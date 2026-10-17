@@ -478,7 +478,7 @@ concat (xs:xss) = xs ++ concat xss {-"~~."-}
 ```
 :::
 
-:::{.texonly}
+:::{.lhsonly}
 % 前面說到 |(++)| 與 |(+)| 的相似性。若要形式化地把 |List a|, |Nat|, |(++)|, 與 |(+)|
 % 牽上關係，連接他們的橋樑就是 |length| --- |xs ++ ys| 的長度，應是 |xs| 與 |ys| 的長度之和！我們試著證明看看。
 % \begin{theorem} \label{thm:length-append}
@@ -679,7 +679,7 @@ lengthAppendPf1 x xs ys =
 :::{.exer #ex:map-append}
 證明對所有 |f|, |xs|, 與 |ys|, |map f (xs ++ ys) = map f xs ++ map f ys|.
 :::
-```texonly
+```lhsonly
 %\Exercise 完成定理\@ref{thm:map-fusion}的證明。
 % \Answer 欲證明|map f (map g xs) = map (f.g) xs|, 在 |xs| 上歸納。
 %
@@ -1039,7 +1039,7 @@ inits (x:xs)  = [] : map (x:) (inits xs) {-"~~."-}
 就如同在自然數上的歸納函數定義中，有些基底狀況是 |0|, 有些是 |1|, 有些是別的值，
 此處我們也依我們的意圖，選定最合適的基底值。
 
-```texonly
+```lhsonly
 %format initsp = "\Varid{inits}^{+}"
 ```
 :::{.exlist}
@@ -1348,7 +1348,7 @@ lengthSublists x xs =
 :::
 :::
 
-```texonly
+```lhsonly
 % ```spec
 %   elem z xs ==> elem z (ys ++ xs)
 % ```
@@ -1423,7 +1423,7 @@ parts (x:xs)  = concat (map (extend x) (parts xs)) {-"~~,"-}
 {.nobreak}呼叫 |map (extend x)| 的結果需再用一個 |concat| 聯集在一起。
 
 :::{.infobox title="反函數"}
-```texonly
+```lhsonly
 %{
 %format inv f = f "^{-1}"
 ```
@@ -1436,7 +1436,7 @@ parts (x:xs)  = concat (map (extend x) (parts xs)) {-"~~,"-}
 {.nobreak}計算 |parts xs| 時，我們用 |inv concat| 找出所有滿足 |concat yss = xs| 的 |List (List a)|, 並且只挑出不含空串列的。
 
 上述定義可以轉換成本節的歸納定義。相關研究可參考 @MuBird:03:Theory.
-```texonly
+```lhsonly
 %}
 ```
 :::
@@ -1472,7 +1472,7 @@ ins x (y:ys)  = (x:y:ys) : map (y:) (ins x ys) {-"~~."-}
 由此可知，等號左手邊的運算是從拆解 |ys| 開始的。
 等號右手邊的情況也一樣：根據 |ins| 與 |(++)| 的定義，要計算 |ins x (ys ++ zs)|，第一個被拆開的是 |ys|. 因此，欲證明\@eqref{eq:append-ins}，合理的猜測是在 |ys| 上做歸納！
 
-```texonly
+```lhsonly
 % Induction on |ys|. For |ys := []| we have
 % ```spec
 %       map (++zs) (ins x []) ++ map ([] ++) (ins x zs)
@@ -1861,7 +1861,7 @@ lenLeavesPf1 x t u =
 
 以串列為例。為單純起見，先考慮元素皆為 |Nat| 的串列。
 如下的定義
-```texonly
+```lhsonly
 %%format ListNat = "{\Varid{List}\mathbb{N}}"
 %%format ListNatF = "{\Varid{List}\mathbb{N}\Varid{F}}"
 ```
@@ -1929,7 +1929,7 @@ f (Suc n)  = ... f n ...
 以後的幾個章節中，我們將逐步放鬆限制，允許更有彈性的函數定義模式。
 我們先從歸納法的一些較簡單的變化開始。
 
-```texonly
+```lhsonly
 %{
 %format f1
 %format fb = "\Varid{f}_{\Varid{b}}"
@@ -1968,7 +1968,7 @@ maximum []      = -infty
 maximum (x:xs)  = x `max` maximum xs {-"~~."-}
 ```
 :::
-```texonly
+```lhsonly
 % %format initsP = "\Varid{inits}^{+}"
 % \begin{exlist}
 % \Exercise 定義 |initsP|, 傳回
@@ -1979,7 +1979,7 @@ maximum (x:xs)  = x `max` maximum xs {-"~~."-}
 % ```
 % \end{exlist}
 ```
-```texonly
+```lhsonly
 %}
 ```
 
@@ -2295,7 +2295,7 @@ ys < xs  <=> ys `mem` tails xs && ys /= xs {-"~~."-}
 
 ## 良基歸納 {#sec:well-founded-induction}
 
-```texonly
+```lhsonly
 %{
 %format a0
 %format a1
@@ -2318,7 +2318,7 @@ ys < xs  <=> ys `mem` tails xs && ys /= xs {-"~~."-}
 給定任一個 |a0 :: A|，我們找一個滿足 |a1 <: a0| 的值 |a1|。
 這種 |a1| 可能已不存在，但如果存在，我們再找一個滿足 |a2 <: a1| 的 |a2|.
 說 |(<:)| 是個良基序的意思便是前述過程不可能永遠做下去：總有一天我們得停在一個「最小」的某*基底* |an :: A|。
-```texonly
+```lhsonly
 %}
 ```
 舉例說明：自然數上的「小於|(<)|」關係是個良基序，但整數上的|(<)|關係則不是 --- 由於負數的存在。實數上的|(<)|關係也不是。良基序並非得是個全序(total order)。例如，我們可定義序對上的比較關係如下：
@@ -2436,7 +2436,7 @@ gcd (m,n)  | m == n     = n
 ```
 {.nobreak}因此，我們可得知 |gcd| 在 |m|, |n| 均為正整數時會正常終止。
 如果把 |gcd| 當作一個良基歸納，我們用了如下的良基序：
-```texonly
+```lhsonly
 %{
 %format m1
 %format n1
@@ -2447,7 +2447,7 @@ gcd (m,n)  | m == n     = n
   (m1, n1) <: (m2, n2) {-"~"-}<=>{-"~"-}  m1+n1 < m2+n2 {-"~~,"-}
 ```
 {.nobreak}其中 |m1|, |n1|, |m2|, |n2| 均為正整數。
-```texonly
+```lhsonly
 %}
 ```
 :::
@@ -2473,7 +2473,7 @@ interleave' (xs,    [])  = xs
 interleave' (x:xs,  ys)  = x : interleave' (ys,xs) {-"~~."-}
 ```
 {.nobreak}函數 |interleave'| 是個良基定義 --- 參數中的兩個串列雖然交換位置，但它們長度的總和會變小。也就是說 |interleave'| 可視為定義在這個良基序上的函數：
-```texonly
+```lhsonly
 %{
 %format xs1
 %format xs2
@@ -2483,7 +2483,7 @@ interleave' (x:xs,  ys)  = x : interleave' (ys,xs) {-"~~."-}
 ```spec
   (xs1,ys1) <: (xs2,ys2) {-"~"-}<=>{-"~"-} length xs1 + length ys1 < length xs2 + length ys2 {-"~~."-}
 ```
-```texonly
+```lhsonly
 %}
 ```
 凡是 |interleave'| 有的性質，不難找出 |interleave| 的相對應版本；

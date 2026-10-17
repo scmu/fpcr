@@ -54,7 +54,7 @@ double x = x + x {-"~~."-}
 邏輯編程\index{logic programming 邏輯編程}中，描述一個問題便是寫下事物間的邏輯關係，計算是邏輯規則「歸結(resolution)」\index{logic programming 邏輯編程!resolution 歸結}的附帶效果。
 共時(concurrent)\index{concurrency 共時}程式語言著眼於描述多個同時執行的程式如何透過通道傳遞訊息，計算也靠此達成。
 ::: {.infobox title="演算格式"}
-::: {.texonly}
+::: {.lhsonly}
 ```
 %format expr0
 %format expr1
@@ -490,7 +490,7 @@ Haskell 鼓勵大家使用 currying --- 它的內建函數大多依此配合設�
 
 另一方面，如果我們想使用 |double| 兩次，計算 |x| 的四倍，應寫成 |double (double x)|.
 若寫 |double double x| ，會被視為 |(double double) x| --- |double| 作用在自身之上，而這顯然是個型別錯誤。
-::: {.texonly}
+::: {.lhsonly}
 ```
 %format poly1
 %format poly2
@@ -665,7 +665,7 @@ compute = forktimes (+1) (+2) {-"~~."-}
 其中 |forktimes| 型別中的 |a| 被特化為 |Int|.
 :::
 
-::: {.texonly}
+::: {.lhsonly}
 ```
 %format lift2
 ```
@@ -784,7 +784,7 @@ id x = x {-"~~."-}
 這也反映在他的型別 |a -> a| 上。
 這個函數有什麼重要性呢？
 原來，|(.)| 滿足結合律，並且以 |id| 為單位元素（這也是「單位函數」這名字的由來）：
-```texonly
+```lhsonly
 \begin{align*}
   |id . f| ~=&~ |f| ~=~ |f . id {-"~~,"-}|\\
   |(f . g) . h| ~&=~ |f . (g . h) {-"~~."-}|
@@ -920,7 +920,7 @@ subst f g x = f x (g x) {-"~~."-}
 雖說函數是一級市民，在本書之中，目前為止，仍有一項功能是其他型別擁有、函數卻還沒有的：寫出一個*未命名*的值的能力。
 整數、真假值都能不經命名、直接寫在算式中，例如，
 我們可寫 |smaller (square 3) 4|, 而不需要先定義好
-::: {.texonly}
+::: {.lhsonly}
 ```
 %format num1
 %format num2
@@ -1363,7 +1363,7 @@ swap p = (snd p, fst p) {-"~~."-}
 
 ::: {.example #eg:swap}
 回顧 |swap| 的兩種定義方式，分別命名為
-```texonly
+```lhsonly
 %format swap1
 %format swap2
 ```
@@ -1646,7 +1646,7 @@ init  :: List a -> List a {-"~~."-}
 
 函數 |take| 和 |drop| 顯然有些關聯，但它們的關聯該怎麼具體地寫下來呢？
 一個可能是：對所有的 |n| 和 |xs|,
-```texonly
+```lhsonly
 \begin{equation*}
    |take n xs ++ drop n xs = xs| \mbox{~~.}
    \label{eq:taken-dropn}
@@ -1659,7 +1659,7 @@ init  :: List a -> List a {-"~~."-}
 {title="映射"} |map :: (a -> b) -> List a -> List b| 是串列上
 一個很重要的高階函數：|map f xs| 將 |f| 作用在 |xs| 的每一個元素上。
 例：
-```texonly
+```lhsonly
 \begin{align*}
 |map square [1,2,3,4]| &= |[1,4,9,16]| \mbox{~~,}\\
 |map (1+) [2,3,4]| &= |[3,4,5]| \mbox{~~.}

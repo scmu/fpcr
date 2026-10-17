@@ -113,7 +113,7 @@ Mary 有的蘋果數目是 John 的兩倍。Mary 發現她的蘋果中有一半�
 你會如何解這問題呢？如果回到第一原則，我們也許可以一步步嘗試：試試看 John 最初有一顆蘋果，Mary 有兩顆的情況是不是合理解答，然後試試看 John 有兩顆，Mary 有四顆的情況... 這是在語意上解問題。就如同我們解騎士與惡棍問題時用窮舉法一樣。
 
 但許多人也許會用代數：把 Mary 最初的蘋果數目用$m$表示，John 的蘋果數目用$j$表示，寫成這樣的式子：
-```{.texonly}
+```{.lhsonly}
 \begin{align*}
       m &= 2j \mbox{~~,}\\
     m/2 &= 2(j-1) \mbox{~~.}
@@ -162,7 +162,7 @@ Mary 有的蘋果數目是 John 的兩倍。Mary 發現她的蘋果中有一半�
 給定一串（有正有負）的數字。請找出一段連續的數字，使其總和越大越好，並傳回這個總和。
 :::
 {.nobreak}這是經典的「最大區段和」問題。如前面的章節所述，面對一個問題，我們先把它描述成符號。如果 |a| 是給定的那串數字，|N| 是其長度，|a[i]| 是數字中的地 |i| 個，而 |m| 是我們想求出的、最大的那個和，最大區段和問題可以描述成這樣：
-``` {.texonly #eq:mss-spec-math}
+``` {.lhsonly #eq:mss-spec-math}
 \begin{gather}\label{eq:mss-spec-math}
 \begin{split}
   m &= max \{sum(i,j) \mid 0 \leq i \leq j \leq N\} \mbox{~~,}\\
@@ -221,7 +221,7 @@ $21$, $22$, $23$ 則寫成 \textkappa\textalpha, \textkappa\textbeta, \textkappa
 $653$可寫成\textchi\textnu\textgamma.
 這套表示法的缺點包括不易表示大數，以及不易做演算：我們需要知道 \textdelta 加上 \textbeta 等於 \foreignlanguage{greek}{\stigma}, 以及 \textmugreek 加上 \textkappa 等於 \textxi。^[西元前八世紀，希臘人曾使用以 I, \textPi, \textDelta, H 分別表示 $1$, $5$, $10$, $100$ 的表示法。後來被圖\@ref{fig:greekalphnumerals}中的系統取代。無論如何，希臘人仍以此發展出了進步的數學。]
 
-```texonly
+```lhsonly
 \newcommand{\greekalphnumerals}{
 \begin{tabular}{*{18}{r}}
   \textalpha & \textbeta & \textgamma & \textdelta & \textepsilon &
@@ -243,13 +243,13 @@ $653$可寫成\textchi\textnu\textgamma.
 ```
 ::: {.figure .top title="希臘數字。" #fig:greekalphnumerals}
 ::: {.center}
-```texonly
+```lhsonly
   \greekalphnumerals
 ```
 :::
 :::
 
-```texonly
+```lhsonly
 \newcommand{\mayalargenumber}{%
 \begin{tabular}{cl}
   $\mayadigit{1}$ & $1 \times 18 \times 20 \times 20 \times 20 \times 20 = 2880000$\\
@@ -269,7 +269,7 @@ $\mayadigit{19}$  & $19$ \\
 ```
 
 與之對比的是瑪雅數字。這套數字系統的年代不詳，據估計可能在西元四至世紀採用。一個點代表 $1$, 一條橫杠代表 $5$。 例如 $19$ 寫成 $\mayadigit{19}$. 瑪雅數字採用 $20$ 進位，較大的位數寫在上方。因此
-```texonly
+```lhsonly
 \begin{align*}
 \mayadigit{7}\\[-0.35cm]
 \mayadigit{11}
@@ -283,14 +283,14 @@ $\mayadigit{19}$  & $19$ \\
 
 ::: {.figure .top title="以瑪雅數字表示 $3212199$." #fig:mayanumerals}
 ::: {.center}
-```texonly
+```lhsonly
 \mayalargenumber
 ```
 :::
 :::
 
 如何用瑪雅數字作加法？以下顯示的是 $151 + 55$:
-```texonly
+```lhsonly
 \begin{align*}
 \mayaaddition
 \end{align*}
