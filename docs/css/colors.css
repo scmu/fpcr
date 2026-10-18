@@ -1,6 +1,7 @@
 body {
   font-size: 120%;
   color: #777;
+  background: #fff;
 }
 
 body a { color: #557a95}
@@ -56,6 +57,7 @@ This styles the selected menu item `<li>`.
 */
 #menu .pure-menu-heading {
     background: #557a95;
+    padding-right: 0px;
 }
 
 #menu .pure-menu-selected{

@@ -13,6 +13,19 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     bottom: 0;
     z-index: 1000; /* so the menu or its navicon stays above all content */
     overflow-y: auto;
+
+    scrollbar-gutter: stable;
+    /* scrollbar-width: none; */
+    scrollbar-width: thin;
+    overflow-y:scroll; /* make the scroll bar always present ... */
+
+    scrollbar-color: transparent #fff; /* ... but with a white background */
+    transition: scrollbar-color 0.3s ease; /* so the scrollbar blends into the background*/
+}
+
+#menu:hover {
+  /* scrollbars appears when hovering */
+  scrollbar-color: #aaa #fff; /* thumb color, track color */
 }
 
 @media (min-width: 80em) {
