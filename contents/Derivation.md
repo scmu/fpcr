@@ -523,7 +523,7 @@ u =  Bin (Bin (... (Bin (Bin (Tip 1) (Tip 2)) (Tip 3)))...
 
 ### 計算多項式 -- Horner 法則 {#sec:poly-horner}
 
-給定整數串列 $\Varid{as} = [a_0, a_1, a_2 \ldots a_n]$ 以及 |x :: Int|, 我們想計算如下的多項式：
+給定整數串列 {.discern lhs="$\\Varid{as} = [a_0, a_1, a_2 \\ldots a_n]$" html="$\\mathit{as} = [a_0, a_1, a_2 \\ldots a_n]$"} 以及 |x :: Int|, 我們想計算如下的多項式：
 ```equation
     a_0 + a_1 x + a_2 x^2 + ... + a_n x^n \mbox{~~.}
 ```

@@ -214,12 +214,12 @@ Mary 有的蘋果數目是 John 的兩倍。Mary 發現她的蘋果中有一半�
 
 {title="適合演算的符號"} 我們舉個例子，談談符號「適合演算」是怎麼回事。
 圖\@ref{fig:greekalphnumerals}中顯示的是西元前四世紀左右希臘人使用的數字表示法。
-以希臘字母表為順序，$1$, $2$,\ldots 到 $9$ 分別寫成 \textalpha, \textbeta,\ldots \straighttheta.
-每遇到 $10$ 的乘冪便換一組符號，如 $10$, $20$, \ldots 寫成\textiota, \textkappa \ldots。
-$11$, $12$, $13$ 分別寫成 \textiota\textalpha, \textiota\textbeta, \textiota\textgamma,
-$21$, $22$, $23$ 則寫成 \textkappa\textalpha, \textkappa\textbeta, \textkappa\textgamma.
-$653$可寫成\textchi\textnu\textgamma.
-這套表示法的缺點包括不易表示大數，以及不易做演算：我們需要知道 \textdelta 加上 \textbeta 等於 \foreignlanguage{greek}{\stigma}, 以及 \textmugreek 加上 \textkappa 等於 \textxi。^[西元前八世紀，希臘人曾使用以 I, \textPi, \textDelta, H 分別表示 $1$, $5$, $10$, $100$ 的表示法。後來被圖\@ref{fig:greekalphnumerals}中的系統取代。無論如何，希臘人仍以此發展出了進步的數學。]
+以希臘字母表為順序，$1$, $2$,{.discern lhs="\\ldots" html="..."} 到 $9$ 分別寫成 {.discern lhs="\\textalpha, \\textbeta,\\ldots \\straighttheta" html="α, β, ... θ"}.
+每遇到 $10$ 的乘冪便換一組符號，如 $10$, $20$, {.discern lhs="\\ldots" html="..."} 寫成{.discern lhs="\\textiota, \\textkappa \\ldots" html="ι, κ ..."}。
+數值 $11$, $12$, $13$ 分別寫成 {.discern lhs="\\textiota\\textalpha, \\textiota\\textbeta, \\textiota\\textgamma" html="ια, ιβ, ιγ"},
+$21$, $22$, $23$ 則寫成 {.discern lhs="\\textkappa\\textalpha, \\textkappa\\textbeta, \\textkappa\\textgamma" html="κα, κβ, κγ"}.
+數值 $653$ 可寫成{.discern lhs="\\textchi\\textnu\\textgamma" html="χνγ"}.
+這套表示法的缺點包括不易表示大數，以及不易做演算：我們需要知道 {.discern lhs="\\textdelta" html="δ"} 加上 {.discern lhs="\\textbeta" html="β"} 等於 {.discern lhs="\\foreignlanguage{greek}{\\stigma}" html="ς"}, 以及  {.discern lhs="\\textmugreek" html="μ"} 加上 {.discern lhs="\\textkappa" html="κ"} 等於 {.discern lhs="\\textxi" html="ξ"}。^[西元前八世紀，希臘人曾使用以 I, {.discern lhs="\\textPi" html="Π"}, {.discern lhs="\\textDelta" html="Δ"}, H 分別表示 $1$, $5$, $10$, $100$ 的表示法。後來被圖\@ref{fig:greekalphnumerals}中的系統取代。無論如何，希臘人仍以此發展出了進步的數學。]
 
 ```lhsonly
 \newcommand{\greekalphnumerals}{
@@ -268,18 +268,18 @@ $\mayadigit{19}$  & $19$ \\
 \end{tabular}}
 ```
 
-與之對比的是瑪雅數字。這套數字系統的年代不詳，據估計可能在西元四至世紀採用。一個點代表 $1$, 一條橫杠代表 $5$。 例如 $19$ 寫成 $\mayadigit{19}$. 瑪雅數字採用 $20$ 進位，較大的位數寫在上方。因此
+與之對比的是瑪雅數字。這套數字系統的年代不詳，據估計可能在西元四至世紀採用。一個點代表 $1$, 一條橫杠代表 $5$。 例如 $19$ 寫成 {.discern lhs="$\\mayadigit{19}$" html="𝋳"}. 瑪雅數字採用 $20$ 進位，較大的位數寫在上方。因此
 ```lhsonly
 \begin{align*}
 \mayadigit{7}\\[-0.35cm]
 \mayadigit{11}
 \end{align*}
 ```
-{.nobreak}代表 $7 (\mayadigit{7}) \times 20 + 11 (\mayadigit{11})$, 也就是 $151$.
+{.nobreak}代表 {.discern lhs="$7 (\\mayadigit{7}) \\times 20 + 11 (\\mayadigit{11})$" html=""}, 也就是 $151$.
 另有個例外：第三個數字為 $18$（而非 $20$）的乘冪 --- 因為 $18 \times 20 = 360$ 接近一年的日數。
 圖 \@ref{fig:mayanumerals} 中左邊由上至下是以瑪雅數字寫成的 $3212199$.
 值得注意的是，此類*以符號的位置表示其量級*的數字表示法大都需要一個相當於「零」的佔位符號。
-在瑪雅數字中，該符號寫成 $\mayadigit{0}$。因此 $20$ 可寫成 $\dot{\raisebox{-1pt}{\vstretch{0.7}{\mayadigit{0}}}}$, 與只有一個點的 $1$ 區分。^[一些早期數字表示法中有此種佔位符號，但並不見得把「零」視為可獨立存在的一個數。「將零視為一個數字」是數學史上的重要發明，許多數學性質都需有它的存在才得以描述。程式語言中也有類似的情況：有一個「不做任何事的指令」或一個「將輸入照樣傳回的函數(即|id|)」對於描述程式的性質是很重要的。]
+在瑪雅數字中，該符號寫成 {.discern lhs="$\\mayadigit{0}$" html="𝋠"}。因此 $20$ 可寫成 {.discern lhs="$\\dot{\\raisebox{-1pt}{\\vstretch{0.7}{\\mayadigit{0}}}}$" html=".𝋠"}, 與只有一個點的 $1$ 區分。^[一些早期數字表示法中有此種佔位符號，但並不見得把「零」視為可獨立存在的一個數。「將零視為一個數字」是數學史上的重要發明，許多數學性質都需有它的存在才得以描述。程式語言中也有類似的情況：有一個「不做任何事的指令」或一個「將輸入照樣傳回的函數(即|id|)」對於描述程式的性質是很重要的。]
 
 ::: {.figure .top title="以瑪雅數字表示 $3212199$." #fig:mayanumerals}
 ::: {.center}
@@ -295,8 +295,8 @@ $\mayadigit{19}$  & $19$ \\
 \mayaaddition
 \end{align*}
 ```
-{.nobreak}我們可先把兩個個位數（$\mayadigit{11}$與$\mayadigit{15}$）和兩個 $20$ 位數（$\mayadigit{7}$與$\mayadigit{2}$）分別相加。
-其中，個位數相加的結果是 $\mayadigit{26}$ --- 超過了 $20$！
+{.nobreak}我們可先把兩個個位數（{.discern lhs="$\\mayadigit{11}$" html="𝋫"}與{.discern lhs="$\\mayadigit{15}$" html="𝋯"}）和兩個 $20$ 位數（{.discern lhs="$\\mayadigit{7}$" html="𝋯"}與{.discern lhs="$\\mayadigit{2}$" html="𝋢"}）分別相加。
+其中，個位數相加的結果是 {.discern lhs="$\\mayadigit{26}$" html=""} --- 超過了 $20$！
 於是我們把其中四個橫槓（即一個 $20$）往上進位成一個點，
 和 $20$ 位數的四個點結合成另一個橫槓。
 

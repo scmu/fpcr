@@ -14,7 +14,7 @@ import Chapters.Basics (ETree(..), ITree(..))
 但這些個別組件該如何實作呢？或著，沒有合用的組件時該怎麼辦？
 我們可以回到更基礎的層次，用*遞迴*(recursion)\index{recursion 遞迴}定義它們。
 「遞迴」意指一個值的定義又用到它本身，是數學中常見的定義方式。
-在早期的編程教材中，遞迴常被視為艱澀、難懂、進階的主題。
+在早期的程式設計教材中，遞迴常被視為艱澀、難懂、進階的主題。
 但在函數程設中，遞迴是唯一可使程式不定次數地重複一項計算的方法。
 一旦跨過了門檻，遞迴其實是個很清晰、簡潔地描述事情的方式。
 
@@ -100,7 +100,7 @@ Haskell 支援無限大的資料結構，也允許我們寫出不會終止的程
 
 ## 自然數上之歸納定義 {#sec:induction-on-Nat}
 
-數學歸納法和編程有什麼關係呢？考慮一個例子：給定 |b, n :: Nat|, 我們希望寫個函數 |exp| 計算乘冪，使得 |exp b n =|{.lhsonly ctnt="\,$\\Varid{b}^{\\Varid{n}}$"}{.htmlonly ctnt="&thinsp;$b^n$"}. 我們先把型別寫下：
+數學歸納法和程式有什麼關係呢？考慮一個例子：給定 |b, n :: Nat|, 我們希望寫個函數 |exp| 計算乘冪，使得 |exp b n =|{.discern lhs="\,$\\Varid{b}^{\\Varid{n}}$" html="&thinsp;$b^n$"}. 我們先把型別寫下：
 ```spec
 exp :: Nat -> Nat -> Nat
 exp b n = ?
@@ -111,8 +111,8 @@ exp :: Nat -> Nat -> Nat
 exp b Zero     = ?
 exp b (Suc n)  = ?
 ```
-{.nobreak}其中，|exp b Zero| 較簡單：顯然應該是{.lhsonly ctnt="$\\Varid{b}^0 = 1$"}{.htmlonly ctnt="$b^0=1$"}. 至於 |exp b (Suc n)| 的右手邊該怎麼寫？似乎很難一步定出來。
-但*假設 |exp b n| 已經順利算出了{.lhsonly ctnt="$\\Varid{b}^{\\Varid{n}}$"}{.htmlonly ctnt="$b^n$"}*, 由於 {.lhsonly ctnt="$\\Varid{b}^{1+\\Varid{n}} = \\Varid{b} \\times \\Varid{b}^{\\Varid{n}}$"} {.htmlonly ctnt="$b^{1+n} = b \\times b^n$"}, |exp b (Suc n)| 與之的關係可寫成：
+{.nobreak}其中，|exp b Zero| 較簡單：顯然應該是{.discern lhs="$\\Varid{b}^0 = 1$" html="$b^0=1$"}. 至於 |exp b (Suc n)| 的右手邊該怎麼寫？似乎很難一步定出來。
+但*假設 |exp b n| 已經順利算出了{.discern lhs="$\\Varid{b}^{\\Varid{n}}$" html="$b^n$"}*, 由於 {.discern lhs="$\\Varid{b}^{1+\\Varid{n}} = \\Varid{b} \\times \\Varid{b}^{\\Varid{n}}$" html="$b^{1+n} = b \\times b^n$"}, |exp b (Suc n)| 與之的關係可寫成：
 ```spec
 exp b (Suc n) = b * exp b n {-"~~."-}
 ```
@@ -137,7 +137,7 @@ exp b n  = b * exp b (n-1) {-"~~."-}
 反對者則批評它與 type class 的衝突。後來由反方勝出。
 
 有些 Haskell 教科書堅持書中出現的程式碼須是能在一個字一個字地鍵入電腦後即可執行的。
-本書的定位並非 Haskell 教材，而是函數編程概念的入門書。
+本書的定位並非 Haskell 教材，而是函數程式設計概念的入門書。
 為此目的，我們希望選擇適合清晰表達概念、易於操作、演算、證明的符號。
 而一個實用目的的語言得在許多設計上妥協尋求平衡，基於種種考量，往往得犧牲符號的簡潔與便利性（這點我們完全能理解）。
 因此本書中的程式語法偶爾會和 Haskell 語法有所不同。
@@ -181,7 +181,7 @@ f (Suc n)  = ... f n ... {-"~~."-}
 只要基底狀況的 |e| 以及在歸納步驟中 |f n| 前後的計算都正常終止，對任何輸入，|f| 都會正常終止。因此 |f| 是個全函數。
 
 「程式會終止」是很重要的性質，我們之後會常談到。
-在本書目前為止示範的編程方法中，「一個函數若呼叫自己，只能給它更小的參數」是個單純但重要的規範
+在本書目前為止示範的程式設計方法中，「一個函數若呼叫自己，只能給它更小的參數」是個單純但重要的規範
 （例如 |f (Suc n)| 的右手邊可以有 |f n|, 不能有 |f (Suc n)| 或 |f (Suc (Suc n))|）。
 操作上這確保程式會終止，而在第 \todo{where?} 章之中，我們將提到這也確保該遞迴定義是「好」的、有意義的。
 
@@ -227,8 +227,8 @@ Zero     + n  = n
 
 ## 自然數上之歸納證明 {#sec:inductive-proof-on-Nat}
 
-上一節中我們定出了函數 |exp|。如果定義正確，|exp b n| 算的應是 {.lhsonly ctnt="$\\Varid{b}^\\Varid{n}$"}{.htmlonly ctnt="$b^n$"}.
-例如，我們知道 $\Varid{b}^\Varid{m+n} = \Varid{b}^\Varid{m} \times \Varid{b}^\Varid{n}$. 我們定出的函數 |exp| 是否真有此性質呢？
+上一節中我們定出了函數 |exp|。如果定義正確，|exp b n| 算的應是 {.discern lhs="$\\Varid{b}^\\Varid{n}$" html="$b^n$"}.
+例如，我們知道 {.discern lhs="$\\Varid{b}^\\Varid{m+n} = \\Varid{b}^\\Varid{m} \\times \\Varid{b}^\\Varid{n}$" html="$b^{m+n} = b^m \\times b^n$"}. 我們定出的函數 |exp| 是否真有此性質呢？
 
 ::: {.theorem #thm:exp-plus-times}
   對任何 |b, m, n :: Nat|, |exp b (m + n) = exp b m * exp b n|.
@@ -524,6 +524,7 @@ concat (xs:xss) = xs ++ concat xss {-"~~."-}
 % ```
 % \end{proof}
 % 讀者可觀察到類似的技巧：在|xs := x : xs|的狀況中，頭幾步的目的是將|length|往裡推，製造出|length (xs++ys)|, 以便使用歸納假設。
+
 :::
 
 :::{.infobox title="等式證明的步驟該多詳細？"}
@@ -1182,7 +1183,7 @@ perms (x:xs)  = concat (map (fan x) (perms xs)) {-"~~."-}
 :::{.proof}
 在 |xs| 上做歸納。
 
-\noindent{\bf 基底狀況} |xs:=[]|:
+{.noindent}{\bf 基底狀況} |xs:=[]|:
 ```{.haskell .invisible}
 lengthPermsPf0 =
 ```
@@ -1734,16 +1735,16 @@ lenLeavesPf1 x t u =
 
   * 如果 $x \in S$ 滿足 $(\forall y \in T: y \leq x)$, 則 $x$ 是 $T$ 的一個*上界*(*upper bound*).
     \index{upper bound 上界}
-  * 如果 $T$ 的所有上界中存在「最小」的，該值稱作 $T$ 的*最小上界*(*supremum*, 或 *least upper bound*), 記為 $\Varid{sup}~T$.
+  * 如果 $T$ 的所有上界中存在「最小」的，該值稱作 $T$ 的*最小上界*(*supremum*, 或 *least upper bound*), 記為 {.discern lhs="$\\Varid{sup}~T$" html="$\\mathit{sup}~T$"}.
     \index{supremum 最小上界}
     \index{least upper bound 最小上界}
-    依據定義，$\Varid{sup}~T$ 滿足 $(\forall y \in T: y \leq x) \Rightarrow \Varid{sup}~T \leq x$.
+    依據定義，{.discern lhs="$\\Varid{sup}~T$" html="$\\mathit{sup}~T$"} 滿足 {.discern lhs="$(\\forall y \\in T: y \\leq x) \\Rightarrow \\Varid{sup}~T \\leq x$" html="$(\\forall y \\in T: y \\leq x) \\Rightarrow \\mathit{sup}~T \\leq x$"}.
   * 如果 $x \in S$ 滿足 $(\forall y \in T: y \geq x)$, 則 $x$ 是 $T$ 的一個*下界*(*lower bound*).
     \index{lower bound 下界}
-  * 如果 $T$ 的所有下界存在「最大」的，該值稱作 $T$ 的*最大下界*(*infimum*, 或*greatest lower bound*), 記為 $\Varid{inf}~T$.
+  * 如果 $T$ 的所有下界存在「最大」的，該值稱作 $T$ 的*最大下界*(*infimum*, 或*greatest lower bound*), 記為 {.discern lhs="$\\Varid{inf}~T$" html="$\\mathit{inf}~T$"}.
     \index{infimum 最大下界}
     \index{greatest lower bound 最大下界}
-    依據定義，$\Varid{inf}~T$ 滿足 $(\forall y \in T: y \geq x) \Rightarrow \Varid{inf}~T \geq x$.
+    依據定義，{.discern lhs="$\\Varid{inf}~T$" html="$\\mathit{inf}~T$"} 滿足 {.discern lhs="$(\\forall y \\in T: y \\geq x) \\Rightarrow \\Varid{inf}~T \\geq x$" html="$(\\forall y \\in T: y \\geq x) \\Rightarrow \\mathit{inf}~T \\geq x$"}.
 
 
 
@@ -1754,7 +1755,7 @@ lenLeavesPf1 x t u =
 
   * 如果對任何 $x, y \in S$, |sup {x,y}| 和 |inf {x,y}| 均存在且都在 $S$ 之中，則 $(S,(\leq))$ 是一個格 (lattice)。
     \index{lattice 格}
-  * 如果對任何 $T \subseteq S$，$\Varid{sup}~T$ 和 $\Varid{inf}~T$ 均存在且都在 $S$ 之中，則 $(S,(\leq))$ 是一個完全格 (complete lattice)。
+  * 如果對任何 $T \subseteq S$，{.discern lhs="$\\Varid{sup}~T$" html="$\\mathit{sup}~T$"} 和 {.discern lhs="$\\Varid{inf}~T$" html="$\\mathit{inf}~T$"} 均存在且都在 $S$ 之中，則 $(S,(\leq))$ 是一個完全格 (complete lattice)。
     \index{complete lattics 完全格}
 
 
@@ -2289,7 +2290,7 @@ ys < xs  <=> ys `mem` tails xs && ys /= xs {-"~~."-}
 ```{.equation title="串列的完全歸納："}
 |(forall xs . P xs) {-"~"-} <==  (forall xs . P xs  <== (forall ys < xs . P ys)) {-"~~."-}|
 ```
-{.nobreak}應用在編程上，當定義 |f (xs:)| 時，遞迴呼叫可作用在 |xs| 的任何後段上。
+{.nobreak}應用在程式設計上，當定義 |f xs| 時，遞迴呼叫可作用在 |xs| 的任何後段上。
 
 但對許多串列上的函數而言，這樣的模式還不夠靈活。我們得用下一節說到的良基歸納。
 
@@ -2364,7 +2365,7 @@ f x = ... f y ... f z ...  {- 如果 |y <: x| 且 |z <: x| -}
 因此該函數遲早得碰到基底狀況。
 換句話說，該函數每次遞迴呼叫的參數符合某個良基序；
 *當我們如此證明一個函數會終止，其實就相當於在論證該函數是一個良基歸納定義*。
-在指令式編程中證明某迴圈會終止的做法也類似。
+在指令式程式設計中證明某迴圈會終止的做法也類似。
 最常見的方式是證明該迴圈每多執行一次，某個量值就會變小，而該量值是不可能一直變小的。
 也就是說這些量值在每趟迴圈執行時的值符合某個良基序。
 
@@ -2537,7 +2538,7 @@ merge (x:xs)  (y:ys)  = if x <= y  then x : merge xs (y:ys)
 
 我們可以再稍微擴充一些，考慮 $x_i$ 與 $y_i$ 型別不同的情況：
 :::{.definition #def:lhd-prec}
-給定義在型別 |A| 之上的序 $(\lhd)$ 和型別 |B| 之上的序 $(\prec)$, 它們的*詞典序*(*lexicographic ordering*)，寫做 $(\lhd;\prec)$，是 |(A :* B)| 上的一個序，定義為：
+給定義在型別 |A| 之上的序 $(\triangleleft)$ 和型別 |B| 之上的序 $(\prec)$, 它們的*詞典序*(*lexicographic ordering*)，寫做 $(\triangleleft;\prec)$，是 |(A :* B)| 上的一個序，定義為：
 ```equation
     (x_1, y_1) (\lhd;\prec) (x_2,y_2) ~~\equiv~~
        x_1 \lhd x_2 ~\vee~ (x_1 = x_2 \wedge y_1 \prec y_2)  \mbox{~~.}
@@ -2547,9 +2548,9 @@ merge (x:xs)  (y:ys)  = if x <= y  then x : merge xs (y:ys)
 
 關於詞典序的有趣性質相當多，此處僅用到下述性質
 :::{.theorem #thm:lhd-prec}
-如果 $(\lhd)$ 與 $(\prec)$ 均為良基序，$(\lhd;\prec)$ 也是良基序。
+如果 $(\triangleleft)$ 與 $(\prec)$ 均為良基序，$(\triangleleft;\prec)$ 也是良基序。
 :::
-{.nobreak}因此，$(\lhd;\prec)$ 也可用來做歸納定義。
+{.nobreak}因此，$(\triangleleft;\prec)$ 也可用來做歸納定義。
 我們把使用詞典序的良基序歸納稱作「詞典序歸納」。
 
 回頭看 |merge| 的定義。先考慮下述、在第\@ref{sec:wholemeal}節中出現的 uncurried 版本：
@@ -2560,7 +2561,7 @@ merge' (x:xs,  [])    = x:xs
 merge' (x:xs,  y:ys)  = if x <= y  then  x : merge' (xs, y:ys)
                                    else  y : merge' (x:xs, ys) {-"~~."-}
 ```
-{.nobreak}如果 |(<:)| 是比較串列長度的良基序，我們可說 |merge'| 是在 $(\lhd;\lhd)$ 之上的歸納定義。確實，
+{.nobreak}如果 |(<:)| 是比較串列長度的良基序，我們可說 |merge'| 是在 |(<:;<:)| 之上的歸納定義。確實，
 
   * |(xs, y:ys) (<:;<:) (x:xs,  y:ys)|, 因為 |xs <: x:xs|;
   * |(x:xs, ys) (<:;<:) (x:xs,  y:ys)|, 因為 |x:xs = x:xs| 且 |ys <: y:ys|.
@@ -2664,7 +2665,7 @@ evenOdd = (  \n -> case n of{-"~~"-}  Zero   -> True
 該專欄要求作者使用 Algol 語言。Algol 支援遞迴，Hoare 也大方地用了遞迴。
 當時遞迴仍是新觀念，Hoare 在另一篇論文[@Hoare:62:Quicksort]中（以大量文字）描述不用遞迴的作法。
 
-例\@ref{ex:quicksort}中的快速排序常被當作「函數編程（或 Haskell）漂亮又簡潔」的例證：快速排序用其他語言得寫得落落長，用 Haskell 可在兩三行內清楚地寫完。
+例\@ref{ex:quicksort}中的快速排序常被當作「函數程式設計（或 Haskell）漂亮又簡潔」的例證：快速排序用其他語言得寫得落落長，用 Haskell 可在兩三行內清楚地寫完。
 但這樣的比較並不很公平：例\@ref{ex:quicksort}排序的是串列，而拿來比較的對象通常是將陣列做排序的指令式語言程式。
 快速排序的主要挑戰之一，也是「演算法63: PARTITION」的重點，是在$O(n)$的時間、$O(1)$的額外空間之內完成陣列的分塊。
 這點在串列版本中並沒有（或不須）表達出來。
