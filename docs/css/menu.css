@@ -43,9 +43,9 @@ Remove all background/borders, since we are applying them to #menu.
 .menu-toggle::after {
   content: '       ';
   display: inline-block;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 10px solid currentColor;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid currentColor;
   vertical-align: middle; margin-right: .7rem;
   transform: translateY(-2px);
   transition: transform .2s ease-out;
