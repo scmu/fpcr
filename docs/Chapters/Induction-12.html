@@ -172,7 +172,7 @@ f x = ... f y ... f z ...  <comment>{- 如果 <code class="haskell">y &lt;: x</c
 因此該函數遲早得碰到基底狀況。
 換句話說，該函數每次遞迴呼叫的參數符合某個良基序；
 <em>當我們如此證明一個函數會終止，其實就相當於在論證該函數是一個良基歸納定義</em>。
-在指令式編程中證明某迴圈會終止的做法也類似。
+在指令式程式設計中證明某迴圈會終止的做法也類似。
 最常見的方式是證明該迴圈每多執行一次，某個量值就會變小，而該量值是不可能一直變小的。
 也就是說這些量值在每趟迴圈執行時的值符合某個良基序。</p><p>以下我們將看幾個遞迴定義的例子。請讀者們想想：這些函數總會正常終止嗎？為何？如果它們是良基歸納，使用的良基序是什麼？</p><div class="theorem" id="ex:quicksort" title="快速排序"><h5 class="theorem-title">例 2.17  快速排序 </h5><p>以下是大家熟悉的<em>快速排序</em>(quicksort)
 <span id="ix-2-39"></span>  <a href="../Biblio.html#Hoare:62:Quicksort">[Hoare 1962]</a>:</p><pre><code class="spec">qsort :: List Int -&gt; List Int

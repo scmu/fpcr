@@ -149,7 +149,7 @@
 至於「演算法65: FIND」 <a href="../Biblio.html#Hoare:61:Find">[Hoare 1961]</a> 的功能則是：給定 <code class="haskell">k</code>，尋找一個陣列中第 <code class="haskell">k</code> 小的元素。
 該演算法也使用了 PARTITION, 我們現在常把它稱為「快速選擇(quickselect)」<span id="ix-2-46"></span>。
 該專欄要求作者使用 Algol 語言。Algol 支援遞迴，Hoare 也大方地用了遞迴。
-當時遞迴仍是新觀念，Hoare 在另一篇論文 <a href="../Biblio.html#Hoare:62:Quicksort">[Hoare 1962]</a>中（以大量文字）描述不用遞迴的作法。</p><p>例<a href="Induction-12.html#ex:quicksort">2.17 </a>中的快速排序常被當作「函數編程（或 Haskell）漂亮又簡潔」的例證：快速排序用其他語言得寫得落落長，用 Haskell 可在兩三行內清楚地寫完。
+當時遞迴仍是新觀念，Hoare 在另一篇論文 <a href="../Biblio.html#Hoare:62:Quicksort">[Hoare 1962]</a>中（以大量文字）描述不用遞迴的作法。</p><p>例<a href="Induction-12.html#ex:quicksort">2.17 </a>中的快速排序常被當作「函數程式設計（或 Haskell）漂亮又簡潔」的例證：快速排序用其他語言得寫得落落長，用 Haskell 可在兩三行內清楚地寫完。
 但這樣的比較並不很公平：例<a href="Induction-12.html#ex:quicksort">2.17 </a>排序的是串列，而拿來比較的對象通常是將陣列做排序的指令式語言程式。
 快速排序的主要挑戰之一，也是「演算法63: PARTITION」的重點，是在$O(n)$的時間、$O(1)$的額外空間之內完成陣列的分塊。
 這點在串列版本中並沒有（或不須）表達出來。</p><p><a href="../Biblio.html#MannaMcCarthy:69:Properties">Manna and McCarthy [1969]</a>

@@ -207,7 +207,7 @@ fibs (Suc n)  = (x1+x0) : x1 : x0 : xs
 將 <code class="haskell">Suc</code> 代換為 <code class="haskell">(x:)</code>. 至於「小於」的關係，可定義為：</p><pre><code class="spec">ys &lt; xs  &lt;=&gt; ys ∈ tails xs ⋀ ys /= xs 
 </code></pre><p>也就是說 <code class="haskell">ys</code> 是 <code class="haskell">xs</code> 的一個後段，但不是 <code class="haskell">xs</code> 自己。
 有了如上定義，串列上的完全歸納法是：</p><pre><code class="equation" title="串列的完全歸納：">|(forall xs . P xs)   &lt;==  (forall xs . P xs  &lt;== (forall ys &lt; xs . P ys)) |</code>    (2.18 )
-</pre><p>應用在編程上，當定義 <code class="haskell">f (xs:)</code> 時，遞迴呼叫可作用在 <code class="haskell">xs</code> 的任何後段上。</p><p>但對許多串列上的函數而言，這樣的模式還不夠靈活。我們得用下一節說到的良基歸納。</p></div><div class="navi"><div class="previous">&laquo;<a href="Induction-10.html#sec:induction-variations">2.10 歸納定義的簡單變化</a></div><div class="next"><a href="Induction-12.html#sec:well-founded-induction">2.12 良基歸納</a>&raquo;</div></div></div></div>
+</pre><p>應用在程式設計上，當定義 <code class="haskell">f xs</code> 時，遞迴呼叫可作用在 <code class="haskell">xs</code> 的任何後段上。</p><p>但對許多串列上的函數而言，這樣的模式還不夠靈活。我們得用下一節說到的良基歸納。</p></div><div class="navi"><div class="previous">&laquo;<a href="Induction-10.html#sec:induction-variations">2.10 歸納定義的簡單變化</a></div><div class="next"><a href="Induction-12.html#sec:well-founded-induction">2.12 良基歸納</a>&raquo;</div></div></div></div>
 
 <script src="../js/ui.js"></script>
 

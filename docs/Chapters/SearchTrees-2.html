@@ -224,71 +224,71 @@ rotate s x t = B s x t
 我們需要關於 <code class="haskell">ins</code> 的定理 <a href="#thm:redblack-bheight-ins">3.2 </a>.
 同樣地，由於 <code class="haskell">ins</code> 呼叫 <code class="haskell">rotate</code>, 欲證明定理 <a href="#thm:redblack-bheight-ins">3.2 </a>,
 我們需要一個關於 <code class="haskell">rotate</code> 的引裡：</p><div class="theorem" id="lma:redblack-bheight-rotate"><h5 class="theorem-title">引理 3.4  </h5><p>對所有 <code class="haskell">t</code>, <code class="haskell">u</code> 與 <code class="haskell">z</code>,
-<code class="haskell">bheight (rotate t z u) = 1 + (bheight t ↑ bheight u)</code>.</p></div><p>這也不意外：<code class="haskell">rotate</code> 的兩個參數 <code class="haskell">t</code> 與 <code class="haskell">u</code> 原本在黑節點之下，旋轉後的黑高度不變，仍是 <code class="haskell">1 + (bheight t ↑ bheight u)</code>.</p><p>以下我們證明定理<a href="#thm:redblack-bheight-ins">3.2 </a>.</p><div class="proof"><b>證明 </b><p>在 <code class="haskell">t</code> 之上做歸納。以下只列出幾個代表性狀況。</p><p><strong>狀況</strong> <code class="haskell">t := E</code>.</p><pre><code class="spec">   bheight (ins k E)
-=  bheight (R E k E)
-=  0
-=  bheight E 
-</code></pre><p><strong>狀況</strong> <code class="haskell">t := R t x u</code>, <code class="haskell">k &lt;  x</code>:</p><pre><code class="spec">   bheight (ins k (R t x u))
-=    <comment>{- <code class="haskell">ins</code> 之定義；<code class="haskell">k &lt; x</code> -}</comment>
-   bheight (R (ins k t) x u)
-=    <comment>{- <code class="haskell">bheight</code> 之定義 -}</comment>
-   bheight (ins k t) ↑ bheight u
-=    <comment>{- 歸納假設 -}</comment>
-   bheight t ↑ bheight u
-=    <comment>{- <code class="haskell">bheight</code> 之定義 -}</comment>
-   bheight (R t x u) 
-</code></pre><p><strong>狀況</strong> <code class="haskell">t := B t x u</code>, <code class="haskell">k &lt;  x</code>:</p><pre><code class="spec">   bheight (ins k (B t x u))
-=    <comment>{- <code class="haskell">ins</code> 之定義；<code class="haskell">k &lt; x</code> -}</comment>
-   bheight (balance (ins k t) x u)
-=    <comment>{- 引理 \ref{lma:redblack-bheight-rotate} -}</comment>
-   1 + (bheight (ins k t) ↑ bheight u)
-=    <comment>{- 歸納假設 -}</comment>
-   1 + (bheight t ↑ bheight u)
-=    <comment>{- <code class="haskell">bheight</code> 之定義 -}</comment>
-   bheight (B t x u) 
+<code class="haskell">bheight (rotate t z u) = 1 + (bheight t ↑ bheight u)</code>.</p></div><p>這也不意外：<code class="haskell">rotate</code> 的兩個參數 <code class="haskell">t</code> 與 <code class="haskell">u</code> 原本在黑節點之下，旋轉後的黑高度不變，仍是 <code class="haskell">1 + (bheight t ↑ bheight u)</code>.</p><p>以下我們證明定理<a href="#thm:redblack-bheight-ins">3.2 </a>.</p><div class="proof"><b>證明 </b><p>在 <code class="haskell">t</code> 之上做歸納。以下只列出幾個代表性狀況。</p><p><strong>狀況</strong> <code class="haskell">t := E</code>.</p><pre><code class="haskell">      bheight (ins k E)
+ ===  bheight (R E k E)
+ ===  0
+ ===  bheight E 
+</code></pre><p><strong>狀況</strong> <code class="haskell">t := R t x u</code>, <code class="haskell">k &lt;  x</code>:</p><pre><code class="haskell">      bheight (ins k (R t x u))
+ ===    <comment>{- <code class="haskell">ins</code> 之定義；<code class="haskell">k &lt; x</code> -}</comment>
+      bheight (R (ins k t) x u)
+ ===    <comment>{- <code class="haskell">bheight</code> 之定義 -}</comment>
+      bheight (ins k t) ↑ bheight u
+ ===    <comment>{- 歸納假設 -}</comment>
+      bheight t ↑ bheight u
+ ===    <comment>{- <code class="haskell">bheight</code> 之定義 -}</comment>
+      bheight (R t x u) 
+</code></pre><p><strong>狀況</strong> <code class="haskell">t := B t x u</code>, <code class="haskell">k &lt;  x</code>:</p><pre><code>      bheight (ins k (B t x u))
+ ===    <comment>{- <code class="haskell">ins</code> 之定義；<code class="haskell">k &lt; x</code> -}</comment>
+      bheight (balance (ins k t) x u)
+ ===    <comment>{- 引理 \ref{lma:redblack-bheight-rotate} -}</comment>
+      1 + (bheight (ins k t) ↑ bheight u)
+ ===    <comment>{- 歸納假設 -}</comment>
+      1 + (bheight t ↑ bheight u)
+ ===    <comment>{- <code class="haskell">bheight</code> 之定義 -}</comment>
+      bheight (B t x u) 
 </code></pre></div><p>為求完整，我們也簡述引理<a href="#lma:redblack-bheight-rotate">3.4 </a>之證明：</p><div class="proof"><b>證明 </b><p>由於 <code class="haskell">rotate</code> 沒有遞迴、不呼叫其他函數，但有許多狀況，
 關於 <code class="haskell">rotate</code> 的證明也大都僅是檢查每個情況，雖不難但可能很繁瑣。
-以下只舉一種狀況為例。</p><p><strong>狀況</strong> <code class="haskell">(t,z,u) := (R (R t x u) y v, z, w)</code>:</p><pre><code class="spec">   bheight (rotate (R (R t x u) y v) z w)
-=    <comment>{- <code class="haskell">rotate</code> 之定義 -}</comment>
-   bheight (R (B t x u) y (B v z w))
-=    <comment>{- <code class="haskell">bheight</code> 之定義 -}</comment>
-   (1+ (bheight t ↑ bheight u)) ↑ (1+ (bheight v ↑ bheight w))
-=    <comment>{- 由於 <code class="haskell">(k+x) ↑ (k+y) = k + (x ↑ y)</code>, <code class="haskell">max</code> 有結合律 -}</comment>
-   1 + (((bheight t ↑ bheight u) ↑ bheight v) ↑ bheight w)
-=    <comment>{- <code class="haskell">bheight</code> 之定義 -}</comment>
-   1 + (bheight ((R (R t x u) y v)) ↑ bheight w)
+以下只舉一種狀況為例。</p><p><strong>狀況</strong> <code class="haskell">(t,z,u) := (R (R t x u) y v, z, w)</code>:</p><pre><code class="haskell">      bheight (rotate (R (R t x u) y v) z w)
+ ===    <comment>{- <code class="haskell">rotate</code> 之定義 -}</comment>
+      bheight (R (B t x u) y (B v z w))
+ ===    <comment>{- <code class="haskell">bheight</code> 之定義 -}</comment>
+     (1+ (bheight t ↑ bheight u)) ↑ (1+ (bheight v ↑ bheight w))
+ ===    <comment>{- 由於 <code class="haskell">(k+x) ↑ (k+y) = k + (x ↑ y)</code>, <code class="haskell">max</code> 有結合律 -}</comment>
+      1 + (((bheight t ↑ bheight u) ↑ bheight v) ↑ bheight w)
+ ===    <comment>{- <code class="haskell">bheight</code> 之定義 -}</comment>
+      1 + (bheight ((R (R t x u) y v)) ↑ bheight w)
 </code></pre></div><h3 class="subsection">3.2.3 紅黑樹之性質：平衡</h3><p>之所以討論黑高度，目的之一當然是要討論平衡。我們可證明函數 <code class="haskell">ins k</code> 維持平衡性：</p><div class="theorem" id="thm:red-black-balanced-ins"><h5 class="theorem-title">定理 3.5  </h5><p>對所有 <code class="haskell">k</code> 與 <code class="haskell">t</code>, <code class="haskell">balanced t ==&gt; balanced (ins k t)</code>.</p></div><p>而由於 <code class="haskell">balanced t ==&gt; balanced (blacken t)</code>, 定理 <a href="#thm:red-black-balanced-ins">3.5 </a> 蘊含 <code class="haskell">insert k</code> 也維持輸入樹的平衡： <code class="haskell">balanced t ==&gt; balanced (insert k t)</code>.</p><p>同樣地，要證明定理 <a href="#thm:red-black-balanced-ins">3.5 </a>，我們也需要一個關於 <code class="haskell">rotate</code> 的引理：</p><div class="theorem" id="lma:red-black-balanced-rotate"><h5 class="theorem-title">引理 3.6  </h5><p>對所有 <code class="haskell">t</code> 與 <code class="haskell">u</code>,</p><pre><code class="spec">balanced t ⋀ balanced u ⋀
    bheight t = bheight u ==&gt; balanced (rotate t x u) 
 </code></pre></div><p>由於這些證明與前面提到的證明類似，我們將它們留給讀者做練習。</p><div class="exlist"><div class="exercise exer"><h5 class="exercise-title">練習 3.2 </h5><p>證明定理<a href="#thm:red-black-balanced-ins">3.5 </a>.
 你將用得上引理<a href="#lma:red-black-balanced-rotate">3.6 </a>與定理 <a href="#thm:redblack-bheight-ins">3.2 </a>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-3-2" type="checkbox"/><label class="lbl-toggle" for="ans-3-2">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>在 <code class="haskell">t</code> 之上做歸納。基底情況 <code class="haskell">t := E</code> 很容易建立。
-以下只示範一種歸納情況。</p><p><strong>狀況</strong> <code class="haskell">t := B t x u</code>, <code class="haskell">k &lt; x</code>:</p><pre><code class="spec">   balanced (ins k (B t x u))
-=    <comment>{- <code class="haskell">ins</code> 之定義；<code class="haskell">k &lt; x</code> -}</comment>
-   balanced (rotate (ins k t) x u)
-&lt;==  <comment>{- 引理 \ref{lma:red-black-balanced-rotate} -}</comment>
-   balanced (ins k t) ⋀ balanced u ⋀ bheight (ins k t) = bheight u
-=    <comment>{- 定理 \ref{thm:redblack-bheight-ins} -}</comment>
-   balanced (ins k t) ⋀ balanced u ⋀ bheight t = bheight u
-&lt;==  <comment>{- 歸納假設 -}</comment>
-   balanced t ⋀ balanced u ⋀ bheight t = bheight u
-=    <comment>{- <code class="haskell">balanced</code> 之定義 -}</comment>
-   balanced (B t x u) 
-</code></pre></div></div><div class="exercise exer"><h5 class="exercise-title">練習 3.3 </h5><p>證明引理<a href="#lma:red-black-balanced-rotate">3.6 </a>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-3-3" type="checkbox"/><label class="lbl-toggle" for="ans-3-3">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>以下只示範其中一種狀況。</p><p><strong>狀況</strong>: <code class="haskell">(t,x,u) := (R (R t x u) y v, z, w)</code>.</p><pre><code class="spec">  balanced (rotate (R (R t x u) y v) z w)
-=    <comment>{- <code class="haskell">rotate</code> 之定義 -}</comment>
-  balanced (R (B t x u) y (B v z w))
-=    <comment>{- <code class="haskell">balanced</code> 之定義 -}</comment>
-  bheight (B t x u) = bheight (B v z w) ⋀
-  balanced (B t x u) ⋀ balanced (B v z w)
-=    <comment>{- <code class="haskell">bheight</code> 之定義 -}</comment>
-  1 + (bheight t ↑ bheight u) = 1+ (bheight v ↑ beight w) ⋀
-  bheight t = bheight u ⋀ balanced t ⋀ balanced u ⋀
-  bheight v = bheight w ⋀ balanced v ⋀ balanced w
-&lt;==  <comment>{- <code class="haskell">balanced</code> 與 <code class="haskell">bheight</code> 之定義；算數性質 -}</comment>
-  bheight (R t x u) = bheight v ⋀
-  balanced (R t x u) ⋀ balanced v ⋀ balanced w ⋀
-  bheight t ↑ bheight u ↑ bheight v = bheight w
-=    <comment>{- <code class="haskell">balanced</code> 與 <code class="haskell">bheight</code> 之定義 -}</comment>
-  balanced (R (R t x u) y v) ⋀ balanced w ⋀
-   bheight R (R t x u) y v = bheight w 
+以下只示範一種歸納情況。</p><p><strong>狀況</strong> <code class="haskell">t := B t x u</code>, <code class="haskell">k &lt; x</code>:</p><pre><code class="haskell">      balanced (ins k (B t x u))
+ ===    <comment>{- <code class="haskell">ins</code> 之定義；<code class="haskell">k &lt; x</code> -}</comment>
+      balanced (rotate (ins k t) x u)
+ &lt;==    <comment>{- 引理 \ref{lma:red-black-balanced-rotate} -}</comment>
+      balanced (ins k t) ⋀ balanced u ⋀ bheight (ins k t) == bheight u
+ ===    <comment>{- 定理 \ref{thm:redblack-bheight-ins} -}</comment>
+      balanced (ins k t) ⋀ balanced u ⋀ bheight t == bheight u
+ &lt;==    <comment>{- 歸納假設 -}</comment>
+      balanced t ⋀ balanced u ⋀ bheight t == bheight u
+ ===    <comment>{- <code class="haskell">balanced</code> 之定義 -}</comment>
+      balanced (B t x u) 
+</code></pre></div></div><div class="exercise exer"><h5 class="exercise-title">練習 3.3 </h5><p>證明引理<a href="#lma:red-black-balanced-rotate">3.6 </a>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-3-3" type="checkbox"/><label class="lbl-toggle" for="ans-3-3">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>以下只示範其中一種狀況。</p><p><strong>狀況</strong>: <code class="haskell">(t,x,u) := (R (R t x u) y v, z, w)</code>.</p><pre><code class="haskell">    balanced (rotate (R (R t x u) y v) z w)
+ ===    <comment>{- <code class="haskell">rotate</code> 之定義 -}</comment>
+    balanced (R (B t x u) y (B v z w))
+ ===    <comment>{- <code class="haskell">balanced</code> 之定義 -}</comment>
+    bheight (B t x u) == bheight (B v z w) ⋀
+    balanced (B t x u) ⋀ balanced (B v z w)
+ ===    <comment>{- <code class="haskell">bheight</code> 之定義 -}</comment>
+    1 + (bheight t ↑ bheight u) == 1+ (bheight v ↑ bheight w) ⋀
+    bheight t == bheight u ⋀ balanced t ⋀ balanced u ⋀
+    bheight v == bheight w ⋀ balanced v ⋀ balanced w
+ &lt;==  <comment>{- <code class="haskell">balanced</code> 與 <code class="haskell">bheight</code> 之定義；算數性質 -}</comment>
+    bheight (R t x u) == bheight v ⋀
+    balanced (R t x u) ⋀ balanced v ⋀ balanced w ⋀
+    bheight t ↑ bheight u ↑ bheight v == bheight w
+ ===    <comment>{- <code class="haskell">balanced</code> 與 <code class="haskell">bheight</code> 之定義 -}</comment>
+    balanced (R (R t x u) y v) ⋀ balanced w ⋀
+      bheight (R (R t x u) y v) == bheight w 
 </code></pre></div></div></div><h3 class="subsection">3.2.4 紅黑樹之性質：顏色</h3><p>最後，我們談談紅黑樹插入之後的顏色。我們也許希望函數 <code class="haskell">ins k</code> 能保持準紅黑性，意即 <code class="haskell">semiRB t ==&gt; semiRB (ins k t)</code>.
 但這顯然不成立：我們已經知道 <code class="haskell">ins k</code> 可能在一個路徑上產生連續兩個紅節點。</p><p>為描述此時的特殊狀況，我們另外定義一個性質：滿足下列述語的樹被稱作<em>紅外(infrared)樹</em> --- 取自比紅色還紅一點之意：</p><pre><code class="haskell">infrared :: RBTree -&gt; Bool
 infrared (R t x u)  =  (color t == Blk || color u == Blk) ⋀
@@ -303,24 +303,24 @@ infrared t          =  False
 我們立刻得知 <code class="haskell">insert k</code> 保持準紅黑性：</p><div class="theorem"><h5 class="theorem-title">系理 3.9  </h5><p><code class="haskell">semiRB t ==&gt; semiRB (insert k t)</code>.</p></div><p>以下證明定理<a href="#thm:red-black-semiRB-ins">3.7 </a>:</p><div class="proof"><b>證明 </b><p>定理<a href="#thm:red-black-semiRB-ins">3.7 </a>的 1, 2 兩個小性質需在同一個歸納中證明。
 注意： 1 與 2 的合取蘊含了</p><pre><code class="equation" id="eq:red-black-semiRB-ins-infrared">|semiRB t ==&gt; (infrared (ins k t) |||| semiRB (ins k t))| \mbox{~~.}</code>    (3.1 )
 </pre><p>我們將用到此性質。</p><p>在 <code class="haskell">t</code> 之上做歸納。我們只舉出兩個具代表性的例子：</p><p><strong>狀況</strong>: <code class="haskell">t := B t x u</code>, <code class="haskell">k &lt; x</code>:</p><pre><code class="spec">   semiRB (ins k (B t x u))
-=    <comment>{- <code class="haskell">ins</code> 之定義, <code class="haskell">k &lt; x</code> -}</comment>
+ ===    <comment>{- <code class="haskell">ins</code> 之定義, <code class="haskell">k &lt; x</code> -}</comment>
    semiRB (rotate (ins k t) x u)
-&lt;==  <comment>{- 引理 \ref{lma:red-black-semiRB-rotate} -}</comment>
+ &lt;==  <comment>{- 引理 \ref{lma:red-black-semiRB-rotate} -}</comment>
    (infrared (ins k t) || semiRB (ins k t)) ⋀ semiRB u
-&lt;==  <comment>{- 歸納假設，\eqref{eq:red-black-semiRB-ins-infrared} -}</comment>
+ &lt;==  <comment>{- 歸納假設，\eqref{eq:red-black-semiRB-ins-infrared} -}</comment>
    semiRB t ⋀ semiRB u
-=    <comment>{- <code class="haskell">semiRB</code> 之定義 -}</comment>
+ ===    <comment>{- <code class="haskell">semiRB</code> 之定義 -}</comment>
    semiRB (B t x u) 
-</code></pre><p><strong>狀況</strong>: <code class="haskell">t := R t x u</code>, <code class="haskell">k &lt; x</code>:</p><pre><code class="spec">   infrared (ins k (R t x u))
-=    <comment>{- <code class="haskell">ins</code> 之定義 -}</comment>
+</code></pre><p><strong>狀況</strong>: <code class="haskell">t := R t x u</code>, <code class="haskell">k &lt; x</code>:</p><pre><code class="haskell">   infrared (ins k (R t x u))
+ ===    <comment>{- <code class="haskell">ins</code> 之定義 -}</comment>
    infrared (R (ins k t) x u)
-=    <comment>{- <code class="haskell">infrared</code> 之定義 -}</comment>
-   (color (ins k t) = Blk || color u = Blk) ⋀ semiRB (ins k t) ⋀ semiRB u
-=    <comment>{- 歸納假設 -}</comment>
-   (color (ins k t) = Blk || color u = Blk) ⋀ semiRB t ⋀ color t = Blk ⋀ semiRB u
-&lt;==  <comment>{- 命題邏輯: <code class="haskell">((P ⋁ Q) ⋀ R) &lt;== (Q ⋀ R)</code> -}</comment>
-   color t = color u = Blk ⋀ semiRB t ⋀ semiRB u
-=   <comment>{- <code class="haskell">semiRB</code> 之定義 -}</comment>
+ ===    <comment>{- <code class="haskell">infrared</code> 之定義 -}</comment>
+   (color (ins k t) == Blk || color u == Blk) ⋀ semiRB (ins k t) ⋀ semiRB u
+ ===    <comment>{- 歸納假設 -}</comment>
+   (color (ins k t) == Blk || color u == Blk) ⋀ semiRB t ⋀ color t == Blk ⋀ semiRB u
+ &lt;==    <comment>{- 命題邏輯: <code class="haskell">((P ⋁ Q) ⋀ R) &lt;== (Q ⋀ R)</code> -}</comment>
+   color t == color u == Blk ⋀ semiRB t ⋀ semiRB u
+ ===    <comment>{- <code class="haskell">semiRB</code> 之定義 -}</comment>
    semiRB (R t x u) 
 </code></pre></div><div class="exlist"><div class="exercise exer"><h5 class="exercise-title">練習 3.4 </h5><p>證明引理 <a href="#lma:red-black-semiRB-rotate">3.8 </a>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-3-4" type="checkbox"/><label class="lbl-toggle" for="ans-3-4">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>本證明只是一一檢查每個狀況。
 以 1. <code class="haskell">(infrared t ⋁ semiRB t) ⋀ semiRB u ==&gt; semiRB (rotate t x u)</code> 為例，由於有 <code class="haskell">semiRB u</code>, 我們只需檢查 <code class="haskell">rotate</code> 的第一、第二、與最後一個狀況。
