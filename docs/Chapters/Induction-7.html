@@ -168,11 +168,11 @@ ins x (y:ys)  = (x:y:ys) : map (y:) (ins x ys)
      (x:y:ys++zs) : map (++zs) (map (y:) (ins x ys)) ++ map ((y:ys) ++) (ins x zs)
  ===     <comment>{- 2. <code class="haskell">map</code> 融合 -}</comment>
      (x:y:ys++zs) : map ((++zs) . (y:)) (ins x ys) ++ map ((y:ys) ++) (ins x zs)
- ===     <comment>{- 3. 由於 <code class="haskell">(++zs) . (y:) = (y:) . (++zs)</code> (習題 \ref{ex:append-cons}) -}</comment>
+ ===     <comment>{- 3. 由於 <code class="haskell">(++zs) . (y:) = (y:) . (++zs)</code> (習題 <a href="#ex:append-cons">2.30</a>) -}</comment>
      (x:y:ys++zs) : map ((y:) . (++zs)) (ins x ys) ++ map ((y:ys) ++) (ins x zs)
  ===     <comment>{- 4. <code class="haskell">map</code> 融合 -}</comment>
      (x:y:ys++zs) : map (y:) (map (++zs) (ins x ys)) ++ map ((y:ys) ++) (ins x zs)
- ===     <comment>{- 5. 由於 <code class="haskell">((y:ys)++) = (y:).(ys++)</code> (習題 \ref{ex:cons-append}) -}</comment>
+ ===     <comment>{- 5. 由於 <code class="haskell">((y:ys)++) = (y:).(ys++)</code> (習題 <a href="#ex:cons-append">2.29</a>) -}</comment>
      (x:y:ys++zs) : map (y:) (map (++zs) (ins x ys)) ++ map ((y:).(ys++)) (ins x zs)
  ===     <comment>{- 6. <code class="haskell">map</code> 融合 -}</comment>
      (x:y:ys++zs) : map (y:) (map (++zs) (ins x ys)) ++ map (y:) (map (ys++) (ins x zs))

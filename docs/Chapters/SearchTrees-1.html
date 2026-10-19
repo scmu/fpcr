@@ -176,7 +176,7 @@ insert k (Nod t x u)  | k &lt; x   = Nod (insert k t) x u
 &lt;=&gt;   <comment>{- <code class="haskell">sorted</code> 之定義 -}</comment>
      all (&lt;x) (elems (insert k t)) ⋀ all (x&lt;) (elems u) ⋀
      sorted (insert k t) ⋀ sorted u
-&lt;=&gt;   <comment>{- 練習 \ref{ex:elems-insert}: <code class="haskell">elems (insert k t) = singleton k ∪ elems t</code> -}</comment>
+&lt;=&gt;   <comment>{- 練習 <a href="#ex:elems-insert">3.1</a>: <code class="haskell">elems (insert k t) = singleton k ∪ elems t</code> -}</comment>
      all (&lt;x) (singleton k ∪ elems t) ⋀ all (x&lt;) (elems u) ⋀
      sorted (insert k t) ⋀ sorted u
 &lt;=&gt;   <comment>{- <code class="haskell">all</code> 之性質 -}</comment>

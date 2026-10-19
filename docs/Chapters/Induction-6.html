@@ -230,7 +230,7 @@ all p (x:xs)  = p x ⋀ all p xs
               else all (`elem` (x:xs)) (filter p xs)
  &lt;=&gt;     <comment>{- \eqref{eq:ifpxx} -}</comment>
       all (`elem` (x:xs)) (filter p xs)
- &lt;==     <comment>{- 因習題 \ref{ex:elem-catleft}, <code class="haskell">z `elem` (x:xs) &lt;== z `elem` xs</code> -}</comment>
+ &lt;==     <comment>{- 因習題 <a href="#ex:elem-catleft">2.17</a>, <code class="haskell">z `elem` (x:xs) &lt;== z `elem` xs</code> -}</comment>
       all (`elem` xs) (filter p xs)
  &lt;==  True 
 </code></pre></div></div></div><h3 class="subsection" id="sec:list-segments">2.6.3 串列區段</h3><p><b>前段與後段</b> &emsp;
@@ -273,11 +273,11 @@ upto (Suc n)  = 0 : map (Suc) (upto n)
     map (\n -&gt; take n (x:xs)) (0 : map (Suc) (upto (length xs)))
  ===    <comment>{- <code class="haskell">map</code>之定義，<code class="haskell">take 0 (x:xs) = []</code> -}</comment>
     [] : map (\n -&gt; take n (x:xs)) (map (Suc) (upto (length xs)))
- ===    <comment>{- 定理\ref{thm:map-fusion}：<code class="haskell">map f . map g = map (f.g)</code> -}</comment>
+ ===    <comment>{- 定理<a href="Induction-4.html#thm:map-fusion">2.2</a>：<code class="haskell">map f . map g = map (f.g)</code> -}</comment>
     [] : map (\n -&gt; take (Suc n) (x:xs)) (upto (length xs))
  ===    <comment>{- <code class="haskell">take</code> 之定義 -}</comment>
     [] : map (\n -&gt; x : take n xs) (upto (length xs))
- ===    <comment>{- 定理\ref{thm:map-fusion}：<code class="haskell">map f . map g = map (f.g)</code> -}</comment>
+ ===    <comment>{- 定理<a href="Induction-4.html#thm:map-fusion">2.2</a>：<code class="haskell">map f . map g = map (f.g)</code> -}</comment>
     [] : map (x:) (map (\n -&gt; take n xs) (upto (length xs)))
  ===    <comment>{- 歸納假設 -}</comment>
     [] : map (x:) (inits xs)
@@ -324,16 +324,16 @@ perms (x:xs)  = concat (map (fan x) (perms xs))
 </code></pre><p>\noindent <strong>歸納步驟</strong> <code class="haskell">xs := x:xs</code>:</p><pre><code class="haskell">      length (perms (x:xs))
  ===    <comment>{- <code class="haskell">perms</code>, <code class="haskell">(.)</code>, 與 <code class="haskell">($)</code> 之定義 -}</comment>
       length . concat . map (fan x) . perms $ xs
- ===    <comment>{- 因 <code class="haskell">length . concat = sum . map length</code> (習題\ref{ex:length-concat}), <code class="haskell">map</code> 融合 -}</comment>
+ ===    <comment>{- 因 <code class="haskell">length . concat = sum . map length</code> (習題<a href="Induction-5.html#ex:length-concat">2.12</a>), <code class="haskell">map</code> 融合 -}</comment>
       sum . map (length . fan x) . perms $ xs
- ===    <comment>{- 因 <code class="haskell">length . fan x = (Suc) . length</code> (習題 \ref{ex:length-fan}) -}</comment>
+ ===    <comment>{- 因 <code class="haskell">length . fan x = (Suc) . length</code> (習題 <a href="#ex:length-fan">2.25</a>) -}</comment>
       sum . map ((Suc) . length) . perms $ xs
  ===    <comment>{- 因 <code class="haskell">map length (perms xs) =</code>
- <code class="haskell">map (const (length xs)) (perms xs)</code> (習題\ref{ex:map-length-perms})  -}</comment>
+ <code class="haskell">map (const (length xs)) (perms xs)</code> (習題<a href="#ex:map-length-perms">2.26</a>)  -}</comment>
       sum . map ((Suc) . const (length xs)) . perms $ xs
- ===    <comment>{- 因 <code class="haskell">sum (map (Suc) xs) = length xs + sum xs</code> (習題\ref{ex:sum-map-suc})-}</comment>
+ ===    <comment>{- 因 <code class="haskell">sum (map (Suc) xs) = length xs + sum xs</code> (習題<a href="Induction-4.html#ex:sum-map-suc">2.8</a>)-}</comment>
       length (perms xs) + sum (map (const (length xs)) (perms xs))
- ===    <comment>{- 因 <code class="haskell">sum (map (const y) xs) = y * length xs</code> (習題\ref{ex:sum-map-const}) -}</comment>
+ ===    <comment>{- 因 <code class="haskell">sum (map (const y) xs) = y * length xs</code> (習題<a href="Induction-4.html#ex:sum-map-const">2.9</a>) -}</comment>
       length (perms xs) + length xs *: length (perms xs)
  ===    <comment>{- 四則運算: <code class="haskell">x + y * x = (1+y) * x</code> -}</comment>
       (Suc (length xs)) *: length (perms xs)
@@ -346,7 +346,7 @@ perms (x:xs)  = concat (map (fan x) (perms xs))
 </code></pre></div><div class="exlist"><div class="exercise exer" id="ex:map-fan"><h5 class="exercise-title">練習 2.23 </h5><p>證明 <code class="haskell">map f . fan x = fan (f x) . map f</code>.</p></div><div class="exercise exer" id="ex:perm-map"><h5 class="exercise-title">練習 2.24 </h5><p>證明 <code class="haskell">perm . map f = map (map f) . perm</code>.</p></div><div class="exercise exer" id="ex:length-fan"><h5 class="exercise-title">練習 2.25 </h5><p>證明 <code class="haskell">length (fan x xs) = Suc (length xs)</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-25" type="checkbox"/><label class="lbl-toggle" for="ans-2-25">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>在 <code class="haskell">xs</code> 上做歸納。基底狀況很容易成立。考慮 <code class="haskell">xs := y:xs</code>:</p><pre><code class="haskell">      length (fan x (y:xs))
  ===  length ((x:y:xs) : map (y:) (fan x xs))
  ===  Suc (length (map (y:) (fan x xs)))
- ===   <comment>{- 因 <code class="haskell">length . map f = length</code> (練習 \ref{ex:length-map}) -}</comment>
+ ===   <comment>{- 因 <code class="haskell">length . map f = length</code> (練習 <a href="Induction-4.html#ex:length-map">2.6</a>) -}</comment>
       Suc (length (fan x xs))
  ===   <comment>{- 歸納假設 -}</comment>
       Suc (Suc (length xs))
@@ -355,7 +355,7 @@ perms (x:xs)  = concat (map (fan x) (perms xs))
 其中 <code class="haskell">const</code> 定義於第  頁 --- <code class="haskell">const y</code> 是一個永遠傳回 <code class="haskell">y</code> 的函數。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-26" type="checkbox"/><label class="lbl-toggle" for="ans-2-26">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>欲證明 <code class="haskell">map length (perms xs) = map (const (length xs)) (perms xs)</code>, 在 <code class="haskell">xs</code> 之上做歸納。基底狀況 <code class="haskell">xs := []</code> 中，等號兩邊都化約為 <code class="haskell">[0]</code>. 考慮歸納步驟 <code class="haskell">xs := x:xs</code>:</p><pre><code class="haskell">  map length (perms (x:xs))
  ===   <comment>{- <code class="haskell">perms</code> 之定義 -}</comment>
   map length . concat . map (fan x) . perms $ xs
- ===   <comment>{- <code class="haskell">map f . concat = concat . map (map f)</code> (習題\ref{ex:map-concat}), <code class="haskell">map</code> 融合 -}</comment>
+ ===   <comment>{- <code class="haskell">map f . concat = concat . map (map f)</code> (習題<a href="Induction-5.html#ex:map-concat">2.13</a>), <code class="haskell">map</code> 融合 -}</comment>
   concat . map (map length . fan x) . perms $ xs
  ===   <comment>{- <code class="haskell">map length . fan x = (\n -&gt; repeatN n n) . length</code> -}</comment>
   concat . map ((\n -&gt; repeatN n n) . (Suc) . length) . perms $ xs
@@ -367,11 +367,11 @@ perms (x:xs)  = concat (map (fan x) (perms xs))
   concat . map ((\n -&gt; repeatN n n) . (Suc) . const (length xs)) . perms $ xs
  ===   <comment>{- 歸約 $\lambda$ 算式 -}</comment>
   concat . map (repeatN (Suc (length xs)) . (Suc) . length) . perms $ xs
- ===   <comment>{- <code class="haskell">length . fan x = (Suc) . length</code> (習題\ref{ex:length-fan})-}</comment>
+ ===   <comment>{- <code class="haskell">length . fan x = (Suc) . length</code> (習題<a href="#ex:length-fan">2.25</a>)-}</comment>
   concat . map (repeatN (Suc (length xs)) . length . fan x) . perms $ xs
  ===   <comment>{- \todo{???} <code class="haskell">map (const y) = repeatN y . length</code> -}</comment>
   concat . map (map (const (Suc (length xs))) . fan x) . perms $ xs
- ===   <comment>{- <code class="haskell">map f . concat = concat . map (map f)</code> (習題\ref{ex:map-concat}) -}</comment>
+ ===   <comment>{- <code class="haskell">map f . concat = concat . map (map f)</code> (習題<a href="Induction-5.html#ex:map-concat">2.13</a>) -}</comment>
   map (const (length (x:xs))) . concat . map (fan x) . perms $ xs
  ===   <comment>{- <code class="haskell">perms</code> 之定義 -}</comment>
   map (const (length (x:xs))) (perms (x:xs)) 
@@ -398,7 +398,7 @@ splits (x:xs)  = ([],x:xs) : map ((x:)***id) (splits xs)
  ===  length (sublists xs ++ map (x:) (sublists xs))
  ===    <comment>{- 因 \eqref{eq:length-append} <code class="haskell">length (xs++ys) = length xs + length ys</code>  -}</comment>
       length (sublists xs) + length (map (x:) (sublists xs))
- ===    <comment>{- 因 <code class="haskell">length . map = length</code> (練習 \ref{ex:length-map})-}</comment>
+ ===    <comment>{- 因 <code class="haskell">length . map = length</code> (練習 <a href="Induction-4.html#ex:length-map">2.6</a>)-}</comment>
       length (sublists xs) + length (sublists xs)
  ===    <comment>{- 因 <code class="haskell">x + x = 2 * x</code> -}</comment>
       2 *: length (sublists xs)

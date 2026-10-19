@@ -273,7 +273,7 @@ choose k = filter ((k ==) . length) . sublists
  ===   <comment>{- <code class="haskell">choose</code> 之定義 -}</comment>
      choose (Suc k) xs ++
      filter ((Suc k ==) . length') (map (x:) (sublists xs))
- ===   <comment>{- 定理 \ref{thm:filter-map} -}</comment>
+ ===   <comment>{- 定理 <a href="Induction-6.html#thm:filter-map">2.4</a> -}</comment>
      choose (Suc k) xs ++
      map (x:) (filter ((Suc k ==) . length' . (x:)) (sublists xs))
  ===  <comment>{- <code class="haskell">(Suc k ==) . length' . (x:) = (k ==) . length'</code> -}</comment>

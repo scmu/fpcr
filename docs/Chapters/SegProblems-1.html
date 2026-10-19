@@ -152,11 +152,11 @@ mss = maximum . map sum . segments
 當輸入串列長度為 $n$, 這個定義本身是一個時間複雜度為 $O(n^3)$ 的演算法 --- 該串列的區段有 $O(n^2)$ 個，每個都需分別算總和。
 我們能導出一個更快的演算法嗎？</p><p><b>前段-後段分解</b> &emsp;許多區段問題的推導都以如下方式開頭：將 <code class="haskell">segments</code> 展開成 <code class="haskell">inits</code> 與 <code class="haskell">tails</code>, 並將 <code class="haskell">maximum</code> 往右推，與 <code class="haskell">inits</code> 放在一起：</p><pre><code class="haskell">      maximum . map sum . segments
  ===  maximum . map sum . concat . map inits . tails
- ===   <comment>{- <code class="haskell">map f . concat = concat . map (map f)</code> (習題 \ref{ex:map-concat}) -}</comment>
+ ===   <comment>{- <code class="haskell">map f . concat = concat . map (map f)</code> (習題 <a href="Induction-5.html#ex:map-concat">2.13</a>) -}</comment>
       maximum . concat . map (map sum) . map inits . tails
  ===   <comment>{- <code class="haskell">maximum . concat = maximum . map maximum</code> -}</comment>
       maximum . map maximum . map (map sum) . map inits . tails
- ===   <comment>{- <code class="haskell">map</code> 融合 （定理\ref{thm:map-fusion}） -}</comment>
+ ===   <comment>{- <code class="haskell">map</code> 融合 （定理<a href="Induction-4.html#thm:map-fusion">2.2</a>） -}</comment>
       maximum . map (maximum . map sum . inits) . tails 
 </code></pre><p>細看 <code class="haskell">maximum . map sum . inits</code> 這個子算式，其意思是「給定一個串列，計算其所有<em>前段</em>的和的最大值」。我們為這個子算式取個名字，令 <code class="haskell">mps = maximum . map sum . inits</code>，其中 <code class="haskell">mps</code> 為「最大前段和 maximum prefix sum」的縮寫。經由上述演算，我們得知</p><pre><code class="spec">  mss = maximum . map mps . tails 
 </code></pre><p>意思是：要找出所有區段的最大和，我們可以對<em>每一個後段，找出其最大前段和</em>。</p><p>這是解許多區段問題的常見模式：要解決最佳區段問題，先試著解最佳前段問題。
@@ -195,7 +195,7 @@ mss = maximum . map sum . segments
 </pre><p>加法與<code class="haskell">max</code>的分配率是使我們能有一個線性時間演算法的關鍵性質。</p><p>既然 <code class="haskell">mps</code> 已經是一個摺，我們可以使用掃描引理：</p><pre><code class="haskell">      maximum . map sum . segments
  ===    <comment>{- 上述計算 -}</comment>
       maximum . map (foldr (\x s -&gt; 0 ↑ (x + s)) 0) . tails
- ===    <comment>{- 掃描引理\ref{lma:scan-lemma} -}</comment>
+ ===    <comment>{- 掃描引理<a href="Folds-2.html#lma:scan-lemma">6.11</a> -}</comment>
       maximum . scanr (\x s -&gt; 0 ↑ (x + s)) 0 
 </code></pre><p>我們得到</p><pre><code class="spec">mss = maximum . scanr (\x s -&gt; 0 ↑ (x + s)) 0 
 </code></pre><p>這是一個使用線性時間、線性空間的演算法。</p><p>藉由程式推導，我們不僅找到了一個較快的演算法，也找出了使得該演算法之所以成立的根本性質。

@@ -240,7 +240,7 @@ rotate s x t = B s x t
 </code></pre><p><strong>狀況</strong> <code class="haskell">t := B t x u</code>, <code class="haskell">k &lt;  x</code>:</p><pre><code>      bheight (ins k (B t x u))
  ===    <comment>{- <code class="haskell">ins</code> 之定義；<code class="haskell">k &lt; x</code> -}</comment>
       bheight (balance (ins k t) x u)
- ===    <comment>{- 引理 \ref{lma:redblack-bheight-rotate} -}</comment>
+ ===    <comment>{- 引理 <a href="#lma:redblack-bheight-rotate">3.4</a> -}</comment>
       1 + (bheight (ins k t) ↑ bheight u)
  ===    <comment>{- 歸納假設 -}</comment>
       1 + (bheight t ↑ bheight u)
@@ -264,9 +264,9 @@ rotate s x t = B s x t
 以下只示範一種歸納情況。</p><p><strong>狀況</strong> <code class="haskell">t := B t x u</code>, <code class="haskell">k &lt; x</code>:</p><pre><code class="haskell">      balanced (ins k (B t x u))
  ===    <comment>{- <code class="haskell">ins</code> 之定義；<code class="haskell">k &lt; x</code> -}</comment>
       balanced (rotate (ins k t) x u)
- &lt;==    <comment>{- 引理 \ref{lma:red-black-balanced-rotate} -}</comment>
+ &lt;==    <comment>{- 引理 <a href="#lma:red-black-balanced-rotate">3.6</a> -}</comment>
       balanced (ins k t) ⋀ balanced u ⋀ bheight (ins k t) == bheight u
- ===    <comment>{- 定理 \ref{thm:redblack-bheight-ins} -}</comment>
+ ===    <comment>{- 定理 <a href="#thm:redblack-bheight-ins">3.2</a> -}</comment>
       balanced (ins k t) ⋀ balanced u ⋀ bheight t == bheight u
  &lt;==    <comment>{- 歸納假設 -}</comment>
       balanced t ⋀ balanced u ⋀ bheight t == bheight u
@@ -305,7 +305,7 @@ infrared t          =  False
 </pre><p>我們將用到此性質。</p><p>在 <code class="haskell">t</code> 之上做歸納。我們只舉出兩個具代表性的例子：</p><p><strong>狀況</strong>: <code class="haskell">t := B t x u</code>, <code class="haskell">k &lt; x</code>:</p><pre><code class="spec">   semiRB (ins k (B t x u))
  ===    <comment>{- <code class="haskell">ins</code> 之定義, <code class="haskell">k &lt; x</code> -}</comment>
    semiRB (rotate (ins k t) x u)
- &lt;==  <comment>{- 引理 \ref{lma:red-black-semiRB-rotate} -}</comment>
+ &lt;==  <comment>{- 引理 <a href="#lma:red-black-semiRB-rotate">3.8</a> -}</comment>
    (infrared (ins k t) || semiRB (ins k t)) ⋀ semiRB u
  &lt;==  <comment>{- 歸納假設，\eqref{eq:red-black-semiRB-ins-infrared} -}</comment>
    semiRB t ⋀ semiRB u

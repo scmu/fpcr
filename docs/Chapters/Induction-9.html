@@ -183,7 +183,7 @@
 但，「所有自然數都滿足 <code class="haskell">P</code>」其實就是 <code class="haskell">Nat ⊆ P</code>.</p><p>如何證明 <code class="haskell">Nat ⊆ P</code>? 如前所述，<code class="haskell">Nat</code> 是 <code class="haskell">NatF</code> 的最小前定點。
 如果 <code class="haskell">P</code> 恰巧也是 <code class="haskell">NatF</code> 的一個前定點，<code class="haskell">Nat ⊆ P</code> 一定得成立。
 寫成推論如下：</p><pre><code class="spec">    Nat ⊆ P
-&lt;==   <comment>{- <code class="haskell">Nat</code> 是 <code class="haskell">NatF</code> 的最小前定點，定義\ref{def:mu-nu} -}</comment>
+&lt;==   <comment>{- <code class="haskell">Nat</code> 是 <code class="haskell">NatF</code> 的最小前定點，定義<a href="#def:mu-nu">2.10</a> -}</comment>
     NatF P ⊆ P
 &lt;=&gt;   <comment>{- <code class="haskell">NatF</code> 的定義 -}</comment>
     {Zero} ∪ {Suc n | n ∈ P}  ⊆   P

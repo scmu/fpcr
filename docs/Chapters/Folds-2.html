@@ -199,7 +199,7 @@
 首先考慮等號左手邊的 <code class="haskell">sum . map (2*)</code>. 由於 <code class="haskell">sum</code> 是一個 <code class="haskell">foldr</code>, 我們可用定理<a href="#thm:foldr-map-fusion">6.4 </a>將該式合併為一個 <code class="haskell">foldr</code>:</p><pre><code class="haskell">       sum . map (2*)
   ===    <comment>{- <code class="haskell">sum</code> 之摺定義 -}</comment>
        foldr (+) 0 . map (2*)
-  ===    <comment>{- 定理\ref{thm:foldr-map-fusion}: <code class="haskell">foldr</code>-<code class="haskell">map</code> 融合 -}</comment>
+  ===    <comment>{- 定理<a href="#thm:foldr-map-fusion">6.4</a>: <code class="haskell">foldr</code>-<code class="haskell">map</code> 融合 -}</comment>
        foldr ((+).(2*)) 0 
 </code></pre><p>另一方面，<code class="haskell">(2*) . sum</code> 可以融合成同一個 <code class="haskell">foldr</code>:</p><pre><code class="spec">       (2*) . sum
   ===  (2*) . foldr (+) 0

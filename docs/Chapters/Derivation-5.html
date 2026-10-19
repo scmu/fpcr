@@ -204,7 +204,7 @@ repl (Bin t u)  xs = Bin (repl t (take n xs)) (repl u (drop n xs))
       Bin  (Bin  (repl t (take n1 (take (n1+n2) xs)))
                  (repl u (drop n1 (take (n1+n2) xs))))
            (repl v (drop (n1+n2) xs))
- ===    <comment>{- 習題 \ref{ex:take-take} -- \ref{ex:drop-drop} -}</comment>
+ ===    <comment>{- 習題 <a href="Induction-10.html#ex:take-take">2.39</a> -- <a href="Induction-10.html#ex:drop-drop">2.41</a> -}</comment>
       Bin  (Bin  (repl t (take n1 xs))
                  (repl u (take n2 (drop n1 xs))))
            (repl v (drop n2 (drop n1 xs)))  
@@ -222,7 +222,7 @@ repTail s xs = (repl s (take n xs), drop n xs)
  ===   <comment>{- <code class="haskell">repl</code> 之定義，令 <code class="haskell">n1 = size t</code> -}</comment>
       (Bin  (repl t (take n1 (take (n1 + n2) xs)))
             (repl u (drop n1 (take (n1 + n2) xs))), drop (n1 + n2) xs)
- ===   <comment>{- 習題 \ref{ex:take-take} -- \ref{ex:drop-drop} -}</comment>
+ ===   <comment>{- 習題 <a href="Induction-10.html#ex:take-take">2.39</a> -- <a href="Induction-10.html#ex:drop-drop">2.41</a> -}</comment>
       (Bin  (repl t (take n1 xs))
             (repl u (take n2 (drop n1 xs))), drop n2 (drop n1 xs))
  ===   <comment>{- 提出共同項 -}</comment>
@@ -415,7 +415,7 @@ mdm xs = (maxdiff xs, minimum xs)
  ===  (  maximum (map minus (map (\y -&gt; (x,y)) xs ++ allpairs xs)),
          x ↓ minimum xs) 
 </code></pre><p>集中焦點在序對的第一個元素：</p><pre><code class="haskell">      maximum (map minus (map (\y -&gt; (x,y)) xs ++ allpairs xs))
- ===     <comment>{- 因 <code class="haskell">map f (xs ++ ys) = map f xs ++ map f ys</code> (習題 \ref{ex:map-append}) -}</comment>
+ ===     <comment>{- 因 <code class="haskell">map f (xs ++ ys) = map f xs ++ map f ys</code> (習題 <a href="Induction-4.html#ex:map-append">2.11</a>) -}</comment>
       maximum (  map minus (map (\y -&gt; (x,y)) xs) ++
                  map minus (allpairs xs))
  ===     <comment>{- <code class="haskell">map</code>-fusion -}</comment>

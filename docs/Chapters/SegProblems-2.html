@@ -190,7 +190,7 @@ plateau (x:y:xs)  = x == y ⋀ plateau (y:xs)
 (f ⋀: g) x = f x ⋀ g x 
 </code></pre><p>函數 <code class="haskell">(⋀) :: Bool -&gt; Bool -&gt; Bool</code> 拿兩個布林值、算出一個新布林值，<code class="haskell">(⋀:)</code> 則拿兩個函數 <code class="haskell">f, g :: a -&gt; Bool</code>，組合成另一個型別為 <code class="haskell">a -&gt; Bool</code> 的函數，其結果是 <code class="haskell">f</code> 與 <code class="haskell">g</code> 之傳回值的合取。函數 <code class="haskell">filter</code> 與 <code class="haskell">(⋀:)</code> 有如下的性質：</p><pre><code class="equation" id="eq:filter-conjunct">  |filter (p ⋀: q)| & |= filter p . filter q| \mbox{~~.}</code>    (7.3 )
 </pre><p>有了以上眾多性質，我們演算如下：</p><pre><code class="haskell">      filter plateau . map (x:)
- ===    <comment>{- 定理 \ref{thm:filter-map} -}</comment>
+ ===    <comment>{- 定理 <a href="Induction-6.html#thm:filter-map">2.4</a> -}</comment>
       map (x:) . filter (plateau . (x:))
  ===    <comment>{- <code class="haskell">plateau</code> 之定義 -}</comment>
       map (x:) . filter (((x ==) . head) ⋀: plateau)

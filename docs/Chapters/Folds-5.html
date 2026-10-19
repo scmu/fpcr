@@ -177,7 +177,7 @@ mapE f  = foldET Bin f
       f (g x) (foldIT f e t) (foldIT f e u)  
 </code></pre><p>因此 <code class="haskell">foldIT f e . mapI g = foldIT (\x y z -&gt; f (g x) y z) e</code>.</p></div></div><div class="exercise exer" id="ex:fold-fusion-minE-mapE"><h5 class="exercise-title">練習 6.16 </h5><p>以摺融合定理證明 <code class="haskell">minE (mapE (x +) t) = x + minE t</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-6-16" type="checkbox"/><label class="lbl-toggle" for="ans-6-16">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>即證明 <code class="haskell">minE . mapE (x+) = (x+) . minE</code>.
 推論如下：</p><pre><code class="spec">      minE . mapE (x+)
- ===    <comment>{- <code class="haskell">foldET</code>-<code class="haskell">mapE</code> 融合，見習題 \ref{ex:foldET-mapE-fusion} -}</comment>
+ ===    <comment>{- <code class="haskell">foldET</code>-<code class="haskell">mapE</code> 融合，見習題 <a href="#ex:foldET-mapE-fusion">6.14</a> -}</comment>
       foldET min (id . (x+))
  ===    <comment>{- <code class="haskell">foldET</code> 融合，如下述 -}</comment>
       (x+) . minE 
