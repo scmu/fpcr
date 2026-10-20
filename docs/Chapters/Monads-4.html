@@ -165,7 +165,7 @@ p &gt;&gt; q = p &gt;&gt;= \_ -&gt; q
 如果它們的某個實作確實表達了我們前面口述的意圖，該實作應該會滿足以下的規則：</p><div class="equations"><ul><li><p id="eq:state-get-put"><b>get-put:</b> &emsp;
 <code class="haskell">get &gt;&gt;= put</code> <code class="haskell">= return () </code></p></li><li><p id="eq:state-put-get"><b>put-get:</b> &emsp;
 <code class="haskell">put e &gt;&gt; get</code> <code class="haskell">= put e &gt;&gt; return e </code></p></li><li><p id="eq:state-put-put"><b>put-put:</b> &emsp;
-<code class="haskell">put e0 &gt;&gt; put e1</code> <code class="haskell">= put e1 </code></p></li></ul></div><p>以及一個和第 <a href="Monads-3.html#sec:monad-reader">8.3 </a> 節中的 <code class="haskell">ask</code> 類似的性質：</p><pre><code class="equation" id="eq:state-get-get" title="get-get:">|get &gt;&gt;= \v0 -&gt; get v1 &gt;&gt;= \v1 -&gt; f v0 v1  =  get &gt;&gt;= \v -&gt; f v v |</code>    (8.4 )
+<code class="haskell">put e0 &gt;&gt; put e1</code> <code class="haskell">= put e1 </code></p></li></ul></div><p>以及一個和第 <a href="Monads-3.html#sec:monad-reader">8.3 </a> 節中的 <code class="haskell">ask</code> 類似的性質：</p><pre><code class="equation" id="eq:state-get-get" title="get-get:">get &gt;&gt;= \v0 -&gt; get v1 &gt;&gt;= \v1 -&gt; f v0 v1  =  get &gt;&gt;= \v -&gt; f v v </code>    (8.4 )
 </pre><p>其中，<strong>get-put</strong> 意謂：將可變變數的值讀出後立刻寫入相當於什麼都不做。
 規則 <strong>put-get</strong> 意謂：剛做完 <code class="haskell">put e</code> 之後立刻讀取可變變數的值，必定得到 <code class="haskell">e</code>.
 規則 <strong>put-put</strong> 意謂：連做兩個 <code class="haskell">put</code> 之後，只有第二個 <code class="haskell">put</code> 寫入的值會被留下。

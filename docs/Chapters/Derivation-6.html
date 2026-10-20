@@ -223,7 +223,7 @@ ascending (x:xs)  = all (x &lt;=) xs ⋀ ascending xs
       all (z&lt;=) [] ⋀ ascending []
  ===   <comment>{- <code class="haskell">all</code> 與 <code class="haskell">ascending</code> 之定義 -}</comment>
       True
-</code></pre><p>歸納狀況的推導則會需要下述性質：</p><pre><code class="equation" id="eq:lowerbound-strengthen">  |z &lt;= x ⋀ all (z &lt;=) xs ⋀ all (x &lt;=) xs <comment>{-"~~"-}</comment> ==&gt; <comment>{-"~~"-}</comment> z &lt;= x ⋀ all (x &lt;=) xs |</code>    (5.6 )
+</code></pre><p>歸納狀況的推導則會需要下述性質：</p><pre><code class="equation" id="eq:lowerbound-strengthen">  z &lt;= x ⋀ all (z &lt;=) xs ⋀ all (x &lt;=) xs {-"~~"-} ==&gt; {-"~~"-} z &lt;= x ⋀ all (x &lt;=) xs </code>    (5.3 )
 </pre><p>回顧起來，我們之所以那麼定義 <code class="haskell">ascendBnd</code>, 正是希望利用 ([RefUndefined]) 將程式中的 <code class="haskell">all (z&lt;=) xs</code> 吸收掉。推導如下：</p><pre><code class="haskell">      ascendBnd z (x:xs)
  ===    <comment>{- <code class="haskell">ascendBnd</code> 與 <code class="haskell">ascending</code> 之定義 -}</comment>
       all (z&lt;=) (x:xs) ⋀ all (x &lt;=) xs ⋀ ascending xs
@@ -362,7 +362,7 @@ return y
 在本節的結尾，我們更完整地討論一下歸納式的串列處理與迴圈的關係。初次閱讀的讀者可跳過本段。
 假設某函數 <code class="haskell">f :: List A -&gt; B</code> 能寫成如下的形式：</p><pre><code class="haskell"> f []      = e
  f (x:xs)  = x ⊕ f xs 
-</code></pre><p>其中 <code class="haskell">e :: B</code>, <code class="haskell">oplus :: A -&gt; B -&gt; B</code>, 此處不假設 <code class="haskell">oplus</code> 滿足結合律。我們能用一個尾遞迴函數（或著說用一個迴圈）計算 <code class="haskell">f</code> 嗎？直覺上，我們可用一個迴圈將串列從右往左走一遍，並用變數紀錄目前為止算出的值。確實，如果我們要求如下的規格：</p><pre><code class="equation" id="eq:fold-loop">|loop xs (f ys)| &|= f (xs ++ ys) |</code>    (5.7 )
+</code></pre><p>其中 <code class="haskell">e :: B</code>, <code class="haskell">oplus :: A -&gt; B -&gt; B</code>, 此處不假設 <code class="haskell">oplus</code> 滿足結合律。我們能用一個尾遞迴函數（或著說用一個迴圈）計算 <code class="haskell">f</code> 嗎？直覺上，我們可用一個迴圈將串列從右往左走一遍，並用變數紀錄目前為止算出的值。確實，如果我們要求如下的規格：</p><pre><code class="equation" id="eq:fold-loop">loop xs (f ys) &= f (xs ++ ys) </code>    (5.4 )
 </pre><p>（所以 <code class="haskell">f xs = loop xs (f []) = loop xs e</code>）
 並分析 <code class="haskell">xs := []</code> 和 <code class="haskell">xs := xs++[x]</code> 的情況如下：</p><div class="multicols"><div class="mcol" width="0.4\textwidth"><pre><code class="spec">    loop [] (f ys)
 ===   <comment>{- <code class="haskell">loop</code> 之規格 -}</comment>
@@ -377,7 +377,7 @@ return y
 === loop xs (x ⊕ f ys) 
 </code></pre></div></div><p>可知如下定義的 <code class="haskell">loop</code> 能滿足 ([RefUndefined])：</p><pre><code class="spec">loop []           z = z
 loop (xs ++ [x])  z = loop xs (x ⊕ z) 
-</code></pre><p>但從串列尾端取出元素較不方便。如果我們改用下式作為規格：</p><pre><code class="equation" id="eq:fold-loop-rev">|loop xs (f ys)| &|= f (reverse xs ++ ys) |</code>    (5.8 )
+</code></pre><p>但從串列尾端取出元素較不方便。如果我們改用下式作為規格：</p><pre><code class="equation" id="eq:fold-loop-rev">loop xs (f ys) &= f (reverse xs ++ ys) </code>    (5.5 )
 </pre><p>可推導出</p><pre><code class="haskell"> loop []      z = z
  loop (x:xs)  z = loop xs (x ⊕ z) 
 </code></pre><p>但此時要用 <code class="haskell">loop</code> 計算出 <code class="haskell">f xs</code>，得先將 <code class="haskell">xs</code> 反轉：<code class="haskell">f xs = loop (reverse xs) e</code>.

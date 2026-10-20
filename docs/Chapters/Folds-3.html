@@ -174,7 +174,7 @@ foldl rhd e (x:xs)  = foldl rhd (e `rhd` x) xs
       foldl rhd e (x:xs) 
 </code></pre><p>在等式推論中段，我們希望 <code class="haskell">x `lhd` foldl rhd e xs = foldl rhd (e `rhd` x) xs</code>.
 這會需要另一個歸納證明。
-但我們若直接證明此等式，到中途便會無法進行，且會發現我們需要稍做一下推廣，改證明一個較強的性質：</p><pre><code class="equation" id="eq:sndDualityGen">  |x `lhd` foldl rhd y xs = foldl rhd (x `lhd` y) xs |</code>    (6.1 )
+但我們若直接證明此等式，到中途便會無法進行，且會發現我們需要稍做一下推廣，改證明一個較強的性質：</p><pre><code class="equation" id="eq:sndDualityGen">  x `lhd` foldl rhd y xs = foldl rhd (x `lhd` y) xs </code>    (6.1 )
 </pre><p>兩者的差別是後者不針對特定的值 <code class="haskell">e</code>, 而是任何的 <code class="haskell">y</code>.
 這是一個「較強的性質反而比較好證明」的例子。</p><p>等式([RefUndefined])的證明如此進行：在 <code class="haskell">xs := []</code> 的情況中，等號兩側都規約為 <code class="haskell">x `lhd` y</code>.
 歸納情況 <code class="haskell">xs := z : xs</code> 證明如下：</p><pre><code class="haskell">      x `lhd` foldl rhd y (z:xs)

@@ -169,12 +169,11 @@ map f (x:xs)  = f x : map f xs
 (x:xs)  ++ ys  = x : (xs ++ ys) 
 </code></pre><p>空串列接上 <code class="haskell">ys</code> 仍是 <code class="haskell">ys</code>. 歸納步驟中，要把 <code class="haskell">x:xs</code> 接上 <code class="haskell">ys</code>, 我們可假設已有辦法把 <code class="haskell">xs</code> 接上 <code class="haskell">ys</code>, 然後只需添上 <code class="haskell">x</code> 即可。</p><p>請讀者比較一下<code class="haskell">(++)</code>與自然數加法<code class="haskell">(+)</code>的定義，會發現兩者的結構一模一樣！
 如果串列是在每個<code class="haskell">Suc</code>中加上資料的自然數，<code class="haskell">(++)</code>就是串列上的加法了。
-若要形式化地把 <code class="haskell">List a</code>, <code class="haskell">Nat</code>, <code class="haskell">(++)</code>, 與 <code class="haskell">(+)</code> 牽上關係，連接他們的橋樑就是 <code class="haskell">length</code> --- <code class="haskell">xs ++ ys</code> 的長度，應是 <code class="haskell">xs</code> 與 <code class="haskell">ys</code> 的長度之和！意即：</p><pre><code class="equation" id="eq:length-append">  |length (xs ++ ys) = length xs + length ys| \mbox{~~.}</code>    (2.3 )
+若要形式化地把 <code class="haskell">List a</code>, <code class="haskell">Nat</code>, <code class="haskell">(++)</code>, 與 <code class="haskell">(+)</code> 牽上關係，連接他們的橋樑就是 <code class="haskell">length</code> --- <code class="haskell">xs ++ ys</code> 的長度，應是 <code class="haskell">xs</code> 與 <code class="haskell">ys</code> 的長度之和！意即：</p><pre><code class="equation" id="eq:length-append">  length (xs ++ ys) = length xs + length ys </code>    (2.2 )
 </pre><p>習題 <a href="#ex:length-append">2.10 </a> 中將證明此性質。</p><p>最後，<code class="haskell">(++)</code> 是反覆使用 <code class="haskell">(:)</code>, 函數 <code class="haskell">concat</code> 則是反覆使用 <code class="haskell">(++)</code>:</p><pre><code class="spec">concat :: List (List a) -&gt; List a
 concat [] = []
 concat (xs:xss) = xs ++ concat xss 
-</code></pre><h3 class="subsection" id="sec:induction-lists-proof">2.4.2 串列上之歸納證明</h3><p>如果 <code class="haskell">List a</code> 是一個歸納定義出的資料結構，我們應可以在 <code class="haskell">List a</code> 之上做歸納證明。確實，串列上的歸納法可寫成：</p><pre><code class="equation" title="串列上之歸納法：">  |(forall xs . P xs)  &lt;==   P [] ⋀ (forall x xs . P (x:xs) &lt;== P xs) |</code>    (2.4 )
-</pre><p>以文字敘述的話：給定一個述語 <code class="haskell">P :: List a -&gt; Bool</code>, 若要證明 <code class="haskell">P xs</code> 對所有 <code class="haskell">xs</code> 都成立，只需證明 <code class="haskell">P []</code> 和「對所有 <code class="haskell">x</code> 和 <code class="haskell">xs</code>, 若 <code class="haskell">P xs</code> 則 <code class="haskell">P (x:xs)</code>」。</p><p>下述的 <em><code class="haskell">map</code> 融合定理</em>(<em>map-fusion theorem</em>)
+</code></pre><h3 class="subsection" id="sec:induction-lists-proof">2.4.2 串列上之歸納證明</h3><p>如果 <code class="haskell">List a</code> 是一個歸納定義出的資料結構，我們應可以在 <code class="haskell">List a</code> 之上做歸納證明。確實，串列上的歸納法可寫成：</p><pre><code class="equation" title="串列上之歸納法：">  (∀ xs . P xs)  &lt;==   P [] ⋀ (∀ x xs . P (x:xs) &lt;== P xs) </code></pre><p>以文字敘述的話：給定一個述語 <code class="haskell">P :: List a -&gt; Bool</code>, 若要證明 <code class="haskell">P xs</code> 對所有 <code class="haskell">xs</code> 都成立，只需證明 <code class="haskell">P []</code> 和「對所有 <code class="haskell">x</code> 和 <code class="haskell">xs</code>, 若 <code class="haskell">P xs</code> 則 <code class="haskell">P (x:xs)</code>」。</p><p>下述的 <em><code class="haskell">map</code> 融合定理</em>(<em>map-fusion theorem</em>)
 <span id="ix-2-7"></span>
 是關於 <code class="haskell">map</code> 極常用的定理之一。所謂「融合」在此處是把兩個 <code class="haskell">map</code> 融合為一。
 我們日後會見到更多的融合定理。</p><div class="theorem" id="thm:map-fusion" title="|map| 融合定理"><h5 class="theorem-title">定理 2.2  |map| 融合定理 </h5><p>對任何 <code class="haskell">f</code> 與 <code class="haskell">g</code>,
@@ -182,8 +181,7 @@ concat (xs:xss) = xs ++ concat xss
 我們目前只會用歸納證明，但是 <code class="haskell">map f . map g = map (f.g)</code> 的左右邊都是函數，
 沒有出現串列也沒有出現自然數。該拿什麼東西來歸納呢？</p><p>回顧<em>外延相等</em>（定義<a href="Basics-4.html#def:extensional-eq">1.8 </a>）：
 當<code class="haskell">h</code>, <code class="haskell">k</code> 均是函數，<code class="haskell">h = k</code> 的意思是對任何參數 <code class="haskell">x</code>, <code class="haskell">h x = k x</code>.
-因此，將待證式左右邊各補上參數，並將 <code class="haskell">(.)</code> 展開，可得知其意義為對任何 <code class="haskell">xs</code>,</p><pre><code class="equation">    |map f (map g xs) = map (f.g) xs| \mbox{~ ~.}</code>    (2.5 )
-</pre><p>我們便可以在<code class="haskell">xs</code>上做歸納了！</p><div class="proof"><b>證明 </b><p>當 <code class="haskell">xs := []</code>，等式兩邊皆歸約為 <code class="haskell">[]</code>.
+因此，將待證式左右邊各補上參數，並將 <code class="haskell">(.)</code> 展開，可得知其意義為對任何 <code class="haskell">xs</code>,</p><pre><code class="equation">    map f (map g xs) = map (f.g) xs \mbox{~ ~.}</code></pre><p>我們便可以在<code class="haskell">xs</code>上做歸納了！</p><div class="proof"><b>證明 </b><p>當 <code class="haskell">xs := []</code>，等式兩邊皆歸約為 <code class="haskell">[]</code>.
 考慮 <code class="haskell">xs := x:xs</code> 的情況：</p><pre><code class="spec">  map f (map g (x:xs))
 =   <comment>{- <code class="haskell">map</code> 之定義 -}</comment>
   map f (g x : map g xs)
@@ -205,7 +203,7 @@ concat (xs:xss) = xs ++ concat xss
 一般說來，僅展開定義的步驟用電腦便可自動做到，通常是可精簡掉的。
 最好寫出的步驟則可能是決定整個證明之結構的、不易以電腦決定而得靠人類智慧與經驗的，等等。
 這可能包括使用歸納假設的那步，或使用較特別的引理時。
-例如，性質 [RefUndefined]的歸納步驟證明可能被精簡如下：</p><pre><code class="spec">   length ((x:xs) ++ ys)
+例如，性質 (<a href="#eq:length-append">2.2 </a>)的歸納步驟證明可能被精簡如下：</p><pre><code class="spec">   length ((x:xs) ++ ys)
 =  Suc (length (xs ++ ys))
 =    <comment>{- 歸納假設 -}</comment>
    Suc (length xs + length ys)
@@ -245,7 +243,7 @@ reverse (x:xs)  = reverse xs ++ [x]
    x : (xs ++ (ys ++ zs))
 =    <comment>{- <code class="haskell">(++)</code> 之定義 -}</comment>
    (x : xs) ++ (ys ++ zs) 
-</code></pre></div><p>基底狀況的證明很簡單。至於歸納步驟，同樣地，前兩步都是為了湊出 <code class="haskell">(xs ++ ys) ++ zs</code>, 以便使用歸納假設。既然 <code class="haskell">(++)</code> 滿足結合律，日後我們寫 <code class="haskell">xs ++ ys ++ zs</code> 就可不加括號了。</p><div class="exlist"><div class="exercise exer" id="ex:length-append"><h5 class="exercise-title">練習 2.10 </h5><p>證明性質([RefUndefined])：對所有 <code class="haskell">xs</code> 與 <code class="haskell">ys</code>, <code class="haskell">length (xs ++ ys) = length xs + length ys</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-10" type="checkbox"/><label class="lbl-toggle" for="ans-2-10">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>檢視 <code class="haskell">length</code>, <code class="haskell">(++)</code>, 與 <code class="haskell">(+)</code> 的定義，會發現等號兩邊都須對 <code class="haskell">xs</code> 做分析才能化簡。因此我們對 <code class="haskell">xs</code> 做歸納。</p><p><strong>狀況</strong> <code class="haskell">xs := []</code>.</p><pre><code class="haskell">      length ([] ++ ys)
+</code></pre></div><p>基底狀況的證明很簡單。至於歸納步驟，同樣地，前兩步都是為了湊出 <code class="haskell">(xs ++ ys) ++ zs</code>, 以便使用歸納假設。既然 <code class="haskell">(++)</code> 滿足結合律，日後我們寫 <code class="haskell">xs ++ ys ++ zs</code> 就可不加括號了。</p><div class="exlist"><div class="exercise exer" id="ex:length-append"><h5 class="exercise-title">練習 2.10 </h5><p>證明性質(<a href="#eq:length-append">2.2 </a>)：對所有 <code class="haskell">xs</code> 與 <code class="haskell">ys</code>, <code class="haskell">length (xs ++ ys) = length xs + length ys</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-10" type="checkbox"/><label class="lbl-toggle" for="ans-2-10">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>檢視 <code class="haskell">length</code>, <code class="haskell">(++)</code>, 與 <code class="haskell">(+)</code> 的定義，會發現等號兩邊都須對 <code class="haskell">xs</code> 做分析才能化簡。因此我們對 <code class="haskell">xs</code> 做歸納。</p><p><strong>狀況</strong> <code class="haskell">xs := []</code>.</p><pre><code class="haskell">      length ([] ++ ys)
  ===    <comment>{- <code class="haskell">(++)</code> 之定義 -}</comment>
       length ys
  ===   <comment>{- <code class="haskell">(+)</code> 之定義 -}</comment>

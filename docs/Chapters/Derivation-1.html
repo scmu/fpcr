@@ -244,7 +244,7 @@ select (x:xs)  = (x, xs) : map (id *** (x:)) (select xs)
 </code></pre></div></div></div><div class="exlist"><div class="exercise exer" id="ex:delete-take-drop"><h5 class="exercise-title">練習 5.5 </h5><p>函數 <code class="haskell">delete</code> 有另一個可能定義：</p><pre><code class="spec">delete xs = map (del xs) [0..length xs-1]
    where del xs i = take i xs ++ drop (1+i) xs 
 </code></pre><p>（此處我們利用了當 <code class="haskell">n</code> 為負數時，<code class="haskell">[0..n]</code> 化簡成 <code class="haskell">[]</code> 的特性。）
-請用此定義推導出 <code class="haskell">delete</code> 的歸納定義。<strong>提示</strong>：你可能用得上下述性質：</p><pre><code class="equation" id="eq:gen-split">  |[0..n] = 0 : map (1+) [0..n-1]|\mbox{,~~ if |n &gt;= 0|,}</code>    (5.1 )
+請用此定義推導出 <code class="haskell">delete</code> 的歸納定義。<strong>提示</strong>：你可能用得上下述性質：</p><pre><code class="equation" id="eq:gen-split">  [0..n] = 0 : map (1+) [0..n-1]\mbox{,~~ if n &gt;= 0,}</code>    (5.1 )
 </pre></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-5" type="checkbox"/><label class="lbl-toggle" for="ans-5-5">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>以下只列出歸納狀況：</p><pre><code class="haskell">    delete (x:xs)
  ===   <comment>{- <code class="haskell">delete</code> 之定義 -}</comment>
     map (del (x:xs)) [0..length (x:xs) -1]

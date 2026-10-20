@@ -233,8 +233,8 @@ quad = twice square
 它拿一個函數 <code class="haskell">f</code>，把它加工一下，做出另一個函數（後者的定義是把 <code class="haskell">f</code> 用兩次）。</p><p><b>參數式多型</b> &emsp;
 函數 <code class="haskell">twice</code> 也是本書中第一個<em>多型</em>函數。
 在 Haskell 的型別中，小寫開頭的識別字（如其中的 <code class="haskell">a</code>）是型別層次的參數。
-讀者可想像成在 <code class="haskell">twice</code> 的型別最外層有一個省略掉的 <code class="haskell">forall a</code>.
-也就是說, <code class="haskell">twice</code> 的完整型別是 <code class="haskell">forall a . (a -&gt; a) -&gt; (a -&gt; a)</code> ---
+讀者可想像成在 <code class="haskell">twice</code> 的型別最外層有一個省略掉的 <code class="haskell">∀ a</code>.
+也就是說, <code class="haskell">twice</code> 的完整型別是 <code class="haskell">∀ a . (a -&gt; a) -&gt; (a -&gt; a)</code> ---
 對所有的型別 <code class="haskell">a</code>, <code class="haskell">twice</code> 都可拿一個型別為 <code class="haskell">a -&gt; a</code> 的函數，
 然後傳回一個型別為 <code class="haskell">a -&gt; a</code> 的函數。</p><p>在 <code class="haskell">twice</code> 的型別 <code class="haskell">(a -&gt; a) -&gt; (a -&gt; a)</code> 中，</p><ul><li><p>第一個 <code class="haskell">a -&gt; a</code> 是參數 <code class="haskell">f</code> 的型別，</p></li><li><p>在第二個 <code class="haskell">a -&gt; a</code> 中，第一個 <code class="haskell">a</code> 是 參數 <code class="haskell">x</code> 的型別，</p></li><li><p>第二個 <code class="haskell">a</code> 則是整個計算結果的型別。</p></li></ul><p>參數 <code class="haskell">f</code> 的型別必須是 <code class="haskell">a -&gt; a</code>: 輸出入型別必須一樣，因為 <code class="haskell">f</code> 的結果必須可當作 <code class="haskell">f</code> 自己的輸入。</p><p>在 <code class="haskell">twice</code> 被使用時，型別參數 <code class="haskell">a</code> 會依照上下文被<em>特化</em>(<em>instantiate</em>)成別的型別。
 例如 <code class="haskell">twice square</code> 中， 因為 <code class="haskell">square</code> 的型別是 <code class="haskell">Int -&gt; Int</code>,

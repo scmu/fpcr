@@ -145,21 +145,21 @@
 </ul></nav><p><a href="../Ix.html">索引</a></p><p><a href="../Biblio.html">參考書目</a></p><p class="author-info"><a href="https://homepage.iis.sinica.edu.tw/pages/scm/">穆信成 Shin-Cheng Mu</a><br/>中央研究院 資訊科學研究所</p></div></div>
 <div id="main"><div class="header"><h1 class="chapter" id="ch:induction">2 歸納定義與證明</h1></div><div class="navi"><div class="previous">&laquo;<a href="Induction-6.html#sec:more-inductive-defns">2.6 更多歸納定義與證明</a></div><div class="next"><a href="Induction-8.html#sec:other-inductive-datatypes">2.8 其他歸納資料結構</a>&raquo;</div></div><div class="content"><h2 class="section" id="sec:using-hints-from-symbols">2.7 再談「讓符號為你工作」</h2><p>看了這麼多歸納定義，我們做個較複雜的練習，並以此為例再談談「讓符號為你工作」。
 本節在初次閱讀時可略過。</p><p>以下的函數 <code class="haskell">ins</code> 將一個元素插到一個串列的空隙中。它和第<a href="Induction-6.html#sec:fan-perm">2.6.4 </a>節中的 <code class="haskell">fan</code> 類似但稍有不同 --- <code class="haskell">ins x xs</code> 不會把 <code class="haskell">x</code> 放到 <code class="haskell">xs</code> 的結尾。
-<input class="toggle" id="footnote-2-7-8" type="checkbox"/><label class="fnote-toggle" for="footnote-2-7-8">(註8) </label><span class="collapsible-footnote">本節不使用 <code class="haskell">fan</code> 而另外定義了 <code class="haskell">ins</code> 的原因僅是因為如此使得性質 ([RefUndefined]) 較單純而方便說明。</span>
+<input class="toggle" id="footnote-2-7-8" type="checkbox"/><label class="fnote-toggle" for="footnote-2-7-8">(註8) </label><span class="collapsible-footnote">本節不使用 <code class="haskell">fan</code> 而另外定義了 <code class="haskell">ins</code> 的原因僅是因為如此使得性質 (<a href="#eq:append-ins">2.7 </a>) 較單純而方便說明。</span>
 例如：<code class="haskell">ins 1 [2,3,4] = [[1,2,3,4],[2,1,3,4],[2,3,1,4]]</code>。</p><pre><code class="haskell">ins :: a -&gt; List a -&gt; List (List a)
 ins x []      = []
 ins x (y:ys)  = (x:y:ys) : map (y:) (ins x ys) 
-</code></pre><p>請證明對所有 <code class="haskell">x</code>, <code class="haskell">ys</code>, 與 <code class="haskell">zs</code>,</p><pre><code class="equation" id="eq:append-ins">  |map (++zs) (ins x ys) ++  map (ys++) (ins x zs)| &= |ins x (ys ++ zs) |</code>    (2.12 )
+</code></pre><p>請證明對所有 <code class="haskell">x</code>, <code class="haskell">ys</code>, 與 <code class="haskell">zs</code>,</p><pre><code class="equation" id="eq:append-ins">  map (++zs) (ins x ys) ++  map (ys++) (ins x zs) &= ins x (ys ++ zs) </code>    (2.7 )
 </pre><p>意即：在 <code class="haskell">ys ++ zs</code> 之中插入 <code class="haskell">x</code> 的所有方法，
 是 1. 把 <code class="haskell">x</code> 插入 <code class="haskell">ys</code> 之中，並把每個結果的右邊接上 <code class="haskell">zs</code>,
 以及 2. 把 <code class="haskell">x</code> 插入 <code class="haskell">zs</code> 之中，並把每個結果的左邊接上 <code class="haskell">ys</code>.</p><p>面對一個如此冗長的式子，我們該如何著手？我們可猜想如此複雜的性質大概會需要歸納證明。
 但在哪個變數上做歸納呢？
-觀察([RefUndefined])，等號左手邊最外側的運算子是<code class="haskell">(++)</code>。
+觀察(<a href="#eq:append-ins">2.7 </a>)，等號左手邊最外側的運算子是<code class="haskell">(++)</code>。
 計算 <code class="haskell">(++)</code> 時，根據定義，先被樣式配對的是 <code class="haskell">(++)</code> 左邊的參數，也就是 <code class="haskell">map (++zs) (ins x ys)</code>。
 再來，根據 <code class="haskell">map</code> 的定義，<code class="haskell">map (++zs) (ins x ys)</code> 的運算要有進展，得先把 <code class="haskell">ins x ys</code> 算出來。
 最後，根據 <code class="haskell">ins</code> 的定義，計算 <code class="haskell">ins x ys</code> 會先拆開 <code class="haskell">ys</code>.
 由此可知，等號左手邊的運算是從拆解 <code class="haskell">ys</code> 開始的。
-等號右手邊的情況也一樣：根據 <code class="haskell">ins</code> 與 <code class="haskell">(++)</code> 的定義，要計算 <code class="haskell">ins x (ys ++ zs)</code>，第一個被拆開的是 <code class="haskell">ys</code>. 因此，欲證明([RefUndefined])，合理的猜測是在 <code class="haskell">ys</code> 上做歸納！</p><p>我們省略 <code class="haskell">ys := []</code> 的情況，僅考慮歸納情況 <code class="haskell">ys := y:ys</code>。
+等號右手邊的情況也一樣：根據 <code class="haskell">ins</code> 與 <code class="haskell">(++)</code> 的定義，要計算 <code class="haskell">ins x (ys ++ zs)</code>，第一個被拆開的是 <code class="haskell">ys</code>. 因此，欲證明(<a href="#eq:append-ins">2.7 </a>)，合理的猜測是在 <code class="haskell">ys</code> 上做歸納！</p><p>我們省略 <code class="haskell">ys := []</code> 的情況，僅考慮歸納情況 <code class="haskell">ys := y:ys</code>。
 經代換後的式子是 <code class="haskell">map (++zs) (ins x (y:ys)) ++ map ((y:ys) ++) (ins x zs)</code>.
 我們採取的策略和證明定理<a href="Induction-3.html#thm:exp-plus-times">2.1 </a>時一樣：
 <em>想辦法湊出 <code class="haskell">map (++zs) (ins x ys) ++  map (ys++) (ins x zs)</code>, 以便使用歸納假設</em>。
@@ -188,7 +188,7 @@ ins x (y:ys)  = (x:y:ys) : map (y:) (ins x ys)
 <em>整個證明中，要配對哪個變數、把式子中的哪些項往哪兒移動，都被符號引導著而有線索可循。</em>
 證明中用到的兩個性質 <code class="haskell">(++zs) . (y:) = (y:) . (++zs)</code> 與 <code class="haskell">((y:ys)++) = (y:).(ys++)</code> 並非天外飛來，而是確立了目標後，因為有需求（兩者分別讓我們把 <code class="haskell">(++zs)</code> 與 <code class="haskell">(ys++)</code> 往右推，把 <code class="haskell">(y:)</code> 往左拉）而設計出並另外證明的性質。</p><p>初學者常犯的一個錯誤是：以為所有情況下、所有的變數都需要樣式配對。
 事實上，<em>過度的樣式配對是形式證明中希望避免的</em>。
-藉由觀察 ([RefUndefined])，我們決定對 <code class="haskell">ys</code> 做歸納，證明過程中發現如此便已經足夠。
+藉由觀察 (<a href="#eq:append-ins">2.7 </a>)，我們決定對 <code class="haskell">ys</code> 做歸納，證明過程中發現如此便已經足夠。
 如果我們對 <code class="haskell">ys</code> 和 <code class="haskell">zs</code> 都做配對，將必須處理四種情況：<code class="haskell">ys,zs := [],[],[]</code>, <code class="haskell">ys,zs := [],z:zs</code>, <code class="haskell">ys,zs := [],z:zs</code> <code class="haskell">ys,zs := y:ys,z:zs</code>。一個待證明的性質若有 <code class="haskell">n</code> 個串列，似乎得分出 $2^n$ 種情況 --- 只有萬不得已我們才會這麼做。</p><p>最嚴重的問題並不是情況數目太多，而是過度的樣式配對破壞了證明的結構。
 如果對 <code class="haskell">zs</code> 做配對，許多人會很自然地想把 <code class="haskell">ins x (z:zs)</code> 展開。
 證明可能如此進行：</p><pre><code class="haskell">   map (++(z:zs)) (ins x (y:ys)) ++ map ((y:ys) ++) (ins x (z:zs))

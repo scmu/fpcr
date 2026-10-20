@@ -187,11 +187,11 @@ mss = maximum . map sum . segments
  ===  maximum . map sum . foldr (\x xss -&gt; [] : map (x:) xss) [[]]
  ===   <comment>{- 摺融合定理，融合條件如上 -}</comment>
       foldr (\x s -&gt; 0 ↑ (x + s)) 0 
-</code></pre><p>注意：步驟函數推導的最後一步中，為了將 <code class="haskell">maximum</code> 往右推，使用了如下的性質</p><pre><code class="equation" id="eq:max-mapadd">  |maximum . map (x+)|&|= (x+) . maximum| \mbox{~~.}</code>    (7.1 )
+</code></pre><p>注意：步驟函數推導的最後一步中，為了將 <code class="haskell">maximum</code> 往右推，使用了如下的性質</p><pre><code class="equation" id="eq:max-mapadd">  maximum . map (x+)&= (x+) . maximum </code>    (7.1 )
 </pre><p>在 ([RefUndefined]) 的左手邊，我們將一個串列的每個元素都加上 <code class="haskell">x</code>, 然後取最大值。
 性質 ([RefUndefined]) 告訴我們，其實我們可以先取最大值，然後做一個加法即可。
 這個步驟允許我們在每一步省下了 $O(n)$ 個加法，是使得整個演算法之所以能加速的關鍵一步。
-而 ([RefUndefined]) 的證明只需使用例行的歸納法，但其中的關鍵一步需要如下的分配律：</p><pre><code class="equation" id="eq:plus-max">|x + (y ↑ z)| &|= (x + y) ↑ (x + z)| \mbox{~~.}</code>    (7.2 )
+而 ([RefUndefined]) 的證明只需使用例行的歸納法，但其中的關鍵一步需要如下的分配律：</p><pre><code class="equation" id="eq:plus-max">x + (y ↑ z) &= (x + y) ↑ (x + z) </code>    (7.2 )
 </pre><p>加法與<code class="haskell">max</code>的分配率是使我們能有一個線性時間演算法的關鍵性質。</p><p>既然 <code class="haskell">mps</code> 已經是一個摺，我們可以使用掃描引理：</p><pre><code class="haskell">      maximum . map sum . segments
  ===    <comment>{- 上述計算 -}</comment>
       maximum . map (foldr (\x s -&gt; 0 ↑ (x + s)) 0) . tails

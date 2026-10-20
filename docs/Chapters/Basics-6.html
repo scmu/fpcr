@@ -261,9 +261,9 @@ uncurry f (x,y) = f x y
 與 <code class="haskell">a -&gt; b -&gt; c</code> 是同構的。試證明
 <code class="haskell">curry . uncurry = id</code>, 以及 <code class="haskell">uncurry . curry = id</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-1-10" type="checkbox"/><label class="lbl-toggle" for="ans-1-10">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>欲證明 <code class="haskell">curry . uncurry = id</code>：</p><pre><code class="spec">     curry . uncurry = id
 &lt;=&gt;    <comment>{- 外延相等及 <code class="haskell">id</code> 之定義 -}</comment>
-     (forall f : curry (uncurry f) = f)
+     (∀ f : curry (uncurry f) = f)
 &lt;=&gt;    <comment>{- 外延相等 -}</comment>
-     (forall f x y : curry (uncurry f) x y = f x y) 
+     (∀ f x y : curry (uncurry f) x y = f x y) 
 </code></pre><p>因此我們證明 <code class="haskell">curry (uncurry f) x y = f x y</code> 如下：</p><pre><code class="spec">   curry (uncurry f) x y
 =   <comment>{- <code class="haskell">curry</code> 之定義 -}</comment>
    uncurry f (x,y)

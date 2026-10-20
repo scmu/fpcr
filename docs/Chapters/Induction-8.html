@@ -154,9 +154,8 @@ minE (Bin t u)  = minE t ↓ minE u
 mapE :: (a -&gt; b) -&gt; ETree a -&gt; ETree b
 mapE f (Tip x)    = Tip (f x)
 mapE f (Bin t u)  = Bin (mapE f t) (mapE f u) 
-</code></pre><p>我們也有如下的歸納原則：</p><pre><code class="equation" title="ETree 上之歸納法：">  |(forall t :: ETree a . P t)  &lt;== <comment>{-"~\\\qquad"-}</comment>|
-  |(forall x . P (Tip x)) ⋀ (forall t u . P (Bin t u) &lt;== P t ⋀ P u) |</code>    (2.13 )
-</pre><p>作為例子，我們證明下列性質：</p><pre><code class="spec">  minE (mapE (x +) t) = x + minE t 
+</code></pre><p>我們也有如下的歸納原則：</p><pre><code class="equation" title="ETree 上之歸納法：">  (∀ t :: ETree a . P t)  &lt;== {-"~\\\qquad"-}
+  (∀ x . P (Tip x)) ⋀ (∀ t u . P (Bin t u) &lt;== P t ⋀ P u) </code></pre><p>作為例子，我們證明下列性質：</p><pre><code class="spec">  minE (mapE (x +) t) = x + minE t 
 </code></pre><p>左手邊將樹中的每個元素都加上 <code class="haskell">x</code>, 然後取最小的。右手邊則告訴我們不必這麼麻煩，先取最小的，再加上 <code class="haskell">x</code> 即可！</p><div class="proof"><b>證明 </b><p>基底狀況 <code class="haskell">t := Tip y</code> 很容易成立。至於歸納狀況 <code class="haskell">t := Bin t u</code>,
 使其成立的關鍵性質是加法可分配至 <code class="haskell">(↓)</code> 中：<code class="haskell">x + (y ↓ z) = (x+y) ↓ (x+z)</code>:</p><pre><code class="haskell">    minE (mapE (x +) (Bin t u))
  ===   <comment>{- <code class="haskell">mapE</code> 與 <code class="haskell">minE</code> 之定義 -}</comment>
@@ -167,9 +166,8 @@ mapE f (Bin t u)  = Bin (mapE f t) (mapE f u)
     x + (minE t ↓ minE u)
  ===   <comment>{- <code class="haskell">minE</code> 之定義 -}</comment>
     x + minE (Bin t u) 
-</code></pre></div><div class="exlist"><div class="exercise exer" id="ex:ITree-principle"><h5 class="exercise-title">練習 2.31 </h5><p>請寫出 <code class="haskell">ITree</code> 的歸納原則？</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-31" type="checkbox"/><label class="lbl-toggle" for="ans-2-31">顯示答案</label><div class="collapsible-content"><h5>答案</h5><pre><code class="equation" title="ITree 上之歸納法：">  |(forall t :: ITree a . P t)  &lt;== <comment>{-"~\\\qquad"-}</comment>|
-    |(P Null ⋀ (forall x t u . P (Node x t u) &lt;== P t ⋀ P u) |</code>    (2.14 )
-</pre></div></div><div class="exercise exer" id="ex:ITree-mapI"><h5 class="exercise-title">練習 2.32 </h5><p>定義函數 <code class="haskell">mapI :: (a -&gt; b) -&gt; ITree a -&gt; ITree b</code>, 使得 <code class="haskell">mapI f</code> 則將函數 <code class="haskell">f</code> 作用在樹中的每個元素上。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-32" type="checkbox"/><label class="lbl-toggle" for="ans-2-32">顯示答案</label><div class="collapsible-content"><h5>答案</h5><pre><code class="haskell">mapI :: (a -&gt; b) -&gt; ITree a -&gt; ITree b
+</code></pre></div><div class="exlist"><div class="exercise exer" id="ex:ITree-principle"><h5 class="exercise-title">練習 2.31 </h5><p>請寫出 <code class="haskell">ITree</code> 的歸納原則？</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-31" type="checkbox"/><label class="lbl-toggle" for="ans-2-31">顯示答案</label><div class="collapsible-content"><h5>答案</h5><pre><code class="equation" title="ITree 上之歸納法：">  (∀ t :: ITree a . P t)  &lt;== {-"~\\\qquad"-}
+    (P Null ⋀ (∀ x t u . P (Node x t u) &lt;== P t ⋀ P u) </code></pre></div></div><div class="exercise exer" id="ex:ITree-mapI"><h5 class="exercise-title">練習 2.32 </h5><p>定義函數 <code class="haskell">mapI :: (a -&gt; b) -&gt; ITree a -&gt; ITree b</code>, 使得 <code class="haskell">mapI f</code> 則將函數 <code class="haskell">f</code> 作用在樹中的每個元素上。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-32" type="checkbox"/><label class="lbl-toggle" for="ans-2-32">顯示答案</label><div class="collapsible-content"><h5>答案</h5><pre><code class="haskell">mapI :: (a -&gt; b) -&gt; ITree a -&gt; ITree b
 mapI f Null          = Null
 mapI f (Node x t u)  = Node (f x) (mapI f t) (mapI f u) 
 </code></pre></div></div><div class="exercise exer" id="ex:ITree-tags"><h5 class="exercise-title">練習 2.33 </h5><p>試定義函數 <code class="haskell">tags :: ITree a -&gt; List a</code>, 由左至右傳回給定之 <code class="haskell">ITree</code> 的所有標籤。例如，若</p><pre><code class="spec">  t = Node 3  (Node 2 (Node 1 Null Null) Null)

@@ -188,7 +188,7 @@ id x = x
 當我們說兩個整數相等，意思很清楚：如果等號左邊是 <code class="haskell">0</code>, 右邊也是 <code class="haskell">0</code>;
 如果左邊是 <code class="haskell">1</code>, 右邊也是 <code class="haskell">1</code>... 但說兩個函數「相等」，是什麼意思呢？</p><div class="theorem" id="def:extensional-eq" title="外延相等(extensional equality)"><h5 class="theorem-title">定義 1.8  外延相等(extensional equality) </h5><p>給定兩個型別相同的函數 <code class="haskell">f</code> 和 <code class="haskell">g</code>, 當我們說它們<em>外延相等</em>(<em>extensionally equal</em>)<span id="ix-1-22"></span>，
 意思是給任何一個輸入，<code class="haskell">f</code> 和 <code class="haskell">g</code> 都算出相等的輸出。也就是：
-<code class="haskell">(forall x. f x = g x)</code>.</p><p>本書中，當我們寫兩個函數相等(<code class="haskell">f = g</code>)時，指的便是外延相等，除非例外註明。</p></div><p>在外延相等的假設下，證明 <code class="haskell">(f . g) . h = f . (g . h)</code> 也就是證明對任何一個 <code class="haskell">x</code>, <code class="haskell">((f . g) . h) x = (f . (g . h)) x</code> 均成立. 我們推論如下：</p><pre><code class="spec">  ((f . g) . h) x
+<code class="haskell">(∀ x. f x = g x)</code>.</p><p>本書中，當我們寫兩個函數相等(<code class="haskell">f = g</code>)時，指的便是外延相等，除非例外註明。</p></div><p>在外延相等的假設下，證明 <code class="haskell">(f . g) . h = f . (g . h)</code> 也就是證明對任何一個 <code class="haskell">x</code>, <code class="haskell">((f . g) . h) x = (f . (g . h)) x</code> 均成立. 我們推論如下：</p><pre><code class="spec">  ((f . g) . h) x
 =  <comment>{- <code class="haskell">(.)</code> 的定義 -}</comment>
   (f . g) (h x)
 =  <comment>{- <code class="haskell">(.)</code> 的定義 -}</comment>
@@ -197,7 +197,7 @@ id x = x
   f ((g . h) x) 
 =  <comment>{- <code class="haskell">(.)</code> 的定義 -}</comment>
   (f . (g . h)) x 
-</code></pre><p>既然 <code class="haskell">(f . g) . h = f . (g . h)</code>，我們便可統一寫成 <code class="haskell">f . g . h</code>, 不用加括號了。</p><div class="exlist"><div class="exercise exer" id="ex:identity-law"><h5 class="exercise-title">練習 1.6 </h5><p>證明 <code class="haskell">id . f = f = f . id</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-1-6" type="checkbox"/><label class="lbl-toggle" for="ans-1-6">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>根據外延相等，我們需證明 <code class="haskell">(forall x . id . f = f = f . id)</code>.
+</code></pre><p>既然 <code class="haskell">(f . g) . h = f . (g . h)</code>，我們便可統一寫成 <code class="haskell">f . g . h</code>, 不用加括號了。</p><div class="exlist"><div class="exercise exer" id="ex:identity-law"><h5 class="exercise-title">練習 1.6 </h5><p>證明 <code class="haskell">id . f = f = f . id</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-1-6" type="checkbox"/><label class="lbl-toggle" for="ans-1-6">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>根據外延相等，我們需證明 <code class="haskell">(∀ x . id . f = f = f . id)</code>.
 推論如下：</p><pre><code class="spec">   (id . f) x
 =    <comment>{- <code class="haskell">(.)</code> 之定義 -}</comment>
    id (f x)

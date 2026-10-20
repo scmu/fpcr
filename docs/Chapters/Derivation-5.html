@@ -195,11 +195,10 @@ repl (Bin t u)  xs = Bin (repl t (take n xs)) (repl u (drop n xs))
 令 <code class="haskell">t</code>, <code class="haskell">u</code> 的 <code class="haskell">size</code> 分別為 <code class="haskell">n1</code> 與 <code class="haskell">n2</code>.
 如果我們希望導出一個線性時間的程式，其中一個提示是：我們希望在 <code class="haskell">repl (Bin (Bin t u) v) xs</code> 中，<em><code class="haskell">xs</code> 的每個元素最多都只被 <code class="haskell">take</code> 和 <code class="haskell">drop</code> 各碰過一次</em>。
 依此原則，以下的推導基嘗試做到兩點：首先，把連續的 <code class="haskell">take</code> 消去；其次，若已做了 <code class="haskell">take n1 xs</code>，就避免再出現 <code class="haskell">take (n1 + n2) xs</code>，因為後者的存在會讓 <code class="haskell">take</code> 重複處理 <code class="haskell">xs</code> 中的元素。
-我們會用到習題 <a href="Induction-10.html#ex:take-take">2.39 </a> -- <a href="Induction-10.html#ex:drop-drop">2.41 </a> 中提到的三個性質：</p><pre><code class="equation">|take m (take (m+n) xs)| ~&=~ |take m xs|
+我們會用到習題 <a href="Induction-10.html#ex:take-take">2.39 </a> -- <a href="Induction-10.html#ex:drop-drop">2.41 </a> 中提到的三個性質：</p><pre><code class="equation">take m (take (m+n) xs) ~&=~ take m xs
 \mbox{~~,}\\
-|drop m (take (m + n) xs)| ~&=~ |take n (drop m xs)|\mbox{~~,}\\
-|drop (m + n) xs| ~&=~ |drop n (drop m xs)| \mbox{~~.}</code>    (5.4 )
-</pre><p>其中 <code class="haskell">m</code>, <code class="haskell">n</code> 均為自然數。試演算如下：</p><pre><code class="haskell">      repl (Bin (Bin t u) v) xs
+drop m (take (m + n) xs) ~&=~ take n (drop m xs)\mbox{~~,}\\
+drop (m + n) xs ~&=~ drop n (drop m xs) </code></pre><p>其中 <code class="haskell">m</code>, <code class="haskell">n</code> 均為自然數。試演算如下：</p><pre><code class="haskell">      repl (Bin (Bin t u) v) xs
  ===    <comment>{- <code class="haskell">repl</code> 之定義，兩次 -}</comment>
       Bin  (Bin  (repl t (take n1 (take (n1+n2) xs)))
                  (repl u (drop n1 (take (n1+n2) xs))))
@@ -405,7 +404,7 @@ maxdiff = maximum . map (\(x,y) -&gt; x - y) . allpairs
 </code></pre><p>當輸入串列長度為 <code class="haskell">n</code>, 如此定義的 <code class="haskell">maxdiff</code> 是一個需時 $O(n^2)$ 的演算法。
 定義：</p><pre><code class="spec"> mdm xs = (maxdiff xs, ???) 
 </code></pre><p>找出 <code class="haskell">???</code> 可能的值，使得 <code class="haskell">mdm</code> 能在 $O(n)$ 時間之內完成計算。
-你可假設以下性質：</p><pre><code class="equation" id="eq:max-minus">  & |maximum (map (x-) xs) = x - minimum xs| \mbox{~~.}</code>    (5.5 )
+你可假設以下性質：</p><pre><code class="equation" id="eq:max-minus">  & maximum (map (x-) xs) = x - minimum xs </code>    (5.2 )
 </pre><p>並假設 <code class="haskell">maximum</code> 與 <code class="haskell">minimum</code> 在空串列上的值分別為 <code class="haskell">-infty</code> 與 <code class="haskell">infty</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-5-18" type="checkbox"/><label class="lbl-toggle" for="ans-5-18">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>由 ([RefUndefined]) 我們推測：</p><pre><code class="spec">mdm :: List Int -&gt; (Int × Int)
 mdm xs = (maxdiff xs, minimum xs) 
 </code></pre><p>我們試圖找出 <code class="haskell">mdm</code> 的歸納定義。顯然 <code class="haskell">mdm [] = (-infty, infty)</code>.

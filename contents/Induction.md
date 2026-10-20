@@ -540,7 +540,7 @@ concat (xs:xss) = xs ++ concat xss {-"~~."-}
 一般說來，僅展開定義的步驟用電腦便可自動做到，通常是可精簡掉的。
 最好寫出的步驟則可能是決定整個證明之結構的、不易以電腦決定而得靠人類智慧與經驗的，等等。
 這可能包括使用歸納假設的那步，或使用較特別的引理時。
-例如，性質 \@ref{eq:length-append}的歸納步驟證明可能被精簡如下：
+例如，性質 \@eqref{eq:length-append}的歸納步驟證明可能被精簡如下：
 ```spec
    length ((x:xs) ++ ys)
 =  Suc (length (xs ++ ys))
@@ -708,7 +708,7 @@ lengthAppendPf1 x xs ys =
 
 本節再用一個例子談談「讓符號為我們工作」。考慮證明下述性質：
 ```{.equation #eq:sum-concat}
- |sum . concat = sum . map sum|\mbox{~ ~.}
+ |sum . concat = sum . map sum|\mbox{~~.}
 ```
 根據外延相等，這相當於證明對所有|xss|,
 |sum (concat xss) = sum (map sum xss)|.
@@ -877,20 +877,22 @@ filter p (x:xs)  | p x        = x : filter p xs
                  | otherwise  = filter p xs {-"~~."-}
 ```
 {.nobreak}若在此定義下證明定理\@ref{thm:filter-map}，依「證明的結構與程式的結構相同」的原則，順理成章地，我們可在 |xs:=x:xs| 中再分出 |p (f x)| 成立與不成立的兩個子狀況：
-```spec
- {-"\mbox{\bf 狀況}~"-} xs:=[]:  ...
- {-"\mbox{\bf 狀況}~"-} xs:=x:xs: ...
-    {-"\mbox{\bf 狀況}~"-} p (f x):
+  * **狀況** |xs := []|: ...
+  * **狀況** |xs := x:xs|: ...
+    * **狀況** |p (f x)|:
+      ```spec
          filter p (map f (x:xs))
       =    {- |p (f x)| 成立 -}
          f x : filter p (map f xs)
       =  ... {-"~~."-}
-    {-"\mbox{\bf 狀況}~"-} not (p (f x)):
+      ```
+    * **狀況** |not (p (f x))|:
+      ```spec
          filter p (map f (x:xs))
       =   {- |(not p (f x))| -}
          filter p (map f xs)
       =  ... {-"~~."-}
-```
+      ```
 {.nobreak}這個定義中不用 |if|, 因此證明中也用不上 \@eqref{eq:fn-if-distribute}, 但該證明要成立仍須假設所有程式都正常終止 --- 我們少證了一個 「|p (f x)| 不終止」的情況（而確實，在此情況下\@eqref{eq:fn-if-distribute}並不成立）。喜歡用哪個方式純屬個人偏好。
 
 前幾章提過的 |takeWhile| 與 |dropWhile| 兩函數型別與 |filter| 相同。他們可寫成如下的歸納定義：
@@ -923,9 +925,12 @@ dropWhile p (x:xs)  = if p x then dropWhile p xs else x:xs {-"~~."-}
 elem x []      = False
 elem x (y:xs)  = (x == y) || elem x xs {-"~~."-}
 ```
+```lhsonly
 % 在 Haskell 中 |elem| 的型別是 |Eq a => a -> List a -> Bool|.
 % 我們將在第???章詳細解釋 |Eq a =>| 的部分。
 % 目前可粗略地理解為：|elem| 檢查某型別為 |a| 的元素是否出現在型別為 |List a| 的串列中，但有個附加條件：屬於型別 |a| 的值必須能判斷是否相等。
+```
+
 目前為止，我們所練習的都是以|(=)|將式子串起的等式證明。
 以下以|elem|為例，我們嘗試證明一個「不等式」：
 ```spec

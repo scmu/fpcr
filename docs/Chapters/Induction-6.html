@@ -147,8 +147,7 @@
 filter p []      = []
 filter p (x:xs)  = if p x then x : filter p xs else filter p xs 
 </code></pre><p>在 <code class="haskell">filter</code> 的許多性質中，我們試著證明下述性質作為例子：</p><div class="theorem" id="thm:filter-map"><h5 class="theorem-title">定理 2.4  </h5><p><code class="haskell">filter p . map f = map f . filter (p . f)</code>.</p></div><div class="proof"><b>證明 </b><p>和定理<a href="Induction-4.html#thm:map-fusion">2.2 </a>一樣，待證式的左右邊都是函數。
-根據外延相等，我們將左右邊各補上參數 <code class="haskell">xs</code>，並在 <code class="haskell">xs</code> 上做歸納：</p><pre><code class="equation">  |filter p (map f xs) = map f (filter (p . f) xs)| \mbox{~~.}</code>    (2.7 )
-</pre><p>情況 <code class="haskell">x := []</code> 中左右邊都可化簡成<code class="haskell">[]</code>.
+根據外延相等，我們將左右邊各補上參數 <code class="haskell">xs</code>，並在 <code class="haskell">xs</code> 上做歸納：</p><pre><code class="equation">  filter p (map f xs) = map f (filter (p . f) xs) </code></pre><p>情況 <code class="haskell">x := []</code> 中左右邊都可化簡成<code class="haskell">[]</code>.
 我們看看 <code class="haskell">xs := x:xs</code> 的情況：</p><pre><code class="haskell">   filter p (map f (x:xs))
  ===    <comment>{- <code class="haskell">map</code> 之定義 -}</comment>
    filter p (f x : map f xs)
@@ -163,31 +162,27 @@ filter p (x:xs)  = if p x then x : filter p xs else filter p xs
  ===    <comment>{- <code class="haskell">filter</code> 之定義 -}</comment>
    map f (filter (p . f) (x:xs)) 
 </code></pre></div><p><b>終止與證明</b> &emsp;
-上述證明的倒數第二步為將 <code class="haskell">map f</code> 提到外面，用了一個關於 <code class="haskell">if</code> 的性質：</p><pre><code class="equation" id="eq:fn-if-distribute">  |f (if p then e1 else e2)  =  if p then f e1 else f e2| \mbox{~~.}</code>    (2.8 )
-</pre><p>這性質對嗎？若 <code class="haskell">p</code> 成立，左右手邊都化簡為<code class="haskell">f e1</code>, 若 <code class="haskell">p</code> 不成立，左右手邊都化簡為 <code class="haskell">f e2</code>. 因此 ([RefUndefined]) 應該成立，是嗎？</p><p>答案是：如果我們假設的世界中有不終止的程式，([RefUndefined])便不正確了。
-例如，當 <code class="haskell">f</code> 是 <code class="haskell">three x = 3</code>，而 <code class="haskell">p</code> 是個永遠執行、不終止的算式（例：<code class="haskell">let b = not b in b</code>)：</p><pre><code class="equation" id="eq:fn-if-three-distribute">  |three (if p then e1 else e2) <comment>{-"~\stackrel{?}{=}~"-}</comment> if p then three e1 else three e2| </code>    (2.9 )
+上述證明的倒數第二步為將 <code class="haskell">map f</code> 提到外面，用了一個關於 <code class="haskell">if</code> 的性質：</p><pre><code class="equation" id="eq:fn-if-distribute">  f (if p then e1 else e2)  =  if p then f e1 else f e2 </code>    (2.4 )
+</pre><p>這性質對嗎？若 <code class="haskell">p</code> 成立，左右手邊都化簡為<code class="haskell">f e1</code>, 若 <code class="haskell">p</code> 不成立，左右手邊都化簡為 <code class="haskell">f e2</code>. 因此 (<a href="#eq:fn-if-distribute">2.4 </a>) 應該成立，是嗎？</p><p>答案是：如果我們假設的世界中有不終止的程式，(<a href="#eq:fn-if-distribute">2.4 </a>)便不正確了。
+例如，當 <code class="haskell">f</code> 是 <code class="haskell">three x = 3</code>，而 <code class="haskell">p</code> 是個永遠執行、不終止的算式（例：<code class="haskell">let b = not b in b</code>)：</p><pre><code class="equation" id="eq:fn-if-three-distribute">  three (if p then e1 else e2) {-"~\stackrel{?}{=}~"-} if p then three e1 else three e2 </code>    (2.5 )
 </pre><p>上述式子的左手邊直接化簡成<code class="haskell">3</code>, 但右手邊卻不會終止，因為 <code class="haskell">if</code> 得知道 <code class="haskell">p</code> 的值。
-我們找到了 ([RefUndefined]) 的反例！</p><p>在允許可能不終止的程式存在的世界中，([RefUndefined])得多些附加條件。
+我們找到了 (<a href="#eq:fn-if-distribute">2.4 </a>) 的反例！</p><p>在允許可能不終止的程式存在的世界中，(<a href="#eq:fn-if-distribute">2.4 </a>)得多些附加條件。
 通常的做法是限定 <code class="haskell">f</code> 須是個<em>嚴格函數</em>, 意即 <code class="haskell">f</code> 的輸入若不終止，<code class="haskell">f</code>也不會終止。
-但([RefUndefined])並不是唯一帶著附加條件的性質 --- 許多常用性質都得加上類似的附加條件。
+但(<a href="#eq:fn-if-distribute">2.4 </a>)並不是唯一帶著附加條件的性質 --- 許多常用性質都得加上類似的附加條件。
 所有狀況分析也都得將不終止考慮進去，例如，自然數除了 <code class="haskell">Zero</code> 與 <code class="haskell">Suc n</code> 之外，還多了第三種情況「不終止」。<input class="toggle" id="footnote-2-6-7" type="checkbox"/><label class="fnote-toggle" for="footnote-2-6-7">(註7) </label><span class="collapsible-footnote"><a href="../Biblio.html#Bird:87:Introduction">Bird [1987]</a> 就採用這種作法。</span>
 推論與證明變得更複雜。
 有些人因此較喜歡另一條路：藉由種種方法確保我們只寫出會終止的程式，便可假設我們確實活在所有程式都正常終止的世界中。</p><p><b>保護式 v.s. 條件分支</b> &emsp; 有些人喜歡用保護式語法定義 <code class="haskell">filter</code>：</p><pre><code class="spec">filter p []      = []
 filter p (x:xs)  | p x        = x : filter p xs
                  | otherwise  = filter p xs 
-</code></pre><p>若在此定義下證明定理<a href="#thm:filter-map">2.4 </a>，依「證明的結構與程式的結構相同」的原則，順理成章地，我們可在 <code class="haskell">xs:=x:xs</code> 中再分出 <code class="haskell">p (f x)</code> 成立與不成立的兩個子狀況：</p><pre><code class="spec"> <comment>{-"\mbox{\bf 狀況}~"-}</comment> xs:=[]:  ...
- <comment>{-"\mbox{\bf 狀況}~"-}</comment> xs:=x:xs: ...
-    <comment>{-"\mbox{\bf 狀況}~"-}</comment> p (f x):
-         filter p (map f (x:xs))
-      =    <comment>{- <code class="haskell">p (f x)</code> 成立 -}</comment>
-         f x : filter p (map f xs)
-      =  ... 
-    <comment>{-"\mbox{\bf 狀況}~"-}</comment> not (p (f x)):
-         filter p (map f (x:xs))
-      =   <comment>{- <code class="haskell">(not p (f x))</code> -}</comment>
-         filter p (map f xs)
-      =  ... 
-</code></pre><p>這個定義中不用 <code class="haskell">if</code>, 因此證明中也用不上 ([RefUndefined]), 但該證明要成立仍須假設所有程式都正常終止 --- 我們少證了一個 「<code class="haskell">p (f x)</code> 不終止」的情況（而確實，在此情況下([RefUndefined])並不成立）。喜歡用哪個方式純屬個人偏好。</p><p>前幾章提過的 <code class="haskell">takeWhile</code> 與 <code class="haskell">dropWhile</code> 兩函數型別與 <code class="haskell">filter</code> 相同。他們可寫成如下的歸納定義：</p><pre><code class="spec">takeWhile :: (a -&gt; Bool) -&gt; List a -&gt; List a
+</code></pre><p>若在此定義下證明定理<a href="#thm:filter-map">2.4 </a>，依「證明的結構與程式的結構相同」的原則，順理成章地，我們可在 <code class="haskell">xs:=x:xs</code> 中再分出 <code class="haskell">p (f x)</code> 成立與不成立的兩個子狀況：</p><ul><li><p><strong>狀況</strong> <code class="haskell">xs := []</code>: ...</p></li><li><p><strong>狀況</strong> <code class="haskell">xs := x:xs</code>: ...</p><ul><li><p><strong>狀況</strong> <code class="haskell">p (f x)</code>:</p><pre><code class="spec">   filter p (map f (x:xs))
+=    <comment>{- <code class="haskell">p (f x)</code> 成立 -}</comment>
+   f x : filter p (map f xs)
+=  ... 
+</code></pre></li><li><p><strong>狀況</strong> <code class="haskell">not (p (f x))</code>:</p><pre><code class="spec">   filter p (map f (x:xs))
+=   <comment>{- <code class="haskell">(not p (f x))</code> -}</comment>
+   filter p (map f xs)
+=  ... 
+</code></pre></li></ul></li></ul><p>這個定義中不用 <code class="haskell">if</code>, 因此證明中也用不上 (<a href="#eq:fn-if-distribute">2.4 </a>), 但該證明要成立仍須假設所有程式都正常終止 --- 我們少證了一個 「<code class="haskell">p (f x)</code> 不終止」的情況（而確實，在此情況下(<a href="#eq:fn-if-distribute">2.4 </a>)並不成立）。喜歡用哪個方式純屬個人偏好。</p><p>前幾章提過的 <code class="haskell">takeWhile</code> 與 <code class="haskell">dropWhile</code> 兩函數型別與 <code class="haskell">filter</code> 相同。他們可寫成如下的歸納定義：</p><pre><code class="spec">takeWhile :: (a -&gt; Bool) -&gt; List a -&gt; List a
 takeWhile p []      = []
 takeWhile p (x:xs)  = if p x then x : takeWhile p xs else [] 
 
@@ -196,10 +191,7 @@ dropWhile p []      = []
 dropWhile p (x:xs)  = if p x then dropWhile p xs else x:xs 
 </code></pre><p>兩者都是在輸入串列上做歸納。兩者也都可用保護式語法定義。</p><div class="exlist"><div class="exercise exer" id="ex:take-cat-drop"><h5 class="exercise-title">練習 2.14 </h5><p>證明 <code class="haskell">takeWhile p xs ++ dropWhile p xs = xs</code>.</p></div><div class="exercise exer" id="ex:protect-takeWhile-dropWhile"><h5 class="exercise-title">練習 2.15 </h5><p>以保護式語法定義 <code class="haskell">takeWhile</code> 與 <code class="haskell">dropWhile</code>, 以此定義做做看習題 <a href="#ex:take-cat-drop">2.14 </a>.</p></div></div><h3 class="subsection" id="sec:elem-neq-proof">2.6.2 <code class="haskell">elem</code> 與不等式證明</h3><p><b>不等式證明</b> &emsp; 給定如下的定義，<code class="haskell">elem x xs</code> 判斷 <code class="haskell">x</code> 是否出現在串列 <code class="haskell">xs</code> 中：</p><pre><code class="spec">elem x []      = False
 elem x (y:xs)  = (x == y) || elem x xs 
-</code></pre><p>% 在 Haskell 中 <code class="haskell">elem</code> 的型別是 <code class="haskell">Eq a =&gt; a -&gt; List a -&gt; Bool</code>.
-% 我們將在第???章詳細解釋 <code class="haskell">Eq a =&gt;</code> 的部分。
-% 目前可粗略地理解為：<code class="haskell">elem</code> 檢查某型別為 <code class="haskell">a</code> 的元素是否出現在型別為 <code class="haskell">List a</code> 的串列中，但有個附加條件：屬於型別 <code class="haskell">a</code> 的值必須能判斷是否相等。
-目前為止，我們所練習的都是以<code class="haskell">(=)</code>將式子串起的等式證明。
+</code></pre><p>目前為止，我們所練習的都是以<code class="haskell">(=)</code>將式子串起的等式證明。
 以下以<code class="haskell">elem</code>為例，我們嘗試證明一個「不等式」：</p><pre><code class="spec">  elem z xs  ==&gt;  elem z (xs ++ ys) 
 </code></pre><p>以口語說出的話：「若<code class="haskell">z</code> 出現在<code class="haskell">xs</code> 中，<code class="haskell">z</code> 也出現在<code class="haskell">xs ++ ys</code> 中」。
 欲證明上式，該從哪一側推到哪一側呢？
@@ -215,11 +207,11 @@ elem x (y:xs)  = (x == y) || elem x xs
      (z==x) || elem z xs
 &lt;=&gt;   <comment>{- <code class="haskell">elem</code> 之定義 -}</comment>
      elem z (x:xs) 
-</code></pre></div><p>讀者可注意：第1, 2, 4 步使用的邏輯關係都是 <code class="haskell">(&lt;=&gt;)</code> ，第 3 步卻是 <code class="haskell">(&lt;==)</code>，因此整個證明建立了「若<code class="haskell">elem z (x:xs)</code>，則<code class="haskell">elem z ((x:xs) ++ ys)</code>」。</p><div class="exlist"><div class="exercise exer" id="ex:weaken-not-elem"><h5 class="exercise-title">練習 2.16 </h5><p>證明 <code class="haskell">not (elem z (xs ++ ys)) ==&gt; not (elem z xs)</code>.</p></div><div class="exercise exer" id="ex:elem-catleft"><h5 class="exercise-title">練習 2.17 </h5><p>證明 <code class="haskell">elem z xs ==&gt; elem z (ys ++ xs)</code>.</p></div><div class="exercise exer" id="ex:all-monotonic"><h5 class="exercise-title">練習 2.18 </h5><p>證明<code class="haskell">(forall x . p x ==&gt; q x) ==&gt; all p xs ==&gt; all q xs</code>.
+</code></pre></div><p>讀者可注意：第1, 2, 4 步使用的邏輯關係都是 <code class="haskell">(&lt;=&gt;)</code> ，第 3 步卻是 <code class="haskell">(&lt;==)</code>，因此整個證明建立了「若<code class="haskell">elem z (x:xs)</code>，則<code class="haskell">elem z ((x:xs) ++ ys)</code>」。</p><div class="exlist"><div class="exercise exer" id="ex:weaken-not-elem"><h5 class="exercise-title">練習 2.16 </h5><p>證明 <code class="haskell">not (elem z (xs ++ ys)) ==&gt; not (elem z xs)</code>.</p></div><div class="exercise exer" id="ex:elem-catleft"><h5 class="exercise-title">練習 2.17 </h5><p>證明 <code class="haskell">elem z xs ==&gt; elem z (ys ++ xs)</code>.</p></div><div class="exercise exer" id="ex:all-monotonic"><h5 class="exercise-title">練習 2.18 </h5><p>證明<code class="haskell">(∀ x . p x ==&gt; q x) ==&gt; all p xs ==&gt; all q xs</code>.
 其中 <code class="haskell">all</code> 的定義為：</p><pre><code class="spec">all :: (a -&gt; Bool) -&gt; List a -&gt; Bool
 all p []      = True
 all p (x:xs)  = p x ⋀ all p xs 
-</code></pre></div><div class="exercise exer" id="ex:all-elem"><h5 class="exercise-title">練習 2.19 </h5><p>證明 <code class="haskell">all (`elem` xs) (filter p xs)</code>. 其中 <code class="haskell">x `elem` xs</code> 是 <code class="haskell">elem x xs</code> 的中序寫法。 我們可能需要習題 <a href="#ex:elem-catleft">2.17 </a> 和 <a href="#ex:all-monotonic">2.18 </a> 的結果，以及下述性質：</p><pre><code class="equation" id="eq:ifpxx">    |if p then x else x| = |x| \mbox{~~.}</code>    (2.10 )
+</code></pre></div><div class="exercise exer" id="ex:all-elem"><h5 class="exercise-title">練習 2.19 </h5><p>證明 <code class="haskell">all (`elem` xs) (filter p xs)</code>. 其中 <code class="haskell">x `elem` xs</code> 是 <code class="haskell">elem x xs</code> 的中序寫法。 我們可能需要習題 <a href="#ex:elem-catleft">2.17 </a> 和 <a href="#ex:all-monotonic">2.18 </a> 的結果，以及下述性質：</p><pre><code class="equation" id="eq:ifpxx">    if p then x else x = x </code>    (2.6 )
 </pre></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-19" type="checkbox"/><label class="lbl-toggle" for="ans-2-19">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>在 xs 上做歸納。</p><pre><code class="haskell">      all (`elem` (x:xs)) (filter p (x:xs))
  &lt;=&gt;  all (`elem` (x:xs)) (if p x then x:filter p xs else filter p xs)
  &lt;=&gt;  if p x  then all (`elem` (x:xs)) (x:filter p xs)
@@ -388,11 +380,10 @@ sublists (x:xs)  = yss ++ map (x:) yss
     where yss = sublists xs 
 </code></pre><div class="exlist"><div class="exercise exer" id="ex:splits"><h5 class="exercise-title">練習 2.27 </h5><p>定義 <code class="haskell">splits :: List a -&gt; List (List a × List a)</code>，
 使 <code class="haskell">splits xs</code> 傳回所有滿足 <code class="haskell">ys ++ zs</code> 的 <code class="haskell">(ys,zs)</code>.
-例：</p><pre><code class="equation">   &|splits [1,2,3] = [([],[1,2,3]), ([1],[2,3]), ([1,2],[3]), ([1,2,3,[]])]|\mbox{~~.}</code>    (2.11 )
-</pre><p>另一種說法是 <code class="haskell">splits xs = zip (inits xs) (tails xs)</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-27" type="checkbox"/><label class="lbl-toggle" for="ans-2-27">顯示答案</label><div class="collapsible-content"><h5>答案</h5><pre><code class="haskell">splits :: List a -&gt; List (List a × List a)
+例：</p><pre><code class="equation">   &splits [1,2,3] = [([],[1,2,3]), ([1],[2,3]), ([1,2],[3]), ([1,2,3,[]])]</code></pre><p>另一種說法是 <code class="haskell">splits xs = zip (inits xs) (tails xs)</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-27" type="checkbox"/><label class="lbl-toggle" for="ans-2-27">顯示答案</label><div class="collapsible-content"><h5>答案</h5><pre><code class="haskell">splits :: List a -&gt; List (List a × List a)
 splits []      = [([],[])]
 splits (x:xs)  = ([],x:xs) : map ((x:)***id) (splits xs) 
-</code></pre><p>其中 <code class="haskell">(f *** g) (x,y) = (f x, g y)</code>, 定義於第 <a href="Basics-6.html#sec:pairs">1.6.3 </a> 節。</p></div></div><div class="exercise exer" id="ex:length-sublists"><h5 class="exercise-title">練習 2.28 </h5><p>證明 <code class="haskell">length . sublists = exp 2 . length</code>. 也就是說，長度為 <code class="haskell">n</code> 的串列的子串列數目為 $2^n$. 你會需要的性質可能包括 ([RefUndefined]) (<code class="haskell">length (xs++ys) = length xs + length ys</code>), 以及 <code class="haskell">length . map f = length</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-28" type="checkbox"/><label class="lbl-toggle" for="ans-2-28">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>將式子改寫為 <code class="haskell">length (sublists xs) = exp 2 (length xs)</code>, 在 <code class="haskell">xs</code> 上做歸納。
+</code></pre><p>其中 <code class="haskell">(f *** g) (x,y) = (f x, g y)</code>, 定義於第 <a href="Basics-6.html#sec:pairs">1.6.3 </a> 節。</p></div></div><div class="exercise exer" id="ex:length-sublists"><h5 class="exercise-title">練習 2.28 </h5><p>證明 <code class="haskell">length . sublists = exp 2 . length</code>. 也就是說，長度為 <code class="haskell">n</code> 的串列的子串列數目為 $2^n$. 你會需要的性質可能包括 (<a href="Induction-4.html#eq:length-append">2.2 </a>) (<code class="haskell">length (xs++ys) = length xs + length ys</code>), 以及 <code class="haskell">length . map f = length</code>.</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-28" type="checkbox"/><label class="lbl-toggle" for="ans-2-28">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>將式子改寫為 <code class="haskell">length (sublists xs) = exp 2 (length xs)</code>, 在 <code class="haskell">xs</code> 上做歸納。
 歸納步驟 <code class="haskell">xs := x:xs</code> 為：</p><pre><code class="haskell">      length (sublists (x:xs))
  ===  length (sublists xs ++ map (x:) (sublists xs))
  ===    <comment>{- 因 \eqref{eq:length-append} <code class="haskell">length (xs++ys) = length xs + length ys</code>  -}</comment>
