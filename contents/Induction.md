@@ -348,7 +348,7 @@ P m <=> (exp b (m + n) = exp b m * exp b n) {-"~~,"-}
 
 最後，說到自然數上的歸納定義，似乎不得不提*階層*(factorial)。用非正式的寫法，|fact n = n * (n-1) * (n-2) * ... * 1|.
 \index{factorial 階層}
-\label{ex:factorial}
+{#ex:factorial}
 形式化的定義如下：
 ```haskell
 fact :: Nat -> Nat
@@ -1183,7 +1183,7 @@ perms (x:xs)  = concat (map (fan x) (perms xs)) {-"~~."-}
 :::{.proof}
 在 |xs| 上做歸納。
 
-{.noindent}{\bf 基底狀況} |xs:=[]|:
+{.noindent}**基底狀況** |xs:=[]|:
 ```{.haskell .invisible}
 lengthPermsPf0 =
 ```
@@ -1193,7 +1193,7 @@ lengthPermsPf0 =
  ===  1
  ===  fact (length []) {-"~~."-}
 ```
-\noindent **歸納步驟** |xs := x:xs|:
+{.noindent}**歸納步驟** |xs := x:xs|:
 ```{.haskell .invisible}
 lengthPermsPf1 x xs =
 ```
@@ -1250,8 +1250,7 @@ lengthFan x y xs =
 ```
 :::
 :::{.exer #ex:map-length-perms}
-證明 |perms xs| 傳回的每個串列都和 |xs| 一樣長，也就是 |map length (perms xs) = map (const (length xs)) (perms xs)|.
-其中 |const| 定義於第 \@pageref{para:const} 頁 --- |const y| 是一個永遠傳回 |y| 的函數。
+證明 |perms xs| 傳回的每個串列都和 |xs| 一樣長，也就是 |map length (perms xs) = map (const (length xs)) (perms xs)|{.discern lhs=". 其中 |const| 定義於第 \\pageref{para:const} 頁"} --- |const y| 是一個永遠傳回 |y| 的函數。
 :::
 :::{.exans}
 欲證明 |map length (perms xs) = map (const (length xs)) (perms xs)|, 在 |xs| 之上做歸納。基底狀況 |xs := []| 中，等號兩邊都化約為 |[0]|. 考慮歸納步驟 |xs := x:xs|:

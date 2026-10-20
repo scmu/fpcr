@@ -317,11 +317,11 @@ perms (x:xs)  = concat (map (fan x) (perms xs))
 </code></pre><p>讀者可思考為何我們需要 <code class="haskell">concat</code>? 如果沒有，會出現什麼錯誤？</p><p>基於 <code class="haskell">perm</code> 的這個定義，我們證明一個定理：<em>長度為 <code class="haskell">n</code> 的串列有 <code class="haskell">fact n</code> 種排列</em>。
 這個證明將使用到許多輔助性質與引理，有些已經是我們之前證明過的習題，有些則可作為接下來的習題。
 在本證明之中我們也練習將連續的函數應用 <code class="haskell">f (g (h x))</code> 寫成函數合成
-<code class="haskell">f . g . h $ x</code> 以方便計算。</p><div class="theorem" id="thm:length-perms"><h5 class="theorem-title">定理 2.5  </h5><p>對任何 <code class="haskell">xs</code>, <code class="haskell">length (perms xs) = fact (length xs)</code>.</p></div><div class="proof"><b>證明 </b><p>在 <code class="haskell">xs</code> 上做歸納。</p><p>{\bf 基底狀況} <code class="haskell">xs:=[]</code>:</p><pre><code class="haskell">      length (perms [])
+<code class="haskell">f . g . h $ x</code> 以方便計算。</p><div class="theorem" id="thm:length-perms"><h5 class="theorem-title">定理 2.5  </h5><p>對任何 <code class="haskell">xs</code>, <code class="haskell">length (perms xs) = fact (length xs)</code>.</p></div><div class="proof"><b>證明 </b><p>在 <code class="haskell">xs</code> 上做歸納。</p><p><strong>基底狀況</strong> <code class="haskell">xs:=[]</code>:</p><pre><code class="haskell">      length (perms [])
  ===  length [[]]
  ===  1
  ===  fact (length []) 
-</code></pre><p>\noindent <strong>歸納步驟</strong> <code class="haskell">xs := x:xs</code>:</p><pre><code class="haskell">      length (perms (x:xs))
+</code></pre><p><strong>歸納步驟</strong> <code class="haskell">xs := x:xs</code>:</p><pre><code class="haskell">      length (perms (x:xs))
  ===    <comment>{- <code class="haskell">perms</code>, <code class="haskell">(.)</code>, 與 <code class="haskell">($)</code> 之定義 -}</comment>
       length . concat . map (fan x) . perms $ xs
  ===    <comment>{- 因 <code class="haskell">length . concat = sum . map length</code> (習題<a href="Induction-5.html#ex:length-concat">2.12</a>), <code class="haskell">map</code> 融合 -}</comment>
@@ -351,8 +351,7 @@ perms (x:xs)  = concat (map (fan x) (perms xs))
  ===   <comment>{- 歸納假設 -}</comment>
       Suc (Suc (length xs))
  ===  Suc (length (y:xs)) 
-</code></pre></div></div><div class="exercise exer" id="ex:map-length-perms"><h5 class="exercise-title">練習 2.26 </h5><p>證明 <code class="haskell">perms xs</code> 傳回的每個串列都和 <code class="haskell">xs</code> 一樣長，也就是 <code class="haskell">map length (perms xs) = map (const (length xs)) (perms xs)</code>.
-其中 <code class="haskell">const</code> 定義於第  頁 --- <code class="haskell">const y</code> 是一個永遠傳回 <code class="haskell">y</code> 的函數。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-26" type="checkbox"/><label class="lbl-toggle" for="ans-2-26">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>欲證明 <code class="haskell">map length (perms xs) = map (const (length xs)) (perms xs)</code>, 在 <code class="haskell">xs</code> 之上做歸納。基底狀況 <code class="haskell">xs := []</code> 中，等號兩邊都化約為 <code class="haskell">[0]</code>. 考慮歸納步驟 <code class="haskell">xs := x:xs</code>:</p><pre><code class="haskell">  map length (perms (x:xs))
+</code></pre></div></div><div class="exercise exer" id="ex:map-length-perms"><h5 class="exercise-title">練習 2.26 </h5><p>證明 <code class="haskell">perms xs</code> 傳回的每個串列都和 <code class="haskell">xs</code> 一樣長，也就是 <code class="haskell">map length (perms xs) = map (const (length xs)) (perms xs)</code> --- <code class="haskell">const y</code> 是一個永遠傳回 <code class="haskell">y</code> 的函數。</p></div><div class="wrap-collabsible"><input class="toggle" id="ans-2-26" type="checkbox"/><label class="lbl-toggle" for="ans-2-26">顯示答案</label><div class="collapsible-content"><h5>答案</h5><p>欲證明 <code class="haskell">map length (perms xs) = map (const (length xs)) (perms xs)</code>, 在 <code class="haskell">xs</code> 之上做歸納。基底狀況 <code class="haskell">xs := []</code> 中，等號兩邊都化約為 <code class="haskell">[0]</code>. 考慮歸納步驟 <code class="haskell">xs := x:xs</code>:</p><pre><code class="haskell">  map length (perms (x:xs))
  ===   <comment>{- <code class="haskell">perms</code> 之定義 -}</comment>
   map length . concat . map (fan x) . perms $ xs
  ===   <comment>{- <code class="haskell">map f . concat = concat . map (map f)</code> (習題<a href="Induction-5.html#ex:map-concat">2.13</a>), <code class="haskell">map</code> 融合 -}</comment>

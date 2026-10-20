@@ -195,7 +195,7 @@
 若很明顯地缺了一個想要的性質，也許可以把它當作引理另外證證看。
 符號幫助我們，使我們的思考清晰而有方向。</p><div class="exlist"><div class="exercise exer" id="ex:proof-no-induction"><h5 class="exercise-title">練習 2.1 </h5><p>證明 <code class="haskell">1 * k = k</code>. 這個證明並不需要歸納。</p></div><div class="exercise exer" id="ex:add-associative"><h5 class="exercise-title">練習 2.2 </h5><p>證明 <code class="haskell">(+)</code> 之結合律: <code class="haskell">m + (n + k) = (m + n) + k</code>. 此證明中你使用的述語是什麼？</p></div><div class="exercise exer" id="ex:add-right-id"><h5 class="exercise-title">練習 2.3 </h5><p>證明 <code class="haskell">k + 1 = k</code>. 你需要使用歸納法嗎？用什麼述語？</p></div></div><p>最後，說到自然數上的歸納定義，似乎不得不提<em>階層</em>(factorial)。用非正式的寫法，<code class="haskell">fact n = n * (n-1) * (n-2) * ... * 1</code>.
 <span id="ix-2-6"></span>
-\label{ex:factorial}
+
 形式化的定義如下：</p><pre><code class="haskell">fact :: Nat -&gt; Nat
 fact Zero     = 1
 fact (Suc n)  = (Suc n) *: fact n 
